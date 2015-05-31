@@ -7,6 +7,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -41,7 +43,7 @@ public class ResultadoBaseDAOImpl extends BaseDAO implements ResultadoDAO {
 			conn.setAutoCommit(false);
 
 			pstmt = conn.prepareStatement("select nu_sorteio FROM TB_SORTEIOS "
-					+ " where hash is null and tp_sorteio = ? order by nu_sorteio");
+			        + " where hash is null and tp_sorteio = ? order by nu_sorteio");
 			pstmt.setString(1, tpSorteio);
 
 			rs = pstmt.executeQuery();
@@ -55,7 +57,7 @@ public class ResultadoBaseDAOImpl extends BaseDAO implements ResultadoDAO {
 			pstmt.close();
 
 			pstmt = conn.prepareStatement("update TB_SORTEIOS"
-					+ " set hash = ? where nu_sorteio = ? and tp_sorteio = ?");
+			        + " set hash = ? where nu_sorteio = ? and tp_sorteio = ?");
 
 			int count = 0;
 			for (Integer key : p.keySet()) {
@@ -490,7 +492,7 @@ public class ResultadoBaseDAOImpl extends BaseDAO implements ResultadoDAO {
 			conn.setAutoCommit(false);
 
 			pstmt = conn.prepareStatement(" insert into tb_sorteios" + " (nu_sorteio, tp_sorteio, dt_sorteio)"
-					+ " values (?,?,?)");
+			        + " values (?,?,?)");
 
 			for (Sorteio sorteio : sorteios) {
 				pstmt.setInt(1, sorteio.getNuSorteio());
@@ -524,7 +526,7 @@ public class ResultadoBaseDAOImpl extends BaseDAO implements ResultadoDAO {
 
 		try {
 			pstmt = conn.prepareStatement(" insert into tb_dezenas"
-					+ " (nu_sorteio, tp_sorteio, nu_dezena, nu_posicao)" + " values (?,?,?,?)");
+			        + " (nu_sorteio, tp_sorteio, nu_dezena, nu_posicao)" + " values (?,?,?,?)");
 
 			for (int i = 0; i < sorteio.getDezenas().size(); i++) {
 				pstmt.setInt(1, sorteio.getNuSorteio());
@@ -557,7 +559,7 @@ public class ResultadoBaseDAOImpl extends BaseDAO implements ResultadoDAO {
 			conn = getDataSource().getConnection();
 
 			pstmt = conn.prepareStatement("select nu_dezena from tb_atrasos where tp_sorteio = ? "
-					+ " and qt_atraso >= ?" + " and nu_sorteio = (select max(nu_sorteio) from tb_atrasos);");
+			        + " and qt_atraso >= ?" + " and nu_sorteio = (select max(nu_sorteio) from tb_atrasos);");
 			pstmt.setString(1, tpSorteio);
 			pstmt.setInt(2, qtSorteios);
 
@@ -619,8 +621,8 @@ public class ResultadoBaseDAOImpl extends BaseDAO implements ResultadoDAO {
 			conn = getDataSource().getConnection();
 
 			pstmt = conn.prepareStatement("select nu_dezena " + " from tb_atrasos where tp_sorteio = ? "
-					+ " and qt_atraso >= (select ceiling(avg(qt_atraso)) from tb_atrasos)"
-					+ " and nu_sorteio = (select max(nu_sorteio) from tb_atrasos);");
+			        + " and qt_atraso >= (select ceiling(avg(qt_atraso)) from tb_atrasos)"
+			        + " and nu_sorteio = (select max(nu_sorteio) from tb_atrasos);");
 
 			pstmt.setString(1, tpSorteio);
 
@@ -688,7 +690,7 @@ public class ResultadoBaseDAOImpl extends BaseDAO implements ResultadoDAO {
 			conn = getDataSource().getConnection();
 
 			pstmt = conn.prepareStatement("delete from tb_dezenas where nu_sorteio in ("
-					+ "select nu_sorteio from tb_sorteios where tp_sorteio = ?)");
+			        + "select nu_sorteio from tb_sorteios where tp_sorteio = ?)");
 			pstmt.setString(1, tpSorteio);
 
 			result = pstmt.executeUpdate();
@@ -793,7 +795,7 @@ public class ResultadoBaseDAOImpl extends BaseDAO implements ResultadoDAO {
 			conn = getDataSource().getConnection();
 
 			pstmt = conn.prepareStatement("select qt_atraso from tb_atrasos "
-					+ "where tp_sorteio = ? and nu_dezena = ? order by nu_sorteio");
+			        + "where tp_sorteio = ? and nu_dezena = ? order by nu_sorteio");
 			pstmt.setString(1, tpSorteio);
 			pstmt.setInt(2, nuDezena);
 
@@ -809,6 +811,96 @@ public class ResultadoBaseDAOImpl extends BaseDAO implements ResultadoDAO {
 			DatabaseUtils.close(rs, pstmt, conn);
 		}
 
+		return result;
+	}
+
+	@Override
+	public Sorteio buscarSorteio(String tpSorteio, int numeroSorteio) {
+		Sorteio result = null;
+
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try {
+
+			conn = getDataSource().getConnection();
+
+			StringBuilder sb = new StringBuilder();
+			sb.append("select tp_sorteio, nu_sorteio, dt_sorteio ");
+			sb.append("  from tb_sorteios ");
+			sb.append(" where tp_sorteio = ? ");
+			sb.append("   and nu_sorteio = ? ");
+
+			pstmt = conn.prepareStatement(sb.toString());
+			pstmt.setString(1, tpSorteio);
+			pstmt.setInt(2, numeroSorteio);
+
+			rs = pstmt.executeQuery();
+
+			result = new Sorteio(rs.getString("tp_sorteio"));
+			result.setNuSorteio(rs.getInt("nu_sorteio"));
+			result.setDtSorteio(parseDate(rs.getString("dt_sorteio")));
+
+			result.setDezenas(buscarDezenasSorteadas(result.getTpSorteio(), result.getNuSorteio()));
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			DatabaseUtils.close(rs, pstmt, conn);
+		}
+
+		return result;
+	}
+
+	@Override
+	public List<Integer> buscarDezenasSorteadas(String tpSorteio, int numeroSorteio) {
+		List<Integer> dezenas = new ArrayList<Integer>();
+
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try {
+
+			conn = getDataSource().getConnection();
+
+			StringBuilder sb = new StringBuilder();
+			sb.append("select nu_dezena ");
+			sb.append("  from tb_dezenas ");
+			sb.append(" where tp_sorteio = ? ");
+			sb.append("   and nu_sorteio = ? ");
+
+			pstmt = conn.prepareStatement(sb.toString());
+			pstmt.setString(1, tpSorteio);
+			pstmt.setInt(2, numeroSorteio);
+
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				dezenas.add(rs.getInt("nu_dezena"));
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			DatabaseUtils.close(rs, pstmt, conn);
+		}
+
+		return dezenas;
+	}
+
+	public Timestamp parseDate(String str){
+		Timestamp result = null;
+		
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/mm/yyyy");
+		
+		try {
+	        result = new Timestamp(sdf.parse(str).getTime());
+        } catch (ParseException e) {
+	        e.printStackTrace();
+        }
+		
 		return result;
 	}
 }

@@ -61,7 +61,7 @@ public class ResultadoLotoFacilService extends BaseService implements
 
 		List<Sorteio> sorteios = new ArrayList<>();
 		for (int numeroSorteio = p + 1; numeroSorteio <= nroUltimoSorteio; numeroSorteio++) {
-			sorteios.add(buscarResultado(numeroSorteio));
+			sorteios.add(buscarSorteio(numeroSorteio));
 		}
 
 		// sorteios
@@ -81,7 +81,7 @@ public class ResultadoLotoFacilService extends BaseService implements
 	 * @see org.manekineko.services.ResultadoService#buscarResultado()
 	 */
 	public Sorteio buscarResultado() {
-		return buscarResultado(0);
+		return buscarSorteio(0);
 	}
 
 	/*
@@ -89,7 +89,7 @@ public class ResultadoLotoFacilService extends BaseService implements
 	 * 
 	 * @see org.manekineko.services.ResultadoService#buscarResultado(int)
 	 */
-	public Sorteio buscarResultado(int numeroSorteio) {
+	public Sorteio buscarSorteio(int numeroSorteio) {
 		Sorteio result = null;
 
 		String url = null;
@@ -194,5 +194,10 @@ public class ResultadoLotoFacilService extends BaseService implements
 		// print(rms.buscarResultado());
 		rlf.atualizarResultados();
 	}
+
+	@Override
+    public boolean isSorteioCadastrado(int numeroSorteio) {
+	    return getResultadoDAO().buscarSorteio("LF", numeroSorteio) != null;
+    }
 
 }

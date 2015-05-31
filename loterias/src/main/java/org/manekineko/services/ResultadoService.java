@@ -10,7 +10,7 @@ import org.manekineko.Sorteio;
  *
  */
 public interface ResultadoService {
-	
+
 	/**
 	 * 
 	 * @return
@@ -21,16 +21,24 @@ public interface ResultadoService {
 	 * 
 	 * @return
 	 */
-	Sorteio buscarResultado(int numeroSorteio);
+	Sorteio buscarSorteio(int numeroSorteio);
 
 	/**
 	 * 
 	 */
 	void atualizarResultados();
-	
+
 	/**
 	 * 
 	 * @return
 	 */
 	int buscarNroUltimoSorteio();
+
+	/**
+	 * Verifica se o sorteio já está cadastrado na base
+	 * 
+	 * @param sorteio
+	 * @return
+	 */
+	boolean isSorteioCadastrado(int sorteio);
 }

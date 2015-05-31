@@ -9,7 +9,12 @@ public class StringUtils {
 	public static void print(Integer[] arg0) {
 		String s = "";
 		for (int i = 0; i < arg0.length; i++) {
-			s += ", " + arg0[i];
+			if (arg0[i] < 10){
+				s += ", 0" + arg0[i];	
+			} else{
+				s += ", " + arg0[i];
+			}
+			
 		}
 		System.out.println(s.substring(2));
 	}

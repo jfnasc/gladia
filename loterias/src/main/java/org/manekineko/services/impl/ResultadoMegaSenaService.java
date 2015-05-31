@@ -64,7 +64,7 @@ public class ResultadoMegaSenaService extends BaseService implements ResultadoSe
 			List<Sorteio> sorteios = new ArrayList<>();
 
 			for (int numeroSorteio = nroUltimoSorteioGravado + 1; numeroSorteio <= nroUltimoSorteioCEF; numeroSorteio++) {
-				sorteios.add(buscarResultado(numeroSorteio));
+				sorteios.add(buscarSorteio(numeroSorteio));
 				if (sorteios.size() == 10) {
 					getResultadoDAO().salvarSorteios(sorteios);
 					sorteios.clear();
@@ -90,7 +90,7 @@ public class ResultadoMegaSenaService extends BaseService implements ResultadoSe
 	 * @see org.manekineko.services.ResultadoService#buscarResultado()
 	 */
 	public Sorteio buscarResultado() {
-		return buscarResultado(0);
+		return buscarSorteio(0);
 	}
 
 	/*
@@ -98,22 +98,25 @@ public class ResultadoMegaSenaService extends BaseService implements ResultadoSe
 	 * 
 	 * @see org.manekineko.services.ResultadoService#buscarResultado(int)
 	 */
-	public Sorteio buscarResultado(int numeroSorteio) {
+	public Sorteio buscarSorteio(int numeroSorteio) {
 
 		if (numeroSorteio < 1) {
 			throw new IllegalArgumentException("Numero sorteio deve ser maior que zero.");
 		}
 
-		Sorteio result = null;
+		Sorteio result = getResultadoDAO().buscarSorteio("MS", numeroSorteio);
+		
+		if (result == null){
+			String url = String.format("%s%s", rb.getString("url.ms"), numeroSorteio);
 
-		String url = String.format("%s%s", rb.getString("url.ms"), numeroSorteio);
+			try {
+				result = criarSorteio(response(url));
 
-		try {
-			result = criarSorteio(response(url));
-
-		} catch (Exception e) {
-			e.printStackTrace();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
+		
 		return result;
 	}
 
@@ -238,5 +241,10 @@ public class ResultadoMegaSenaService extends BaseService implements ResultadoSe
 		// rms.buscarResultado(1630);
 		rms.atualizarResultados();
 	}
+
+	@Override
+    public boolean isSorteioCadastrado(int numeroSorteio) {
+	    return getResultadoDAO().buscarSorteio("MS", numeroSorteio) != null;
+    }
 
 }
