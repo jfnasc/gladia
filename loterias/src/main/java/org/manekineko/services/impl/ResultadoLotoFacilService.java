@@ -33,7 +33,7 @@ public class ResultadoLotoFacilService extends BaseService implements
 	 * @see
 	 * org.manekineko.services.ResultadoService#buscarNumeroUltimoSorteioCEF()
 	 */
-	public int buscarNroUltimoSorteioCEF() {
+	public int buscarNroUltimoSorteio() {
 		int resultado = 0;
 
 		String url = rb.getString("url.lf");
@@ -54,7 +54,7 @@ public class ResultadoLotoFacilService extends BaseService implements
 	public void atualizarResultados() {
 
 		// último sorteio
-		int nroUltimoSorteio = buscarNroUltimoSorteioCEF();
+		int nroUltimoSorteio = buscarNroUltimoSorteio();
 
 		// último sorteio gravado
 		int p = getResultadoDAO().buscarNroUltimoSorteioGravado("LF");

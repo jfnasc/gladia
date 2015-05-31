@@ -32,5 +32,5 @@ public interface ResultadoService {
 	 * 
 	 * @return
 	 */
-	int buscarNroUltimoSorteioCEF();
+	int buscarNroUltimoSorteio();
 }

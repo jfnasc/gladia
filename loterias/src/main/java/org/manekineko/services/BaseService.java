@@ -10,6 +10,7 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
+import org.manekineko.Sorteio;
 
 public abstract class BaseService {
 
@@ -50,5 +51,4 @@ public abstract class BaseService {
 			System.out.println(result[i]);
 		}
 	}
-
 }

@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -34,12 +33,12 @@ public class ResultadoMegaSenaService extends BaseService implements ResultadoSe
 	 * @see
 	 * org.manekineko.services.ResultadoService#buscarNumeroUltimoSorteioCEF()
 	 */
-	public int buscarNroUltimoSorteioCEF() {
+	public int buscarNroUltimoSorteio() {
 		int resultado = 0;
 
-		String url = rb.getString("url.ms");
+		String url = rb.getString("url.ms.ultimosorteio");
 		try {
-			resultado = obterNumeroSorteio(response(url));
+			resultado = obterNumeroUltimoSorteio(response(url));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -55,7 +54,7 @@ public class ResultadoMegaSenaService extends BaseService implements ResultadoSe
 	public void atualizarResultados() {
 
 		// último sorteio
-		int nroUltimoSorteioCEF = buscarNroUltimoSorteioCEF();
+		int nroUltimoSorteioCEF = buscarNroUltimoSorteio();
 
 		// último sorteio gravado
 		int nroUltimoSorteioGravado = getResultadoDAO().buscarNroUltimoSorteioGravado("MS");
@@ -100,15 +99,14 @@ public class ResultadoMegaSenaService extends BaseService implements ResultadoSe
 	 * @see org.manekineko.services.ResultadoService#buscarResultado(int)
 	 */
 	public Sorteio buscarResultado(int numeroSorteio) {
+
+		if (numeroSorteio < 1) {
+			throw new IllegalArgumentException("Numero sorteio deve ser maior que zero.");
+		}
+
 		Sorteio result = null;
 
-		String url = null;
-		if (numeroSorteio > 0) {
-			url = String.format("%s%s%s", rb.getString("url.ms"), "?submeteu=sim&opcao=concurso&txtConcurso=",
-					numeroSorteio);
-		} else {
-			url = rb.getString("url.ms");
-		}
+		String url = String.format("%s%s", rb.getString("url.ms"), numeroSorteio);
 
 		try {
 			result = criarSorteio(response(url));
@@ -125,19 +123,20 @@ public class ResultadoMegaSenaService extends BaseService implements ResultadoSe
 	 * @return
 	 */
 	private List<Integer> obterDezenasSorteadas(String s) {
-		Integer[] result = new Integer[6];
+		List<Integer> result = new ArrayList<Integer>();
 
-		String[] parts = s.split("\\|");
-		Pattern p = Pattern.compile("<li>[0-9]{2}</li>");
-		Matcher m = p.matcher(parts[2]);
+		Pattern p = Pattern.compile("<Dezenas>[|0-9]*</Dezenas>");
+		Matcher m = p.matcher(s);
 
-		int i = 0;
-		while (m.find()) {
-			result[i] = Integer.valueOf(parts[2].substring(m.start() + 4, m.end() - 5));
-			i++;
+		if (m.find()) {
+			System.out.println(s.substring(m.start() + 9, m.end() - 10));
+			String tmp = s.substring(m.start() + 9, m.end() - 10);
+			for (String dezena : tmp.split("\\|")) {
+				result.add(Integer.valueOf(dezena));
+			}
 		}
 
-		return Arrays.asList(result);
+		return result;
 	}
 
 	private Sorteio criarSorteio(String resposta) {
@@ -158,8 +157,32 @@ public class ResultadoMegaSenaService extends BaseService implements ResultadoSe
 	private int obterNumeroSorteio(String s) {
 		int result = 0;
 
-		String[] parts = s.split("\\|");
-		result = Integer.valueOf(parts[0]);
+		Pattern p = Pattern.compile("<Concurso>[0-9]*</Concurso>");
+		Matcher m = p.matcher(s);
+
+		if (m.find()) {
+			System.out.println(s.substring(m.start() + 10, m.end() - 11));
+			result = Integer.valueOf(s.substring(m.start() + 10, m.end() - 11));
+		}
+
+		return result;
+	}
+
+	/**
+	 * 
+	 * @param s
+	 * @return
+	 */
+	private int obterNumeroUltimoSorteio(String s) {
+		int result = 0;
+
+		Pattern p = Pattern.compile("<Concurso>[0-9]*</Concurso>");
+		Matcher m = p.matcher(s);
+
+		if (m.find()) {
+			System.out.println(s.substring(m.start() + 10, m.end() - 11));
+			result = Integer.valueOf(s.substring(m.start() + 10, m.end() - 11));
+		}
 
 		return result;
 	}
@@ -170,11 +193,19 @@ public class ResultadoMegaSenaService extends BaseService implements ResultadoSe
 	 * @return
 	 */
 	private Date obterDataSorteio(String s) {
+
+		//
 		Date result = null;
 
+		Pattern p = Pattern.compile("<Data>[-T:0-9]*</Data>");
+		Matcher m = p.matcher(s);
+
 		try {
-			String[] parts = s.split("\\|");
-			result = sdf.parse(parts[11]);
+			if (m.find()) {
+				System.out.println(s.substring(m.start() + 6, m.end() - 16));
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-mm-dd");
+				result = sdf.parse(s.substring(m.start() + 6, m.end() - 16));
+			}
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
@@ -204,8 +235,7 @@ public class ResultadoMegaSenaService extends BaseService implements ResultadoSe
 	 */
 	public static void main(String[] args) {
 		ResultadoMegaSenaService rms = new ResultadoMegaSenaService();
-		// print(rms.buscarResultado(1630));
-		// print(rms.buscarResultado());
+		// rms.buscarResultado(1630);
 		rms.atualizarResultados();
 	}
 
