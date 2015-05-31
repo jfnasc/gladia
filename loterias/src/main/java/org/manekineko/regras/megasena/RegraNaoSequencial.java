@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.manekineko.regras.Regra;
 import org.manekineko.regras.RegraBase;
 
@@ -16,9 +17,11 @@ import org.manekineko.regras.RegraBase;
  */
 public class RegraNaoSequencial extends RegraBase implements Regra {
 
+	private Logger LOGGER = Logger.getLogger(RegraNaoSequencial.class);
+	
 	public void aplicar(List<Integer[]> p) {
 
-		if (p == null || p.size() == 0){
+		if (p == null || p.isEmpty()){
 			return;
 		}
 		
@@ -42,7 +45,7 @@ public class RegraNaoSequencial extends RegraBase implements Regra {
 
 		p.removeAll(toRemoveList);
 
-		System.out.println("RegraNaoSequencial: "
+		LOGGER.debug("RegraNaoSequencial: "
 				+ (Float.valueOf(toRemoveList.size()) / total * 100));
 	}
 }

@@ -8,6 +8,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
+import org.manekineko.utils.StringUtils;
+
 /**
  * @author josen
  * 
@@ -109,10 +111,8 @@ public class Sorteio implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Sorteio [tpSorteio=" + tpSorteio + ", nuSorteio=" + nuSorteio
-				+ ", dtSorteio="
-				+ (new SimpleDateFormat("dd/mm/yyyy")).format(dtSorteio)
-				+ ", dezenas=" + dezenas + "]";
+		return "Sorteio [tpSorteio=" + tpSorteio + ", nuSorteio=" + nuSorteio + ", dtSorteio="
+		        + (new SimpleDateFormat("dd/mm/yyyy")).format(dtSorteio) + ", dezenas=" + StringUtils.print(dezenas) + "]";
 	}
 
 }

@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.manekineko.Sorteio;
+import org.manekineko.TiposSorteio;
 import org.manekineko.dao.ResultadoDAO;
 import org.manekineko.dao.impl.ResultadoBaseDAOImpl;
 import org.manekineko.services.CargaResultados;
@@ -49,7 +50,7 @@ public class CargaResultadosMegaSena implements CargaResultados {
 			while ((line = reader.readLine()) != null) {
 				String[] parts = line.split(";");
 
-				Sorteio sorteio = new Sorteio("MS");
+				Sorteio sorteio = new Sorteio(TiposSorteio.MEGASENA.sigla);
 
 				sorteio.setNuSorteio(Integer.valueOf(parts[0]));
 				sorteio.setDtSorteio(sdf.parse(parts[1]));

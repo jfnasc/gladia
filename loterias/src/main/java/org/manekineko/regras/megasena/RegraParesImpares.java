@@ -6,6 +6,7 @@ package org.manekineko.regras.megasena;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.manekineko.regras.Regra;
 import org.manekineko.regras.RegraBase;
 
@@ -15,6 +16,8 @@ import org.manekineko.regras.RegraBase;
  */
 public class RegraParesImpares extends RegraBase implements Regra {
 
+	private Logger LOGGER = Logger.getLogger(RegraParesImpares.class);
+	
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -33,7 +36,7 @@ public class RegraParesImpares extends RegraBase implements Regra {
 
 		for (int i = 0; i < p.size(); i++) {
 			int countPares = 0;
-			// System.out.println(prognosticos.get(i));
+			// LOGGER.debug(prognosticos.get(i));
 			for (int k = 0; k < p.get(i).length; k++) {
 				if ((p.get(i)[k] % 2) == 0) {
 					++countPares;
@@ -47,6 +50,6 @@ public class RegraParesImpares extends RegraBase implements Regra {
 
 		p.removeAll(toRemoveList);
 
-		System.out.println("RegraParesImpares: " + (Float.valueOf(toRemoveList.size()) / total * 100));
+		LOGGER.debug("RegraParesImpares: " + (Float.valueOf(toRemoveList.size()) / total * 100));
 	}
 }

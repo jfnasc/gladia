@@ -6,6 +6,7 @@ package org.manekineko.tests;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.manekineko.TiposSorteio;
 import org.manekineko.dao.ResultadoDAO;
 import org.manekineko.dao.impl.ResultadoBaseDAOImpl;
 import org.manekineko.regras.Regra;
@@ -47,7 +48,7 @@ public class TestRegrasMegaSena {
 		List<Integer[]> p = new ArrayList<Integer[]>();
 
 		for (int i = 1; i <= 1636; i++) {
-			List<Integer> dezenas = getResultadoDAO().buscarDezenasSorteadas(i, "MS");
+			List<Integer> dezenas = getResultadoDAO().buscarDezenasSorteadas(i, TiposSorteio.MEGASENA.sigla);
 
 			Integer[] tmp = new Integer[dezenas.size()];
 			dezenas.toArray(tmp);

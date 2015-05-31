@@ -6,17 +6,24 @@ import java.util.List;
 
 public class StringUtils {
 
-	public static void print(Integer[] arg0) {
+	public static String print(List<Integer> dezenas) {
+		Integer[] result = new Integer[dezenas.size()];
+		dezenas.toArray(result);
+		return print(result);
+	}
+
+	public static String print(Integer[] arg0) {
 		String s = "";
 		for (int i = 0; i < arg0.length; i++) {
-			if (arg0[i] < 10){
-				s += ", 0" + arg0[i];	
-			} else{
+			if (arg0[i] < 10) {
+				s += ", 0" + arg0[i];
+			} else {
 				s += ", " + arg0[i];
 			}
-			
+
 		}
 		System.out.println(s.substring(2));
+		return s.substring(2);
 	}
 
 	public static Integer[] splitAsIntArray(String arg0) {

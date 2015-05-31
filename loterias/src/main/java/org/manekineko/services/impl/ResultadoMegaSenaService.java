@@ -10,7 +10,9 @@ import java.util.ResourceBundle;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.apache.log4j.Logger;
 import org.manekineko.Sorteio;
+import org.manekineko.TiposSorteio;
 import org.manekineko.dao.ResultadoDAO;
 import org.manekineko.dao.impl.ResultadoBaseDAOImpl;
 import org.manekineko.services.BaseService;
@@ -23,9 +25,9 @@ import org.manekineko.services.ResultadoService;
  */
 public class ResultadoMegaSenaService extends BaseService implements ResultadoService {
 
-	static ResourceBundle rb = ResourceBundle.getBundle("maneki");
-
-	static SimpleDateFormat sdf = new SimpleDateFormat("dd/mm/yyyy");
+	private static Logger LOGGER = Logger.getLogger(ResultadoMegaSenaService.class);
+	
+	private static ResourceBundle rb = ResourceBundle.getBundle("maneki");
 
 	/*
 	 * (non-Javadoc)
@@ -57,7 +59,7 @@ public class ResultadoMegaSenaService extends BaseService implements ResultadoSe
 		int nroUltimoSorteioCEF = buscarNroUltimoSorteio();
 
 		// último sorteio gravado
-		int nroUltimoSorteioGravado = getResultadoDAO().buscarNroUltimoSorteioGravado("MS");
+		int nroUltimoSorteioGravado = getResultadoDAO().buscarNroUltimoSorteioGravado(TiposSorteio.MEGASENA.sigla);
 
 		if (nroUltimoSorteioGravado < nroUltimoSorteioCEF) {
 
@@ -77,10 +79,10 @@ public class ResultadoMegaSenaService extends BaseService implements ResultadoSe
 		}
 
 		// atrasos
-		getResultadoDAO().registrarAtrasos(nroUltimoSorteioCEF, "MS", 60);
+		getResultadoDAO().registrarAtrasos(nroUltimoSorteioCEF, TiposSorteio.MEGASENA.sigla, 60);
 
 		// atualizar hashes
-		getResultadoDAO().atualizarHashSorteios("MS");
+		getResultadoDAO().atualizarHashSorteios(TiposSorteio.MEGASENA.sigla);
 
 	}
 
@@ -104,7 +106,7 @@ public class ResultadoMegaSenaService extends BaseService implements ResultadoSe
 			throw new IllegalArgumentException("Numero sorteio deve ser maior que zero.");
 		}
 
-		Sorteio result = getResultadoDAO().buscarSorteio("MS", numeroSorteio);
+		Sorteio result = getResultadoDAO().buscarSorteio(TiposSorteio.MEGASENA.sigla, numeroSorteio);
 		
 		if (result == null){
 			String url = String.format("%s%s", rb.getString("url.ms"), numeroSorteio);
@@ -132,7 +134,7 @@ public class ResultadoMegaSenaService extends BaseService implements ResultadoSe
 		Matcher m = p.matcher(s);
 
 		if (m.find()) {
-			System.out.println(s.substring(m.start() + 9, m.end() - 10));
+			LOGGER.debug(s.substring(m.start() + 9, m.end() - 10));
 			String tmp = s.substring(m.start() + 9, m.end() - 10);
 			for (String dezena : tmp.split("\\|")) {
 				result.add(Integer.valueOf(dezena));
@@ -143,7 +145,7 @@ public class ResultadoMegaSenaService extends BaseService implements ResultadoSe
 	}
 
 	private Sorteio criarSorteio(String resposta) {
-		Sorteio sorteio = new Sorteio("MS");
+		Sorteio sorteio = new Sorteio(TiposSorteio.MEGASENA.sigla);
 
 		sorteio.setNuSorteio(obterNumeroSorteio(resposta));
 		sorteio.setDezenas(obterDezenasSorteadas(resposta));
@@ -164,7 +166,7 @@ public class ResultadoMegaSenaService extends BaseService implements ResultadoSe
 		Matcher m = p.matcher(s);
 
 		if (m.find()) {
-			System.out.println(s.substring(m.start() + 10, m.end() - 11));
+			LOGGER.debug(s.substring(m.start() + 10, m.end() - 11));
 			result = Integer.valueOf(s.substring(m.start() + 10, m.end() - 11));
 		}
 
@@ -183,7 +185,7 @@ public class ResultadoMegaSenaService extends BaseService implements ResultadoSe
 		Matcher m = p.matcher(s);
 
 		if (m.find()) {
-			System.out.println(s.substring(m.start() + 10, m.end() - 11));
+			LOGGER.debug(s.substring(m.start() + 10, m.end() - 11));
 			result = Integer.valueOf(s.substring(m.start() + 10, m.end() - 11));
 		}
 
@@ -205,7 +207,7 @@ public class ResultadoMegaSenaService extends BaseService implements ResultadoSe
 
 		try {
 			if (m.find()) {
-				System.out.println(s.substring(m.start() + 6, m.end() - 16));
+				LOGGER.debug(s.substring(m.start() + 6, m.end() - 16));
 				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-mm-dd");
 				result = sdf.parse(s.substring(m.start() + 6, m.end() - 16));
 			}
@@ -244,7 +246,7 @@ public class ResultadoMegaSenaService extends BaseService implements ResultadoSe
 
 	@Override
     public boolean isSorteioCadastrado(int numeroSorteio) {
-	    return getResultadoDAO().buscarSorteio("MS", numeroSorteio) != null;
+	    return getResultadoDAO().buscarSorteio(TiposSorteio.MEGASENA.sigla, numeroSorteio) != null;
     }
 
 }

@@ -6,6 +6,7 @@ package org.manekineko.regras.megasena;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.manekineko.regras.Regra;
 import org.manekineko.regras.RegraBase;
 
@@ -15,6 +16,8 @@ import org.manekineko.regras.RegraBase;
  */
 public class RegraNaoVertical extends RegraBase implements Regra {
 
+	private Logger LOGGER = Logger.getLogger(RegraNaoVertical.class);
+	
 	public void aplicar(List<Integer[]> p) {
 
 		if (p == null || p.size() == 0){
@@ -36,6 +39,6 @@ public class RegraNaoVertical extends RegraBase implements Regra {
 
 		p.removeAll(toRemoveList);
 		
-		System.out.println("RegraNaoVertical: " + (Float.valueOf(toRemoveList.size()) / total * 100));
+		LOGGER.debug("RegraNaoVertical: " + (Float.valueOf(toRemoveList.size()) / total * 100));
 	}
 }

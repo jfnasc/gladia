@@ -39,19 +39,19 @@ public class GerarCombinacoesMS {
 			StringUtils.print(aposta);
 		}
 
-		int ultimoSorteio = getResultadoDAO().buscarNroUltimoSorteioGravado("MS");
+		int ultimoSorteio = getResultadoDAO().buscarNroUltimoSorteioGravado(TiposSorteio.MEGASENA.sigla);
 
 		System.out.println("------------------------------------------------");
 		System.out.println("Ultimas sorteadas");
 		System.out.println("------------------------------------------------");
-		List<Integer> ultimasDezenas = getResultadoDAO().buscarDezenasSorteadas(ultimoSorteio, "MS");
+		List<Integer> ultimasDezenas = getResultadoDAO().buscarDezenasSorteadas(ultimoSorteio, TiposSorteio.MEGASENA.sigla);
 		Collections.sort(ultimasDezenas);
 		System.out.println(ultimasDezenas);
 
 		System.out.println("------------------------------------------------");
 		System.out.println("Atrasos (entre 8 e 9 sorteios de atraso)");
 		System.out.println("------------------------------------------------");
-		List<Integer> atrasos = getResultadoDAO().buscarDezenasEmAtraso("MS", 8);
+		List<Integer> atrasos = getResultadoDAO().buscarDezenasEmAtraso(TiposSorteio.MEGASENA.sigla, 8);
 		Collections.sort(atrasos);
 		System.out.println(atrasos);
 	}

@@ -3,6 +3,7 @@ package org.manekineko.analysis;
 import java.util.List;
 
 import org.manekineko.Sorteio;
+import org.manekineko.TiposSorteio;
 
 public class ParImpar extends Analise {
 	public static void main(String[] args) {
@@ -11,7 +12,7 @@ public class ParImpar extends Analise {
 	}
 
 	public void executar() {
-		List<Sorteio> sorteios = getResultadoDAO().listarSorteios("MS");
+		List<Sorteio> sorteios = getResultadoDAO().listarSorteios(TiposSorteio.MEGASENA.sigla);
 
 		// media de sorteios / numeros pares
 		int mediaPares = 0;

@@ -51,8 +51,8 @@
 						<manifest>
 							<!-- Classpath is added to the manifest of the created jar file. -->
 							<addClasspath>true</addClasspath>
-							<!-- Configures the classpath prefix. This configuration option is used to specify that all needed libraries are found 
-								under lib/ directory. -->
+							<!-- Configures the classpath prefix. This configuration option is 
+								used to specify that all needed libraries are found under lib/ directory. -->
 							<classpathPrefix>lib/</classpathPrefix>
 							<!-- Specifies the main class of the application -->
 							<mainClass>org.manekineko.GerarCombinacoesMS</mainClass>
@@ -95,21 +95,27 @@
 			<artifactId>postgresql</artifactId>
 			<version>9.1-901.jdbc4</version>
 		</dependency>
+
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+			<version>1.2.17</version>
+		</dependency>
 	</dependencies>
-    
-    <profiles>
-        <profile>
-            <id>sonar</id>
-            <activation>
-                <activeByDefault>true</activeByDefault>
-            </activation>
-            <properties>
-                <sonar.jdbc.url>jdbc:postgresql://localhost:5432/scm01</sonar.jdbc.url>
-                <sonar.jdbc.username>sonar</sonar.jdbc.username>
-                <sonar.jdbc.password>sonar123</sonar.jdbc.password>
-                <sonar.jdbc.driver>org.postgresql.Driver</sonar.jdbc.driver>
-            </properties>
-        </profile>
-    </profiles>    
-    
+
+	<profiles>
+		<profile>
+			<id>sonar</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<properties>
+				<sonar.jdbc.url>jdbc:postgresql://localhost:5432/scm01</sonar.jdbc.url>
+				<sonar.jdbc.username>sonar</sonar.jdbc.username>
+				<sonar.jdbc.password>sonar123</sonar.jdbc.password>
+				<sonar.jdbc.driver>org.postgresql.Driver</sonar.jdbc.driver>
+			</properties>
+		</profile>
+	</profiles>
+
 </project>

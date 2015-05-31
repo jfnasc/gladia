@@ -4,11 +4,15 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import org.apache.log4j.Logger;
+import org.manekineko.TiposSorteio;
 import org.manekineko.regras.Regra;
 import org.manekineko.regras.RegraBase;
 
 public class RegraSorteiosAnteriores extends RegraBase implements Regra {
 
+	private Logger LOGGER = Logger.getLogger(RegraSorteiosAnteriores.class);
+	
 	@Override
 	public void aplicar(List<Integer[]> p) {
 		
@@ -25,14 +29,14 @@ public class RegraSorteiosAnteriores extends RegraBase implements Regra {
 			// senas
 			for (int i = 0; i < p.size(); i++) {
 				String hash = getResultadoDAO().calcularHash(Arrays.asList(p.get(i)));
-				if (getResultadoDAO().existeSorteioIgual("MS", hash)) {
+				if (getResultadoDAO().existeSorteioIgual(TiposSorteio.MEGASENA.sigla, hash)) {
 					aRemover.add(p.get(i));
 				}
 			}
 
 			p.removeAll(aRemover);
 
-			System.out.println("RegraSorteiosAnteriores: "
+			LOGGER.debug("RegraSorteiosAnteriores: "
 					+ (Float.valueOf(aRemover.size()) / total * 100));			
 			
 		} catch (Exception e) {
