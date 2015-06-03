@@ -30,7 +30,7 @@ public class GerarCombinacoesMS {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		List<Integer[]> prognosticos = prognosticos(10,6);
+		List<Integer[]> prognosticos = prognosticos(3,6);
 
 		System.out.println("--------------------------");
 		System.out.println("Boa Sorte!");
