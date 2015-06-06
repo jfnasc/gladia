@@ -1,0 +1,619 @@
+21:38:40,381 DEBUG [RequestAddCookies] CookieSpec selected: best-match
+21:38:40,397 DEBUG [RequestAuthCache] Auth cache not set in the context
+21:38:40,399 DEBUG [PoolingHttpClientConnectionManager] Connection request: [route: {}->http://servicos.albertino.eti.br:80][total kept alive: 0; route allocated: 0 of 2; total allocated: 0 of 20]
+21:38:40,422 DEBUG [PoolingHttpClientConnectionManager] Connection leased: [id: 0][route: {}->http://servicos.albertino.eti.br:80][total kept alive: 0; route allocated: 1 of 2; total allocated: 1 of 20]
+21:38:40,445 DEBUG [MainClientExec] Opening connection {}->http://servicos.albertino.eti.br:80
+21:38:40,481 DEBUG [HttpClientConnectionManager] Connecting to servicos.albertino.eti.br/169.53.231.5:80
+21:38:40,801 DEBUG [MainClientExec] Executing request GET /Loteria.asmx/GetMegaSena_UltimoConcurso HTTP/1.1
+21:38:40,802 DEBUG [MainClientExec] Target auth state: UNCHALLENGED
+21:38:40,806 DEBUG [MainClientExec] Proxy auth state: UNCHALLENGED
+21:38:40,809 DEBUG [headers] http-outgoing-0 >> GET /Loteria.asmx/GetMegaSena_UltimoConcurso HTTP/1.1
+21:38:40,810 DEBUG [headers] http-outgoing-0 >> Host: servicos.albertino.eti.br:80
+21:38:40,810 DEBUG [headers] http-outgoing-0 >> Connection: Keep-Alive
+21:38:40,810 DEBUG [headers] http-outgoing-0 >> User-Agent: Apache-HttpClient/4.3.2 (java 1.5)
+21:38:40,810 DEBUG [headers] http-outgoing-0 >> Accept-Encoding: gzip,deflate
+21:38:40,810 DEBUG [wire] http-outgoing-0 >> "GET /Loteria.asmx/GetMegaSena_UltimoConcurso HTTP/1.1[\r][\n]"
+21:38:40,811 DEBUG [wire] http-outgoing-0 >> "Host: servicos.albertino.eti.br:80[\r][\n]"
+21:38:40,811 DEBUG [wire] http-outgoing-0 >> "Connection: Keep-Alive[\r][\n]"
+21:38:40,811 DEBUG [wire] http-outgoing-0 >> "User-Agent: Apache-HttpClient/4.3.2 (java 1.5)[\r][\n]"
+21:38:40,811 DEBUG [wire] http-outgoing-0 >> "Accept-Encoding: gzip,deflate[\r][\n]"
+21:38:40,811 DEBUG [wire] http-outgoing-0 >> "[\r][\n]"
+21:38:41,023 DEBUG [wire] http-outgoing-0 << "HTTP/1.1 200 OK[\r][\n]"
+21:38:41,024 DEBUG [wire] http-outgoing-0 << "Cache-Control: no-cache[\r][\n]"
+21:38:41,025 DEBUG [wire] http-outgoing-0 << "Pragma: no-cache[\r][\n]"
+21:38:41,025 DEBUG [wire] http-outgoing-0 << "Content-Type: text/xml; charset=utf-8[\r][\n]"
+21:38:41,026 DEBUG [wire] http-outgoing-0 << "Content-Encoding: gzip[\r][\n]"
+21:38:41,026 DEBUG [wire] http-outgoing-0 << "Expires: -1[\r][\n]"
+21:38:41,027 DEBUG [wire] http-outgoing-0 << "Vary: Accept-Encoding[\r][\n]"
+21:38:41,027 DEBUG [wire] http-outgoing-0 << "Server: Microsoft-IIS/8.0[\r][\n]"
+21:38:41,028 DEBUG [wire] http-outgoing-0 << "X-AspNet-Version: 4.0.30319[\r][\n]"
+21:38:41,028 DEBUG [wire] http-outgoing-0 << "X-Powered-By: ASP.NET[\r][\n]"
+21:38:41,029 DEBUG [wire] http-outgoing-0 << "X-Powered-By-Plesk: PleskWin[\r][\n]"
+21:38:41,030 DEBUG [wire] http-outgoing-0 << "Access-Control-Allow-Origin: *[\r][\n]"
+21:38:41,030 DEBUG [wire] http-outgoing-0 << "Date: Sat, 06 Jun 2015 00:38:51 GMT[\r][\n]"
+21:38:41,031 DEBUG [wire] http-outgoing-0 << "Content-Length: 329[\r][\n]"
+21:38:41,031 DEBUG [wire] http-outgoing-0 << "[\r][\n]"
+21:38:41,034 DEBUG [wire] http-outgoing-0 << "[0x1f][0x8b][0x8][0x0][0x0][0x0][0x0][0x0][0x4][0x0][0xed][0xbd][0x7]`[0x1c]I[0x96]%&/m[0xca]{J[0xf5]J[0xd7][0xe0]t[0xa1][0x8][0x80]`[0x13]$[0xd8][0x90]@[0x10][0xec][0xc1][0x88][0xcd][0xe6][0x92][0xec][0x1d]iG#)[0xab]*[0x81][0xca]eVe]f[0x16]@[0xcc][0xed][0x9d][0xbc][0xf7][0xde]{[0xef][0xbd][0xf7][0xde]{[0xef][0xbd][0xf7][0xba];[0x9d]N'[0xf7][0xdf][0xff]?\fd[0x1]l[0xf6][0xce]J[0xda][0xc9][0x9e]![0x80][0xaa][0xc8][0x1f]?~|[0x1f]?"[0x1e][0xff][0x1e][0xef][0x16]ez[0x99][0xd7]MQ-?[0xfb]hw[0xbc][0xf3]Q[0x9a]/[0xa7][0xd5][0xac]X^|[0xf6][0xd1][0xba]=[0xdf]>[0xf8][0xe8][0xf7]8[0xfa][0x8d][0x93][0xc7][0xaf][0xab][0xba][0xcd][0x8b]*[0xa5][0xe6][0xcb][0xe6][0xd1][0xbb][0xa6][0xf8][0xec][0xa3]y[0xdb][0xae][0x1e][0xdd][0xbd]{uu5[0xbe][0xba]7[0xae][0xea][0x8b][0xbb]{;;[0xbb]w[0xef]/[0x9e][0xbf][0x9e][0xce][0xf3]E[0xb6]],[0x9b]6[N[0xf3][0x8f][0xec][[0xb3][0x9b][0xdf][0xd2][0xc6][0xb6]a[0x93][0xd7][0x97][0xc5][0xb4]j[0xc6]Y9[0xc9][0xeb][0xb6]XV[0xe3][0xbc]-[0xc6][0x93][0xfa]#B+M[0x1f][0x9f]T[0xcb][0xe9][0xba]n[0xaa][0xa3][0xdd][0x7][0xbb];[0x8f][0xef][0xda]?[0xf9][0xcb][0xa7]Y[0x9b][0x1d][0xed][0xed][0xec][0xde][0xdf][0xde][0xf9]t{[0xe7][0xde][0x9b][0x9d][0x9d]G[0xfc][0xbf][0xc7]w[0xf9][0x1b]i[0x93][0xff] _f[0xcd][0xd1][0xce][0x83][0x9f][0xd9][0xdb][0xfd][0x99][0xbd][0x83][0x9f][0xb9][0xff][0xe9][0xcf][0xdc][0xa7][0x1f]R#[0xfd][0x8a][0xc6]W[0x9]p[0xf4][0xff][0x0][0x96] V[0xfc]2[0x1][0x0][0x0]"
+21:38:41,040 DEBUG [headers] http-outgoing-0 << HTTP/1.1 200 OK
+21:38:41,040 DEBUG [headers] http-outgoing-0 << Cache-Control: no-cache
+21:38:41,040 DEBUG [headers] http-outgoing-0 << Pragma: no-cache
+21:38:41,040 DEBUG [headers] http-outgoing-0 << Content-Type: text/xml; charset=utf-8
+21:38:41,041 DEBUG [headers] http-outgoing-0 << Content-Encoding: gzip
+21:38:41,041 DEBUG [headers] http-outgoing-0 << Expires: -1
+21:38:41,041 DEBUG [headers] http-outgoing-0 << Vary: Accept-Encoding
+21:38:41,041 DEBUG [headers] http-outgoing-0 << Server: Microsoft-IIS/8.0
+21:38:41,041 DEBUG [headers] http-outgoing-0 << X-AspNet-Version: 4.0.30319
+21:38:41,042 DEBUG [headers] http-outgoing-0 << X-Powered-By: ASP.NET
+21:38:41,042 DEBUG [headers] http-outgoing-0 << X-Powered-By-Plesk: PleskWin
+21:38:41,042 DEBUG [headers] http-outgoing-0 << Access-Control-Allow-Origin: *
+21:38:41,042 DEBUG [headers] http-outgoing-0 << Date: Sat, 06 Jun 2015 00:38:51 GMT
+21:38:41,043 DEBUG [headers] http-outgoing-0 << Content-Length: 329
+21:38:41,049 DEBUG [MainClientExec] Connection can be kept alive indefinitely
+21:38:41,074 DEBUG [PoolingHttpClientConnectionManager] Connection [id: 0][route: {}->http://servicos.albertino.eti.br:80] can be kept alive indefinitely
+21:38:41,075 DEBUG [PoolingHttpClientConnectionManager] Connection released: [id: 0][route: {}->http://servicos.albertino.eti.br:80][total kept alive: 1; route allocated: 1 of 2; total allocated: 1 of 20]
+21:38:41,076 DEBUG [ResultadoMegaSenaService] 1710
+21:38:41,077 DEBUG [ResultadoMegaSenaService] 2015-06-03
+21:38:41,106 DEBUG [PoolingHttpClientConnectionManager] Connection manager is shutting down
+21:38:41,107 DEBUG [DefaultManagedHttpClientConnection] http-outgoing-0: Close connection
+21:38:41,112 DEBUG [DefaultManagedHttpClientConnection] http-outgoing-0: Close connection
+21:38:41,112 DEBUG [PoolingHttpClientConnectionManager] Connection manager shut down
+21:38:41,851 DEBUG [RequestAddCookies] CookieSpec selected: best-match
+21:38:41,851 DEBUG [RequestAuthCache] Auth cache not set in the context
+21:38:41,851 DEBUG [PoolingHttpClientConnectionManager] Connection request: [route: {}->http://servicos.albertino.eti.br:80][total kept alive: 0; route allocated: 0 of 2; total allocated: 0 of 20]
+21:38:41,852 DEBUG [PoolingHttpClientConnectionManager] Connection leased: [id: 1][route: {}->http://servicos.albertino.eti.br:80][total kept alive: 0; route allocated: 1 of 2; total allocated: 1 of 20]
+21:38:41,852 DEBUG [MainClientExec] Opening connection {}->http://servicos.albertino.eti.br:80
+21:38:41,852 DEBUG [HttpClientConnectionManager] Connecting to servicos.albertino.eti.br/169.53.231.5:80
+21:38:42,058 DEBUG [MainClientExec] Executing request GET /Loteria.asmx/GetMegaSena_PorConcurso?numero=1 HTTP/1.1
+21:38:42,059 DEBUG [MainClientExec] Target auth state: UNCHALLENGED
+21:38:42,059 DEBUG [MainClientExec] Proxy auth state: UNCHALLENGED
+21:38:42,061 DEBUG [headers] http-outgoing-1 >> GET /Loteria.asmx/GetMegaSena_PorConcurso?numero=1 HTTP/1.1
+21:38:42,061 DEBUG [headers] http-outgoing-1 >> Host: servicos.albertino.eti.br:80
+21:38:42,062 DEBUG [headers] http-outgoing-1 >> Connection: Keep-Alive
+21:38:42,062 DEBUG [headers] http-outgoing-1 >> User-Agent: Apache-HttpClient/4.3.2 (java 1.5)
+21:38:42,063 DEBUG [headers] http-outgoing-1 >> Accept-Encoding: gzip,deflate
+21:38:42,064 DEBUG [wire] http-outgoing-1 >> "GET /Loteria.asmx/GetMegaSena_PorConcurso?numero=1 HTTP/1.1[\r][\n]"
+21:38:42,064 DEBUG [wire] http-outgoing-1 >> "Host: servicos.albertino.eti.br:80[\r][\n]"
+21:38:42,065 DEBUG [wire] http-outgoing-1 >> "Connection: Keep-Alive[\r][\n]"
+21:38:42,066 DEBUG [wire] http-outgoing-1 >> "User-Agent: Apache-HttpClient/4.3.2 (java 1.5)[\r][\n]"
+21:38:42,067 DEBUG [wire] http-outgoing-1 >> "Accept-Encoding: gzip,deflate[\r][\n]"
+21:38:42,067 DEBUG [wire] http-outgoing-1 >> "[\r][\n]"
+21:38:42,281 DEBUG [wire] http-outgoing-1 << "HTTP/1.1 200 OK[\r][\n]"
+21:38:42,281 DEBUG [wire] http-outgoing-1 << "Cache-Control: no-cache[\r][\n]"
+21:38:42,282 DEBUG [wire] http-outgoing-1 << "Pragma: no-cache[\r][\n]"
+21:38:42,282 DEBUG [wire] http-outgoing-1 << "Content-Type: text/xml; charset=utf-8[\r][\n]"
+21:38:42,282 DEBUG [wire] http-outgoing-1 << "Content-Encoding: gzip[\r][\n]"
+21:38:42,283 DEBUG [wire] http-outgoing-1 << "Expires: -1[\r][\n]"
+21:38:42,283 DEBUG [wire] http-outgoing-1 << "Vary: Accept-Encoding[\r][\n]"
+21:38:42,283 DEBUG [wire] http-outgoing-1 << "Server: Microsoft-IIS/8.0[\r][\n]"
+21:38:42,284 DEBUG [wire] http-outgoing-1 << "X-AspNet-Version: 4.0.30319[\r][\n]"
+21:38:42,284 DEBUG [wire] http-outgoing-1 << "X-Powered-By: ASP.NET[\r][\n]"
+21:38:42,284 DEBUG [wire] http-outgoing-1 << "X-Powered-By-Plesk: PleskWin[\r][\n]"
+21:38:42,285 DEBUG [wire] http-outgoing-1 << "Access-Control-Allow-Origin: *[\r][\n]"
+21:38:42,285 DEBUG [wire] http-outgoing-1 << "Date: Sat, 06 Jun 2015 00:38:52 GMT[\r][\n]"
+21:38:42,286 DEBUG [wire] http-outgoing-1 << "Content-Length: 327[\r][\n]"
+21:38:42,286 DEBUG [wire] http-outgoing-1 << "[\r][\n]"
+21:38:42,287 DEBUG [wire] http-outgoing-1 << "[0x1f][0x8b][0x8][0x0][0x0][0x0][0x0][0x0][0x4][0x0][0xed][0xbd][0x7]`[0x1c]I[0x96]%&/m[0xca]{J[0xf5]J[0xd7][0xe0]t[0xa1][0x8][0x80]`[0x13]$[0xd8][0x90]@[0x10][0xec][0xc1][0x88][0xcd][0xe6][0x92][0xec][0x1d]iG#)[0xab]*[0x81][0xca]eVe]f[0x16]@[0xcc][0xed][0x9d][0xbc][0xf7][0xde]{[0xef][0xbd][0xf7][0xde]{[0xef][0xbd][0xf7][0xba];[0x9d]N'[0xf7][0xdf][0xff]?\fd[0x1]l[0xf6][0xce]J[0xda][0xc9][0x9e]![0x80][0xaa][0xc8][0x1f]?~|[0x1f]?"[0x1e][0xff][0x1e][0xef][0x16]ez[0x99][0xd7]MQ-?[0xfb]hw[0xbc][0xf3]Q[0x9a]/[0xa7][0xd5][0xac]X^|[0xf6][0xd1][0xba]=[0xdf]>[0xf8][0xe8][0xf7]8[0xfa][0x8d][0x93][0xc7][0xaf][0xab][0xba][0xcd][0x8b]*[0xa5][0xe6][0xcb][0xe6][0xd1][0xbb][0xa6][0xf8][0xec][0xa3]y[0xdb][0xae][0x1e][0xdd][0xbd]{uu5[0xbe][0xba]7[0xae][0xea][0x8b][0xbb]{;;[0xbb]w[0xef]/[0x9e][0xbf][0x9e][0xce][0xf3]E[0xb6]],[0x9b]6[N[0xf3][0x8f][0xec][[0xb3][0x9b][0xdf][0xd2][0xc6][0xb6]a[0x93][0xd7][0x97][0xc5][0xb4]j[0xc6]Y9[0xc9][0xeb][0xb6]XV[0xe3][0xbc]-[0xc6][0x93][0xfa]#B+M[0x1f][0x9f]T[0xcb][0xe9][0xba]n[0xaa][0xa3][0xdd][0xc7]w[0xed][0xef][0xfc][0xcd][0xd3][0xac][0xcd][0x8e]v[0x1f]>[0xfc]t{[0xe7][0xde][0xf6][0xee][0xee][0x9b][0x9d][0x9d]G[0xfc][0xbf][0xc7]w[0xf9][0x1b]i[0x93][0xff] _f[0xcd][0xd1][0xce][0xfe][0xcf][0xec][0xdc][0xff][0x99]{;?s[0xef][0xde][0xcf][0xec][0xef][0xfe][0xcc][0xfd]=j[0xa4]_[0xd1][0xe0][0xef][0xea][0xe8][0x8f][0xfe][0x1f][0x1f][0xe3][0xa0][0x8]/[0x1][0x0][0x0]"
+21:38:42,288 DEBUG [headers] http-outgoing-1 << HTTP/1.1 200 OK
+21:38:42,289 DEBUG [headers] http-outgoing-1 << Cache-Control: no-cache
+21:38:42,289 DEBUG [headers] http-outgoing-1 << Pragma: no-cache
+21:38:42,289 DEBUG [headers] http-outgoing-1 << Content-Type: text/xml; charset=utf-8
+21:38:42,290 DEBUG [headers] http-outgoing-1 << Content-Encoding: gzip
+21:38:42,290 DEBUG [headers] http-outgoing-1 << Expires: -1
+21:38:42,290 DEBUG [headers] http-outgoing-1 << Vary: Accept-Encoding
+21:38:42,291 DEBUG [headers] http-outgoing-1 << Server: Microsoft-IIS/8.0
+21:38:42,291 DEBUG [headers] http-outgoing-1 << X-AspNet-Version: 4.0.30319
+21:38:42,291 DEBUG [headers] http-outgoing-1 << X-Powered-By: ASP.NET
+21:38:42,292 DEBUG [headers] http-outgoing-1 << X-Powered-By-Plesk: PleskWin
+21:38:42,292 DEBUG [headers] http-outgoing-1 << Access-Control-Allow-Origin: *
+21:38:42,292 DEBUG [headers] http-outgoing-1 << Date: Sat, 06 Jun 2015 00:38:52 GMT
+21:38:42,293 DEBUG [headers] http-outgoing-1 << Content-Length: 327
+21:38:42,293 DEBUG [MainClientExec] Connection can be kept alive indefinitely
+21:38:42,296 DEBUG [PoolingHttpClientConnectionManager] Connection [id: 1][route: {}->http://servicos.albertino.eti.br:80] can be kept alive indefinitely
+21:38:42,297 DEBUG [PoolingHttpClientConnectionManager] Connection released: [id: 1][route: {}->http://servicos.albertino.eti.br:80][total kept alive: 1; route allocated: 1 of 2; total allocated: 1 of 20]
+21:38:42,297 DEBUG [ResultadoMegaSenaService] 1
+21:38:42,297 DEBUG [ResultadoMegaSenaService] 1996-03-11
+21:38:42,298 DEBUG [ResultadoMegaSenaService] 04|05|30|33|41|52
+21:39:18,776 DEBUG [RequestAddCookies] CookieSpec selected: best-match
+21:39:18,777 DEBUG [RequestAuthCache] Auth cache not set in the context
+21:39:18,778 DEBUG [PoolingHttpClientConnectionManager] Connection request: [route: {}->http://servicos.albertino.eti.br:80][total kept alive: 0; route allocated: 0 of 2; total allocated: 0 of 20]
+21:39:18,779 DEBUG [PoolingHttpClientConnectionManager] Connection leased: [id: 2][route: {}->http://servicos.albertino.eti.br:80][total kept alive: 0; route allocated: 1 of 2; total allocated: 1 of 20]
+21:39:18,780 DEBUG [MainClientExec] Opening connection {}->http://servicos.albertino.eti.br:80
+21:39:18,807 DEBUG [HttpClientConnectionManager] Connecting to servicos.albertino.eti.br/169.53.231.5:80
+21:39:19,152 DEBUG [MainClientExec] Executing request GET /Loteria.asmx/GetMegaSena_PorConcurso?numero=2 HTTP/1.1
+21:39:19,154 DEBUG [MainClientExec] Target auth state: UNCHALLENGED
+21:39:19,156 DEBUG [MainClientExec] Proxy auth state: UNCHALLENGED
+21:39:19,159 DEBUG [headers] http-outgoing-2 >> GET /Loteria.asmx/GetMegaSena_PorConcurso?numero=2 HTTP/1.1
+21:39:19,160 DEBUG [headers] http-outgoing-2 >> Host: servicos.albertino.eti.br:80
+21:39:19,161 DEBUG [headers] http-outgoing-2 >> Connection: Keep-Alive
+21:39:19,161 DEBUG [headers] http-outgoing-2 >> User-Agent: Apache-HttpClient/4.3.2 (java 1.5)
+21:39:19,162 DEBUG [headers] http-outgoing-2 >> Accept-Encoding: gzip,deflate
+21:39:19,162 DEBUG [wire] http-outgoing-2 >> "GET /Loteria.asmx/GetMegaSena_PorConcurso?numero=2 HTTP/1.1[\r][\n]"
+21:39:19,163 DEBUG [wire] http-outgoing-2 >> "Host: servicos.albertino.eti.br:80[\r][\n]"
+21:39:19,164 DEBUG [wire] http-outgoing-2 >> "Connection: Keep-Alive[\r][\n]"
+21:39:19,165 DEBUG [wire] http-outgoing-2 >> "User-Agent: Apache-HttpClient/4.3.2 (java 1.5)[\r][\n]"
+21:39:19,165 DEBUG [wire] http-outgoing-2 >> "Accept-Encoding: gzip,deflate[\r][\n]"
+21:39:19,166 DEBUG [wire] http-outgoing-2 >> "[\r][\n]"
+21:39:19,381 DEBUG [wire] http-outgoing-2 << "HTTP/1.1 200 OK[\r][\n]"
+21:39:19,382 DEBUG [wire] http-outgoing-2 << "Cache-Control: no-cache[\r][\n]"
+21:39:19,384 DEBUG [wire] http-outgoing-2 << "Pragma: no-cache[\r][\n]"
+21:39:19,386 DEBUG [wire] http-outgoing-2 << "Content-Type: text/xml; charset=utf-8[\r][\n]"
+21:39:19,387 DEBUG [wire] http-outgoing-2 << "Content-Encoding: gzip[\r][\n]"
+21:39:19,388 DEBUG [wire] http-outgoing-2 << "Expires: -1[\r][\n]"
+21:39:19,389 DEBUG [wire] http-outgoing-2 << "Vary: Accept-Encoding[\r][\n]"
+21:39:19,389 DEBUG [wire] http-outgoing-2 << "Server: Microsoft-IIS/8.0[\r][\n]"
+21:39:19,390 DEBUG [wire] http-outgoing-2 << "X-AspNet-Version: 4.0.30319[\r][\n]"
+21:39:19,391 DEBUG [wire] http-outgoing-2 << "X-Powered-By: ASP.NET[\r][\n]"
+21:39:19,391 DEBUG [wire] http-outgoing-2 << "X-Powered-By-Plesk: PleskWin[\r][\n]"
+21:39:19,392 DEBUG [wire] http-outgoing-2 << "Access-Control-Allow-Origin: *[\r][\n]"
+21:39:19,393 DEBUG [wire] http-outgoing-2 << "Date: Sat, 06 Jun 2015 00:39:29 GMT[\r][\n]"
+21:39:19,393 DEBUG [wire] http-outgoing-2 << "Content-Length: 328[\r][\n]"
+21:39:19,394 DEBUG [wire] http-outgoing-2 << "[\r][\n]"
+21:39:19,398 DEBUG [wire] http-outgoing-2 << "[0x1f][0x8b][0x8][0x0][0x0][0x0][0x0][0x0][0x4][0x0][0xed][0xbd][0x7]`[0x1c]I[0x96]%&/m[0xca]{J[0xf5]J[0xd7][0xe0]t[0xa1][0x8][0x80]`[0x13]$[0xd8][0x90]@[0x10][0xec][0xc1][0x88][0xcd][0xe6][0x92][0xec][0x1d]iG#)[0xab]*[0x81][0xca]eVe]f[0x16]@[0xcc][0xed][0x9d][0xbc][0xf7][0xde]{[0xef][0xbd][0xf7][0xde]{[0xef][0xbd][0xf7][0xba];[0x9d]N'[0xf7][0xdf][0xff]?\fd[0x1]l[0xf6][0xce]J[0xda][0xc9][0x9e]![0x80][0xaa][0xc8][0x1f]?~|[0x1f]?"[0x1e][0xff][0x1e][0xef][0x16]ez[0x99][0xd7]MQ-?[0xfb]hw[0xbc][0xf3]Q[0x9a]/[0xa7][0xd5][0xac]X^|[0xf6][0xd1][0xba]=[0xdf]>[0xf8][0xe8][0xf7]8[0xfa][0x8d][0x93][0xc7][0xaf][0xab][0xba][0xcd][0x8b]*[0xa5][0xe6][0xcb][0xe6][0xd1][0xbb][0xa6][0xf8][0xec][0xa3]y[0xdb][0xae][0x1e][0xdd][0xbd]{uu5[0xbe][0xba]7[0xae][0xea][0x8b][0xbb]{;;[0xbb]w[0xef]/[0x9e][0xbf][0x9e][0xce][0xf3]E[0xb6]],[0x9b]6[N[0xf3][0x8f][0xec][[0xb3][0x9b][0xdf][0xd2][0xc6][0xb6]a[0x93][0xd7][0x97][0xc5][0xb4]j[0xc6]Y9[0xc9][0xeb][0xb6]XV[0xe3][0xbc]-[0xc6][0x93][0xfa]#B+M[0x1f][0x9f]T[0xcb][0xe9][0xba]n[0xaa][0xa3][0xbd][0xc7]w[0xed][0xef][0xfc][0xcd][0xd3][0xac][0xcd][0x8e]v[0x1f]>[0xfc]t{[0xe7][0xde][0xf6][0xee][0xc1][0x9b][0x9d][0x9d]G[0xfc][0xbf][0xc7]w[0xf9][0x1b]i[0x93][0xff] _f[0xcd][0xd1][0xce][0xc3][0x9f][0xb9][0xf7][0xe0]g[0xee]=[0xfc][0x99][0xfd][0xdd][0x9f][0xd9][0xbf][0xf7]3[0xfb][0xf][0xa9][0x91]~E[0x83][0xbf][0xab][0xa3]?[0xfa][0x0][0xac][0xfe][0xbf][0x9f]/[0x1][0x0][0x0]"
+21:39:19,399 DEBUG [headers] http-outgoing-2 << HTTP/1.1 200 OK
+21:39:19,400 DEBUG [headers] http-outgoing-2 << Cache-Control: no-cache
+21:39:19,401 DEBUG [headers] http-outgoing-2 << Pragma: no-cache
+21:39:19,401 DEBUG [headers] http-outgoing-2 << Content-Type: text/xml; charset=utf-8
+21:39:19,402 DEBUG [headers] http-outgoing-2 << Content-Encoding: gzip
+21:39:19,402 DEBUG [headers] http-outgoing-2 << Expires: -1
+21:39:19,403 DEBUG [headers] http-outgoing-2 << Vary: Accept-Encoding
+21:39:19,403 DEBUG [headers] http-outgoing-2 << Server: Microsoft-IIS/8.0
+21:39:19,404 DEBUG [headers] http-outgoing-2 << X-AspNet-Version: 4.0.30319
+21:39:19,404 DEBUG [headers] http-outgoing-2 << X-Powered-By: ASP.NET
+21:39:19,405 DEBUG [headers] http-outgoing-2 << X-Powered-By-Plesk: PleskWin
+21:39:19,405 DEBUG [headers] http-outgoing-2 << Access-Control-Allow-Origin: *
+21:39:19,406 DEBUG [headers] http-outgoing-2 << Date: Sat, 06 Jun 2015 00:39:29 GMT
+21:39:19,406 DEBUG [headers] http-outgoing-2 << Content-Length: 328
+21:39:19,407 DEBUG [MainClientExec] Connection can be kept alive indefinitely
+21:39:19,412 DEBUG [PoolingHttpClientConnectionManager] Connection [id: 2][route: {}->http://servicos.albertino.eti.br:80] can be kept alive indefinitely
+21:39:19,413 DEBUG [PoolingHttpClientConnectionManager] Connection released: [id: 2][route: {}->http://servicos.albertino.eti.br:80][total kept alive: 1; route allocated: 1 of 2; total allocated: 1 of 20]
+21:39:19,414 DEBUG [ResultadoMegaSenaService] 2
+21:39:19,415 DEBUG [ResultadoMegaSenaService] 1996-03-18
+21:39:19,417 DEBUG [ResultadoMegaSenaService] 09|37|39|41|43|49
+21:39:23,305 DEBUG [RequestAddCookies] CookieSpec selected: best-match
+21:39:23,305 DEBUG [RequestAuthCache] Auth cache not set in the context
+21:39:23,305 DEBUG [PoolingHttpClientConnectionManager] Connection request: [route: {}->http://servicos.albertino.eti.br:80][total kept alive: 0; route allocated: 0 of 2; total allocated: 0 of 20]
+21:39:23,306 DEBUG [PoolingHttpClientConnectionManager] Connection leased: [id: 3][route: {}->http://servicos.albertino.eti.br:80][total kept alive: 0; route allocated: 1 of 2; total allocated: 1 of 20]
+21:39:23,306 DEBUG [MainClientExec] Opening connection {}->http://servicos.albertino.eti.br:80
+21:39:23,306 DEBUG [HttpClientConnectionManager] Connecting to servicos.albertino.eti.br/169.53.231.5:80
+21:39:23,646 DEBUG [MainClientExec] Executing request GET /Loteria.asmx/GetMegaSena_PorConcurso?numero=3 HTTP/1.1
+21:39:23,646 DEBUG [MainClientExec] Target auth state: UNCHALLENGED
+21:39:23,647 DEBUG [MainClientExec] Proxy auth state: UNCHALLENGED
+21:39:23,648 DEBUG [headers] http-outgoing-3 >> GET /Loteria.asmx/GetMegaSena_PorConcurso?numero=3 HTTP/1.1
+21:39:23,648 DEBUG [headers] http-outgoing-3 >> Host: servicos.albertino.eti.br:80
+21:39:23,649 DEBUG [headers] http-outgoing-3 >> Connection: Keep-Alive
+21:39:23,649 DEBUG [headers] http-outgoing-3 >> User-Agent: Apache-HttpClient/4.3.2 (java 1.5)
+21:39:23,650 DEBUG [headers] http-outgoing-3 >> Accept-Encoding: gzip,deflate
+21:39:23,650 DEBUG [wire] http-outgoing-3 >> "GET /Loteria.asmx/GetMegaSena_PorConcurso?numero=3 HTTP/1.1[\r][\n]"
+21:39:23,651 DEBUG [wire] http-outgoing-3 >> "Host: servicos.albertino.eti.br:80[\r][\n]"
+21:39:23,651 DEBUG [wire] http-outgoing-3 >> "Connection: Keep-Alive[\r][\n]"
+21:39:23,651 DEBUG [wire] http-outgoing-3 >> "User-Agent: Apache-HttpClient/4.3.2 (java 1.5)[\r][\n]"
+21:39:23,652 DEBUG [wire] http-outgoing-3 >> "Accept-Encoding: gzip,deflate[\r][\n]"
+21:39:23,652 DEBUG [wire] http-outgoing-3 >> "[\r][\n]"
+21:39:23,878 DEBUG [wire] http-outgoing-3 << "HTTP/1.1 200 OK[\r][\n]"
+21:39:23,879 DEBUG [wire] http-outgoing-3 << "Cache-Control: no-cache[\r][\n]"
+21:39:23,879 DEBUG [wire] http-outgoing-3 << "Pragma: no-cache[\r][\n]"
+21:39:23,880 DEBUG [wire] http-outgoing-3 << "Content-Type: text/xml; charset=utf-8[\r][\n]"
+21:39:23,880 DEBUG [wire] http-outgoing-3 << "Content-Encoding: gzip[\r][\n]"
+21:39:23,880 DEBUG [wire] http-outgoing-3 << "Expires: -1[\r][\n]"
+21:39:23,881 DEBUG [wire] http-outgoing-3 << "Vary: Accept-Encoding[\r][\n]"
+21:39:23,881 DEBUG [wire] http-outgoing-3 << "Server: Microsoft-IIS/8.0[\r][\n]"
+21:39:23,881 DEBUG [wire] http-outgoing-3 << "X-AspNet-Version: 4.0.30319[\r][\n]"
+21:39:23,882 DEBUG [wire] http-outgoing-3 << "X-Powered-By: ASP.NET[\r][\n]"
+21:39:23,882 DEBUG [wire] http-outgoing-3 << "X-Powered-By-Plesk: PleskWin[\r][\n]"
+21:39:23,882 DEBUG [wire] http-outgoing-3 << "Access-Control-Allow-Origin: *[\r][\n]"
+21:39:23,883 DEBUG [wire] http-outgoing-3 << "Date: Sat, 06 Jun 2015 00:39:33 GMT[\r][\n]"
+21:39:23,883 DEBUG [wire] http-outgoing-3 << "Content-Length: 328[\r][\n]"
+21:39:23,883 DEBUG [wire] http-outgoing-3 << "[\r][\n]"
+21:39:23,884 DEBUG [wire] http-outgoing-3 << "[0x1f][0x8b][0x8][0x0][0x0][0x0][0x0][0x0][0x4][0x0][0xed][0xbd][0x7]`[0x1c]I[0x96]%&/m[0xca]{J[0xf5]J[0xd7][0xe0]t[0xa1][0x8][0x80]`[0x13]$[0xd8][0x90]@[0x10][0xec][0xc1][0x88][0xcd][0xe6][0x92][0xec][0x1d]iG#)[0xab]*[0x81][0xca]eVe]f[0x16]@[0xcc][0xed][0x9d][0xbc][0xf7][0xde]{[0xef][0xbd][0xf7][0xde]{[0xef][0xbd][0xf7][0xba];[0x9d]N'[0xf7][0xdf][0xff]?\fd[0x1]l[0xf6][0xce]J[0xda][0xc9][0x9e]![0x80][0xaa][0xc8][0x1f]?~|[0x1f]?"[0x1e][0xff][0x1e][0xef][0x16]ez[0x99][0xd7]MQ-?[0xfb]hw[0xbc][0xf3]Q[0x9a]/[0xa7][0xd5][0xac]X^|[0xf6][0xd1][0xba]=[0xdf]>[0xf8][0xe8][0xf7]8[0xfa][0x8d][0x93][0xc7][0xaf][0xab][0xba][0xcd][0x8b]*[0xa5][0xe6][0xcb][0xe6][0xd1][0xbb][0xa6][0xf8][0xec][0xa3]y[0xdb][0xae][0x1e][0xdd][0xbd]{uu5[0xbe][0xba]7[0xae][0xea][0x8b][0xbb]{;;[0xbb]w[0xef]/[0x9e][0xbf][0x9e][0xce][0xf3]E[0xb6]],[0x9b]6[N[0xf3][0x8f][0xec][[0xb3][0x9b][0xdf][0xd2][0xc6][0xb6]a[0x93][0xd7][0x97][0xc5][0xb4]j[0xc6]Y9[0xc9][0xeb][0xb6]XV[0xe3][0xbc]-[0xc6][0x93][0xfa]#B+M[0x1f][0x9f]T[0xcb][0xe9][0xba]n[0xaa][0xa3]{[0x8f][0xef][0xda][0xdf][0xf9][0x9b][0xa7]Y[0x9b][0x1d][0xed]>|[0xf8][0xe9][0xf6][0xce][0xbd][0xed][0xbd][0xfb]ovv[0x1e][0xf1][0xff][0x1e][0xdf][0xe5]o[0xa4]M[0xfe][0x83]|[0x99]5G[0xbb];?[0xb3][0xbb][0xfb]3{[0xf][0xe6][0xde][0xce][0xcf][0xdc][0xfb][0xf4]g[0xf6][0x1f]P#[0xfd][0x8a][0x6]WG[0xf4][0xff][0x0][0x9e]s9s/[0x1][0x0][0x0]"
+21:39:23,885 DEBUG [headers] http-outgoing-3 << HTTP/1.1 200 OK
+21:39:23,886 DEBUG [headers] http-outgoing-3 << Cache-Control: no-cache
+21:39:23,886 DEBUG [headers] http-outgoing-3 << Pragma: no-cache
+21:39:23,886 DEBUG [headers] http-outgoing-3 << Content-Type: text/xml; charset=utf-8
+21:39:23,887 DEBUG [headers] http-outgoing-3 << Content-Encoding: gzip
+21:39:23,887 DEBUG [headers] http-outgoing-3 << Expires: -1
+21:39:23,887 DEBUG [headers] http-outgoing-3 << Vary: Accept-Encoding
+21:39:23,887 DEBUG [headers] http-outgoing-3 << Server: Microsoft-IIS/8.0
+21:39:23,888 DEBUG [headers] http-outgoing-3 << X-AspNet-Version: 4.0.30319
+21:39:23,888 DEBUG [headers] http-outgoing-3 << X-Powered-By: ASP.NET
+21:39:23,888 DEBUG [headers] http-outgoing-3 << X-Powered-By-Plesk: PleskWin
+21:39:23,888 DEBUG [headers] http-outgoing-3 << Access-Control-Allow-Origin: *
+21:39:23,888 DEBUG [headers] http-outgoing-3 << Date: Sat, 06 Jun 2015 00:39:33 GMT
+21:39:23,889 DEBUG [headers] http-outgoing-3 << Content-Length: 328
+21:39:23,889 DEBUG [MainClientExec] Connection can be kept alive indefinitely
+21:39:23,890 DEBUG [PoolingHttpClientConnectionManager] Connection [id: 3][route: {}->http://servicos.albertino.eti.br:80] can be kept alive indefinitely
+21:39:23,890 DEBUG [PoolingHttpClientConnectionManager] Connection released: [id: 3][route: {}->http://servicos.albertino.eti.br:80][total kept alive: 1; route allocated: 1 of 2; total allocated: 1 of 20]
+21:39:23,891 DEBUG [ResultadoMegaSenaService] 3
+21:39:23,891 DEBUG [ResultadoMegaSenaService] 1996-03-25
+21:39:23,891 DEBUG [ResultadoMegaSenaService] 10|11|29|30|36|47
+21:39:24,649 DEBUG [RequestAddCookies] CookieSpec selected: best-match
+21:39:24,649 DEBUG [RequestAuthCache] Auth cache not set in the context
+21:39:24,649 DEBUG [PoolingHttpClientConnectionManager] Connection request: [route: {}->http://servicos.albertino.eti.br:80][total kept alive: 0; route allocated: 0 of 2; total allocated: 0 of 20]
+21:39:24,650 DEBUG [PoolingHttpClientConnectionManager] Connection leased: [id: 4][route: {}->http://servicos.albertino.eti.br:80][total kept alive: 0; route allocated: 1 of 2; total allocated: 1 of 20]
+21:39:24,650 DEBUG [MainClientExec] Opening connection {}->http://servicos.albertino.eti.br:80
+21:39:24,650 DEBUG [HttpClientConnectionManager] Connecting to servicos.albertino.eti.br/169.53.231.5:80
+21:39:24,865 DEBUG [MainClientExec] Executing request GET /Loteria.asmx/GetMegaSena_PorConcurso?numero=4 HTTP/1.1
+21:39:24,865 DEBUG [MainClientExec] Target auth state: UNCHALLENGED
+21:39:24,865 DEBUG [MainClientExec] Proxy auth state: UNCHALLENGED
+21:39:24,866 DEBUG [headers] http-outgoing-4 >> GET /Loteria.asmx/GetMegaSena_PorConcurso?numero=4 HTTP/1.1
+21:39:24,866 DEBUG [headers] http-outgoing-4 >> Host: servicos.albertino.eti.br:80
+21:39:24,866 DEBUG [headers] http-outgoing-4 >> Connection: Keep-Alive
+21:39:24,866 DEBUG [headers] http-outgoing-4 >> User-Agent: Apache-HttpClient/4.3.2 (java 1.5)
+21:39:24,867 DEBUG [headers] http-outgoing-4 >> Accept-Encoding: gzip,deflate
+21:39:24,867 DEBUG [wire] http-outgoing-4 >> "GET /Loteria.asmx/GetMegaSena_PorConcurso?numero=4 HTTP/1.1[\r][\n]"
+21:39:24,867 DEBUG [wire] http-outgoing-4 >> "Host: servicos.albertino.eti.br:80[\r][\n]"
+21:39:24,867 DEBUG [wire] http-outgoing-4 >> "Connection: Keep-Alive[\r][\n]"
+21:39:24,867 DEBUG [wire] http-outgoing-4 >> "User-Agent: Apache-HttpClient/4.3.2 (java 1.5)[\r][\n]"
+21:39:24,868 DEBUG [wire] http-outgoing-4 >> "Accept-Encoding: gzip,deflate[\r][\n]"
+21:39:24,868 DEBUG [wire] http-outgoing-4 >> "[\r][\n]"
+21:39:25,110 DEBUG [wire] http-outgoing-4 << "HTTP/1.1 200 OK[\r][\n]"
+21:39:25,111 DEBUG [wire] http-outgoing-4 << "Cache-Control: no-cache[\r][\n]"
+21:39:25,111 DEBUG [wire] http-outgoing-4 << "Pragma: no-cache[\r][\n]"
+21:39:25,112 DEBUG [wire] http-outgoing-4 << "Content-Type: text/xml; charset=utf-8[\r][\n]"
+21:39:25,112 DEBUG [wire] http-outgoing-4 << "Content-Encoding: gzip[\r][\n]"
+21:39:25,113 DEBUG [wire] http-outgoing-4 << "Expires: -1[\r][\n]"
+21:39:25,113 DEBUG [wire] http-outgoing-4 << "Vary: Accept-Encoding[\r][\n]"
+21:39:25,114 DEBUG [wire] http-outgoing-4 << "Server: Microsoft-IIS/8.0[\r][\n]"
+21:39:25,114 DEBUG [wire] http-outgoing-4 << "X-AspNet-Version: 4.0.30319[\r][\n]"
+21:39:25,114 DEBUG [wire] http-outgoing-4 << "X-Powered-By: ASP.NET[\r][\n]"
+21:39:25,115 DEBUG [wire] http-outgoing-4 << "X-Powered-By-Plesk: PleskWin[\r][\n]"
+21:39:25,115 DEBUG [wire] http-outgoing-4 << "Access-Control-Allow-Origin: *[\r][\n]"
+21:39:25,116 DEBUG [wire] http-outgoing-4 << "Date: Sat, 06 Jun 2015 00:39:35 GMT[\r][\n]"
+21:39:25,116 DEBUG [wire] http-outgoing-4 << "Content-Length: 327[\r][\n]"
+21:39:25,116 DEBUG [wire] http-outgoing-4 << "[\r][\n]"
+21:39:25,118 DEBUG [wire] http-outgoing-4 << "[0x1f][0x8b][0x8][0x0][0x0][0x0][0x0][0x0][0x4][0x0][0xed][0xbd][0x7]`[0x1c]I[0x96]%&/m[0xca]{J[0xf5]J[0xd7][0xe0]t[0xa1][0x8][0x80]`[0x13]$[0xd8][0x90]@[0x10][0xec][0xc1][0x88][0xcd][0xe6][0x92][0xec][0x1d]iG#)[0xab]*[0x81][0xca]eVe]f[0x16]@[0xcc][0xed][0x9d][0xbc][0xf7][0xde]{[0xef][0xbd][0xf7][0xde]{[0xef][0xbd][0xf7][0xba];[0x9d]N'[0xf7][0xdf][0xff]?\fd[0x1]l[0xf6][0xce]J[0xda][0xc9][0x9e]![0x80][0xaa][0xc8][0x1f]?~|[0x1f]?"[0x1e][0xff][0x1e][0xef][0x16]ez[0x99][0xd7]MQ-?[0xfb]hw[0xbc][0xf3]Q[0x9a]/[0xa7][0xd5][0xac]X^|[0xf6][0xd1][0xba]=[0xdf]>[0xf8][0xe8][0xf7]8[0xfa][0x8d][0x93][0xc7][0xaf][0xab][0xba][0xcd][0x8b]*[0xa5][0xe6][0xcb][0xe6][0xd1][0xbb][0xa6][0xf8][0xec][0xa3]y[0xdb][0xae][0x1e][0xdd][0xbd]{uu5[0xbe][0xba]7[0xae][0xea][0x8b][0xbb]{;;[0xbb]w[0xef]/[0x9e][0xbf][0x9e][0xce][0xf3]E[0xb6]],[0x9b]6[N[0xf3][0x8f][0xec][[0xb3][0x9b][0xdf][0xd2][0xc6][0xb6]a[0x93][0xd7][0x97][0xc5][0xb4]j[0xc6]Y9[0xc9][0xeb][0xb6]XV[0xe3][0xbc]-[0xc6][0x93][0xfa]#B+M[0x1f][0x9f]T[0xcb][0xe9][0xba]n[0xaa][0xa3][0xfd][0xc7]w[0xed][0xef][0xfc][0xcd][0xd3][0xac][0xcd][0x8e]v[0x1f]>[0xfc]t{g{g[0xf7][0xcd][0xce][0xce]#[0xfe][0xdf][0xe3][0xbb][0xfc][0x8d][0xb4][0xc9][0x90]/[0xb3][0xe6]hg[0xf7]gv[0xee][0xff][0xcc][0xce][0xa7]?[0xb3][0xf7][0xe0]g[0xf6][0xf7]~[0xe6][0xfe]Cj[0xa4]_[0xd1][0xe0][0xef][0xea][0xe8][0x8f][0xfe][0x1f][0xb][0x7][0xe0][0xfe]/[0x1][0x0][0x0]"
+21:39:25,119 DEBUG [headers] http-outgoing-4 << HTTP/1.1 200 OK
+21:39:25,120 DEBUG [headers] http-outgoing-4 << Cache-Control: no-cache
+21:39:25,120 DEBUG [headers] http-outgoing-4 << Pragma: no-cache
+21:39:25,121 DEBUG [headers] http-outgoing-4 << Content-Type: text/xml; charset=utf-8
+21:39:25,121 DEBUG [headers] http-outgoing-4 << Content-Encoding: gzip
+21:39:25,121 DEBUG [headers] http-outgoing-4 << Expires: -1
+21:39:25,122 DEBUG [headers] http-outgoing-4 << Vary: Accept-Encoding
+21:39:25,122 DEBUG [headers] http-outgoing-4 << Server: Microsoft-IIS/8.0
+21:39:25,123 DEBUG [headers] http-outgoing-4 << X-AspNet-Version: 4.0.30319
+21:39:25,123 DEBUG [headers] http-outgoing-4 << X-Powered-By: ASP.NET
+21:39:25,123 DEBUG [headers] http-outgoing-4 << X-Powered-By-Plesk: PleskWin
+21:39:25,124 DEBUG [headers] http-outgoing-4 << Access-Control-Allow-Origin: *
+21:39:25,124 DEBUG [headers] http-outgoing-4 << Date: Sat, 06 Jun 2015 00:39:35 GMT
+21:39:25,124 DEBUG [headers] http-outgoing-4 << Content-Length: 327
+21:39:25,124 DEBUG [MainClientExec] Connection can be kept alive indefinitely
+21:39:25,126 DEBUG [PoolingHttpClientConnectionManager] Connection [id: 4][route: {}->http://servicos.albertino.eti.br:80] can be kept alive indefinitely
+21:39:25,126 DEBUG [PoolingHttpClientConnectionManager] Connection released: [id: 4][route: {}->http://servicos.albertino.eti.br:80][total kept alive: 1; route allocated: 1 of 2; total allocated: 1 of 20]
+21:39:25,127 DEBUG [ResultadoMegaSenaService] 4
+21:39:25,127 DEBUG [ResultadoMegaSenaService] 1996-04-01
+21:39:25,128 DEBUG [ResultadoMegaSenaService] 01|05|06|27|42|59
+21:39:26,411 DEBUG [RequestAddCookies] CookieSpec selected: best-match
+21:39:26,412 DEBUG [RequestAuthCache] Auth cache not set in the context
+21:39:26,412 DEBUG [PoolingHttpClientConnectionManager] Connection request: [route: {}->http://servicos.albertino.eti.br:80][total kept alive: 0; route allocated: 0 of 2; total allocated: 0 of 20]
+21:39:26,412 DEBUG [PoolingHttpClientConnectionManager] Connection leased: [id: 5][route: {}->http://servicos.albertino.eti.br:80][total kept alive: 0; route allocated: 1 of 2; total allocated: 1 of 20]
+21:39:26,412 DEBUG [MainClientExec] Opening connection {}->http://servicos.albertino.eti.br:80
+21:39:26,412 DEBUG [HttpClientConnectionManager] Connecting to servicos.albertino.eti.br/169.53.231.5:80
+21:39:26,720 DEBUG [MainClientExec] Executing request GET /Loteria.asmx/GetMegaSena_PorConcurso?numero=5 HTTP/1.1
+21:39:26,720 DEBUG [MainClientExec] Target auth state: UNCHALLENGED
+21:39:26,721 DEBUG [MainClientExec] Proxy auth state: UNCHALLENGED
+21:39:26,722 DEBUG [headers] http-outgoing-5 >> GET /Loteria.asmx/GetMegaSena_PorConcurso?numero=5 HTTP/1.1
+21:39:26,722 DEBUG [headers] http-outgoing-5 >> Host: servicos.albertino.eti.br:80
+21:39:26,723 DEBUG [headers] http-outgoing-5 >> Connection: Keep-Alive
+21:39:26,723 DEBUG [headers] http-outgoing-5 >> User-Agent: Apache-HttpClient/4.3.2 (java 1.5)
+21:39:26,724 DEBUG [headers] http-outgoing-5 >> Accept-Encoding: gzip,deflate
+21:39:26,724 DEBUG [wire] http-outgoing-5 >> "GET /Loteria.asmx/GetMegaSena_PorConcurso?numero=5 HTTP/1.1[\r][\n]"
+21:39:26,725 DEBUG [wire] http-outgoing-5 >> "Host: servicos.albertino.eti.br:80[\r][\n]"
+21:39:26,725 DEBUG [wire] http-outgoing-5 >> "Connection: Keep-Alive[\r][\n]"
+21:39:26,726 DEBUG [wire] http-outgoing-5 >> "User-Agent: Apache-HttpClient/4.3.2 (java 1.5)[\r][\n]"
+21:39:26,726 DEBUG [wire] http-outgoing-5 >> "Accept-Encoding: gzip,deflate[\r][\n]"
+21:39:26,726 DEBUG [wire] http-outgoing-5 >> "[\r][\n]"
+21:39:26,937 DEBUG [wire] http-outgoing-5 << "HTTP/1.1 200 OK[\r][\n]"
+21:39:26,938 DEBUG [wire] http-outgoing-5 << "Cache-Control: no-cache[\r][\n]"
+21:39:26,938 DEBUG [wire] http-outgoing-5 << "Pragma: no-cache[\r][\n]"
+21:39:26,938 DEBUG [wire] http-outgoing-5 << "Content-Type: text/xml; charset=utf-8[\r][\n]"
+21:39:26,939 DEBUG [wire] http-outgoing-5 << "Content-Encoding: gzip[\r][\n]"
+21:39:26,939 DEBUG [wire] http-outgoing-5 << "Expires: -1[\r][\n]"
+21:39:26,939 DEBUG [wire] http-outgoing-5 << "Vary: Accept-Encoding[\r][\n]"
+21:39:26,940 DEBUG [wire] http-outgoing-5 << "Server: Microsoft-IIS/8.0[\r][\n]"
+21:39:26,940 DEBUG [wire] http-outgoing-5 << "X-AspNet-Version: 4.0.30319[\r][\n]"
+21:39:26,941 DEBUG [wire] http-outgoing-5 << "X-Powered-By: ASP.NET[\r][\n]"
+21:39:26,941 DEBUG [wire] http-outgoing-5 << "X-Powered-By-Plesk: PleskWin[\r][\n]"
+21:39:26,941 DEBUG [wire] http-outgoing-5 << "Access-Control-Allow-Origin: *[\r][\n]"
+21:39:26,942 DEBUG [wire] http-outgoing-5 << "Date: Sat, 06 Jun 2015 00:39:36 GMT[\r][\n]"
+21:39:26,942 DEBUG [wire] http-outgoing-5 << "Content-Length: 326[\r][\n]"
+21:39:26,943 DEBUG [wire] http-outgoing-5 << "[\r][\n]"
+21:39:26,944 DEBUG [wire] http-outgoing-5 << "[0x1f][0x8b][0x8][0x0][0x0][0x0][0x0][0x0][0x4][0x0][0xed][0xbd][0x7]`[0x1c]I[0x96]%&/m[0xca]{J[0xf5]J[0xd7][0xe0]t[0xa1][0x8][0x80]`[0x13]$[0xd8][0x90]@[0x10][0xec][0xc1][0x88][0xcd][0xe6][0x92][0xec][0x1d]iG#)[0xab]*[0x81][0xca]eVe]f[0x16]@[0xcc][0xed][0x9d][0xbc][0xf7][0xde]{[0xef][0xbd][0xf7][0xde]{[0xef][0xbd][0xf7][0xba];[0x9d]N'[0xf7][0xdf][0xff]?\fd[0x1]l[0xf6][0xce]J[0xda][0xc9][0x9e]![0x80][0xaa][0xc8][0x1f]?~|[0x1f]?"[0x1e][0xff][0x1e][0xef][0x16]ez[0x99][0xd7]MQ-?[0xfb]hw[0xbc][0xf3]Q[0x9a]/[0xa7][0xd5][0xac]X^|[0xf6][0xd1][0xba]=[0xdf]>[0xf8][0xe8][0xf7]8[0xfa][0x8d][0x93][0xc7][0xaf][0xab][0xba][0xcd][0x8b]*[0xa5][0xe6][0xcb][0xe6][0xd1][0xbb][0xa6][0xf8][0xec][0xa3]y[0xdb][0xae][0x1e][0xdd][0xbd]{uu5[0xbe][0xba]7[0xae][0xea][0x8b][0xbb]{;;[0xbb]w[0xef]/[0x9e][0xbf][0x9e][0xce][0xf3]E[0xb6]],[0x9b]6[N[0xf3][0x8f][0xec][[0xb3][0x9b][0xdf][0xd2][0xc6][0xb6]a[0x93][0xd7][0x97][0xc5][0xb4]j[0xc6]Y9[0xc9][0xeb][0xb6]XV[0xe3][0xbc]-[0xc6][0x93][0xfa]#B+M[0x1f][0x9f]T[0xcb][0xe9][0xba]n[0xaa][0xa3][0xfb][0x8f][0xef][0xda][0xdf][0xf9][0x9b][0xa7]Y[0x9b][0x1d][0xed]>|[0xf8][0xe9][0xf6][0xce][0xfe][0xf6][0xce][0xc1][0x9b][0x9d][0x9d]G[0xfc][0xbf][0xc7]w[0xf9][0x1b]i[0x93][0xff] _f[0xcd][0xd1][0xce][0xee][0xcf][0xec][0xec][0xfd][0xcc][0xce][0xa7]?[0xb3]K[0xff]{[0xf8]3[0xfb][0x9f]R#[0xfd][0x8a][0x6]WG[0xf4][0xff][0x0]'[0xde][0x9d];/[0x1][0x0][0x0]"
+21:39:26,945 DEBUG [headers] http-outgoing-5 << HTTP/1.1 200 OK
+21:39:26,945 DEBUG [headers] http-outgoing-5 << Cache-Control: no-cache
+21:39:26,945 DEBUG [headers] http-outgoing-5 << Pragma: no-cache
+21:39:26,946 DEBUG [headers] http-outgoing-5 << Content-Type: text/xml; charset=utf-8
+21:39:26,946 DEBUG [headers] http-outgoing-5 << Content-Encoding: gzip
+21:39:26,946 DEBUG [headers] http-outgoing-5 << Expires: -1
+21:39:26,947 DEBUG [headers] http-outgoing-5 << Vary: Accept-Encoding
+21:39:26,947 DEBUG [headers] http-outgoing-5 << Server: Microsoft-IIS/8.0
+21:39:26,947 DEBUG [headers] http-outgoing-5 << X-AspNet-Version: 4.0.30319
+21:39:26,947 DEBUG [headers] http-outgoing-5 << X-Powered-By: ASP.NET
+21:39:26,947 DEBUG [headers] http-outgoing-5 << X-Powered-By-Plesk: PleskWin
+21:39:26,948 DEBUG [headers] http-outgoing-5 << Access-Control-Allow-Origin: *
+21:39:26,948 DEBUG [headers] http-outgoing-5 << Date: Sat, 06 Jun 2015 00:39:36 GMT
+21:39:26,948 DEBUG [headers] http-outgoing-5 << Content-Length: 326
+21:39:26,948 DEBUG [MainClientExec] Connection can be kept alive indefinitely
+21:39:26,951 DEBUG [PoolingHttpClientConnectionManager] Connection [id: 5][route: {}->http://servicos.albertino.eti.br:80] can be kept alive indefinitely
+21:39:26,951 DEBUG [PoolingHttpClientConnectionManager] Connection released: [id: 5][route: {}->http://servicos.albertino.eti.br:80][total kept alive: 1; route allocated: 1 of 2; total allocated: 1 of 20]
+21:39:26,951 DEBUG [ResultadoMegaSenaService] 5
+21:39:26,952 DEBUG [ResultadoMegaSenaService] 1996-04-08
+21:39:26,952 DEBUG [ResultadoMegaSenaService] 01|02|06|16|19|46
+21:39:27,723 DEBUG [RequestAddCookies] CookieSpec selected: best-match
+21:39:27,723 DEBUG [RequestAuthCache] Auth cache not set in the context
+21:39:27,724 DEBUG [PoolingHttpClientConnectionManager] Connection request: [route: {}->http://servicos.albertino.eti.br:80][total kept alive: 0; route allocated: 0 of 2; total allocated: 0 of 20]
+21:39:27,724 DEBUG [PoolingHttpClientConnectionManager] Connection leased: [id: 6][route: {}->http://servicos.albertino.eti.br:80][total kept alive: 0; route allocated: 1 of 2; total allocated: 1 of 20]
+21:39:27,725 DEBUG [MainClientExec] Opening connection {}->http://servicos.albertino.eti.br:80
+21:39:27,725 DEBUG [HttpClientConnectionManager] Connecting to servicos.albertino.eti.br/169.53.231.5:80
+21:39:27,930 DEBUG [MainClientExec] Executing request GET /Loteria.asmx/GetMegaSena_PorConcurso?numero=6 HTTP/1.1
+21:39:27,931 DEBUG [MainClientExec] Target auth state: UNCHALLENGED
+21:39:27,931 DEBUG [MainClientExec] Proxy auth state: UNCHALLENGED
+21:39:27,931 DEBUG [headers] http-outgoing-6 >> GET /Loteria.asmx/GetMegaSena_PorConcurso?numero=6 HTTP/1.1
+21:39:27,932 DEBUG [headers] http-outgoing-6 >> Host: servicos.albertino.eti.br:80
+21:39:27,932 DEBUG [headers] http-outgoing-6 >> Connection: Keep-Alive
+21:39:27,932 DEBUG [headers] http-outgoing-6 >> User-Agent: Apache-HttpClient/4.3.2 (java 1.5)
+21:39:27,933 DEBUG [headers] http-outgoing-6 >> Accept-Encoding: gzip,deflate
+21:39:27,933 DEBUG [wire] http-outgoing-6 >> "GET /Loteria.asmx/GetMegaSena_PorConcurso?numero=6 HTTP/1.1[\r][\n]"
+21:39:27,934 DEBUG [wire] http-outgoing-6 >> "Host: servicos.albertino.eti.br:80[\r][\n]"
+21:39:27,934 DEBUG [wire] http-outgoing-6 >> "Connection: Keep-Alive[\r][\n]"
+21:39:27,934 DEBUG [wire] http-outgoing-6 >> "User-Agent: Apache-HttpClient/4.3.2 (java 1.5)[\r][\n]"
+21:39:27,935 DEBUG [wire] http-outgoing-6 >> "Accept-Encoding: gzip,deflate[\r][\n]"
+21:39:27,935 DEBUG [wire] http-outgoing-6 >> "[\r][\n]"
+21:39:28,161 DEBUG [wire] http-outgoing-6 << "HTTP/1.1 200 OK[\r][\n]"
+21:39:28,162 DEBUG [wire] http-outgoing-6 << "Cache-Control: no-cache[\r][\n]"
+21:39:28,162 DEBUG [wire] http-outgoing-6 << "Pragma: no-cache[\r][\n]"
+21:39:28,163 DEBUG [wire] http-outgoing-6 << "Content-Type: text/xml; charset=utf-8[\r][\n]"
+21:39:28,163 DEBUG [wire] http-outgoing-6 << "Content-Encoding: gzip[\r][\n]"
+21:39:28,163 DEBUG [wire] http-outgoing-6 << "Expires: -1[\r][\n]"
+21:39:28,164 DEBUG [wire] http-outgoing-6 << "Vary: Accept-Encoding[\r][\n]"
+21:39:28,164 DEBUG [wire] http-outgoing-6 << "Server: Microsoft-IIS/8.0[\r][\n]"
+21:39:28,164 DEBUG [wire] http-outgoing-6 << "X-AspNet-Version: 4.0.30319[\r][\n]"
+21:39:28,165 DEBUG [wire] http-outgoing-6 << "X-Powered-By: ASP.NET[\r][\n]"
+21:39:28,165 DEBUG [wire] http-outgoing-6 << "X-Powered-By-Plesk: PleskWin[\r][\n]"
+21:39:28,165 DEBUG [wire] http-outgoing-6 << "Access-Control-Allow-Origin: *[\r][\n]"
+21:39:28,166 DEBUG [wire] http-outgoing-6 << "Date: Sat, 06 Jun 2015 00:39:38 GMT[\r][\n]"
+21:39:28,166 DEBUG [wire] http-outgoing-6 << "Content-Length: 327[\r][\n]"
+21:39:28,166 DEBUG [wire] http-outgoing-6 << "[\r][\n]"
+21:39:28,167 DEBUG [wire] http-outgoing-6 << "[0x1f][0x8b][0x8][0x0][0x0][0x0][0x0][0x0][0x4][0x0][0xed][0xbd][0x7]`[0x1c]I[0x96]%&/m[0xca]{J[0xf5]J[0xd7][0xe0]t[0xa1][0x8][0x80]`[0x13]$[0xd8][0x90]@[0x10][0xec][0xc1][0x88][0xcd][0xe6][0x92][0xec][0x1d]iG#)[0xab]*[0x81][0xca]eVe]f[0x16]@[0xcc][0xed][0x9d][0xbc][0xf7][0xde]{[0xef][0xbd][0xf7][0xde]{[0xef][0xbd][0xf7][0xba];[0x9d]N'[0xf7][0xdf][0xff]?\fd[0x1]l[0xf6][0xce]J[0xda][0xc9][0x9e]![0x80][0xaa][0xc8][0x1f]?~|[0x1f]?"[0x1e][0xff][0x1e][0xef][0x16]ez[0x99][0xd7]MQ-?[0xfb]hw[0xbc][0xf3]Q[0x9a]/[0xa7][0xd5][0xac]X^|[0xf6][0xd1][0xba]=[0xdf]>[0xf8][0xe8][0xf7]8[0xfa][0x8d][0x93][0xc7][0xaf][0xab][0xba][0xcd][0x8b]*[0xa5][0xe6][0xcb][0xe6][0xd1][0xbb][0xa6][0xf8][0xec][0xa3]y[0xdb][0xae][0x1e][0xdd][0xbd]{uu5[0xbe][0xba]7[0xae][0xea][0x8b][0xbb]{;;[0xbb]w[0xef]/[0x9e][0xbf][0x9e][0xce][0xf3]E[0xb6]],[0x9b]6[N[0xf3][0x8f][0xec][[0xb3][0x9b][0xdf][0xd2][0xc6][0xb6]a[0x93][0xd7][0x97][0xc5][0xb4]j[0xc6]Y9[0xc9][0xeb][0xb6]XV[0xe3][0xbc]-[0xc6][0x93][0xfa]#B+M[0x1f][0x9f]T[0xcb][0xe9][0xba]n[0xaa][0xa3]O[0x1f][0xdf][0xb5][0xbf][0xf3]7O[0xb3]6;[0xda]}[0xf8][0xf0][0xd3][0xed][0x9d][0xfd][0xed][0xdd][0xfb]ovv[0x1e][0xf1][0xff][0x1e][0xdf][0xe5]o[0xa4]M[0xfe][0x83]|[0x99]5G;[0xf]~f[0xf7][0xde][0xcf][0xec]>[0xfc][0x99][0xbd][0xbd][0x9f][0xd9][0xdf][0xf9][0x99][0xfd][0x7][0xd4]H[0xbf][0xa2][0xc1][0xdf][0xd5][0xd1][0x1f][0xfd]?[0xd3][0xf3]?L/[0x1][0x0][0x0]"
+21:39:28,168 DEBUG [headers] http-outgoing-6 << HTTP/1.1 200 OK
+21:39:28,168 DEBUG [headers] http-outgoing-6 << Cache-Control: no-cache
+21:39:28,169 DEBUG [headers] http-outgoing-6 << Pragma: no-cache
+21:39:28,169 DEBUG [headers] http-outgoing-6 << Content-Type: text/xml; charset=utf-8
+21:39:28,169 DEBUG [headers] http-outgoing-6 << Content-Encoding: gzip
+21:39:28,170 DEBUG [headers] http-outgoing-6 << Expires: -1
+21:39:28,170 DEBUG [headers] http-outgoing-6 << Vary: Accept-Encoding
+21:39:28,170 DEBUG [headers] http-outgoing-6 << Server: Microsoft-IIS/8.0
+21:39:28,171 DEBUG [headers] http-outgoing-6 << X-AspNet-Version: 4.0.30319
+21:39:28,171 DEBUG [headers] http-outgoing-6 << X-Powered-By: ASP.NET
+21:39:28,171 DEBUG [headers] http-outgoing-6 << X-Powered-By-Plesk: PleskWin
+21:39:28,171 DEBUG [headers] http-outgoing-6 << Access-Control-Allow-Origin: *
+21:39:28,172 DEBUG [headers] http-outgoing-6 << Date: Sat, 06 Jun 2015 00:39:38 GMT
+21:39:28,172 DEBUG [headers] http-outgoing-6 << Content-Length: 327
+21:39:28,172 DEBUG [MainClientExec] Connection can be kept alive indefinitely
+21:39:28,174 DEBUG [PoolingHttpClientConnectionManager] Connection [id: 6][route: {}->http://servicos.albertino.eti.br:80] can be kept alive indefinitely
+21:39:28,174 DEBUG [PoolingHttpClientConnectionManager] Connection released: [id: 6][route: {}->http://servicos.albertino.eti.br:80][total kept alive: 1; route allocated: 1 of 2; total allocated: 1 of 20]
+21:39:28,174 DEBUG [ResultadoMegaSenaService] 6
+21:39:28,174 DEBUG [ResultadoMegaSenaService] 1996-04-15
+21:39:28,175 DEBUG [ResultadoMegaSenaService] 07|13|19|22|40|47
+21:39:29,026 DEBUG [RequestAddCookies] CookieSpec selected: best-match
+21:39:29,026 DEBUG [RequestAuthCache] Auth cache not set in the context
+21:39:29,026 DEBUG [PoolingHttpClientConnectionManager] Connection request: [route: {}->http://servicos.albertino.eti.br:80][total kept alive: 0; route allocated: 0 of 2; total allocated: 0 of 20]
+21:39:29,026 DEBUG [PoolingHttpClientConnectionManager] Connection leased: [id: 7][route: {}->http://servicos.albertino.eti.br:80][total kept alive: 0; route allocated: 1 of 2; total allocated: 1 of 20]
+21:39:29,027 DEBUG [MainClientExec] Opening connection {}->http://servicos.albertino.eti.br:80
+21:39:29,027 DEBUG [HttpClientConnectionManager] Connecting to servicos.albertino.eti.br/169.53.231.5:80
+21:39:29,224 DEBUG [MainClientExec] Executing request GET /Loteria.asmx/GetMegaSena_PorConcurso?numero=7 HTTP/1.1
+21:39:29,225 DEBUG [MainClientExec] Target auth state: UNCHALLENGED
+21:39:29,225 DEBUG [MainClientExec] Proxy auth state: UNCHALLENGED
+21:39:29,226 DEBUG [headers] http-outgoing-7 >> GET /Loteria.asmx/GetMegaSena_PorConcurso?numero=7 HTTP/1.1
+21:39:29,227 DEBUG [headers] http-outgoing-7 >> Host: servicos.albertino.eti.br:80
+21:39:29,227 DEBUG [headers] http-outgoing-7 >> Connection: Keep-Alive
+21:39:29,227 DEBUG [headers] http-outgoing-7 >> User-Agent: Apache-HttpClient/4.3.2 (java 1.5)
+21:39:29,227 DEBUG [headers] http-outgoing-7 >> Accept-Encoding: gzip,deflate
+21:39:29,228 DEBUG [wire] http-outgoing-7 >> "GET /Loteria.asmx/GetMegaSena_PorConcurso?numero=7 HTTP/1.1[\r][\n]"
+21:39:29,228 DEBUG [wire] http-outgoing-7 >> "Host: servicos.albertino.eti.br:80[\r][\n]"
+21:39:29,229 DEBUG [wire] http-outgoing-7 >> "Connection: Keep-Alive[\r][\n]"
+21:39:29,229 DEBUG [wire] http-outgoing-7 >> "User-Agent: Apache-HttpClient/4.3.2 (java 1.5)[\r][\n]"
+21:39:29,229 DEBUG [wire] http-outgoing-7 >> "Accept-Encoding: gzip,deflate[\r][\n]"
+21:39:29,230 DEBUG [wire] http-outgoing-7 >> "[\r][\n]"
+21:39:29,430 DEBUG [wire] http-outgoing-7 << "HTTP/1.1 200 OK[\r][\n]"
+21:39:29,431 DEBUG [wire] http-outgoing-7 << "Cache-Control: no-cache[\r][\n]"
+21:39:29,431 DEBUG [wire] http-outgoing-7 << "Pragma: no-cache[\r][\n]"
+21:39:29,432 DEBUG [wire] http-outgoing-7 << "Content-Type: text/xml; charset=utf-8[\r][\n]"
+21:39:29,432 DEBUG [wire] http-outgoing-7 << "Content-Encoding: gzip[\r][\n]"
+21:39:29,432 DEBUG [wire] http-outgoing-7 << "Expires: -1[\r][\n]"
+21:39:29,433 DEBUG [wire] http-outgoing-7 << "Vary: Accept-Encoding[\r][\n]"
+21:39:29,433 DEBUG [wire] http-outgoing-7 << "Server: Microsoft-IIS/8.0[\r][\n]"
+21:39:29,433 DEBUG [wire] http-outgoing-7 << "X-AspNet-Version: 4.0.30319[\r][\n]"
+21:39:29,434 DEBUG [wire] http-outgoing-7 << "X-Powered-By: ASP.NET[\r][\n]"
+21:39:29,434 DEBUG [wire] http-outgoing-7 << "X-Powered-By-Plesk: PleskWin[\r][\n]"
+21:39:29,434 DEBUG [wire] http-outgoing-7 << "Access-Control-Allow-Origin: *[\r][\n]"
+21:39:29,435 DEBUG [wire] http-outgoing-7 << "Date: Sat, 06 Jun 2015 00:39:39 GMT[\r][\n]"
+21:39:29,435 DEBUG [wire] http-outgoing-7 << "Content-Length: 327[\r][\n]"
+21:39:29,435 DEBUG [wire] http-outgoing-7 << "[\r][\n]"
+21:39:29,436 DEBUG [wire] http-outgoing-7 << "[0x1f][0x8b][0x8][0x0][0x0][0x0][0x0][0x0][0x4][0x0][0xed][0xbd][0x7]`[0x1c]I[0x96]%&/m[0xca]{J[0xf5]J[0xd7][0xe0]t[0xa1][0x8][0x80]`[0x13]$[0xd8][0x90]@[0x10][0xec][0xc1][0x88][0xcd][0xe6][0x92][0xec][0x1d]iG#)[0xab]*[0x81][0xca]eVe]f[0x16]@[0xcc][0xed][0x9d][0xbc][0xf7][0xde]{[0xef][0xbd][0xf7][0xde]{[0xef][0xbd][0xf7][0xba];[0x9d]N'[0xf7][0xdf][0xff]?\fd[0x1]l[0xf6][0xce]J[0xda][0xc9][0x9e]![0x80][0xaa][0xc8][0x1f]?~|[0x1f]?"[0x1e][0xff][0x1e][0xef][0x16]ez[0x99][0xd7]MQ-?[0xfb]hw[0xbc][0xf3]Q[0x9a]/[0xa7][0xd5][0xac]X^|[0xf6][0xd1][0xba]=[0xdf]>[0xf8][0xe8][0xf7]8[0xfa][0x8d][0x93][0xc7][0xaf][0xab][0xba][0xcd][0x8b]*[0xa5][0xe6][0xcb][0xe6][0xd1][0xbb][0xa6][0xf8][0xec][0xa3]y[0xdb][0xae][0x1e][0xdd][0xbd]{uu5[0xbe][0xba]7[0xae][0xea][0x8b][0xbb]{;;[0xbb]w[0xef]/[0x9e][0xbf][0x9e][0xce][0xf3]E[0xb6]],[0x9b]6[N[0xf3][0x8f][0xec][[0xb3][0x9b][0xdf][0xd2][0xc6][0xb6]a[0x93][0xd7][0x97][0xc5][0xb4]j[0xc6]Y9[0xc9][0xeb][0xb6]XV[0xe3][0xbc]-[0xc6][0x93][0xfa]#B+M[0x1f][0x9f]T[0xcb][0xe9][0xba]n[0xaa][0xa3][0x7][0x8f][0xef][0xda][0xdf][0xf9][0x9b][0xa7]Y[0x9b][0x1d][0xed]>|[0xf8][0xe9][0xf6][0xce][0xfe][0xf6][0xde][0xde][0x9b][0x9d][0x9d]G[0xfc][0xbf][0xc7]w[0xf9][0x1b]i[0x93][0xff] _f[0xcd][0xd1][0xce][0xbd][0x9f][0xd9][0xb9][0xff]3{;?[0xb3][0xb7][0xfb]3[0xf7][0xe]~[0xe6][0xfe][0xa7][0xd4]H[0xbf][0xa2][0xc1][0xdf][0xd5][0xd1][0x1f][0xfd]?[0xa7]^[0xef][0xe7]/[0x1][0x0][0x0]"
+21:39:29,437 DEBUG [headers] http-outgoing-7 << HTTP/1.1 200 OK
+21:39:29,437 DEBUG [headers] http-outgoing-7 << Cache-Control: no-cache
+21:39:29,437 DEBUG [headers] http-outgoing-7 << Pragma: no-cache
+21:39:29,438 DEBUG [headers] http-outgoing-7 << Content-Type: text/xml; charset=utf-8
+21:39:29,438 DEBUG [headers] http-outgoing-7 << Content-Encoding: gzip
+21:39:29,438 DEBUG [headers] http-outgoing-7 << Expires: -1
+21:39:29,439 DEBUG [headers] http-outgoing-7 << Vary: Accept-Encoding
+21:39:29,439 DEBUG [headers] http-outgoing-7 << Server: Microsoft-IIS/8.0
+21:39:29,439 DEBUG [headers] http-outgoing-7 << X-AspNet-Version: 4.0.30319
+21:39:29,440 DEBUG [headers] http-outgoing-7 << X-Powered-By: ASP.NET
+21:39:29,440 DEBUG [headers] http-outgoing-7 << X-Powered-By-Plesk: PleskWin
+21:39:29,440 DEBUG [headers] http-outgoing-7 << Access-Control-Allow-Origin: *
+21:39:29,441 DEBUG [headers] http-outgoing-7 << Date: Sat, 06 Jun 2015 00:39:39 GMT
+21:39:29,441 DEBUG [headers] http-outgoing-7 << Content-Length: 327
+21:39:29,442 DEBUG [MainClientExec] Connection can be kept alive indefinitely
+21:39:29,446 DEBUG [PoolingHttpClientConnectionManager] Connection [id: 7][route: {}->http://servicos.albertino.eti.br:80] can be kept alive indefinitely
+21:39:29,446 DEBUG [PoolingHttpClientConnectionManager] Connection released: [id: 7][route: {}->http://servicos.albertino.eti.br:80][total kept alive: 1; route allocated: 1 of 2; total allocated: 1 of 20]
+21:39:29,446 DEBUG [ResultadoMegaSenaService] 7
+21:39:29,446 DEBUG [ResultadoMegaSenaService] 1996-04-22
+21:39:29,447 DEBUG [ResultadoMegaSenaService] 03|05|20|21|38|56
+21:39:30,164 DEBUG [RequestAddCookies] CookieSpec selected: best-match
+21:39:30,165 DEBUG [RequestAuthCache] Auth cache not set in the context
+21:39:30,165 DEBUG [PoolingHttpClientConnectionManager] Connection request: [route: {}->http://servicos.albertino.eti.br:80][total kept alive: 0; route allocated: 0 of 2; total allocated: 0 of 20]
+21:39:30,165 DEBUG [PoolingHttpClientConnectionManager] Connection leased: [id: 8][route: {}->http://servicos.albertino.eti.br:80][total kept alive: 0; route allocated: 1 of 2; total allocated: 1 of 20]
+21:39:30,165 DEBUG [MainClientExec] Opening connection {}->http://servicos.albertino.eti.br:80
+21:39:30,166 DEBUG [HttpClientConnectionManager] Connecting to servicos.albertino.eti.br/169.53.231.5:80
+21:39:30,375 DEBUG [MainClientExec] Executing request GET /Loteria.asmx/GetMegaSena_PorConcurso?numero=8 HTTP/1.1
+21:39:30,375 DEBUG [MainClientExec] Target auth state: UNCHALLENGED
+21:39:30,375 DEBUG [MainClientExec] Proxy auth state: UNCHALLENGED
+21:39:30,376 DEBUG [headers] http-outgoing-8 >> GET /Loteria.asmx/GetMegaSena_PorConcurso?numero=8 HTTP/1.1
+21:39:30,376 DEBUG [headers] http-outgoing-8 >> Host: servicos.albertino.eti.br:80
+21:39:30,377 DEBUG [headers] http-outgoing-8 >> Connection: Keep-Alive
+21:39:30,377 DEBUG [headers] http-outgoing-8 >> User-Agent: Apache-HttpClient/4.3.2 (java 1.5)
+21:39:30,377 DEBUG [headers] http-outgoing-8 >> Accept-Encoding: gzip,deflate
+21:39:30,378 DEBUG [wire] http-outgoing-8 >> "GET /Loteria.asmx/GetMegaSena_PorConcurso?numero=8 HTTP/1.1[\r][\n]"
+21:39:30,378 DEBUG [wire] http-outgoing-8 >> "Host: servicos.albertino.eti.br:80[\r][\n]"
+21:39:30,378 DEBUG [wire] http-outgoing-8 >> "Connection: Keep-Alive[\r][\n]"
+21:39:30,379 DEBUG [wire] http-outgoing-8 >> "User-Agent: Apache-HttpClient/4.3.2 (java 1.5)[\r][\n]"
+21:39:30,379 DEBUG [wire] http-outgoing-8 >> "Accept-Encoding: gzip,deflate[\r][\n]"
+21:39:30,379 DEBUG [wire] http-outgoing-8 >> "[\r][\n]"
+21:39:30,593 DEBUG [wire] http-outgoing-8 << "HTTP/1.1 200 OK[\r][\n]"
+21:39:30,594 DEBUG [wire] http-outgoing-8 << "Cache-Control: no-cache[\r][\n]"
+21:39:30,594 DEBUG [wire] http-outgoing-8 << "Pragma: no-cache[\r][\n]"
+21:39:30,594 DEBUG [wire] http-outgoing-8 << "Content-Type: text/xml; charset=utf-8[\r][\n]"
+21:39:30,595 DEBUG [wire] http-outgoing-8 << "Content-Encoding: gzip[\r][\n]"
+21:39:30,595 DEBUG [wire] http-outgoing-8 << "Expires: -1[\r][\n]"
+21:39:30,595 DEBUG [wire] http-outgoing-8 << "Vary: Accept-Encoding[\r][\n]"
+21:39:30,596 DEBUG [wire] http-outgoing-8 << "Server: Microsoft-IIS/8.0[\r][\n]"
+21:39:30,596 DEBUG [wire] http-outgoing-8 << "X-AspNet-Version: 4.0.30319[\r][\n]"
+21:39:30,596 DEBUG [wire] http-outgoing-8 << "X-Powered-By: ASP.NET[\r][\n]"
+21:39:30,597 DEBUG [wire] http-outgoing-8 << "X-Powered-By-Plesk: PleskWin[\r][\n]"
+21:39:30,597 DEBUG [wire] http-outgoing-8 << "Access-Control-Allow-Origin: *[\r][\n]"
+21:39:30,597 DEBUG [wire] http-outgoing-8 << "Date: Sat, 06 Jun 2015 00:39:40 GMT[\r][\n]"
+21:39:30,598 DEBUG [wire] http-outgoing-8 << "Content-Length: 326[\r][\n]"
+21:39:30,598 DEBUG [wire] http-outgoing-8 << "[\r][\n]"
+21:39:30,599 DEBUG [wire] http-outgoing-8 << "[0x1f][0x8b][0x8][0x0][0x0][0x0][0x0][0x0][0x4][0x0][0xed][0xbd][0x7]`[0x1c]I[0x96]%&/m[0xca]{J[0xf5]J[0xd7][0xe0]t[0xa1][0x8][0x80]`[0x13]$[0xd8][0x90]@[0x10][0xec][0xc1][0x88][0xcd][0xe6][0x92][0xec][0x1d]iG#)[0xab]*[0x81][0xca]eVe]f[0x16]@[0xcc][0xed][0x9d][0xbc][0xf7][0xde]{[0xef][0xbd][0xf7][0xde]{[0xef][0xbd][0xf7][0xba];[0x9d]N'[0xf7][0xdf][0xff]?\fd[0x1]l[0xf6][0xce]J[0xda][0xc9][0x9e]![0x80][0xaa][0xc8][0x1f]?~|[0x1f]?"[0x1e][0xff][0x1e][0xef][0x16]ez[0x99][0xd7]MQ-?[0xfb]hw[0xbc][0xf3]Q[0x9a]/[0xa7][0xd5][0xac]X^|[0xf6][0xd1][0xba]=[0xdf]>[0xf8][0xe8][0xf7]8[0xfa][0x8d][0x93][0xc7][0xaf][0xab][0xba][0xcd][0x8b]*[0xa5][0xe6][0xcb][0xe6][0xd1][0xbb][0xa6][0xf8][0xec][0xa3]y[0xdb][0xae][0x1e][0xdd][0xbd]{uu5[0xbe][0xba]7[0xae][0xea][0x8b][0xbb]{;;[0xbb]w[0xef]/[0x9e][0xbf][0x9e][0xce][0xf3]E[0xb6]],[0x9b]6[N[0xf3][0x8f][0xec][[0xb3][0x9b][0xdf][0xd2][0xc6][0xb6]a[0x93][0xd7][0x97][0xc5][0xb4]j[0xc6]Y9[0xc9][0xeb][0xb6]XV[0xe3][0xbc]-[0xc6][0x93][0xfa]#B+M[0x1f][0x9f]T[0xcb][0xe9][0xba]n[0xaa][0xa3][0x83][0xc7]w[0xed][0xef][0xfc][0xcd][0xd3][0xac][0xcd][0x8e]v[0x1f]>[0xfc]t{g{[0xef][0xe1][0x9b][0x9d][0x9d]G[0xfc][0xbf][0xc7]w[0xf9][0x1b]i[0x93][0xff] _f[0xcd][0xd1][0xce][0xfe][0xcf][0xec]>[0xf8][0x99]{[0xf4][0xbf][0x83][0x9f][0xd9][0xf0]3[0xf7][0xef]Q#[0xfd][0x8a][0x6]WG[0xf4][0xff][0x0][0xe4]i[0x14][0xa8]/[0x1][0x0][0x0]"
+21:39:30,600 DEBUG [headers] http-outgoing-8 << HTTP/1.1 200 OK
+21:39:30,600 DEBUG [headers] http-outgoing-8 << Cache-Control: no-cache
+21:39:30,600 DEBUG [headers] http-outgoing-8 << Pragma: no-cache
+21:39:30,601 DEBUG [headers] http-outgoing-8 << Content-Type: text/xml; charset=utf-8
+21:39:30,601 DEBUG [headers] http-outgoing-8 << Content-Encoding: gzip
+21:39:30,601 DEBUG [headers] http-outgoing-8 << Expires: -1
+21:39:30,602 DEBUG [headers] http-outgoing-8 << Vary: Accept-Encoding
+21:39:30,602 DEBUG [headers] http-outgoing-8 << Server: Microsoft-IIS/8.0
+21:39:30,602 DEBUG [headers] http-outgoing-8 << X-AspNet-Version: 4.0.30319
+21:39:30,602 DEBUG [headers] http-outgoing-8 << X-Powered-By: ASP.NET
+21:39:30,603 DEBUG [headers] http-outgoing-8 << X-Powered-By-Plesk: PleskWin
+21:39:30,603 DEBUG [headers] http-outgoing-8 << Access-Control-Allow-Origin: *
+21:39:30,603 DEBUG [headers] http-outgoing-8 << Date: Sat, 06 Jun 2015 00:39:40 GMT
+21:39:30,604 DEBUG [headers] http-outgoing-8 << Content-Length: 326
+21:39:30,604 DEBUG [MainClientExec] Connection can be kept alive indefinitely
+21:39:30,607 DEBUG [PoolingHttpClientConnectionManager] Connection [id: 8][route: {}->http://servicos.albertino.eti.br:80] can be kept alive indefinitely
+21:39:30,608 DEBUG [PoolingHttpClientConnectionManager] Connection released: [id: 8][route: {}->http://servicos.albertino.eti.br:80][total kept alive: 1; route allocated: 1 of 2; total allocated: 1 of 20]
+21:39:30,608 DEBUG [ResultadoMegaSenaService] 8
+21:39:30,608 DEBUG [ResultadoMegaSenaService] 1996-04-29
+21:39:30,609 DEBUG [ResultadoMegaSenaService] 04|17|37|38|47|53
+21:39:31,438 DEBUG [RequestAddCookies] CookieSpec selected: best-match
+21:39:31,438 DEBUG [RequestAuthCache] Auth cache not set in the context
+21:39:31,439 DEBUG [PoolingHttpClientConnectionManager] Connection request: [route: {}->http://servicos.albertino.eti.br:80][total kept alive: 0; route allocated: 0 of 2; total allocated: 0 of 20]
+21:39:31,439 DEBUG [PoolingHttpClientConnectionManager] Connection leased: [id: 9][route: {}->http://servicos.albertino.eti.br:80][total kept alive: 0; route allocated: 1 of 2; total allocated: 1 of 20]
+21:39:31,439 DEBUG [MainClientExec] Opening connection {}->http://servicos.albertino.eti.br:80
+21:39:31,439 DEBUG [HttpClientConnectionManager] Connecting to servicos.albertino.eti.br/169.53.231.5:80
+21:39:31,673 DEBUG [MainClientExec] Executing request GET /Loteria.asmx/GetMegaSena_PorConcurso?numero=9 HTTP/1.1
+21:39:31,674 DEBUG [MainClientExec] Target auth state: UNCHALLENGED
+21:39:31,674 DEBUG [MainClientExec] Proxy auth state: UNCHALLENGED
+21:39:31,675 DEBUG [headers] http-outgoing-9 >> GET /Loteria.asmx/GetMegaSena_PorConcurso?numero=9 HTTP/1.1
+21:39:31,675 DEBUG [headers] http-outgoing-9 >> Host: servicos.albertino.eti.br:80
+21:39:31,675 DEBUG [headers] http-outgoing-9 >> Connection: Keep-Alive
+21:39:31,676 DEBUG [headers] http-outgoing-9 >> User-Agent: Apache-HttpClient/4.3.2 (java 1.5)
+21:39:31,676 DEBUG [headers] http-outgoing-9 >> Accept-Encoding: gzip,deflate
+21:39:31,676 DEBUG [wire] http-outgoing-9 >> "GET /Loteria.asmx/GetMegaSena_PorConcurso?numero=9 HTTP/1.1[\r][\n]"
+21:39:31,676 DEBUG [wire] http-outgoing-9 >> "Host: servicos.albertino.eti.br:80[\r][\n]"
+21:39:31,677 DEBUG [wire] http-outgoing-9 >> "Connection: Keep-Alive[\r][\n]"
+21:39:31,677 DEBUG [wire] http-outgoing-9 >> "User-Agent: Apache-HttpClient/4.3.2 (java 1.5)[\r][\n]"
+21:39:31,677 DEBUG [wire] http-outgoing-9 >> "Accept-Encoding: gzip,deflate[\r][\n]"
+21:39:31,678 DEBUG [wire] http-outgoing-9 >> "[\r][\n]"
+21:39:31,918 DEBUG [wire] http-outgoing-9 << "HTTP/1.1 200 OK[\r][\n]"
+21:39:31,919 DEBUG [wire] http-outgoing-9 << "Cache-Control: no-cache[\r][\n]"
+21:39:31,919 DEBUG [wire] http-outgoing-9 << "Pragma: no-cache[\r][\n]"
+21:39:31,919 DEBUG [wire] http-outgoing-9 << "Content-Type: text/xml; charset=utf-8[\r][\n]"
+21:39:31,920 DEBUG [wire] http-outgoing-9 << "Content-Encoding: gzip[\r][\n]"
+21:39:31,920 DEBUG [wire] http-outgoing-9 << "Expires: -1[\r][\n]"
+21:39:31,920 DEBUG [wire] http-outgoing-9 << "Vary: Accept-Encoding[\r][\n]"
+21:39:31,921 DEBUG [wire] http-outgoing-9 << "Server: Microsoft-IIS/8.0[\r][\n]"
+21:39:31,921 DEBUG [wire] http-outgoing-9 << "X-AspNet-Version: 4.0.30319[\r][\n]"
+21:39:31,922 DEBUG [wire] http-outgoing-9 << "X-Powered-By: ASP.NET[\r][\n]"
+21:39:31,922 DEBUG [wire] http-outgoing-9 << "X-Powered-By-Plesk: PleskWin[\r][\n]"
+21:39:31,922 DEBUG [wire] http-outgoing-9 << "Access-Control-Allow-Origin: *[\r][\n]"
+21:39:31,923 DEBUG [wire] http-outgoing-9 << "Date: Sat, 06 Jun 2015 00:39:42 GMT[\r][\n]"
+21:39:31,923 DEBUG [wire] http-outgoing-9 << "Content-Length: 327[\r][\n]"
+21:39:31,924 DEBUG [wire] http-outgoing-9 << "[\r][\n]"
+21:39:31,925 DEBUG [wire] http-outgoing-9 << "[0x1f][0x8b][0x8][0x0][0x0][0x0][0x0][0x0][0x4][0x0][0xed][0xbd][0x7]`[0x1c]I[0x96]%&/m[0xca]{J[0xf5]J[0xd7][0xe0]t[0xa1][0x8][0x80]`[0x13]$[0xd8][0x90]@[0x10][0xec][0xc1][0x88][0xcd][0xe6][0x92][0xec][0x1d]iG#)[0xab]*[0x81][0xca]eVe]f[0x16]@[0xcc][0xed][0x9d][0xbc][0xf7][0xde]{[0xef][0xbd][0xf7][0xde]{[0xef][0xbd][0xf7][0xba];[0x9d]N'[0xf7][0xdf][0xff]?\fd[0x1]l[0xf6][0xce]J[0xda][0xc9][0x9e]![0x80][0xaa][0xc8][0x1f]?~|[0x1f]?"[0x1e][0xff][0x1e][0xef][0x16]ez[0x99][0xd7]MQ-?[0xfb]hw[0xbc][0xf3]Q[0x9a]/[0xa7][0xd5][0xac]X^|[0xf6][0xd1][0xba]=[0xdf]>[0xf8][0xe8][0xf7]8[0xfa][0x8d][0x93][0xc7][0xaf][0xab][0xba][0xcd][0x8b]*[0xa5][0xe6][0xcb][0xe6][0xd1][0xbb][0xa6][0xf8][0xec][0xa3]y[0xdb][0xae][0x1e][0xdd][0xbd]{uu5[0xbe][0xba]7[0xae][0xea][0x8b][0xbb]{;;[0xbb]w[0xef]/[0x9e][0xbf][0x9e][0xce][0xf3]E[0xb6]],[0x9b]6[N[0xf3][0x8f][0xec][[0xb3][0x9b][0xdf][0xd2][0xc6][0xb6]a[0x93][0xd7][0x97][0xc5][0xb4]j[0xc6]Y9[0xc9][0xeb][0xb6]XV[0xe3][0xbc]-[0xc6][0x93][0xfa]#B+M[0x1f][0x9f]T[0xcb][0xe9][0xba]n[0xaa][0xa3][0x87][0x8f][0xef][0xda][0xdf][0xf9][0x9b][0xa7]Y[0x9b][0x1d][0xed]>|[0xf8][0xe9][0xf6][0xce][0xfd][0xed][0x9d]O[0xdf][0xec][0xec]<[0xe2][0xff]=[0xbe][0xcb][0xdf]H[0x9b][0xfc][0x7][0xf9]2k[0x8e]v[0xe]~f[0xff][0xde][0xcf][0xdc][0xdf][0xff][0x99][0xfb][0xf7][0xe6][0xfe][0xa7]?[0xf3])[0x1a][0xe9]W4[0xf8][0xbb]:[0xfa][0xa3][0xff][0x7]e[0xa4][0x9d][0x9b]/[0x1][0x0][0x0]"
+21:39:31,926 DEBUG [headers] http-outgoing-9 << HTTP/1.1 200 OK
+21:39:31,926 DEBUG [headers] http-outgoing-9 << Cache-Control: no-cache
+21:39:31,926 DEBUG [headers] http-outgoing-9 << Pragma: no-cache
+21:39:31,927 DEBUG [headers] http-outgoing-9 << Content-Type: text/xml; charset=utf-8
+21:39:31,927 DEBUG [headers] http-outgoing-9 << Content-Encoding: gzip
+21:39:31,927 DEBUG [headers] http-outgoing-9 << Expires: -1
+21:39:31,928 DEBUG [headers] http-outgoing-9 << Vary: Accept-Encoding
+21:39:31,928 DEBUG [headers] http-outgoing-9 << Server: Microsoft-IIS/8.0
+21:39:31,928 DEBUG [headers] http-outgoing-9 << X-AspNet-Version: 4.0.30319
+21:39:31,928 DEBUG [headers] http-outgoing-9 << X-Powered-By: ASP.NET
+21:39:31,928 DEBUG [headers] http-outgoing-9 << X-Powered-By-Plesk: PleskWin
+21:39:31,928 DEBUG [headers] http-outgoing-9 << Access-Control-Allow-Origin: *
+21:39:31,929 DEBUG [headers] http-outgoing-9 << Date: Sat, 06 Jun 2015 00:39:42 GMT
+21:39:31,929 DEBUG [headers] http-outgoing-9 << Content-Length: 327
+21:39:31,929 DEBUG [MainClientExec] Connection can be kept alive indefinitely
+21:39:31,931 DEBUG [PoolingHttpClientConnectionManager] Connection [id: 9][route: {}->http://servicos.albertino.eti.br:80] can be kept alive indefinitely
+21:39:31,931 DEBUG [PoolingHttpClientConnectionManager] Connection released: [id: 9][route: {}->http://servicos.albertino.eti.br:80][total kept alive: 1; route allocated: 1 of 2; total allocated: 1 of 20]
+21:39:31,931 DEBUG [ResultadoMegaSenaService] 9
+21:39:31,931 DEBUG [ResultadoMegaSenaService] 1996-05-06
+21:39:31,932 DEBUG [ResultadoMegaSenaService] 08|43|54|55|56|60
+21:39:32,757 DEBUG [RequestAddCookies] CookieSpec selected: best-match
+21:39:32,757 DEBUG [RequestAuthCache] Auth cache not set in the context
+21:39:32,758 DEBUG [PoolingHttpClientConnectionManager] Connection request: [route: {}->http://servicos.albertino.eti.br:80][total kept alive: 0; route allocated: 0 of 2; total allocated: 0 of 20]
+21:39:32,758 DEBUG [PoolingHttpClientConnectionManager] Connection leased: [id: 10][route: {}->http://servicos.albertino.eti.br:80][total kept alive: 0; route allocated: 1 of 2; total allocated: 1 of 20]
+21:39:32,758 DEBUG [MainClientExec] Opening connection {}->http://servicos.albertino.eti.br:80
+21:39:32,758 DEBUG [HttpClientConnectionManager] Connecting to servicos.albertino.eti.br/169.53.231.5:80
+21:39:32,952 DEBUG [MainClientExec] Executing request GET /Loteria.asmx/GetMegaSena_PorConcurso?numero=10 HTTP/1.1
+21:39:32,953 DEBUG [MainClientExec] Target auth state: UNCHALLENGED
+21:39:32,953 DEBUG [MainClientExec] Proxy auth state: UNCHALLENGED
+21:39:32,954 DEBUG [headers] http-outgoing-10 >> GET /Loteria.asmx/GetMegaSena_PorConcurso?numero=10 HTTP/1.1
+21:39:32,954 DEBUG [headers] http-outgoing-10 >> Host: servicos.albertino.eti.br:80
+21:39:32,954 DEBUG [headers] http-outgoing-10 >> Connection: Keep-Alive
+21:39:32,955 DEBUG [headers] http-outgoing-10 >> User-Agent: Apache-HttpClient/4.3.2 (java 1.5)
+21:39:32,955 DEBUG [headers] http-outgoing-10 >> Accept-Encoding: gzip,deflate
+21:39:32,955 DEBUG [wire] http-outgoing-10 >> "GET /Loteria.asmx/GetMegaSena_PorConcurso?numero=10 HTTP/1.1[\r][\n]"
+21:39:32,955 DEBUG [wire] http-outgoing-10 >> "Host: servicos.albertino.eti.br:80[\r][\n]"
+21:39:32,956 DEBUG [wire] http-outgoing-10 >> "Connection: Keep-Alive[\r][\n]"
+21:39:32,956 DEBUG [wire] http-outgoing-10 >> "User-Agent: Apache-HttpClient/4.3.2 (java 1.5)[\r][\n]"
+21:39:32,956 DEBUG [wire] http-outgoing-10 >> "Accept-Encoding: gzip,deflate[\r][\n]"
+21:39:32,957 DEBUG [wire] http-outgoing-10 >> "[\r][\n]"
+21:39:33,160 DEBUG [wire] http-outgoing-10 << "HTTP/1.1 200 OK[\r][\n]"
+21:39:33,161 DEBUG [wire] http-outgoing-10 << "Cache-Control: no-cache[\r][\n]"
+21:39:33,161 DEBUG [wire] http-outgoing-10 << "Pragma: no-cache[\r][\n]"
+21:39:33,161 DEBUG [wire] http-outgoing-10 << "Content-Type: text/xml; charset=utf-8[\r][\n]"
+21:39:33,161 DEBUG [wire] http-outgoing-10 << "Content-Encoding: gzip[\r][\n]"
+21:39:33,162 DEBUG [wire] http-outgoing-10 << "Expires: -1[\r][\n]"
+21:39:33,162 DEBUG [wire] http-outgoing-10 << "Vary: Accept-Encoding[\r][\n]"
+21:39:33,162 DEBUG [wire] http-outgoing-10 << "Server: Microsoft-IIS/8.0[\r][\n]"
+21:39:33,162 DEBUG [wire] http-outgoing-10 << "X-AspNet-Version: 4.0.30319[\r][\n]"
+21:39:33,163 DEBUG [wire] http-outgoing-10 << "X-Powered-By: ASP.NET[\r][\n]"
+21:39:33,163 DEBUG [wire] http-outgoing-10 << "X-Powered-By-Plesk: PleskWin[\r][\n]"
+21:39:33,163 DEBUG [wire] http-outgoing-10 << "Access-Control-Allow-Origin: *[\r][\n]"
+21:39:33,163 DEBUG [wire] http-outgoing-10 << "Date: Sat, 06 Jun 2015 00:39:43 GMT[\r][\n]"
+21:39:33,164 DEBUG [wire] http-outgoing-10 << "Content-Length: 328[\r][\n]"
+21:39:33,164 DEBUG [wire] http-outgoing-10 << "[\r][\n]"
+21:39:33,164 DEBUG [wire] http-outgoing-10 << "[0x1f][0x8b][0x8][0x0][0x0][0x0][0x0][0x0][0x4][0x0][0xed][0xbd][0x7]`[0x1c]I[0x96]%&/m[0xca]{J[0xf5]J[0xd7][0xe0]t[0xa1][0x8][0x80]`[0x13]$[0xd8][0x90]@[0x10][0xec][0xc1][0x88][0xcd][0xe6][0x92][0xec][0x1d]iG#)[0xab]*[0x81][0xca]eVe]f[0x16]@[0xcc][0xed][0x9d][0xbc][0xf7][0xde]{[0xef][0xbd][0xf7][0xde]{[0xef][0xbd][0xf7][0xba];[0x9d]N'[0xf7][0xdf][0xff]?\fd[0x1]l[0xf6][0xce]J[0xda][0xc9][0x9e]![0x80][0xaa][0xc8][0x1f]?~|[0x1f]?"[0x1e][0xff][0x1e][0xef][0x16]ez[0x99][0xd7]MQ-?[0xfb]hw[0xbc][0xf3]Q[0x9a]/[0xa7][0xd5][0xac]X^|[0xf6][0xd1][0xba]=[0xdf]>[0xf8][0xe8][0xf7]8[0xfa][0x8d][0x93][0xc7][0xaf][0xab][0xba][0xcd][0x8b]*[0xa5][0xe6][0xcb][0xe6][0xd1][0xbb][0xa6][0xf8][0xec][0xa3]y[0xdb][0xae][0x1e][0xdd][0xbd]{uu5[0xbe][0xba]7[0xae][0xea][0x8b][0xbb]{;;[0xbb]w[0xef]/[0x9e][0xbf][0x9e][0xce][0xf3]E[0xb6]],[0x9b]6[N[0xf3][0x8f][0xec][[0xb3][0x9b][0xdf][0xd2][0xc6][0xb6]a[0x93][0xd7][0x97][0xc5][0xb4]j[0xc6]Y9[0xc9][0xeb][0xb6]XV[0xe3][0xbc]-[0xc6][0x93][0xfa]#B+M[0x1f][0x9f]T[0xcb][0xe9][0xba]n[0xaa][0xa3][0xdd][0x9d][0xc7]w[0xed][0x1f][0xfc][0xd5][0xd3][0xac][0xcd][0x8e]v[0x1f]>[0xfc]t{[0xe7][0xfe][0xf6][0xee][0xbd]7;;[0x8f][0xf8][0x8f][0xef][0xf2]7[0xd2]&[0xff]A[0xbe][0xcc][0x9a][0xa3][0x9d][0xfd][0x9f][0xd9]=[0xf8][0x99][0xbd][0xdd][0x9f][0xd9][0xbb][0xff]3[0xf7][0xe]~[0xe6][0xfe][0x3]j[0xa4]_[0xd1][0xe8][0xef][0xea][0xf0][0x8f][0xfe][0x1f][0x8e][0xef][0xf7][0xeb]0[0x1][0x0][0x0]"
+21:39:33,165 DEBUG [headers] http-outgoing-10 << HTTP/1.1 200 OK
+21:39:33,165 DEBUG [headers] http-outgoing-10 << Cache-Control: no-cache
+21:39:33,165 DEBUG [headers] http-outgoing-10 << Pragma: no-cache
+21:39:33,165 DEBUG [headers] http-outgoing-10 << Content-Type: text/xml; charset=utf-8
+21:39:33,165 DEBUG [headers] http-outgoing-10 << Content-Encoding: gzip
+21:39:33,165 DEBUG [headers] http-outgoing-10 << Expires: -1
+21:39:33,165 DEBUG [headers] http-outgoing-10 << Vary: Accept-Encoding
+21:39:33,166 DEBUG [headers] http-outgoing-10 << Server: Microsoft-IIS/8.0
+21:39:33,166 DEBUG [headers] http-outgoing-10 << X-AspNet-Version: 4.0.30319
+21:39:33,166 DEBUG [headers] http-outgoing-10 << X-Powered-By: ASP.NET
+21:39:33,166 DEBUG [headers] http-outgoing-10 << X-Powered-By-Plesk: PleskWin
+21:39:33,166 DEBUG [headers] http-outgoing-10 << Access-Control-Allow-Origin: *
+21:39:33,166 DEBUG [headers] http-outgoing-10 << Date: Sat, 06 Jun 2015 00:39:43 GMT
+21:39:33,166 DEBUG [headers] http-outgoing-10 << Content-Length: 328
+21:39:33,167 DEBUG [MainClientExec] Connection can be kept alive indefinitely
+21:39:33,168 DEBUG [PoolingHttpClientConnectionManager] Connection [id: 10][route: {}->http://servicos.albertino.eti.br:80] can be kept alive indefinitely
+21:39:33,168 DEBUG [PoolingHttpClientConnectionManager] Connection released: [id: 10][route: {}->http://servicos.albertino.eti.br:80][total kept alive: 1; route allocated: 1 of 2; total allocated: 1 of 20]
+21:39:33,169 DEBUG [ResultadoMegaSenaService] 10
+21:39:33,169 DEBUG [ResultadoMegaSenaService] 1996-05-13
+21:39:33,169 DEBUG [ResultadoMegaSenaService] 04|18|21|25|38|57
