@@ -52,4 +52,13 @@ public class RegraParesImpares extends RegraBase implements Regra {
 
 		LOGGER.debug("RegraParesImpares: " + (Float.valueOf(toRemoveList.size()) / total * 100));
 	}
+	
+    public static void main(String[] args) {
+        List<Integer[]> p = new ArrayList<>();
+        p.add(new Integer[] { 2,2,2,2,2,2 });
+        p.add(new Integer[] { 8, 9, 1, 2, 3, 4 });
+
+        Regra regra = new RegraParesImpares();
+        regra.aplicar(p);
+    }
 }

@@ -11,7 +11,7 @@ public interface Regra {
 
 	/**
 	 * 
-	 * @param prognosticos
+	 * @param p
 	 */
-	abstract void aplicar(List<Integer[]> prognosticos);
+	abstract void aplicar(List<Integer[]> p);
 }

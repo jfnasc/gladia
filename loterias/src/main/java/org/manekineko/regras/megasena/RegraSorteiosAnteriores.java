@@ -43,4 +43,12 @@ public class RegraSorteiosAnteriores extends RegraBase implements Regra {
 			e.printStackTrace();
 		}
 	}
+	
+	public static void main(String[] args) {
+	    List<Integer[]> p = new ArrayList<>();
+	    p.add(new Integer[]{7,19,30,35,42,47});
+        
+        RegraSorteiosAnteriores rs =new RegraSorteiosAnteriores();
+        rs.aplicar(p);
+    }
 }

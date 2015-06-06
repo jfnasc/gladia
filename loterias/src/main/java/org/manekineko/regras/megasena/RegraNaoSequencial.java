@@ -17,35 +17,43 @@ import org.manekineko.regras.RegraBase;
  */
 public class RegraNaoSequencial extends RegraBase implements Regra {
 
-	private Logger LOGGER = Logger.getLogger(RegraNaoSequencial.class);
-	
-	public void aplicar(List<Integer[]> p) {
+    private Logger LOGGER = Logger.getLogger(RegraNaoSequencial.class);
 
-		if (p == null || p.isEmpty()){
-			return;
-		}
-		
-		float total = Float.valueOf(p.size());
-		
-		List<Integer[]> toRemoveList = new ArrayList<Integer[]>();
+    public void aplicar(List<Integer[]> p) {
 
-		for (int i = 0; i < p.size(); i++) {
+        if (p == null || p.isEmpty()) {
+            return;
+        }
 
-			Arrays.sort(p.get(i));
+        float total = Float.valueOf(p.size());
 
-			for (int k = 0; k < p.get(i).length; k++) {
-				if ((k + 1) < p.get(i).length) {
-					if ((p.get(i)[k] + 1) == (p.get(i)[k + 1])) {
-						toRemoveList.add(p.get(i));
-						break;
-					}
-				}
-			}
-		}
+        List<Integer[]> toRemoveList = new ArrayList<Integer[]>();
 
-		p.removeAll(toRemoveList);
+        for (int i = 0; i < p.size(); i++) {
 
-		LOGGER.debug("RegraNaoSequencial: "
-				+ (Float.valueOf(toRemoveList.size()) / total * 100));
-	}
+            Arrays.sort(p.get(i));
+
+            for (int k = 0; k < p.get(i).length; k++) {
+                if ((k + 1) < p.get(i).length) {
+                    if ((p.get(i)[k] + 1) == (p.get(i)[k + 1])) {
+                        toRemoveList.add(p.get(i));
+                        break;
+                    }
+                }
+            }
+        }
+
+        p.removeAll(toRemoveList);
+
+        LOGGER.debug("RegraNaoSequencial: " + (Float.valueOf(toRemoveList.size()) / total * 100));
+    }
+
+    public static void main(String[] args) {
+        List<Integer[]> p = new ArrayList<>();
+        p.add(new Integer[] { 1, 2, 3, 4, 5, 6 });
+        p.add(new Integer[] { 8, 9, 1, 2, 3, 4 });
+
+        Regra regra = new RegraNaoSequencial();
+        regra.aplicar(p);
+    }
 }

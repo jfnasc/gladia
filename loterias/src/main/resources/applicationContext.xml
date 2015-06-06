@@ -10,8 +10,8 @@
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
 		<property name="driverClassName" value="org.sqlite.JDBC" />
 		<property name="url" value="jdbc:sqlite:./database/data/daikoku.db" />
-		<property name="initialSize" value="10" />
-		<property name="maxActive" value="50" />
+		<property name="initialSize" value="1" />
+		<property name="maxActive" value="3" />
 		<property name="poolPreparedStatements" value="true" />
 		<property name="maxOpenPreparedStatements" value="20" />
 	</bean>

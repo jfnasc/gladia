@@ -657,7 +657,7 @@ public class ResultadoBaseDAOImpl extends BaseDAO implements ResultadoDAO {
 			sb.append("select nu_dezena FROM TB_ATRASOS");
 			sb.append(" where nu_sorteio = (");
 			sb.append("   SELECT MAX(nu_sorteio) FROM TB_ATRASOS");
-			sb.append(" ) and qt_atraso >= (select ceiling(avg(qt_atraso)) from tb_atrasos)");
+			sb.append(" ) and qt_atraso >= (select avg(qt_atraso) from tb_atrasos)");
 			sb.append(" and tp_sorteio = ?");
 			sb.append(" and nu_dezena = ?");
 
