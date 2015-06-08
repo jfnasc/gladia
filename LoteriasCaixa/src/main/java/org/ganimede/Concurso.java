@@ -9,7 +9,7 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * @author josen
+ * @author Jose Flavio <jfnasc@outlook.com>
  * 
  */
 public class Concurso implements Serializable {

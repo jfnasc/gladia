@@ -11,7 +11,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 /**
- * @author josen
+ * @author Jose Flavio <jfnasc@outlook.com>
  * 
  */
 public class DatabaseUtils {

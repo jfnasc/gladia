@@ -2,7 +2,7 @@
  * 
  */
 /**
- * @author josen
+ * @author Jose Flavio <jfnasc@outlook.com>
  *
  */
 package org.ganimede.utils;

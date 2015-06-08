@@ -31,11 +31,10 @@ public class ResultadoMegaSenaService extends BaseService implements ResultadoSe
             resultado = new Concurso();
 
             resultado.setNuConcurso(obterNumeroConcurso(consultaWebService));
-            resultado.setTpConcurso(TiposConcurso.MEGASENA.sigla);
+            resultado.setTpConcurso(TiposConcurso.MEGA_SENA.sigla);
             resultado.setDtConcurso(obterDataConcurso(consultaWebService));
 
-        }
-        catch (IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
 
@@ -53,13 +52,12 @@ public class ResultadoMegaSenaService extends BaseService implements ResultadoSe
             resultado = new Concurso();
 
             resultado.setNuConcurso(obterNumeroConcurso(consultaWebService));
-            resultado.setTpConcurso(TiposConcurso.MEGASENA.sigla);
+            resultado.setTpConcurso(TiposConcurso.MEGA_SENA.sigla);
             resultado.setDtConcurso(obterDataConcurso(consultaWebService));
 
             obterSorteios(resultado, consultaWebService);
-            
-        }
-        catch (IOException e) {
+
+        } catch (IOException e) {
             e.printStackTrace();
         }
 
@@ -71,19 +69,21 @@ public class ResultadoMegaSenaService extends BaseService implements ResultadoSe
 
         Concurso ultimoConcurso = buscarUltimoConcurso();
 
-        Concurso ultimoConcursoSalvo = getConcursoDAO().obterUltimoConcursoSalvo(TiposConcurso.MEGASENA.sigla);
+        Concurso ultimoConcursoSalvo = getConcursoDAO().recuperarUltimoConcurso(TiposConcurso.MEGA_SENA.sigla);
         if (ultimoConcursoSalvo == null) {
             ultimoConcursoSalvo = new Concurso();
-            ultimoConcursoSalvo.setTpConcurso(TiposConcurso.MEGASENA.sigla);
+            ultimoConcursoSalvo.setTpConcurso(TiposConcurso.MEGA_SENA.sigla);
             ultimoConcursoSalvo.setNuConcurso(1);
         }
 
-        // for (int i = ultimoConcursoSalvo.getNuConcurso(); i <=
-        // ultimoConcurso.getNuConcurso(); i++) {
-        for (int i = ultimoConcursoSalvo.getNuConcurso(); i <= 10; i++) {
-            Concurso concurso = buscarConcurso(i);
-            getConcursoDAO().salvarConcurso(concurso);
+        List<Concurso> concursos = new ArrayList<>();
+
+        for (int i = ultimoConcursoSalvo.getNuConcurso(); i <= ultimoConcurso.getNuConcurso(); i++) {
+            // for (int i = ultimoConcursoSalvo.getNuConcurso(); i <= 10; i++) {
+            concursos.add(buscarConcurso(i));
         }
+
+        getConcursoDAO().salvarConcursos(concursos);
 
         System.out.println(ultimoConcurso);
     }
@@ -131,8 +131,7 @@ public class ResultadoMegaSenaService extends BaseService implements ResultadoSe
                 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-mm-dd");
                 result = sdf.parse(s.substring(m.start() + 6, m.end() - 16));
             }
-        }
-        catch (ParseException e) {
+        } catch (ParseException e) {
             e.printStackTrace();
         }
 
@@ -146,11 +145,11 @@ public class ResultadoMegaSenaService extends BaseService implements ResultadoSe
      */
     private void obterSorteios(Concurso concurso, String s) {
         Sorteio sorteio = new Sorteio();
-        
+
         sorteio.setNuSorteio(1);
         sorteio.setNuConcurso(concurso.getNuConcurso());
         sorteio.setTpConcurso(concurso.getTpConcurso());
-        
+
         List<Integer> result = new ArrayList<Integer>();
 
         Pattern p = Pattern.compile("<Dezenas>[|0-9]*</Dezenas>");
@@ -165,7 +164,7 @@ public class ResultadoMegaSenaService extends BaseService implements ResultadoSe
         }
 
         sorteio.setDezenas(result);
-        
+
         concurso.addSorteio(sorteio);
     }
 

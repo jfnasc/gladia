@@ -7,7 +7,7 @@ import java.io.Serializable;
 import java.util.List;
 
 /**
- * @author josen
+ * @author Jose Flavio <jfnasc@outlook.com>
  * 
  */
 public class Sorteio implements Serializable {

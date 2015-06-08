@@ -8,7 +8,8 @@ package org.ganimede;
  *
  */
 public enum TiposConcurso {
-	MEGASENA("MS", "Megasena");
+    DUPLA_SENA("DS", "Dupla Sena"),
+	MEGA_SENA("MS", "Mega Sena");
 
 	public String sigla;
 	public String nome;

@@ -6,7 +6,7 @@ package org.ganimede.services;
 import org.ganimede.Concurso;
 
 /**
- * @author josen
+ * @author Jose Flavio <jfnasc@outlook.com>
  * 
  */
 public interface ResultadoService {
