@@ -7,7 +7,6 @@ import org.apache.log4j.Logger;
 import org.ganimede.TiposConcurso;
 import org.ganimede.regras.Regra;
 import org.ganimede.regras.RegraBase;
-import org.ganimede.utils.MathUtils;
 
 public class RegraDezenasFrequentes extends RegraBase implements Regra {
 
@@ -20,22 +19,22 @@ public class RegraDezenasFrequentes extends RegraBase implements Regra {
     private Logger LOGGER = Logger.getLogger(RegraDezenasFrequentes.class);
 
     @Override
-    public void aplicar(List<Integer[]> p) {
+    public void aplicar(List<Integer[]> apostas) {
 
-        if (p == null || p.size() == 0) {
+        if (apostas == null || apostas.size() == 0) {
             return;
         }
 
-        float total = Float.valueOf(p.size());
+        float total = Float.valueOf(apostas.size());
 
         try {
 
             List<Integer[]> aRemover = new ArrayList<Integer[]>();
 
-            for (Integer[] aposta : p) {
-                
+            for (Integer[] aposta : apostas) {
+
                 boolean valido = false;
-                
+
                 for (Integer dezena : aposta) {
                     if (getResultadoDAO().isDezenaFrequente(TiposConcurso.MEGA_SENA.sigla, dezena, this.qtConcursos)) {
                         valido = true;
@@ -48,7 +47,7 @@ public class RegraDezenasFrequentes extends RegraBase implements Regra {
                 }
             }
 
-            p.removeAll(aRemover);
+            apostas.removeAll(aRemover);
 
             LOGGER.debug("RegraDezenasFrequentes: " + (Float.valueOf(aRemover.size()) / total * 100));
 

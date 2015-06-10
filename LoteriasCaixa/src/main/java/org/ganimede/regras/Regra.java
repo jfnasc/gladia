@@ -11,7 +11,7 @@ public interface Regra {
 
     /**
      * 
-     * @param p
+     * @param apostas
      */
-    abstract void aplicar(List<Integer[]> p);
+    abstract void aplicar(List<Integer[]> apostas);
 }

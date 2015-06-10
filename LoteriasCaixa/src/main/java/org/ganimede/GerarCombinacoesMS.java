@@ -28,28 +28,27 @@ public class GerarCombinacoesMS {
         regras.add(new org.ganimede.regras.megasena.RegraNaoVertical());
         regras.add(new org.ganimede.regras.megasena.RegraAtraso(8));
         regras.add(new org.ganimede.regras.megasena.RegraDezenasFrequentes(10));
+        regras.add(new org.ganimede.regras.megasena.RegraDezenasAnteriores(2));
         regras.add(new org.ganimede.regras.megasena.RegraDistribuicao());
     }
 
-    public static void fechamento(List<String> apostas, Integer[] p, int pos, int size) {
-        StringBuilder sb = new StringBuilder();
-
+    public static void fechamento(List<List<Integer>> apostas, Integer[] p, int pos, int size) {
         List<Integer> base = Arrays.asList(p).subList(pos, pos + size);
-        Collections.sort(base);
         
-        for (Integer dezena : base) {
-            sb.append(dezena + ",");
-        }
-
         for (Integer dezena : p) {
+            List<Integer> aposta = new ArrayList<>();
+            aposta.addAll(base);
+            
             if (!base.contains(dezena)) {
-                apostas.add(sb.toString() + dezena);
+                aposta.add(dezena);
+                //Collections.sort(aposta);
+                apostas.add(aposta);
             }
         }
     }
 
     public static void main(String[] args) {
-        List<String> apostas = new ArrayList<>();
+        List<List<Integer>> apostas = new ArrayList<List<Integer>>();
 
         List<Integer[]> prognosticos = prognosticos(1, 10);
 
@@ -62,7 +61,8 @@ public class GerarCombinacoesMS {
                 fechamento(apostas, p, i * 5, 5);
             }
 
-            for (String aposta : apostas) {
+            for (List<Integer> aposta : apostas) {
+                Collections.sort(aposta);
                 System.out.println(aposta);
             }
             System.out.println("--------------------");
@@ -132,7 +132,7 @@ public class GerarCombinacoesMS {
         List<Integer> tmp = new ArrayList<Integer>();
 
         while (tmp.size() < qtDezenas) {
-            Integer p1 = RndUtils.nextInt(1, 55);
+            Integer p1 = RndUtils.nextInt(1, 60);
             if (!tmp.contains(p1)) {
                 tmp.add(p1);
             }

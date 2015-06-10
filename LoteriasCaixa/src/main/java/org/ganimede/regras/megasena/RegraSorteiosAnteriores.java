@@ -14,27 +14,27 @@ public class RegraSorteiosAnteriores extends RegraBase implements Regra {
     private Logger LOGGER = Logger.getLogger(RegraSorteiosAnteriores.class);
 
     @Override
-    public void aplicar(List<Integer[]> p) {
+    public void aplicar(List<Integer[]> apostas) {
 
-        if (p == null || p.size() == 0) {
+        if (apostas == null || apostas.size() == 0) {
             return;
         }
 
-        float total = Float.valueOf(p.size());
+        float total = Float.valueOf(apostas.size());
 
         try {
 
             List<Integer[]> aRemover = new ArrayList<Integer[]>();
 
             // senas
-            for (int i = 0; i < p.size(); i++) {
-                String hash = MathUtils.hash(p.get(i));
+            for (int i = 0; i < apostas.size(); i++) {
+                String hash = MathUtils.hash(apostas.get(i));
                 if (getResultadoDAO().existeSorteioIgual(TiposConcurso.MEGA_SENA.sigla, hash)) {
-                    aRemover.add(p.get(i));
+                    aRemover.add(apostas.get(i));
                 }
             }
 
-            p.removeAll(aRemover);
+            apostas.removeAll(aRemover);
 
             LOGGER.debug("RegraSorteiosAnteriores: " + (Float.valueOf(aRemover.size()) / total * 100));
 

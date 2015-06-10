@@ -150,7 +150,7 @@ public class ResultadoDAOImpl extends BaseDAO implements ResultadoDAO {
     }
 
     @Override
-    public boolean isDezenaFrequente(String tpConcurso, int nuDezena, int qtConcursos) {
+    public boolean isDezenaFrequente(String tpConcurso, int nuDezena, int limite) {
         boolean result = false;
 
         StringBuilder sb = new StringBuilder();
@@ -178,7 +178,7 @@ public class ResultadoDAOImpl extends BaseDAO implements ResultadoDAO {
             pstmt = conn.prepareStatement(sb.toString());
 
             pstmt.setString(1, tpConcurso);
-            pstmt.setInt(2, qtConcursos);
+            pstmt.setInt(2, limite);
             pstmt.setInt(3, nuDezena);
 
             rs = pstmt.executeQuery();

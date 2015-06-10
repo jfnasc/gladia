@@ -24,31 +24,31 @@ public class RegraParesImpares extends RegraBase implements Regra {
      * @see daikoku.Regra#aplicar(java.util.List)
      */
     @Override
-    public void aplicar(List<Integer[]> p) {
+    public void aplicar(List<Integer[]> apostas) {
 
-        if (p == null || p.size() == 0) {
+        if (apostas == null || apostas.size() == 0) {
             return;
         }
 
-        float total = Float.valueOf(p.size());
+        float total = Float.valueOf(apostas.size());
 
         List<Integer[]> toRemoveList = new ArrayList<Integer[]>();
 
-        for (int i = 0; i < p.size(); i++) {
+        for (int i = 0; i < apostas.size(); i++) {
             int countPares = 0;
 
-            for (int k = 0; k < p.get(i).length; k++) {
-                if ((p.get(i)[k] % 2) == 0) {
+            for (int k = 0; k < apostas.get(i).length; k++) {
+                if ((apostas.get(i)[k] % 2) == 0) {
                     ++countPares;
                 }
             }
 
-            if (countPares < (p.size() / 2)) {
-                toRemoveList.add(p.get(i));
+            if (countPares < (apostas.size() / 2)) {
+                toRemoveList.add(apostas.get(i));
             }
         }
 
-        p.removeAll(toRemoveList);
+        apostas.removeAll(toRemoveList);
 
         LOGGER.debug("RegraParesImpares: " + (Float.valueOf(toRemoveList.size()) / total * 100));
     }

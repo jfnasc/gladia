@@ -19,17 +19,17 @@ public class RegraNaoSequencial extends RegraBase implements Regra {
 
     private Logger LOGGER = Logger.getLogger(RegraNaoSequencial.class);
 
-    public void aplicar(List<Integer[]> p) {
+    public void aplicar(List<Integer[]> apostas) {
 
-        if (p == null || p.isEmpty()) {
+        if (apostas == null || apostas.isEmpty()) {
             return;
         }
 
-        float total = Float.valueOf(p.size());
+        float total = Float.valueOf(apostas.size());
 
         List<Integer[]> toRemoveList = new ArrayList<Integer[]>();
 
-        for (Integer[] aposta : p) {
+        for (Integer[] aposta : apostas) {
             for (Integer dezena : aposta) {
                 if (Arrays.asList(aposta).contains(dezena + 1)) {
                     toRemoveList.add(aposta);
@@ -38,7 +38,7 @@ public class RegraNaoSequencial extends RegraBase implements Regra {
             }
         }
 
-        p.removeAll(toRemoveList);
+        apostas.removeAll(toRemoveList);
 
         LOGGER.debug(Float.valueOf(toRemoveList.size()) / total * 100);
     }

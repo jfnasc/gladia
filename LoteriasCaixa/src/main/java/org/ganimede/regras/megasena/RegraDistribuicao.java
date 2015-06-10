@@ -18,30 +18,30 @@ public class RegraDistribuicao extends RegraBase implements Regra {
 
     private Logger LOGGER = Logger.getLogger(RegraNaoVertical.class);
 
-    public void aplicar(List<Integer[]> p) {
+    public void aplicar(List<Integer[]> apostas) {
 
-        if (p == null || p.size() == 0) {
+        if (apostas == null || apostas.size() == 0) {
             return;
         }
 
-        float total = Float.valueOf(p.size());
+        float total = Float.valueOf(apostas.size());
 
         List<Integer[]> toRemoveList = new ArrayList<Integer[]>();
 
-        for (Integer[] aposta : p) {
+        for (Integer[] aposta : apostas) {
 
             boolean valido = true;
 
-            if (!possuiAoMenosUma(aposta, 1, 20, 2)) {
+            if (!possuiAoMenosUma(aposta, 1, 20, aposta.length / 3)) {
                 valido = false;
             }
 
-            if (valido && !possuiAoMenosUma(aposta, 21, 40, 2)) {
+            if (valido && !possuiAoMenosUma(aposta, 21, 40, aposta.length / 3)) {
                 valido = false;
                 break;
             }
 
-            if (valido && !possuiAoMenosUma(aposta, 41, 60, 2)) {
+            if (valido && !possuiAoMenosUma(aposta, 41, 60, aposta.length / 3)) {
                 valido = false;
                 break;
             }
@@ -51,7 +51,7 @@ public class RegraDistribuicao extends RegraBase implements Regra {
             }
         }
 
-        p.removeAll(toRemoveList);
+        apostas.removeAll(toRemoveList);
 
         LOGGER.debug("RegraDistribuicao: " + (Float.valueOf(toRemoveList.size()) / total * 100));
     }

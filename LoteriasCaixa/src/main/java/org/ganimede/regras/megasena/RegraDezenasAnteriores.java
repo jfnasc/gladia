@@ -21,13 +21,13 @@ public class RegraDezenasAnteriores extends RegraBase implements Regra {
     }
 
     @Override
-    public void aplicar(List<Integer[]> p) {
+    public void aplicar(List<Integer[]> apostas) {
 
-        if (p == null || p.size() == 0) {
+        if (apostas == null || apostas.size() == 0) {
             return;
         }
 
-        float total = Float.valueOf(p.size());
+        float total = Float.valueOf(apostas.size());
 
         List<Integer> dezenasAIgnorar = new ArrayList<>();
 
@@ -52,7 +52,7 @@ public class RegraDezenasAnteriores extends RegraBase implements Regra {
             List<Integer[]> aRemover = new ArrayList<Integer[]>();
 
             // senas
-            for (Integer[] aposta : p) {
+            for (Integer[] aposta : apostas) {
                 for (Integer dezena : aposta) {
                     if (dezenasAIgnorar.contains(dezena)) {
                         aRemover.add(aposta);
@@ -61,7 +61,7 @@ public class RegraDezenasAnteriores extends RegraBase implements Regra {
                 }
             }
 
-            p.removeAll(aRemover);
+            apostas.removeAll(aRemover);
 
             LOGGER.debug("RegraSorteiosAnteriores: " + (Float.valueOf(aRemover.size()) / total * 100));
 
