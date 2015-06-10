@@ -7,6 +7,7 @@
        http://www.springframework.org/schema/oxm http://www.springframework.org/schema/oxm/spring-oxm-3.0.xsd">
 
 	<!-- Data Source (SQLITE) -->
+	<!--
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
 		<property name="driverClassName" value="org.sqlite.JDBC" />
 		<property name="url" value="jdbc:sqlite:./database/data/dbloterias.db" />
@@ -15,16 +16,15 @@
 		<property name="poolPreparedStatements" value="true" />
 		<property name="maxOpenPreparedStatements" value="20" />
 	</bean>
+	-->
 
 	<!-- Data Source (POSTGRES) -->
-	<!--
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
 		<property name="driverClassName" value="org.postgresql.Driver" />
-		<property name="url" value="jdbc:postgresql://localhost:5432/daikoku" />
-		<property name="username" value="daikoku" />
-		<property name="password" value="daikoku" />
+		<property name="url" value="jdbc:postgresql://localhost:5432/dbdes01" />
+		<property name="username" value="ganimede" />
+		<property name="password" value="ganimede01" />
 		<property name="initialSize" value="1" />
 		<property name="maxActive" value="5" />
 	</bean>
-	-->
 </beans>

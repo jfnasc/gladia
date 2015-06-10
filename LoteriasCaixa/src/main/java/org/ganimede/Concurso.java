@@ -22,7 +22,9 @@ public class Concurso implements Serializable {
 
     private Date dtConcurso;
 
-    private List<Sorteio> sorteios = new ArrayList<>();
+    private List<Sorteio> sorteios = new ArrayList<Sorteio>();
+
+    private List<Atraso> atrasos = new ArrayList<Atraso>();
 
     /**
      * @return the nuConcurso
@@ -90,6 +92,21 @@ public class Concurso implements Serializable {
      */
     public void setSorteios(List<Sorteio> sorteios) {
         this.sorteios = sorteios;
+    }
+
+    /**
+     * @return the atrasos
+     */
+    public List<Atraso> getAtrasos() {
+        return atrasos;
+    }
+
+    /**
+     * @param atrasos
+     *            the atrasos to set
+     */
+    public void setAtrasos(List<Atraso> atrasos) {
+        this.atrasos = atrasos;
     }
 
     /*

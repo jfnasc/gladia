@@ -5,6 +5,7 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -36,16 +37,20 @@ public class MathUtils {
         return fatorial(n).divide(fatorial(p).multiply(fatorial(n - p)), RoundingMode.CEILING);
     }
 
-    public static String hash(Integer[] dezenas) {
+    public static String hash(final Integer[] dezenas) {
         return hash(Arrays.asList(dezenas));
     }
 
-    public static String hash(List<Integer> dezenas) {
-        Collections.sort(dezenas);
+    public static String hash(final List<Integer> dezenas) {
+        
+        List<Integer> tmp = new ArrayList<>();
+        tmp.addAll(dezenas);
+        
+        Collections.sort(tmp);
 
         StringBuilder sb = new StringBuilder();
 
-        for (Integer dezena : dezenas) {
+        for (Integer dezena : tmp) {
             sb.append("#" + dezena);
         }
 
@@ -82,9 +87,7 @@ public class MathUtils {
         // System.out.println(MathUtils.csimples(25,
         // 15).divide(MathUtils.csimples(16, 15)));
 
-        System.out.println(MathUtils.hash(new Integer[] { 1, 2, 5, 6, 21, 25 }));
-        System.out.println(MathUtils.hash(new Integer[] { 4, 5, 11, 13, 16, 20 }));
-        System.out.println(MathUtils.hash(new Integer[] { 11, 38, 32, 4, 9, 42 }));
-        System.out.println(MathUtils.hash(new Integer[] { 13, 9, 46, 29, 19, 24 }));
+        System.out.println(MathUtils.hash(new Integer[] { 3, 26, 30, 33, 37, 49 }));
+        System.out.println(MathUtils.hash(new Integer[] { 2, 8, 11, 30, 32, 49 }));
     }
 }

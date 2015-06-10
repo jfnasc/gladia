@@ -15,7 +15,7 @@ public interface ConcursoDAO {
 
     void salvarConcursos(Collection<Concurso> concursos);
 
-    Concurso recuperarConcurso(Concurso concurso);
+    Concurso recuperarConcurso(int nuConcurso, String tpConcurso, int numeroSorteio);
 
     Concurso recuperarUltimoConcurso(String tpConcurso);
 }
