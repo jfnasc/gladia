@@ -149,4 +149,54 @@ public class ResultadoDAOImpl extends BaseDAO implements ResultadoDAO {
         return result;
     }
 
+    @Override
+    public boolean isDezenaFrequente(String tpConcurso, int nuDezena, int qtConcursos) {
+        boolean result = false;
+
+        StringBuilder sb = new StringBuilder();
+
+        sb.append("select tb1.nu_dezena ");
+        sb.append("  from ( ");
+        sb.append("         select nu_dezena, ");
+        sb.append("                count(nu_concurso) ");
+        sb.append("           from tb_dezenas ");
+        sb.append("          where tp_concurso = ? ");
+        sb.append("          group by nu_dezena ");
+        sb.append("          order by count(nu_concurso) desc ");
+        sb.append("          limit ? ");
+        sb.append("       ) tb1 ");
+        sb.append("  where tb1.nu_dezena = ? ");
+
+        Connection conn = null;
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+
+        try {
+
+            conn = getDataSource().getConnection();
+
+            pstmt = conn.prepareStatement(sb.toString());
+
+            pstmt.setString(1, tpConcurso);
+            pstmt.setInt(2, qtConcursos);
+            pstmt.setInt(3, nuDezena);
+
+            rs = pstmt.executeQuery();
+
+            result = rs.next();
+
+        } catch (Exception e) {
+            try {
+                conn.rollback();
+            } catch (SQLException e1) {
+                e1.printStackTrace();
+            }
+            e.printStackTrace();
+        } finally {
+            DatabaseUtils.close(rs, pstmt, conn);
+        }
+
+        return result;
+    }
+
 }

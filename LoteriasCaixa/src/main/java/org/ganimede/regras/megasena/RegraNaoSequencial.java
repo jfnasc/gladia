@@ -31,7 +31,7 @@ public class RegraNaoSequencial extends RegraBase implements Regra {
 
         for (Integer[] aposta : p) {
             for (Integer dezena : aposta) {
-                if (Arrays.asList(aposta).contains(dezena + 1) || Arrays.asList(aposta).contains(dezena - 1)) {
+                if (Arrays.asList(aposta).contains(dezena + 1)) {
                     toRemoveList.add(aposta);
                     break;
                 }
@@ -40,7 +40,7 @@ public class RegraNaoSequencial extends RegraBase implements Regra {
 
         p.removeAll(toRemoveList);
 
-        LOGGER.debug("RegraNaoSequencial: " + (Float.valueOf(toRemoveList.size()) / total * 100));
+        LOGGER.debug(Float.valueOf(toRemoveList.size()) / total * 100);
     }
 
     public static void main(String[] args) {

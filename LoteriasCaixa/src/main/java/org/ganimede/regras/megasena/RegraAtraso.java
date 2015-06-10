@@ -40,19 +40,19 @@ public class RegraAtraso extends RegraBase implements Regra {
             List<Integer[]> aRemover = new ArrayList<Integer[]>();
 
             // senas
-            for (int i = 0; i < p.size(); i++) {
+            for (Integer[] aposta : p) {
 
-                boolean manter = false;
+                int count = 0;
 
-                for (Integer dezena : p.get(i)) {
-                    if ((manter = getResultadoDAO().isDezenaEmAtrasoMinimo(TiposConcurso.MEGA_SENA.sigla, 1, dezena,
-                            this.qtConcursos)) == true) {
-                        break;
+                for (Integer dezena : aposta) {
+                    if (getResultadoDAO().isDezenaEmAtrasoMinimo(TiposConcurso.MEGA_SENA.sigla, 1, dezena,
+                            this.qtConcursos)) {
+                        count++;
                     }
                 }
 
-                if (!manter) {
-                    aRemover.add(p.get(i));
+                if (count < 2) {
+                    aRemover.add(aposta);
                 }
             }
 

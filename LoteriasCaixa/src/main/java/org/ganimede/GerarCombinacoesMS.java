@@ -27,13 +27,16 @@ public class GerarCombinacoesMS {
         regras.add(new org.ganimede.regras.megasena.RegraParesImpares());
         regras.add(new org.ganimede.regras.megasena.RegraNaoVertical());
         regras.add(new org.ganimede.regras.megasena.RegraAtraso(8));
+        regras.add(new org.ganimede.regras.megasena.RegraDezenasFrequentes(10));
+        regras.add(new org.ganimede.regras.megasena.RegraDistribuicao());
     }
 
     public static void fechamento(List<String> apostas, Integer[] p, int pos, int size) {
         StringBuilder sb = new StringBuilder();
 
         List<Integer> base = Arrays.asList(p).subList(pos, pos + size);
-
+        Collections.sort(base);
+        
         for (Integer dezena : base) {
             sb.append(dezena + ",");
         }
@@ -48,7 +51,7 @@ public class GerarCombinacoesMS {
     public static void main(String[] args) {
         List<String> apostas = new ArrayList<>();
 
-        List<Integer[]> prognosticos = prognosticos(1, 15);
+        List<Integer[]> prognosticos = prognosticos(1, 10);
 
         for (Integer[] p : prognosticos) {
             System.out.println("-- BASE");
@@ -129,7 +132,7 @@ public class GerarCombinacoesMS {
         List<Integer> tmp = new ArrayList<Integer>();
 
         while (tmp.size() < qtDezenas) {
-            Integer p1 = RndUtils.nextInt(1, 60);
+            Integer p1 = RndUtils.nextInt(1, 55);
             if (!tmp.contains(p1)) {
                 tmp.add(p1);
             }
