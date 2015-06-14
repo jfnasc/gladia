@@ -1,10 +1,8 @@
 package org.ganimede.utils;
 
-import java.io.UnsupportedEncodingException;
 import java.math.BigDecimal;
+import java.math.MathContext;
 import java.math.RoundingMode;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -42,10 +40,10 @@ public class MathUtils {
     }
 
     public static String hash(final List<Integer> dezenas) {
-        
+
         List<Integer> tmp = new ArrayList<>();
         tmp.addAll(dezenas);
-        
+
         Collections.sort(tmp);
 
         StringBuilder sb = new StringBuilder();
@@ -79,15 +77,23 @@ public class MathUtils {
     public static void main(String[] args) {
         // System.out.println(MathUtils.fatorial(2));
         // System.out.println(MathUtils.fatorial(5));
-        // System.out.println(MathUtils.csimples(5, 3));
-        // System.out.println(MathUtils.csimples(60, 6));
+        System.out.println(MathUtils.csimples(10, 3));
+        System.out.println(MathUtils.csimples(10, 5));
+        System.out.println(MathUtils.csimples(80, 5));
+        System.out.println(MathUtils.csimples(80, 5).divide(MathUtils.csimples(6, 5), MathContext.DECIMAL128).intValue());
+        System.out.println(MathUtils.csimples(80, 5).divide(MathUtils.csimples(7, 5), MathContext.DECIMAL128).intValue());
+        System.out.println(MathUtils.csimples(80, 5).divide(MathUtils.csimples(10, 3), MathContext.DECIMAL128).intValue());
+        
+        
         // System.out.println(MathUtils.csimples(60,
         // 6).divide(MathUtils.csimples(7, 6)));
         // System.out.println(MathUtils.csimples(15, 9));
         // System.out.println(MathUtils.csimples(25,
         // 15).divide(MathUtils.csimples(16, 15)));
 
-        System.out.println(MathUtils.hash(new Integer[] { 3, 26, 30, 33, 37, 49 }));
-        System.out.println(MathUtils.hash(new Integer[] { 2, 8, 11, 30, 32, 49 }));
+        // System.out.println(MathUtils.hash(new Integer[] { 3, 26, 30, 33, 37,
+        // 49 }));
+        // System.out.println(MathUtils.hash(new Integer[] { 2, 8, 11, 30, 32,
+        // 49 }));
     }
 }

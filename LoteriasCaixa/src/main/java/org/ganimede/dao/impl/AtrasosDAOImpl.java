@@ -331,6 +331,7 @@ public class AtrasosDAOImpl extends BaseDAO implements AtrasosDAO {
         dao.registrarAtrasos(TiposConcurso.DUPLA_SENA.sigla, 1, 60);
         dao.registrarAtrasos(TiposConcurso.DUPLA_SENA.sigla, 2, 60);
         dao.registrarAtrasos(TiposConcurso.MEGA_SENA.sigla, 1, 60);
+        dao.registrarAtrasos(TiposConcurso.QUINA.sigla, 1, 80);
     }
 
 

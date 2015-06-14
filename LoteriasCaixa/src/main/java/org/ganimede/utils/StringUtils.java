@@ -24,7 +24,6 @@ public class StringUtils {
             }
 
         }
-        System.out.println(s.substring(2));
         return s.substring(2);
     }
 
