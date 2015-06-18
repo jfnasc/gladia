@@ -45,8 +45,8 @@ public class RegraAtraso extends RegraBase implements Regra {
                 int count = 0;
 
                 for (Integer dezena : aposta) {
-                    if (getResultadoDAO().isDezenaEmAtrasoMinimo(TiposConcurso.MEGA_SENA.sigla, 1, dezena,
-                            this.qtConcursos)) {
+                    int qtConcursosAtraso = getResultadoDAO().concursosEmAtraso(TiposConcurso.QUINA.sigla, 1, dezena);
+                    if (qtConcursosAtraso >= this.qtConcursos) {
                         count++;
                     }
                 }

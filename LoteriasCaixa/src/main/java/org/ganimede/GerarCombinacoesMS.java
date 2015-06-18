@@ -1,82 +1,22 @@
 package org.ganimede;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-import org.ganimede.dao.ConcursoDAO;
-import org.ganimede.dao.ResultadoDAO;
-import org.ganimede.dao.impl.ConcursoDAOImpl;
-import org.ganimede.dao.impl.ResultadoDAOImpl;
 import org.ganimede.regras.Regra;
-import org.ganimede.utils.RndUtils;
 import org.ganimede.utils.StringUtils;
 
-public class GerarCombinacoesMS {
+public class GerarCombinacoesMS extends GerarCombinacoesBase {
 
-    static ConcursoDAO concursoDAO = null;
-
-    static ResultadoDAO resultadoDAO = null;
-
-    static List<Regra> regras = new ArrayList<Regra>();
-
-    static {
-        regras.add(new org.ganimede.regras.megasena.RegraNaoSequencial());
-        regras.add(new org.ganimede.regras.megasena.RegraSorteiosAnteriores());
-        regras.add(new org.ganimede.regras.megasena.RegraParesImpares());
-        regras.add(new org.ganimede.regras.megasena.RegraNaoVertical());
-        regras.add(new org.ganimede.regras.megasena.RegraAtraso(8));
-        regras.add(new org.ganimede.regras.megasena.RegraDezenasFrequentes(10));
-        regras.add(new org.ganimede.regras.megasena.RegraDezenasAnteriores(2));
-        regras.add(new org.ganimede.regras.megasena.RegraDistribuicao());
-    }
-
-    public static void fechamento(List<List<Integer>> apostas, Integer[] p, int pos, int size) {
-        List<Integer> base = Arrays.asList(p).subList(pos, pos + size);
-        
-        for (Integer dezena : p) {
-            List<Integer> aposta = new ArrayList<>();
-            aposta.addAll(base);
-            
-            if (!base.contains(dezena)) {
-                aposta.add(dezena);
-                //Collections.sort(aposta);
-                apostas.add(aposta);
-            }
-        }
-    }
-
-    public static void main(String[] args) {
-        List<List<Integer>> apostas = new ArrayList<List<Integer>>();
-
-        List<Integer[]> prognosticos = prognosticos(1, 10);
-
-        for (Integer[] p : prognosticos) {
-            System.out.println("-- BASE");
-            StringUtils.print(p);
-            System.out.println("--------------------");
-
-            for (int i = 0; i < p.length / 5; i++) {
-                fechamento(apostas, p, i * 5, 5);
-            }
-
-            for (List<Integer> aposta : apostas) {
-                Collections.sort(aposta);
-                System.out.println(aposta);
-            }
-            System.out.println("--------------------");
-            System.out.println("Nro. apostas: " + apostas.size());
-            System.out.println("Vl.  apostas: " + Float.valueOf(apostas.size()) * 3.50);
-        }
-    }
+    private static GerarCombinacoesBase gb = new GerarCombinacoesMS();
 
     /**
      * 
      * @param args
      */
     public static void main2(String[] args) {
-        List<Integer[]> prognosticos = prognosticos(3, 6);
+        List<Integer[]> prognosticos = gb.prognosticos(3, 6);
 
         System.out.println("--------------------------");
         System.out.println("Boa Sorte!");
@@ -102,62 +42,49 @@ public class GerarCombinacoesMS {
         System.out.println(atrasos);
     }
 
-    /**
-     * 
-     * @param quantidade
-     * @return
-     */
-    public static List<Integer[]> prognosticos(Integer quantidade, Integer qtDezenas) {
-        List<Integer[]> result = new ArrayList<Integer[]>();
+    public static void main(String[] args) {
+        List<List<Integer>> apostas = new ArrayList<List<Integer>>();
 
-        while (result.size() < quantidade) {
+        List<Integer[]> prognosticos = gb.prognosticos(1, 10);
 
-            for (int i = 0; i < quantidade; i++) {
-                result.add(gerarAposta(qtDezenas));
+        for (Integer[] p : prognosticos) {
+            System.out.println("-- BASE");
+            StringUtils.print(p);
+            System.out.println("--------------------");
+
+            for (int i = 0; i < p.length / 5; i++) {
+                fechamento(apostas, p, i * 5, 5);
             }
 
-            for (Regra regra : regras) {
-                regra.aplicar(result);
+            for (List<Integer> aposta : apostas) {
+                Collections.sort(aposta);
+                System.out.println(aposta);
             }
+            System.out.println("--------------------");
+            System.out.println("Nro. apostas: " + apostas.size());
+            System.out.println("Vl.  apostas: " + Float.valueOf(apostas.size()) * 3.50);
         }
-
-        return result.subList(0, quantidade);
     }
 
-    /**
-     * 
-     * @return
-     */
-    public static Integer[] gerarAposta(int qtDezenas) {
-        List<Integer> tmp = new ArrayList<Integer>();
-
-        while (tmp.size() < qtDezenas) {
-            Integer p1 = RndUtils.nextInt(1, 60);
-            if (!tmp.contains(p1)) {
-                tmp.add(p1);
-            }
-        }
-
-        Integer[] result = new Integer[qtDezenas];
-        tmp.subList(0, qtDezenas).toArray(result);
-
-        // Integer[] result = new Integer[] { 15, 14, 13, 12, 11, 10, 9, 8, 7,
-        // 6, 5, 4, 3, 2, 1 };
-        
-        return result;
+    @Override
+    int qtDezenas() {
+        return 60;
     }
 
-    private static ConcursoDAO getConcursoDAO() {
-        if (concursoDAO == null) {
-            concursoDAO = new ConcursoDAOImpl();
-        }
-        return concursoDAO;
+    @Override
+    List<Regra> regras() {
+        List<Regra> regras = new ArrayList<Regra>();
+
+        regras.add(new org.ganimede.regras.megasena.RegraNaoSequencial());
+        regras.add(new org.ganimede.regras.megasena.RegraSorteiosAnteriores());
+        regras.add(new org.ganimede.regras.megasena.RegraParesImpares());
+        regras.add(new org.ganimede.regras.megasena.RegraNaoVertical());
+        regras.add(new org.ganimede.regras.megasena.RegraAtraso(8));
+        regras.add(new org.ganimede.regras.megasena.RegraDezenasFrequentes(10));
+        regras.add(new org.ganimede.regras.megasena.RegraDezenasAnteriores(2));
+        regras.add(new org.ganimede.regras.megasena.RegraDistribuicao());
+
+        return regras;
     }
 
-    private static ResultadoDAO getResultadoDAO() {
-        if (resultadoDAO == null) {
-            resultadoDAO = new ResultadoDAOImpl();
-        }
-        return resultadoDAO;
-    }
 }

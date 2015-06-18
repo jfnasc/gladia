@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.ganimede.Sorteio;
 import org.ganimede.dao.BaseDAO;
 import org.ganimede.dao.ResultadoDAO;
 import org.ganimede.utils.DatabaseUtils;
@@ -14,18 +15,16 @@ import org.ganimede.utils.DatabaseUtils;
 public class ResultadoDAOImpl extends BaseDAO implements ResultadoDAO {
 
     @Override
-    public boolean isDezenaEmAtrasoMinimo(String tpConcurso, int nuSorteio, int nuDezena, int qtConcursos) {
-        boolean result = false;
+    public int concursosEmAtraso(String tpConcurso, int nuSorteio, int nuDezena) {
+        int result = 0;
 
         StringBuilder sb = new StringBuilder();
 
-        sb.append("select nu_dezena ");
-        sb.append("  from tb_atrasos ");
-        sb.append(" where nu_sorteio = ? ");
-        sb.append("   and tp_concurso = ? ");
-        sb.append("   and nu_concurso = (select max(nu_concurso) from tb_concursos where tp_concurso = ?) ");
-        sb.append("   and qt_atraso > ? ");
-        sb.append("   and nu_dezena = ?");
+        sb.append("select qt_atraso "); 
+        sb.append("  from tb_atrasos "); 
+        sb.append(" where tp_concurso = ? "); 
+        sb.append("   and nu_sorteio = ? "); 
+        sb.append("   and nu_dezena = ?; ");
 
         Connection conn = null;
         PreparedStatement pstmt = null;
@@ -37,15 +36,16 @@ public class ResultadoDAOImpl extends BaseDAO implements ResultadoDAO {
 
             pstmt = conn.prepareStatement(sb.toString());
 
-            pstmt.setInt(1, nuSorteio);
-            pstmt.setString(2, tpConcurso);
-            pstmt.setString(3, tpConcurso);
-            pstmt.setInt(4, qtConcursos);
+            pstmt.setString(1, tpConcurso);
+            pstmt.setInt(2, nuSorteio);
             pstmt.setInt(5, nuDezena);
 
             rs = pstmt.executeQuery();
 
-            result = rs.next();
+            if (rs.next()){
+                result = rs.getInt(1);    
+            }
+            
 
         } catch (Exception e) {
             try {
@@ -197,6 +197,11 @@ public class ResultadoDAOImpl extends BaseDAO implements ResultadoDAO {
         }
 
         return result;
+    }
+
+    @Override
+    public List<Sorteio> buscarSorteios(String tpConcurso, int nuSorteio) {
+        return null;
     }
 
 }

@@ -148,6 +148,7 @@ public class AtrasosDAOImpl extends BaseDAO implements AtrasosDAO {
         try {
 
             conn = getDataSource().getConnection();
+            conn.setAutoCommit(false);
 
             StringBuilder sb = new StringBuilder();
 
@@ -186,7 +187,7 @@ public class AtrasosDAOImpl extends BaseDAO implements AtrasosDAO {
             }
 
             calcularAtrasos(atrasos);
-
+            
         } catch (Exception e) {
             e.printStackTrace();
         } finally {

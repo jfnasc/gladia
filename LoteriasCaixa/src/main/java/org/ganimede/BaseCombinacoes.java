@@ -1,105 +1,114 @@
+package org.ganimede;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.Arrays;
 import java.util.List;
 
-import org.ganimede.RegistrarEventosSISAR;
+import org.ganimede.utils.MathUtils;
 import org.ganimede.utils.StringUtils;
 
-public abstract class BaseCombinacoesHTML {
+public abstract class BaseCombinacoes {
 
-    protected NumberFormat df = new DecimalFormat("##0.00");
+    private NumberFormat nf = new DecimalFormat("###,##0.00");
+    private int nuPrognosticos;
+    private int numeroDezenasFixas;
+    private int tamanhoBase;
+    private Integer[] base;
 
-    public void gerar() {
-        int n = getTamanhoBase();
+    public List<Integer[]> gerar(int tamanhoBase, int nuPrognosticos, int numeroDezenasFixas) {
+        this.tamanhoBase = tamanhoBase;
+        this.nuPrognosticos = nuPrognosticos;
+        this.numeroDezenasFixas = numeroDezenasFixas;
 
-        Integer[] base = new Integer[n];
-        for (int i = 0; i < n; i++) {
-            base[i] = i + 1;
-        }
-
-        List<Integer[]> apostas = RegistrarEventosSISAR.gerar(base, getNumeroDezenasFixas(), getNumeroPrognosticos());
-        gerarProva(base, apostas);
+        List<Integer[]> bases = gerarCombinacoes().prognosticos(numeroDezenas(), this.tamanhoBase);
+        this.base = bases.get(0);
+        
+        return Combinacoes.calcularFechamento(this.base, this.numeroDezenasFixas, this.nuPrognosticos);
     }
 
-    protected String calcularValor(List<Integer[]> apostas) {
-        return df.format(Float.valueOf(apostas.size()) * getValorAposta(apostas.get(0).length));
+    abstract GerarCombinacoesBase gerarCombinacoes();
+    
+    abstract BigDecimal valorAposta(int numeroPrognosticos);
+
+    abstract Integer[] simularResultado();
+
+    abstract int menorFaixaPremiavel();
+
+    abstract int maiorFaixaPremiavel();
+
+    abstract BigDecimal valorPremio(int numeroAcertos);
+
+    abstract int numeroDezenas();
+
+    public BigDecimal calcularValor(int tamanhoBase, int numeroPrognosticos, int numeroDezenasFixas) {
+        List<Integer[]> apostas = gerar(tamanhoBase, numeroPrognosticos, numeroDezenasFixas);
+        return calcularValor(apostas);
     }
 
-    abstract int getNumeroPrognosticos();
+    public BigDecimal calcularValor(List<Integer[]> apostas) {
+        return BigDecimal.valueOf(apostas.size()).multiply(valorAposta(apostas.get(0).length));
+    }
 
-    abstract int getMinimoAcertos();
+    public void gerarProvaHTML(int tamanhoBase, int numeroPrognosticos, int numeroDezenasFixas) {
 
-    abstract int getMenorFaixaPremiavel();
-
-    abstract int getTamanhoBase();
-
-    abstract int getNumeroDezenasFixas();
-
-    abstract boolean isPararSeErro();
-
-    abstract float getValorPremio(int numeroAcertos);
-
-    abstract float getValorAposta(int numeroPrognosticos);
-
-    protected void gerarProva(Integer[] base, List<Integer[]> apostas) {
+        List<Integer[]> apostas = gerar(tamanhoBase, numeroPrognosticos, numeroDezenasFixas);
 
         StringBuilder html = abrirHtml();
 
         html.append("<tr><td colspan=2> " + StringUtils.print(base) + "</td></tr>");
+        html.append("<tr><td colspan=2> 1:"
+                + MathUtils.calcularChances(numeroDezenas(), maiorFaixaPremiavel(), tamanhoBase, numeroDezenasFixas)
+                + "</td></tr>");
 
         html.append("<tr><td colspan=2><textarea rows=\"10\">");
         for (Integer[] aposta : apostas) {
             html.append(StringUtils.print(aposta) + "\n");
         }
         html.append("</textarea></td></tr>");
-        html.append("<tr><td>Qtd. Prognosticos:</td><td style=\"width: 50px; text-align: right\">"
-                + getNumeroPrognosticos() + "</td></tr>");
+        html.append("<tr><td>Qtd. Prognosticos:</td><td style=\"width: 50px; text-align: right\">" + numeroPrognosticos
+                + "</td></tr>");
         html.append("<tr><td>Qtd. Jogos: </td><td style=\"width: 50px; text-align: right\">" + apostas.size()
                 + "</td></tr>");
         html.append("<tr><td>Valor Aposta: </td><td style=\"width: 50px; text-align: right\">R$ "
-                + getValorAposta(apostas.get(0).length) + "</td></tr>");
+                + nf.format(valorAposta(apostas.get(0).length)) + "</td></tr>");
         html.append("<tr><td>Valor Total:</td><td style=\"width: 50px; text-align: right\">R$ "
-                + calcularValor(apostas) + "</td></tr>");
+                + nf.format(calcularValor(apostas)) + "</td></tr>");
         html.append("</table>");
         html.append("<br/>");
-        html.append("<table width=\"50%\">");
+        html.append("<table width=\"40%\">");
 
         int nuPrognosticos = apostas.get(0).length;
 
         int tentativas = 0;
-        while (tentativas < 10) {
+        while (tentativas < 100) {
 
-            Integer[] resultado = RegistrarEventosSISAR.simularResultado(6, 60);
+            Integer[] resultado = Combinacoes.simularResultado(maiorFaixaPremiavel(), numeroDezenas());
             Arrays.sort(resultado);
 
-            if (RegistrarEventosSISAR.conferir(resultado, base) >= getMinimoAcertos()) {
+            if (Combinacoes.conferir(resultado, base) >= 0) {
 
-                html.append("<tr><td colspan=" + (nuPrognosticos + 2) + ">&nbsp;</td></tr>");
                 html.append("<tr><td colspan=" + (nuPrognosticos + 2) + " style=\"background-color: #f5f5f5\"> "
                         + StringUtils.print(resultado) + "</td></tr>");
 
-                float premio = Float.valueOf(0);
+                BigDecimal premio = BigDecimal.ZERO;
                 for (Integer[] aposta : apostas) {
                     Arrays.sort(aposta);
 
-                    int numeroAcertos = RegistrarEventosSISAR.conferir(resultado, aposta);
-                    if (numeroAcertos >= getMenorFaixaPremiavel()) {
+                    int numeroAcertos = Combinacoes.conferir(resultado, aposta);
+                    if (numeroAcertos >= menorFaixaPremiavel()) {
                         html.append(conferirToHtml(resultado, aposta));
-                        premio += getValorPremio(numeroAcertos);
+                        premio = premio.add(valorPremio(numeroAcertos));
                     }
                 }
 
-                html.append(String.format("<tr><td colspan=" + (nuPrognosticos - 1)
-                        + "></td><td colspan=2>Premio: R$ </td><td>%s</td></tr>", premio));
-
-                if (isPararSeErro()) {
-                    if (premio == 0) {
-                        throw new RuntimeException("Falha!");
-                    }
-                }
+                html.append(String
+                        .format("<tr><td colspan="
+                                + (nuPrognosticos - 1)
+                                + " width=\"50\"></td><td colspan=2 width=\"30\">Premio: R$ </td><td align=\"right\" width=\"20\">%s</td></tr>",
+                                nf.format(premio)));
 
                 tentativas++;
 
@@ -154,7 +163,7 @@ public abstract class BaseCombinacoesHTML {
         html.append("</style> ");
         html.append("</head> ");
         html.append("<body> ");
-        html.append("<table width=\"50%\"> ");
+        html.append("<table width=\"40%\"> ");
 
         return html;
     }
@@ -191,10 +200,38 @@ public abstract class BaseCombinacoesHTML {
 
         result.append("<td>&nbsp;</td>");
         result.append(String.format("<td style=\"width: 50px; text-align: right\"><b>%s</b></td>",
-                RegistrarEventosSISAR.conferir(resultado, aposta)));
+                Combinacoes.conferir(resultado, aposta)));
 
         result.append("</tr>\n");
 
         return result.toString();
+    }
+
+    public void gerarProva(int tamanhoBase, int numeroPrognosticos, int numeroDezenasFixas) {
+        List<Integer[]> apostas = gerar(tamanhoBase, numeroPrognosticos, numeroDezenasFixas);
+
+        float premiadas = 0;
+        float tentativas = 0;
+        while (tentativas < 1000000) {
+
+            Integer[] resultado = Combinacoes.simularResultado(maiorFaixaPremiavel(), numeroDezenas());
+            Arrays.sort(resultado);
+
+            BigDecimal premio = BigDecimal.ZERO;
+            for (Integer[] aposta : apostas) {
+                Arrays.sort(aposta);
+                int numeroAcertos = Combinacoes.conferir(resultado, aposta);
+                if (numeroAcertos >= menorFaixaPremiavel()) {
+                    premio = premio.add(valorPremio(numeroAcertos));
+                }
+                if (premio.intValue() > 0) {
+                    premiadas++;
+                }
+            }
+
+            tentativas++;
+        }
+
+        System.out.println(String.format("%s %s %s ", premiadas, tentativas, nf.format(premiadas / tentativas * 100)));
     }
 }

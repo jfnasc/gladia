@@ -18,7 +18,7 @@ public abstract class BaseService {
     protected static ResourceBundle config = ResourceBundle.getBundle("application");
 
     private ConcursoDAO concursoDAO;
-    
+
     protected String response(String url) throws IOException {
         String result = null;
 
@@ -26,13 +26,10 @@ public abstract class BaseService {
         CloseableHttpResponse response = null;
         HttpHost target = new HttpHost(config.getString("host"), 80, "http");
 
-        // HttpHost proxy = new HttpHost("proxy.spread.com.br", 8080, "http");
-        // RequestConfig config =
-        // RequestConfig.custom().setProxy(proxy).build();
-        // HttpGet request = new HttpGet(url);
-        // request.setConfig(config);
+        HttpHost proxy = new HttpHost("proxy.caixa", 80, "http");
+        RequestConfig config = RequestConfig.custom().setProxy(proxy).build();
+        //RequestConfig config = RequestConfig.custom().build();
 
-        RequestConfig config = RequestConfig.custom().build();
         HttpGet request = new HttpGet(url);
         request.setConfig(config);
 
@@ -55,9 +52,9 @@ public abstract class BaseService {
             System.out.println(result[i]);
         }
     }
-    
-    protected ConcursoDAO getConcursoDAO(){
-        if (this.concursoDAO == null){
+
+    protected ConcursoDAO getConcursoDAO() {
+        if (this.concursoDAO == null) {
             this.concursoDAO = new ConcursoDAOImpl();
         }
         return this.concursoDAO;

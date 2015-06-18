@@ -11,6 +11,8 @@ import java.security.NoSuchAlgorithmException;
 import java.security.cert.CertificateException;
 import java.security.cert.X509Certificate;
 
+import org.apache.http.HttpHost;
+import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.conn.ssl.SSLConnectionSocketFactory;
@@ -46,9 +48,13 @@ public abstract class DownloadResultadosService {
             SSLConnectionSocketFactory sslsf = new SSLConnectionSocketFactory(builder.build());
             CloseableHttpClient httpclient = HttpClients.custom().setSSLSocketFactory(sslsf).build();
 
-            HttpGet httpGet = new HttpGet(url);
+            HttpHost proxy = new HttpHost("proxy.caixa", 80, "http");
+            RequestConfig config = RequestConfig.custom().setProxy(proxy).build();
+            
+            HttpGet request = new HttpGet(url);
+            request.setConfig(config);
 
-            response = httpclient.execute(httpGet);
+            response = httpclient.execute(request);
 
             System.out.println(response.getStatusLine());
 
@@ -82,6 +88,7 @@ public abstract class DownloadResultadosService {
                 return true;
             }
         });
+        
         return builder;
     }
 }

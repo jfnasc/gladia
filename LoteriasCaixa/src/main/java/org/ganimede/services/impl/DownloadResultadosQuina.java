@@ -15,8 +15,8 @@ public class DownloadResultadosQuina extends DownloadResultadosService {
 
     @Override
     public void processarResultados() {
-        // baixarResultados("http://www1.caixa.gov.br/loterias/_arquivos/loterias/D_quina.zip",
-        // "/projetos/github/gladia/LoteriasCaixa/arquivos");
+        baixarResultados("http://www1.caixa.gov.br/loterias/_arquivos/loterias/D_quina.zip",
+                "/projetos/github/gladia/LoteriasCaixa/arquivos");
 
         BufferedReader reader = null;
         InputStreamReader in = null;
@@ -69,7 +69,6 @@ public class DownloadResultadosQuina extends DownloadResultadosService {
                 buffer.append(str + "\n");
 
                 count++;
-                System.out.println(count);
                 if (count != Integer.valueOf(str.substring(0, str.indexOf(";")))) {
                     reader.close();
                     throw new RuntimeException("Erro de contagem: " + count);
