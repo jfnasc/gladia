@@ -81,7 +81,7 @@ public class GerarCombinacoesMS extends GerarCombinacoesBase {
         regras.add(new org.ganimede.regras.megasena.RegraNaoVertical());
         regras.add(new org.ganimede.regras.megasena.RegraAtraso(8));
         regras.add(new org.ganimede.regras.megasena.RegraDezenasFrequentes(10));
-        regras.add(new org.ganimede.regras.megasena.RegraDezenasAnteriores(2));
+        regras.add(new org.ganimede.regras.impl.RegraDezenasAnteriores(TiposConcurso.MEGA_SENA.sigla, 2));
         regras.add(new org.ganimede.regras.megasena.RegraDistribuicao());
 
         return regras;

@@ -3,6 +3,7 @@
  */
 package org.ganimede;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.ganimede.regras.Regra;
@@ -15,8 +16,7 @@ public class GerarCombinacoesQuina extends GerarCombinacoesBase {
 
     public static void main(String[] args) {
         BaseCombinacoes p = new CombinacoesQuina();
-        p.gerarProvaHTML(13, 5, 2);
-        // p.gerarProva(10, 5, 3);
+        p.gerarProvaHTML(10, 5, 3);
     }
 
     @Override
@@ -26,8 +26,13 @@ public class GerarCombinacoesQuina extends GerarCombinacoesBase {
 
     @Override
     List<Regra> regras() {
-        // TODO Auto-generated method stub
-        return null;
+        List<Regra> regras = new ArrayList<Regra>();
+
+        regras.add(new org.ganimede.regras.megasena.RegraNaoSequencial());
+        regras.add(new org.ganimede.regras.megasena.RegraParesImpares());
+        regras.add(new org.ganimede.regras.impl.RegraDezenasAnteriores(TiposConcurso.QUINA.sigla, 2));
+
+        return regras;
     }
 
 }

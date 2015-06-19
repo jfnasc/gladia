@@ -1,6 +1,8 @@
-package org.ganimede.regras.megasena;
+package org.ganimede.regras.impl;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import org.apache.log4j.Logger;
@@ -15,8 +17,10 @@ public class RegraDezenasAnteriores extends RegraBase implements Regra {
     private Logger LOGGER = Logger.getLogger(RegraDezenasAnteriores.class);
 
     private int qtConcursos;
+    private String tpConcurso;
 
-    public RegraDezenasAnteriores(int qtConcursos) {
+    public RegraDezenasAnteriores(String tpConcurso, int qtConcursos) {
+        this.tpConcurso = tpConcurso;
         this.qtConcursos = qtConcursos;
     }
 
@@ -31,21 +35,22 @@ public class RegraDezenasAnteriores extends RegraBase implements Regra {
 
         List<Integer> dezenasAIgnorar = new ArrayList<>();
 
-        Concurso concurso = getConcursoDAO().recuperarUltimoConcurso(TiposConcurso.MEGA_SENA.sigla);
+        Concurso concurso = getConcursoDAO().recuperarUltimoConcurso(this.tpConcurso);
 
-        for (Sorteio sorteio : concurso.getSorteios()){
-            dezenasAIgnorar.addAll(sorteio.getDezenas());    
+        for (Sorteio sorteio : concurso.getSorteios()) {
+            Collections.sort(sorteio.getDezenas());
+            dezenasAIgnorar.addAll(sorteio.getDezenas());
         }
-        
+
         for (int i = (concurso.getNuConcurso() - (qtConcursos - 1)); i < concurso.getNuConcurso(); i++) {
-            concurso = getConcursoDAO().recuperarConcurso(i, TiposConcurso.MEGA_SENA.sigla, 1);
-            for (Sorteio sorteio : concurso.getSorteios()){
-                dezenasAIgnorar.addAll(sorteio.getDezenas());    
+            concurso = getConcursoDAO().recuperarConcurso(i, this.tpConcurso, 1);
+            for (Sorteio sorteio : concurso.getSorteios()) {
+                Collections.sort(sorteio.getDezenas());
+                dezenasAIgnorar.addAll(sorteio.getDezenas());
             }
         }
 
-        LOGGER.debug(String.format("RegraSorteiosAnteriores: Dezenas a ignorar (sairam nos %s ultimos sorteios) [%s]",
-                qtConcursos, dezenasAIgnorar));
+        LOGGER.debug(String.format("Dezenas sorteadas nos %s ultimos concursos: [%s]", qtConcursos, dezenasAIgnorar));
 
         try {
 
@@ -63,7 +68,7 @@ public class RegraDezenasAnteriores extends RegraBase implements Regra {
 
             apostas.removeAll(aRemover);
 
-            LOGGER.debug("RegraSorteiosAnteriores: " + (Float.valueOf(aRemover.size()) / total * 100));
+            LOGGER.debug((Float.valueOf(aRemover.size()) / total * 100));
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -71,7 +76,7 @@ public class RegraDezenasAnteriores extends RegraBase implements Regra {
     }
 
     public static void main(String[] args) {
-        RegraDezenasAnteriores regra = new RegraDezenasAnteriores(2);
+        RegraDezenasAnteriores regra = new RegraDezenasAnteriores(TiposConcurso.QUINA.sigla, 2);
 
         List<Integer[]> p = new ArrayList<>();
         p.add(new Integer[] { 7, 19, 30, 35, 42, 47 });

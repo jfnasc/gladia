@@ -48,11 +48,11 @@ public abstract class DownloadResultadosService {
             SSLConnectionSocketFactory sslsf = new SSLConnectionSocketFactory(builder.build());
             CloseableHttpClient httpclient = HttpClients.custom().setSSLSocketFactory(sslsf).build();
 
-            HttpHost proxy = new HttpHost("proxy.caixa", 80, "http");
-            RequestConfig config = RequestConfig.custom().setProxy(proxy).build();
-            
             HttpGet request = new HttpGet(url);
-            request.setConfig(config);
+
+//            HttpHost proxy = new HttpHost("proxy.caixa", 80, "http");
+//            RequestConfig config = RequestConfig.custom().setProxy(proxy).build();
+//            request.setConfig(config);
 
             response = httpclient.execute(request);
 

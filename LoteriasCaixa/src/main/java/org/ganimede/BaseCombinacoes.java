@@ -5,6 +5,7 @@ import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import org.ganimede.utils.MathUtils;
@@ -23,7 +24,7 @@ public abstract class BaseCombinacoes {
         this.nuPrognosticos = nuPrognosticos;
         this.numeroDezenasFixas = numeroDezenasFixas;
 
-        List<Integer[]> bases = gerarCombinacoes().prognosticos(numeroDezenas(), this.tamanhoBase);
+        List<Integer[]> bases = gerarCombinacoes().prognosticos(1, this.tamanhoBase);
         this.base = bases.get(0);
         
         return Combinacoes.calcularFechamento(this.base, this.numeroDezenasFixas, this.nuPrognosticos);
@@ -58,7 +59,10 @@ public abstract class BaseCombinacoes {
 
         StringBuilder html = abrirHtml();
 
+        Arrays.sort(base);
+        
         html.append("<tr><td colspan=2> " + StringUtils.print(base) + "</td></tr>");
+        html.append("<tr><td colspan=2> " + base.length + "</td></tr>");
         html.append("<tr><td colspan=2> 1:"
                 + MathUtils.calcularChances(numeroDezenas(), maiorFaixaPremiavel(), tamanhoBase, numeroDezenasFixas)
                 + "</td></tr>");
