@@ -30,7 +30,7 @@ public class GerarCombinacoesQuina extends GerarCombinacoesBase {
 
         regras.add(new org.ganimede.regras.megasena.RegraNaoSequencial());
         regras.add(new org.ganimede.regras.megasena.RegraParesImpares());
-        regras.add(new org.ganimede.regras.impl.RegraDezenasAnteriores(TiposConcurso.QUINA.sigla, 2));
+        regras.add(new org.ganimede.regras.impl.RegraDezenasAnteriores(TiposConcurso.QUINA.sigla, 3));
 
         return regras;
     }

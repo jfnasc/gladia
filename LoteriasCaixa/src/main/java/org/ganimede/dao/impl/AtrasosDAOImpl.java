@@ -87,8 +87,6 @@ public class AtrasosDAOImpl extends BaseDAO implements AtrasosDAO {
     }
 
     private void registrarSerieAtrasos(int nuConcurso, String tpConcurso, int numeroSorteio, int qtDezenas) {
-        System.out.println(nuConcurso);
-
         Connection conn = null;
         PreparedStatement pstmt = null;
         ResultSet rs = null;
@@ -244,8 +242,6 @@ public class AtrasosDAOImpl extends BaseDAO implements AtrasosDAO {
                 zerarAtrasoDezenasSorteadas(conn, atraso);
                 
                 atualizarStatus(conn, atraso);
-            
-                System.out.println(atraso);
             }
             
             conn.commit();

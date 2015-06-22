@@ -28,14 +28,26 @@
 --   primary key (nu_sorteio, nu_concurso, tp_concurso, nu_dezena)
 -- );
 
+-- drop table if exists tb_atrasos;
+-- 
+-- create table tb_atrasos(
+--   nu_sorteio   integer     not null,
+--   nu_concurso  integer     not null,
+--   tp_concurso  char(2)     not null,
+--   nu_dezena    integer     not null,
+--   qt_atraso    integer     not null default 1,
+--   ic_calculado char(1)     not null default 'N', 
+--   primary key (nu_sorteio, nu_concurso, tp_concurso, nu_dezena)
+-- );
+
 drop table if exists tb_atrasos;
 
 create table tb_atrasos(
-  nu_sorteio   integer     not null,
-  nu_concurso  integer     not null,
-  tp_concurso  char(2)     not null,
-  nu_dezena    integer     not null,
-  qt_atraso    integer     not null default 1,
-  ic_calculado char(1)     not null default 'N', 
-  primary key (nu_sorteio, nu_concurso, tp_concurso, nu_dezena)
+  nu_sorteio     integer     not null,
+  tp_concurso    char(2)     not null,
+  nu_concurso_1  integer     not null,
+  nu_concurso_2  integer     not null,
+  qt_concursos   integer     not null,
+  qt_dezenas     integer     not null,
+  primary key (nu_sorteio, tp_concurso, nu_concurso_1, nu_concurso_2)
 );
