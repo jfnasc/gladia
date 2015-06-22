@@ -11,7 +11,7 @@ import org.ganimede.dao.impl.ConcursoDAOImpl;
 
 public abstract class CargaResultadosService {
 
-    protected SimpleDateFormat sdf = new SimpleDateFormat("dd/mm/yyyy");
+    private ServiceConfig serviceConfig;
 
     private ConcursoDAO concursoDAO;
 
@@ -31,4 +31,20 @@ public abstract class CargaResultadosService {
         }
         return this.concursoDAO;
     }
+
+    /**
+     * @return the serviceConfig
+     */
+    public ServiceConfig getServiceConfig() {
+        return serviceConfig;
+    }
+
+    /**
+     * @param serviceConfig
+     *            the serviceConfig to set
+     */
+    public void setServiceConfig(ServiceConfig serviceConfig) {
+        this.serviceConfig = serviceConfig;
+    }
+
 }

@@ -10,6 +10,7 @@ import java.security.KeyStoreException;
 import java.security.NoSuchAlgorithmException;
 import java.security.cert.CertificateException;
 import java.security.cert.X509Certificate;
+import java.util.Date;
 
 import org.apache.http.HttpHost;
 import org.apache.http.client.config.RequestConfig;
@@ -40,10 +41,17 @@ public abstract class DownloadResultadosService {
         }
     }
 
-    protected void baixarArquivos(String url, String filepath) {
+    protected boolean baixarArquivos(String url, String filepath) {
         CloseableHttpResponse response = null;
 
         try {
+            File f = new File(filepath + File.separator + url.substring(url.lastIndexOf("/") + 1));
+            if (isArquivoAtualizado(f)){
+                System.out.println(f.getAbsolutePath());
+                System.out.println("Nada a fazer. O arquivo esta atualizado.");
+                return false;
+            }
+            
             SSLContextBuilder builder = buildSSLContext();
 
             SSLConnectionSocketFactory sslsf = new SSLConnectionSocketFactory(builder.build());
@@ -61,7 +69,6 @@ public abstract class DownloadResultadosService {
 
             System.out.println(response.getStatusLine());
 
-            File f = new File(filepath + File.separator + url.substring(url.lastIndexOf("/") + 1));
             BufferedInputStream bis = new BufferedInputStream(response.getEntity().getContent());
             BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(f));
             int inByte;
@@ -77,11 +84,15 @@ public abstract class DownloadResultadosService {
 
         } finally {
             try {
-                response.close();
+                if (response != null){
+                    response.close();    
+                }
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
+        
+        return true;
     }
 
     private static SSLContextBuilder buildSSLContext() throws NoSuchAlgorithmException, KeyStoreException {
@@ -111,4 +122,8 @@ public abstract class DownloadResultadosService {
         this.serviceConfig = serviceConfig;
     }
 
+    private boolean isArquivoAtualizado(File f){
+        System.out.println(new Date(f.lastModified()));
+        return false;
+    }
 }

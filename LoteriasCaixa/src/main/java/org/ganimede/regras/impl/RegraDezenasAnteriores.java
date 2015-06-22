@@ -38,6 +38,7 @@ public class RegraDezenasAnteriores extends RegraBase implements Regra {
         Concurso ultimoConcurso = getConcursoDAO().recuperarUltimoConcurso(this.tpConcurso);
 
         for (int i = ultimoConcurso.getNuConcurso(); i > ultimoConcurso.getNuConcurso() - qtConcursos; i--) {
+            LOGGER.debug(String.format("%s Concurso [%s]", this.tpConcurso, i));
             Concurso concurso = getConcursoDAO().recuperarConcurso(i, this.tpConcurso, 1);
             for (Sorteio sorteio : concurso.getSorteios()) {
                 Collections.sort(sorteio.getDezenas());
@@ -45,6 +46,7 @@ public class RegraDezenasAnteriores extends RegraBase implements Regra {
             }
         }
 
+        Collections.sort(dezenasAIgnorar);
         LOGGER.debug(String.format("Dezenas sorteadas nos %s ultimos concursos: [%s]", qtConcursos, dezenasAIgnorar));
 
         try {

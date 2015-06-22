@@ -193,7 +193,9 @@ public class MathUtils {
         // }
         // System.out.println();
 
-        System.out.println(calcularChances(80, 5, 10, 2));
+        //System.out.println(calcularChances(80, 5, 10, 2));
+        
+        System.out.println(MathUtils.csimples(3, 3));
 
     }
 

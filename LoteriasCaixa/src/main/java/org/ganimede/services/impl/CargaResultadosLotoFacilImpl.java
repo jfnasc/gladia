@@ -16,13 +16,13 @@ import org.ganimede.services.CargaResultadosService;
 import org.ganimede.services.ServiceConfig;
 import org.ganimede.utils.MathUtils;
 
-public class CargaResultadosDuplaSenaImpl extends CargaResultadosService {
+public class CargaResultadosLotoFacilImpl extends CargaResultadosService {
 
     @Override
     public void carregar() {
-        Concurso ultimoConcursoGravado = getConcursoDAO().recuperarUltimoConcurso(TiposConcurso.DUPLA_SENA.sigla);
+        Concurso ultimoConcursoGravado = getConcursoDAO().recuperarUltimoConcurso(TiposConcurso.LOTO_FACIL.sigla);
 
-        String filepath = "/projetos/github/gladia/LoteriasCaixa/arquivos/resultados_dupla_sena.csv";
+        String filepath = getServiceConfig().getPath() + File.separator + "resultados_loto_facil.csv";
         BufferedReader reader = null;
         InputStreamReader in = null;
 
@@ -37,9 +37,7 @@ public class CargaResultadosDuplaSenaImpl extends CargaResultadosService {
             while ((line = reader.readLine()) != null) {
                 Concurso concurso = carregarDadosConcurso(line);
                 if (ultimoConcursoGravado == null || (concurso.getNuConcurso() > ultimoConcursoGravado.getNuConcurso())) {
-                    //if (concurso.getNuConcurso() == 921 || concurso.getNuConcurso() == 341) {
-                        concursos.add(concurso);
-                    //}
+                    concursos.add(concurso);
                 }
             }
 
@@ -70,7 +68,7 @@ public class CargaResultadosDuplaSenaImpl extends CargaResultadosService {
             e.printStackTrace();
         }
 
-        concurso.setTpConcurso(TiposConcurso.DUPLA_SENA.sigla);
+        concurso.setTpConcurso(TiposConcurso.LOTO_FACIL.sigla);
 
         concurso.setSorteios(carregarDadosSorteio(concurso, line));
 
@@ -82,34 +80,28 @@ public class CargaResultadosDuplaSenaImpl extends CargaResultadosService {
 
         List<Sorteio> sorteios = new ArrayList<>();
 
-        sorteios.add(carregarDadosSorteio(concurso, line, 1, 2));
-        sorteios.add(carregarDadosSorteio(concurso, line, 2, 19));
-
-        return sorteios;
-    }
-
-    private Sorteio carregarDadosSorteio(Concurso concurso, String line, int numeroSorteio, int pos) {
         Sorteio sorteio = new Sorteio();
 
         sorteio.setNuConcurso(concurso.getNuConcurso());
-        sorteio.setNuSorteio(numeroSorteio);
+        sorteio.setNuSorteio(1);
         sorteio.setTpConcurso(concurso.getTpConcurso());
 
-        String[] dados = line.split(";");
-
         List<Integer> dezenas = new ArrayList<>();
-        while (dezenas.size() < 6) {
-            dezenas.add(Integer.valueOf(dados[pos]));
-            pos++;
+
+        String[] dados = line.split(";");
+        for (int i = 2; i < dados.length; i++) {
+            dezenas.add(Integer.valueOf(dados[i]));
         }
         sorteio.setDezenas(dezenas);
         sorteio.setHash(MathUtils.hash(dezenas));
 
-        return sorteio;
+        sorteios.add(sorteio);
+
+        return sorteios;
     }
 
     public static void main(String[] args) {
-        CargaResultadosService cgs = new CargaResultadosDuplaSenaImpl();
+        CargaResultadosService cgs = new CargaResultadosMegaSenaImpl();
         cgs.carregar();
     }
 

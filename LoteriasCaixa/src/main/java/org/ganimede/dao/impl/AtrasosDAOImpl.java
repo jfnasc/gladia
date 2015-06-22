@@ -37,14 +37,15 @@ public class AtrasosDAOImpl extends BaseDAO implements AtrasosDAO {
             sb.append("  from tb_concursos tb1 ");
             sb.append(" where tb1.nu_concurso = ( select max(nu_concurso) ");
             sb.append("                             from tb_atrasos ");
-            sb.append("                            where tp_concurso = tb1.tp_concurso ");
+            sb.append("                            where tp_concurso = ? ");
             sb.append("                              and nu_sorteio  = ?) ");
             sb.append("   and tb1.tp_concurso = ? ");
 
             pstmt = conn.prepareStatement(sb.toString());
 
-            pstmt.setInt(1, numeroSorteio);
-            pstmt.setString(2, tpConcurso);
+            pstmt.setString(1, tpConcurso);
+            pstmt.setInt(2, numeroSorteio);
+            pstmt.setString(3, tpConcurso);
 
             rs = pstmt.executeQuery();
 
@@ -69,10 +70,10 @@ public class AtrasosDAOImpl extends BaseDAO implements AtrasosDAO {
         return result;
     }
 
-    public void registrarAtrasos(String tpConcurso, int numeroSorteio, int qtDezenas) {
+    public void registrarAtrasos(TiposConcurso tpConcurso, int numeroSorteio) {
 
-        Concurso ultimoConcursoRegistrado = getConcursoDAO().recuperarUltimoConcurso(tpConcurso);
-        Concurso ultimoAtrasoRegistrado = recuperarUltimoConcurso(tpConcurso, numeroSorteio);
+        Concurso ultimoConcursoRegistrado = getConcursoDAO().recuperarUltimoConcurso(tpConcurso.sigla);
+        Concurso ultimoAtrasoRegistrado = recuperarUltimoConcurso(tpConcurso.sigla, numeroSorteio);
 
         int inicioSerie = 1;
         if (ultimoAtrasoRegistrado != null) {
@@ -80,10 +81,10 @@ public class AtrasosDAOImpl extends BaseDAO implements AtrasosDAO {
         }
 
         for (int i = inicioSerie; i <= ultimoConcursoRegistrado.getNuConcurso(); i++) {
-            registrarSerieAtrasos(i, tpConcurso, numeroSorteio, qtDezenas);
+            registrarSerieAtrasos(i, tpConcurso.sigla, numeroSorteio, tpConcurso.nuDezenas);
         }
 
-        calcularAtrasos(tpConcurso, numeroSorteio);
+        calcularAtrasos(tpConcurso.sigla, numeroSorteio);
     }
 
     private void registrarSerieAtrasos(int nuConcurso, String tpConcurso, int numeroSorteio, int qtDezenas) {
@@ -168,24 +169,24 @@ public class AtrasosDAOImpl extends BaseDAO implements AtrasosDAO {
             List<Atraso> atrasos = new ArrayList<Atraso>();
             while (rs.next()) {
                 Atraso atraso = new Atraso();
-                
+
                 atraso.setNuConcurso(rs.getInt("nu_concurso"));
                 atraso.setNuSorteio(rs.getInt("nu_sorteio"));
                 atraso.setTpConcurso(rs.getString("tp_concurso"));
                 atraso.setNuDezena(rs.getInt("nu_dezena"));
                 atraso.setQtAtraso(rs.getInt("qt_atraso"));
                 atraso.setIcCalculado(rs.getString("ic_calculado"));
-                
+
                 atrasos.add(atraso);
-                
-                if (atrasos.size() == 10){
+
+                if (atrasos.size() == 10) {
                     calcularAtrasos(atrasos);
                     atrasos.clear();
                 }
             }
 
             calcularAtrasos(atrasos);
-            
+
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
@@ -194,10 +195,10 @@ public class AtrasosDAOImpl extends BaseDAO implements AtrasosDAO {
     }
 
     private void calcularAtrasos(List<Atraso> atrasos) {
-        if (atrasos == null){
+        if (atrasos == null) {
             return;
         }
-        
+
         Connection conn = null;
         PreparedStatement pstmt = null;
 
@@ -238,12 +239,14 @@ public class AtrasosDAOImpl extends BaseDAO implements AtrasosDAO {
 
                     pstmt.executeUpdate();
                 }
-                
+
                 zerarAtrasoDezenasSorteadas(conn, atraso);
-                
+
                 atualizarStatus(conn, atraso);
+                
+                System.out.println(atraso);
             }
-            
+
             conn.commit();
             
         } catch (Exception e) {
@@ -325,11 +328,7 @@ public class AtrasosDAOImpl extends BaseDAO implements AtrasosDAO {
 
     public static void main(String[] args) {
         AtrasosDAO dao = new AtrasosDAOImpl();
-        dao.registrarAtrasos(TiposConcurso.DUPLA_SENA.sigla, 1, 60);
-        dao.registrarAtrasos(TiposConcurso.DUPLA_SENA.sigla, 2, 60);
-        dao.registrarAtrasos(TiposConcurso.MEGA_SENA.sigla, 1, 60);
-        dao.registrarAtrasos(TiposConcurso.QUINA.sigla, 1, 80);
+        dao.registrarAtrasos(TiposConcurso.LOTO_FACIL, 1);
     }
-
 
 }

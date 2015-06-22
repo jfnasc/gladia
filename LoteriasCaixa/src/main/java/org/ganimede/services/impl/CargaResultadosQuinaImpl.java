@@ -13,6 +13,7 @@ import org.ganimede.Concurso;
 import org.ganimede.Sorteio;
 import org.ganimede.TiposConcurso;
 import org.ganimede.services.CargaResultadosService;
+import org.ganimede.services.ServiceConfig;
 import org.ganimede.utils.MathUtils;
 
 public class CargaResultadosQuinaImpl extends CargaResultadosService {
@@ -62,7 +63,7 @@ public class CargaResultadosQuinaImpl extends CargaResultadosService {
 
         concurso.setNuConcurso(Integer.valueOf(dados[0]));
         try {
-            concurso.setDtConcurso(sdf.parse(dados[1]));
+            concurso.setDtConcurso(ServiceConfig.sdf.parse(dados[1]));
         } catch (ParseException e) {
             e.printStackTrace();
         }

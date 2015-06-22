@@ -8,25 +8,25 @@ import java.io.InputStreamReader;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.ganimede.TiposConcurso;
 import org.ganimede.services.DownloadResultadosService;
 import org.ganimede.utils.StringUtils;
 
-public class DownloadResultadosQuina extends DownloadResultadosService {
+public class DownloadResultadosLotoFacil extends DownloadResultadosService {
 
     private String urlArquivo;
 
     @Override
     public void processarResultados() {
-        if (!baixarArquivos(getUrlArquivo(), getServiceConfig().getPath())){
+        if (!baixarArquivos(getUrlArquivo(), getServiceConfig().getPath())) {
             return;
         }
-
 
         BufferedReader reader = null;
         InputStreamReader in = null;
 
         try {
-            File f = new File(getServiceConfig().getPath() + File.separator + "D_QUINA.HTM");
+            File f = new File(getServiceConfig().getPath() + File.separator + "D_LOTFAC.HTM");
             in = new InputStreamReader(new FileInputStream(f), "ISO-8859-1");
             reader = new BufferedReader(in);
 
@@ -39,24 +39,9 @@ public class DownloadResultadosQuina extends DownloadResultadosService {
             StringBuilder template = new StringBuilder();
             template.append("<td rowspan=\"[0-9]*\">[0-9]*</td>");
             template.append("<td rowspan=\"[0-9]*\">[0-9]*/[0-9]*/[0-9]*</td>");
-            template.append("<td rowspan=\"[0-9]*\">[0-9]*</td>");
-            template.append("<td rowspan=\"[0-9]*\">[0-9]*</td>");
-            template.append("<td rowspan=\"[0-9]*\">[0-9]*</td>");
-            template.append("<td rowspan=\"[0-9]*\">[0-9]*</td>");
-            template.append("<td rowspan=\"[0-9]*\">[0-9]*</td>");
-            // template.append("<td rowspan=\"[0-9]*\">[0-9,.]*</td>");
-            // template.append("<td rowspan=\"[0-9]*\">[0-9]*</td>");
-            // template.append("<td rowspan=\"[0-9]*\">[-\\(\\),&;\\s\\w]*</td>");
-            // template.append("<td rowspan=\"[0-9]*\">[-\\(\\),&;\\s\\w]*</td>");
-            // template.append("<td rowspan=\"[0-9]*\">[0-9,.]*</td>");
-            // template.append("<td rowspan=\"[0-9]*\">[0-9]*</td>");
-            // template.append("<td rowspan=\"[0-9]*\">[0-9,.]*</td>");
-            // template.append("<td rowspan=\"[0-9]*\">[0-9]*</td>");
-            // template.append("<td rowspan=\"[0-9]*\">[0-9,.]*</td>");
-            // template.append("<td rowspan=\"[0-9]*\">[a-zA-Z]*</td>");
-            // template.append("<td rowspan=\"[0-9]*\">[0-9,.]*</td>");
-            // template.append("<td rowspan=\"[0-9]*\">[0-9,.]*</td>");
-            // template.append("<td rowspan=\"[0-9]*\">[0-9,.]*</td>");
+            for (int i = 0; i < TiposConcurso.LOTO_FACIL.maiorFaixaPremiavel; i++) {
+                template.append("<td rowspan=\"[0-9]*\">[0-9]*</td>");
+            }
 
             Pattern p = Pattern.compile(template.toString());
             Matcher m = p.matcher(sb.toString());
@@ -79,7 +64,7 @@ public class DownloadResultadosQuina extends DownloadResultadosService {
                 }
             }
 
-            writeFile("resultados_quina.csv", buffer);
+            writeFile("resultados_loto_facil.csv", buffer);
 
             System.out.println(count);
         } catch (Exception e) {

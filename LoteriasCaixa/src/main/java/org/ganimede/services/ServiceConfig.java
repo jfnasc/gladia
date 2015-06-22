@@ -1,7 +1,14 @@
 package org.ganimede.services;
 
+import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
+
 public class ServiceConfig {
     private String path;
+    
+    public static SimpleDateFormat sdf = new SimpleDateFormat("dd/mm/yyyy");
+    
+    public static DecimalFormat df = new DecimalFormat("###,##0.00");
 
     private boolean isProxyEnabled;
 

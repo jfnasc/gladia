@@ -17,7 +17,9 @@ public class DownloadResultadosDuplaSena extends DownloadResultadosService {
 
     @Override
     public void processarResultados() {
-        baixarArquivos(getUrlArquivo(), getServiceConfig().getPath());
+        if (!baixarArquivos(getUrlArquivo(), getServiceConfig().getPath())){
+            return;
+        }
 
         BufferedReader reader = null;
         InputStreamReader in = null;

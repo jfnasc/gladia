@@ -6,12 +6,14 @@ package org.ganimede;
 import java.io.Serializable;
 import java.util.List;
 
+import org.ganimede.utils.StringUtils;
+
 /**
  * @author Jose Flavio <jfnasc@outlook.com>
  * 
  */
 public class Sorteio implements Serializable {
-    
+
     private static final long serialVersionUID = 1L;
 
     private int nuSorteio;
@@ -103,7 +105,7 @@ public class Sorteio implements Serializable {
     @Override
     public String toString() {
         return "Sorteio [nuSorteio=" + nuSorteio + ", nuConcurso=" + nuConcurso + ", tpConcurso=" + tpConcurso
-                        + ", hash=" + hash + "]";
+                + ", hash=" + hash + ", dezenas=" + StringUtils.print(dezenas) + "]";
     }
 
 }

@@ -45,4 +45,13 @@
 		<property name="urlArquivo" value="http://www1.caixa.gov.br/loterias/_arquivos/loterias/d_dplsen.zip"/>
 	</bean>
 
+	<bean id="downloadResultadosLotoFacil" class="org.ganimede.services.impl.DownloadResultadosLotoFacil">
+		<property name="serviceConfig" ref="serviceConfig" />
+		<property name="urlArquivo" value="http://www1.caixa.gov.br/loterias/_arquivos/loterias/D_lotfac.zip"/>
+	</bean>
+
+	<bean id="cargaResultadosLotoFacil" class="org.ganimede.services.impl.CargaResultadosLotoFacilImpl">
+		<property name="serviceConfig" ref="serviceConfig" />
+	</bean>
+
 </beans>
