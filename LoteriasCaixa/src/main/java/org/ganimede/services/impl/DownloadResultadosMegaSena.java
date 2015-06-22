@@ -2,7 +2,8 @@ package org.ganimede.services.impl;
 
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileReader;
+import java.io.FileInputStream;
+import java.io.InputStreamReader;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -10,16 +11,19 @@ import org.ganimede.services.DownloadResultadosService;
 
 public class DownloadResultadosMegaSena extends DownloadResultadosService {
 
+    private String urlArquivo;
+
     @Override
     public void processarResultados() {
-        baixarResultados("https://www1.caixa.gov.br/loterias/_arquivos/loterias/D_mgsasc.zip",
-                "/projetos/github/gladia/LoteriasCaixa/arquivos");
+        baixarArquivos(getUrlArquivo(), getServiceConfig().getPath());
 
         BufferedReader reader = null;
+        InputStreamReader in = null;
 
         try {
-            reader = new BufferedReader(new FileReader(new File(
-                    "/projetos/github/gladia/LoteriasCaixa/arquivos/d_megasc.htm")));
+            File f = new File(getServiceConfig().getPath() + File.separator + "d_megasc.htm");
+            in = new InputStreamReader(new FileInputStream(f), "ISO-8859-1");
+            reader = new BufferedReader(in);
 
             StringBuilder sb = new StringBuilder();
             String line = null;
@@ -57,12 +61,27 @@ public class DownloadResultadosMegaSena extends DownloadResultadosService {
                     System.exit(1);
                 }
             }
-            
+
             writeFile("resultados_mega_sena.csv", buffer);
-            
+
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    /**
+     * @return the urlArquivo
+     */
+    public String getUrlArquivo() {
+        return urlArquivo;
+    }
+
+    /**
+     * @param urlArquivo
+     *            the urlArquivo to set
+     */
+    public void setUrlArquivo(String urlArquivo) {
+        this.urlArquivo = urlArquivo;
     }
 
     public static void main(String[] args) {

@@ -23,23 +23,24 @@ import org.apache.http.impl.client.HttpClients;
 import org.ganimede.utils.ZipUtils;
 
 public abstract class DownloadResultadosService {
-    
+
+    private ServiceConfig serviceConfig;
+
     public abstract void processarResultados();
-    
-    protected void writeFile(String filename, StringBuilder buffer) throws Exception{
+
+    protected void writeFile(String filename, StringBuilder buffer) throws Exception {
         FileWriter fw = null;
-        
+
         try {
-            fw = new FileWriter("/projetos/github/gladia/LoteriasCaixa/arquivos/" + filename);
+            fw = new FileWriter(getServiceConfig().getPath() + File.separator + filename);
             fw.write(buffer.toString());
             fw.flush();
         } catch (Exception e) {
-           fw.close();
+            fw.close();
         }
-
     }
-    
-    protected void baixarResultados(String url, String filepath) {
+
+    protected void baixarArquivos(String url, String filepath) {
         CloseableHttpResponse response = null;
 
         try {
@@ -50,9 +51,11 @@ public abstract class DownloadResultadosService {
 
             HttpGet request = new HttpGet(url);
 
-//            HttpHost proxy = new HttpHost("proxy.caixa", 80, "http");
-//            RequestConfig config = RequestConfig.custom().setProxy(proxy).build();
-//            request.setConfig(config);
+            if (getServiceConfig().isProxyEnabled()) {
+                HttpHost proxy = new HttpHost("proxy.caixa", 80, "http");
+                RequestConfig config = RequestConfig.custom().setProxy(proxy).build();
+                request.setConfig(config);
+            }
 
             response = httpclient.execute(request);
 
@@ -62,8 +65,9 @@ public abstract class DownloadResultadosService {
             BufferedInputStream bis = new BufferedInputStream(response.getEntity().getContent());
             BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(f));
             int inByte;
-            while ((inByte = bis.read()) != -1)
+            while ((inByte = bis.read()) != -1) {
                 bos.write(inByte);
+            }
             bis.close();
             bos.close();
 
@@ -88,7 +92,23 @@ public abstract class DownloadResultadosService {
                 return true;
             }
         });
-        
+
         return builder;
     }
+
+    /**
+     * @return the serviceConfig
+     */
+    public ServiceConfig getServiceConfig() {
+        return serviceConfig;
+    }
+
+    /**
+     * @param serviceConfig
+     *            the serviceConfig to set
+     */
+    public void setServiceConfig(ServiceConfig serviceConfig) {
+        this.serviceConfig = serviceConfig;
+    }
+
 }

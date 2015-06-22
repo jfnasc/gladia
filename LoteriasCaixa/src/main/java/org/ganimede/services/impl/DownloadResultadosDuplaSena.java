@@ -13,16 +13,17 @@ import org.ganimede.utils.StringUtils;
 
 public class DownloadResultadosDuplaSena extends DownloadResultadosService {
 
+    private String urlArquivo;
+
     @Override
     public void processarResultados() {
-        baixarResultados("http://www1.caixa.gov.br/loterias/_arquivos/loterias/d_dplsen.zip",
-                "/projetos/github/gladia/LoteriasCaixa/arquivos");
+        baixarArquivos(getUrlArquivo(), getServiceConfig().getPath());
 
         BufferedReader reader = null;
         InputStreamReader in = null;
 
         try {
-            File f = new File("/projetos/github/gladia/LoteriasCaixa/arquivos/D_DPLSEN.HTM");
+            File f = new File(getServiceConfig().getPath() + File.separator + "D_DPLSEN.HTM");
             in = new InputStreamReader(new FileInputStream(f), "ISO-8859-1");
             reader = new BufferedReader(in);
 
@@ -98,6 +99,21 @@ public class DownloadResultadosDuplaSena extends DownloadResultadosService {
                 e.printStackTrace();
             }
         }
+    }
+
+    /**
+     * @return the urlArquivo
+     */
+    public String getUrlArquivo() {
+        return urlArquivo;
+    }
+
+    /**
+     * @param urlArquivo
+     *            the urlArquivo to set
+     */
+    public void setUrlArquivo(String urlArquivo) {
+        this.urlArquivo = urlArquivo;
     }
 
     public static void main(String[] args) {
