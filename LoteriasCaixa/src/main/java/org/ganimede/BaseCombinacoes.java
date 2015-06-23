@@ -1,11 +1,11 @@
 package org.ganimede;
+
 import java.io.FileWriter;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 import org.ganimede.utils.MathUtils;
@@ -19,6 +19,10 @@ public abstract class BaseCombinacoes {
     private int tamanhoBase;
     private Integer[] base;
 
+    public Integer[] simularResultado() {
+        return Fechamentos.simularResultado(maiorFaixaPremiavel(), numeroDezenas());
+    }
+    
     public List<Integer[]> gerar(int tamanhoBase, int nuPrognosticos, int numeroDezenasFixas) {
         this.tamanhoBase = tamanhoBase;
         this.nuPrognosticos = nuPrognosticos;
@@ -26,15 +30,13 @@ public abstract class BaseCombinacoes {
 
         List<Integer[]> bases = gerarCombinacoes().prognosticos(1, this.tamanhoBase);
         this.base = bases.get(0);
-        
-        return Combinacoes.calcularFechamento(this.base, this.numeroDezenasFixas, this.nuPrognosticos);
+
+        return Fechamentos.calcular(this.base, this.numeroDezenasFixas, this.nuPrognosticos);
     }
 
     abstract GerarCombinacoesBase gerarCombinacoes();
-    
-    abstract BigDecimal valorAposta(int numeroPrognosticos);
 
-    abstract Integer[] simularResultado();
+    abstract BigDecimal valorAposta(int numeroPrognosticos);
 
     abstract int menorFaixaPremiavel();
 
@@ -60,7 +62,7 @@ public abstract class BaseCombinacoes {
         StringBuilder html = abrirHtml();
 
         Arrays.sort(base);
-        
+
         html.append("<tr><td colspan=2> " + StringUtils.print(base) + "</td></tr>");
         html.append("<tr><td colspan=2> " + base.length + "</td></tr>");
         html.append("<tr><td colspan=2> 1:"
@@ -89,10 +91,10 @@ public abstract class BaseCombinacoes {
         int tentativas = 0;
         while (tentativas < 100) {
 
-            Integer[] resultado = Combinacoes.simularResultado(maiorFaixaPremiavel(), numeroDezenas());
+            Integer[] resultado = Fechamentos.simularResultado(maiorFaixaPremiavel(), numeroDezenas());
             Arrays.sort(resultado);
 
-            if (Combinacoes.conferir(resultado, base) >= 0) {
+            if (Fechamentos.conferir(resultado, base) >= 0) {
 
                 html.append("<tr><td colspan=" + (nuPrognosticos + 2) + " style=\"background-color: #f5f5f5\"> "
                         + StringUtils.print(resultado) + "</td></tr>");
@@ -101,7 +103,7 @@ public abstract class BaseCombinacoes {
                 for (Integer[] aposta : apostas) {
                     Arrays.sort(aposta);
 
-                    int numeroAcertos = Combinacoes.conferir(resultado, aposta);
+                    int numeroAcertos = Fechamentos.conferir(resultado, aposta);
                     if (numeroAcertos >= menorFaixaPremiavel()) {
                         html.append(conferirToHtml(resultado, aposta));
                         premio = premio.add(valorPremio(numeroAcertos));
@@ -204,7 +206,7 @@ public abstract class BaseCombinacoes {
 
         result.append("<td>&nbsp;</td>");
         result.append(String.format("<td style=\"width: 50px; text-align: right\"><b>%s</b></td>",
-                Combinacoes.conferir(resultado, aposta)));
+                Fechamentos.conferir(resultado, aposta)));
 
         result.append("</tr>\n");
 
@@ -218,13 +220,13 @@ public abstract class BaseCombinacoes {
         float tentativas = 0;
         while (tentativas < 1000000) {
 
-            Integer[] resultado = Combinacoes.simularResultado(maiorFaixaPremiavel(), numeroDezenas());
+            Integer[] resultado = Fechamentos.simularResultado(maiorFaixaPremiavel(), numeroDezenas());
             Arrays.sort(resultado);
 
             BigDecimal premio = BigDecimal.ZERO;
             for (Integer[] aposta : apostas) {
                 Arrays.sort(aposta);
-                int numeroAcertos = Combinacoes.conferir(resultado, aposta);
+                int numeroAcertos = Fechamentos.conferir(resultado, aposta);
                 if (numeroAcertos >= menorFaixaPremiavel()) {
                     premio = premio.add(valorPremio(numeroAcertos));
                 }

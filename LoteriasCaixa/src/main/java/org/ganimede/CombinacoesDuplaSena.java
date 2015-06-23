@@ -1,4 +1,5 @@
 package org.ganimede;
+
 import java.math.BigDecimal;
 
 public class CombinacoesDuplaSena extends BaseCombinacoes {
@@ -6,11 +7,6 @@ public class CombinacoesDuplaSena extends BaseCombinacoes {
     public static void main(String[] args) {
         BaseCombinacoes p = new CombinacoesDuplaSena();
         p.gerarProvaHTML(10, 6, 4);
-    }
-
-    @Override
-    Integer[] simularResultado() {
-        return Combinacoes.simularResultado(6, 50);
     }
 
     @Override

@@ -4,51 +4,46 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import org.ganimede.utils.Combinations;
 import org.ganimede.utils.RndUtils;
 import org.ganimede.utils.StringUtils;
 
-public class Combinacoes {
+public class Fechamentos {
 
     public static void main(String[] args) {
-        int n = 15;
+        int n = 10;
 
         Integer[] base = new Integer[n];
         for (int i = 0; i < n; i++) {
             base[i] = i + 1;
         }
 
-        List<Integer[]> p = calcularFechamento(base, 3, 5);
+        //
+        // calcular(base, 6, 5);
+
+        List<Integer[]> p = calcular(base, 3, 5);
         for (Integer[] d : p) {
             System.out.println(StringUtils.print(d));
         }
     }
 
-    public static List<Integer[]> calcularFechamento(Integer[] base, int tamanhoBase, int nuPrognosticos) {
+    public static List<Integer[]> calcular(Integer[] base, int nuDezenasVariaveis, int nuPrognosticos) {
+
+        if (nuPrognosticos < nuDezenasVariaveis) {
+            throw new RuntimeException("Erro! o numero de dezenas variaveis não pode ser maior que"
+                    + " o de prognosticos desejados");
+        }
+
         List<Integer[]> apostas = new ArrayList<>();
 
         List<Integer[]> combinacoesBase = new ArrayList<>();
         List<Integer[]> combinacoesComplementares = new ArrayList<>();
 
-        if (tamanhoBase == 2) {
-            calcularCombinacoesBase2(combinacoesBase, base);
-        } else if (tamanhoBase == 3) {
-            calcularCombinacoesBase3(combinacoesBase, base);
-        } else if (tamanhoBase == 4) {
-            calcularCombinacoesBase4(combinacoesBase, base);
-        } else {
-            throw new RuntimeException("Nao suportado.");
-        }
+        calcularCombinacoes(combinacoesBase, base, nuDezenasVariaveis);
 
         for (Integer[] combinacao : combinacoesBase) {
-            if (nuPrognosticos - tamanhoBase == 1) {
-                calcularCombinacoes(combinacoesComplementares, remover(base, combinacao));
-            } else if (nuPrognosticos - tamanhoBase == 2) {
-                calcularCombinacoesBase2(combinacoesComplementares, remover(base, combinacao));
-            } else if (nuPrognosticos - tamanhoBase == 3) {
-                calcularCombinacoesBase3(combinacoesComplementares, remover(base, combinacao));
-            } else if (nuPrognosticos - tamanhoBase == 4) {
-                calcularCombinacoesBase4(combinacoesComplementares, remover(base, combinacao));
-            }
+            calcularCombinacoes(combinacoesComplementares, remover(base, combinacao), nuPrognosticos
+                    - nuDezenasVariaveis);
         }
 
         for (Integer[] combinacao : combinacoesBase) {
@@ -74,48 +69,8 @@ public class Combinacoes {
         return apostas;
     }
 
-    public static void calcularCombinacoes(List<Integer[]> combinacoes, Integer[] base) {
-        int i = 0;
-
-        for (i = 0; i < base.length; i++) {
-            combinacoes.add(new Integer[] { base[i] });
-        }
-    }
-
-    public static void calcularCombinacoesBase2(List<Integer[]> combinacoes, Integer[] base) {
-        int i, j = 0;
-
-        for (i = 0; i < base.length; i++) {
-            for (j = i + 1; j < base.length; j++) {
-                combinacoes.add(new Integer[] { base[i], base[j] });
-            }
-        }
-    }
-
-    public static void calcularCombinacoesBase3(List<Integer[]> combinacoes, Integer[] base) {
-        int i, j, k = 0;
-
-        for (i = 0; i < base.length; i++) {
-            for (j = i + 1; j < base.length; j++) {
-                for (k = j + 1; k < base.length; k++) {
-                    combinacoes.add(new Integer[] { base[i], base[j], base[k] });
-                }
-            }
-        }
-    }
-
-    public static void calcularCombinacoesBase4(List<Integer[]> combinacoes, Integer[] base) {
-        int i, j, k, l = 0;
-
-        for (i = 0; i < base.length; i++) {
-            for (j = i + 1; j < base.length; j++) {
-                for (k = j + 1; k < base.length; k++) {
-                    for (l = k + 1; l < base.length; l++) {
-                        combinacoes.add(new Integer[] { base[i], base[j], base[k], base[l] });
-                    }
-                }
-            }
-        }
+    public static void calcularCombinacoes(List<Integer[]> combinacoes, Integer[] base, int nuDezenasFixas) {
+        combinacoes.addAll(Combinations.calc(base, nuDezenasFixas));
     }
 
     public static Integer[] remover(Integer[] base, Integer[] lista) {

@@ -20,10 +20,10 @@ public class ResultadoDAOImpl extends BaseDAO implements ResultadoDAO {
 
         StringBuilder sb = new StringBuilder();
 
-        sb.append("select qt_atraso "); 
-        sb.append("  from tb_atrasos "); 
-        sb.append(" where tp_concurso = ? "); 
-        sb.append("   and nu_sorteio = ? "); 
+        sb.append("select qt_atraso ");
+        sb.append("  from tb_atrasos ");
+        sb.append(" where tp_concurso = ? ");
+        sb.append("   and nu_sorteio = ? ");
         sb.append("   and nu_dezena = ?; ");
 
         Connection conn = null;
@@ -42,10 +42,9 @@ public class ResultadoDAOImpl extends BaseDAO implements ResultadoDAO {
 
             rs = pstmt.executeQuery();
 
-            if (rs.next()){
-                result = rs.getInt(1);    
+            if (rs.next()) {
+                result = rs.getInt(1);
             }
-            
 
         } catch (Exception e) {
             try {

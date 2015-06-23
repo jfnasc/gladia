@@ -193,13 +193,67 @@ public class MathUtils {
         // }
         // System.out.println();
 
-        //System.out.println(calcularChances(80, 5, 10, 2));
-        
-        System.out.println(MathUtils.csimples(3, 3));
+        // System.out.println(calcularChances(80, 5, 10, 2));
 
+        // System.out.println(MathUtils.csimples(15, 8));
+
+//        int i, j = 0;
+//
+//        for (i = 0; i < 5; i++) {
+//            for (j = i + 1; j < 5; j++) {
+//                System.out.println(String.format("%s\t%s", i, j));
+//            }
+//        }
+//
+//        System.out.println("-------------------------");
+//
+//        i = 0;
+//        j = 0;
+//        int k = 0;
+//
+//        for (i = 0; i < 5; i++) {
+//            for (j = i + 1; j < 5; j++) {
+//                for (k = j + 1; k < 5; k++) {
+//                    System.out.println(String.format("%s\t%s\t%s", i, j, k));
+//                }
+//            }
+//        }
+//
+//        System.out.println("-------------------------");
+//
+//        i = 0;
+//        j = 0;
+//        k = 0;
+//        int l = 0;
+//
+//        for (i = 0; i < 5; i++) {
+//            for (j = i + 1; j < 5; j++) {
+//                for (k = j + 1; k < 5; k++) {
+//                    for (l = k + 1; l < 5; l++) {
+//                        System.out.println(String.format("%s\t%s\t%s\t%s", i, j, k, l));
+//                    }
+//                }
+//            }
+//        }
+        
+        long m = 5;
+        long n = 2;
+        long t = csimples(m, n);
+        
+        System.out.println(t);
+        
+        List<Integer[]> combinacoes = new ArrayList<>();
+        for (int i = 0; i < t; i++) {
+            combinacoes.add(new Integer[]{0,0});
+        }
+        
+        for (Integer[] integers : combinacoes) {
+            System.out.println(Arrays.toString(integers));
+        }
+        
     }
 
-    private static String format(long p, int size) {
+    public static String format(long p, int size) {
         StringBuilder sb = new StringBuilder();
         while (sb.length() < (size - String.valueOf(p).length())) {
             sb.append(new char[] { ' ' }, 0, 1);
@@ -208,5 +262,15 @@ public class MathUtils {
         sb.append(String.valueOf(p).toCharArray(), 0, String.valueOf(p).length());
 
         return sb.toString();
+    }
+
+    public static boolean combine(int[] c, int[] m) {
+
+        for (int i = m.length; --i >= 0;)
+            if (++c[i] < m[i])
+                return true;
+            else
+                c[i] = 0;
+        return false;
     }
 }

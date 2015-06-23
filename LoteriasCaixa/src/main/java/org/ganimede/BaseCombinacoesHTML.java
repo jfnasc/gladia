@@ -1,4 +1,5 @@
 package org.ganimede;
+
 import java.io.FileWriter;
 import java.io.IOException;
 import java.math.BigDecimal;
@@ -21,9 +22,10 @@ public abstract class BaseCombinacoesHTML {
             base[i] = i + 1;
         }
 
-        List<Integer[]> apostas = Combinacoes.calcularFechamento(base, getNumeroDezenasFixas(), getNumeroPrognosticos());
+        List<Integer[]> apostas = Fechamentos
+                .calcular(base, getNumeroDezenasFixas(), getNumeroPrognosticos());
         gerarProva(base, apostas);
-        
+
         return apostas;
     }
 
@@ -75,10 +77,10 @@ public abstract class BaseCombinacoesHTML {
         int tentativas = 0;
         while (tentativas < 10) {
 
-            Integer[] resultado = Combinacoes.simularResultado(6, 60);
+            Integer[] resultado = Fechamentos.simularResultado(6, 60);
             Arrays.sort(resultado);
 
-            if (Combinacoes.conferir(resultado, base) >= getMinimoAcertos()) {
+            if (Fechamentos.conferir(resultado, base) >= getMinimoAcertos()) {
 
                 html.append("<tr><td colspan=" + (nuPrognosticos + 2) + ">&nbsp;</td></tr>");
                 html.append("<tr><td colspan=" + (nuPrognosticos + 2) + " style=\"background-color: #f5f5f5\"> "
@@ -88,7 +90,7 @@ public abstract class BaseCombinacoesHTML {
                 for (Integer[] aposta : apostas) {
                     Arrays.sort(aposta);
 
-                    int numeroAcertos = Combinacoes.conferir(resultado, aposta);
+                    int numeroAcertos = Fechamentos.conferir(resultado, aposta);
                     if (numeroAcertos >= getMenorFaixaPremiavel()) {
                         html.append(conferirToHtml(resultado, aposta));
                         premio.add(getValorPremio(numeroAcertos));
@@ -194,7 +196,7 @@ public abstract class BaseCombinacoesHTML {
 
         result.append("<td>&nbsp;</td>");
         result.append(String.format("<td style=\"width: 50px; text-align: right\"><b>%s</b></td>",
-                Combinacoes.conferir(resultado, aposta)));
+                Fechamentos.conferir(resultado, aposta)));
 
         result.append("</tr>\n");
 

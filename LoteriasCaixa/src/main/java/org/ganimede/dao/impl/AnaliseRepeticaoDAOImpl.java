@@ -20,25 +20,24 @@ public class AnaliseRepeticaoDAOImpl extends BaseDAO implements AnaliseDAO {
 
     public static void main(String[] args) {
         AnaliseDAO analise = new AnaliseRepeticaoDAOImpl();
-        analise.executar(TiposConcurso.QUINA.sigla, 1);
-        
-        analise.executar(TiposConcurso.MEGA_SENA.sigla, 1);
-        
-        analise.executar(TiposConcurso.DUPLA_SENA.sigla, 1);
-        analise.executar(TiposConcurso.DUPLA_SENA.sigla, 2);
+        analise.executar(TiposConcurso.QUINA, 1);
+        analise.executar(TiposConcurso.MEGA_SENA, 1);
+        analise.executar(TiposConcurso.DUPLA_SENA, 1);
+        analise.executar(TiposConcurso.DUPLA_SENA, 2);
+        analise.executar(TiposConcurso.LOTO_FACIL, 1);
     }
 
     @Override
-    public void executar(String tpConcurso, int nuSorteio) {
-        Concurso ultimoConcurso = getConcursoDAO().recuperarUltimoConcurso(tpConcurso);
-        int ultimoConcursoRegistrado = recuperarUltimoConcursoRegistrado(tpConcurso, nuSorteio);
+    public void executar(TiposConcurso tpConcurso, int nuSorteio) {
+        Concurso ultimoConcurso = getConcursoDAO().recuperarUltimoConcurso(tpConcurso.sigla);
+        int ultimoConcursoRegistrado = recuperarUltimoConcursoRegistrado(tpConcurso.sigla, nuSorteio);
 
         int count = 0;
         List<Integer> p = new ArrayList<>();
 
         for (int i = ultimoConcursoRegistrado; i < ultimoConcurso.getNuConcurso(); i++) {
             for (int j = i + 1; j < ultimoConcurso.getNuConcurso(); j++) {
-                if (contar(tpConcurso, i, j) == 0) {
+                if (contar(tpConcurso.sigla, i, j) == 0) {
                     count++;
                 } else {
                     if (count == 0) {
@@ -46,7 +45,7 @@ public class AnaliseRepeticaoDAOImpl extends BaseDAO implements AnaliseDAO {
                     }
                     p.add(new Integer(j - i));
                     System.out.println(String.format("%s\t%s\t%s\t%s", i, j, j - i, count));
-                    salvar(nuSorteio, tpConcurso, i, j, j - i, count);
+                    salvar(nuSorteio, tpConcurso.sigla, i, j, j - i, count);
                     count = 0;
                     i = j - 1;
                     break;

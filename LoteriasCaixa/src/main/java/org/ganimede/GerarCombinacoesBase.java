@@ -49,8 +49,8 @@ public abstract class GerarCombinacoesBase {
             for (int i = 0; i < quantidade; i++) {
                 result.add(gerarAposta(nuPrognosticos));
             }
-            
-            if (regras() != null){
+
+            if (regras() != null) {
                 for (Regra regra : regras()) {
                     regra.aplicar(result);
                 }

@@ -6,18 +6,8 @@ public class CombinacoesQuina extends BaseCombinacoes {
 
     public static void main(String[] args) {
         BaseCombinacoes p = new CombinacoesQuina();
-        p.gerarProvaHTML(15, 5, 3);
+        p.gerarProvaHTML(10, 5, 3);
         // p.gerarProva(10, 5, 3);
-    }
-
-    @Override
-    Integer[] simularResultado() {
-        return Combinacoes.simularResultado(5, 80);
-    }
-
-    @Override
-    int menorFaixaPremiavel() {
-        return 3;
     }
 
     @Override
@@ -65,5 +55,10 @@ public class CombinacoesQuina extends BaseCombinacoes {
     @Override
     GerarCombinacoesBase gerarCombinacoes() {
         return new GerarCombinacoesQuina();
+    }
+
+    @Override
+    int menorFaixaPremiavel() {
+        return 3;
     }
 }

@@ -146,10 +146,10 @@ public class ConcursoDAOImpl extends BaseDAO implements ConcursoDAO {
                 result.setNuConcurso(rs.getInt("nu_concurso"));
                 result.setTpConcurso(rs.getString("tp_concurso"));
                 result.setDtConcurso(sdf.parse(rs.getString("dt_concurso")));
-                
+
                 recuperarSorteios(result, 1);
             }
-            
+
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
@@ -189,7 +189,7 @@ public class ConcursoDAOImpl extends BaseDAO implements ConcursoDAO {
                 result.setNuConcurso(rs.getInt("nu_concurso"));
                 result.setTpConcurso(rs.getString("tp_concurso"));
                 result.setDtConcurso(sdf.parse(rs.getString("dt_concurso")));
-                
+
                 recuperarSorteios(result, 1);
             }
         } catch (Exception e) {
@@ -201,17 +201,17 @@ public class ConcursoDAOImpl extends BaseDAO implements ConcursoDAO {
         return result;
     }
 
-    private List<Sorteio> recuperarSorteios(Concurso concurso, int nuSorteio){
+    private List<Sorteio> recuperarSorteios(Concurso concurso, int nuSorteio) {
         List<Sorteio> result = new ArrayList<Sorteio>();
 
         StringBuilder sb = new StringBuilder();
-        sb.append("select nu_dezena, nu_posicao "); 
-        sb.append("  from tb_dezenas "); 
-        sb.append(" where nu_concurso = ? "); 
-        sb.append("   and tp_concurso = ? "); 
-        sb.append("   and nu_sorteio = ? "); 
+        sb.append("select nu_dezena, nu_posicao ");
+        sb.append("  from tb_dezenas ");
+        sb.append(" where nu_concurso = ? ");
+        sb.append("   and tp_concurso = ? ");
+        sb.append("   and nu_sorteio = ? ");
         sb.append(" order by nu_sorteio");
-        
+
         Connection conn = null;
         PreparedStatement pstmt = null;
         ResultSet rs = null;
@@ -232,24 +232,23 @@ public class ConcursoDAOImpl extends BaseDAO implements ConcursoDAO {
             while (rs.next()) {
                 dezenas.add(rs.getInt("nu_dezena"));
             }
-            
+
             Sorteio sorteio = new Sorteio();
-            
+
             sorteio.setNuConcurso(concurso.getNuConcurso());
             sorteio.setNuSorteio(nuSorteio);
             sorteio.setTpConcurso(concurso.getTpConcurso());
             sorteio.setHash(MathUtils.hash(dezenas));
             sorteio.setDezenas(dezenas);
-            
+
             concurso.getSorteios().add(sorteio);
-            
+
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
             DatabaseUtils.close(rs, pstmt, conn);
         }
-        
-        
+
         return result;
     }
 }

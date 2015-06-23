@@ -33,7 +33,7 @@ public class ZipUtils {
 
             // get the zip file content
             ZipInputStream zis = new ZipInputStream(new FileInputStream(zipFile));
-            
+
             // get the zipped file list entry
             ZipEntry ze = zis.getNextEntry();
 
@@ -68,7 +68,7 @@ public class ZipUtils {
             ex.printStackTrace();
         }
     }
-    
+
     public static void main(String[] args) {
         ZipUtils.unzip("/home/josen/megasena.zip", "/projetos/github/gladia/LoteriasCaixa/arquivos");
     }

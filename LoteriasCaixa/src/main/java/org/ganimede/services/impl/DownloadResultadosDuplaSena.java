@@ -17,7 +17,7 @@ public class DownloadResultadosDuplaSena extends DownloadResultadosService {
 
     @Override
     public void processarResultados() {
-        if (!baixarArquivos(getUrlArquivo(), getServiceConfig().getPath())){
+        if (!baixarArquivos(getUrlArquivo(), getServiceConfig().getPath())) {
             return;
         }
 

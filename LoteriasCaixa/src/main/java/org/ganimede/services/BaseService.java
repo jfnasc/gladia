@@ -28,7 +28,7 @@ public abstract class BaseService {
 
         HttpHost proxy = new HttpHost("proxy.caixa", 80, "http");
         RequestConfig config = RequestConfig.custom().setProxy(proxy).build();
-        //RequestConfig config = RequestConfig.custom().build();
+        // RequestConfig config = RequestConfig.custom().build();
 
         HttpGet request = new HttpGet(url);
         request.setConfig(config);

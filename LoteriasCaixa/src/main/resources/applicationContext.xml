@@ -54,4 +54,15 @@
 		<property name="serviceConfig" ref="serviceConfig" />
 	</bean>
 
+	<bean id="cargaResultadosQuina" class="org.ganimede.services.impl.CargaResultadosQuinaImpl">
+		<property name="serviceConfig" ref="serviceConfig" />
+	</bean>
+	
+	<bean id="cargaResultadosMegaSena" class="org.ganimede.services.impl.CargaResultadosMegaSenaImpl">
+		<property name="serviceConfig" ref="serviceConfig" />
+	</bean>	
+	
+	<bean id="cargaResultadosDuplaSena" class="org.ganimede.services.impl.CargaResultadosDuplaSenaImpl">
+		<property name="serviceConfig" ref="serviceConfig" />
+	</bean>	
 </beans>

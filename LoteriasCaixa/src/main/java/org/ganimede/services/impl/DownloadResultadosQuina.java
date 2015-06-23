@@ -17,10 +17,9 @@ public class DownloadResultadosQuina extends DownloadResultadosService {
 
     @Override
     public void processarResultados() {
-        if (!baixarArquivos(getUrlArquivo(), getServiceConfig().getPath())){
+        if (!baixarArquivos(getUrlArquivo(), getServiceConfig().getPath())) {
             return;
         }
-
 
         BufferedReader reader = null;
         InputStreamReader in = null;

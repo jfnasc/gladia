@@ -46,12 +46,12 @@ public abstract class DownloadResultadosService {
 
         try {
             File f = new File(filepath + File.separator + url.substring(url.lastIndexOf("/") + 1));
-            if (isArquivoAtualizado(f)){
+            if (isArquivoAtualizado(f)) {
                 System.out.println(f.getAbsolutePath());
                 System.out.println("Nada a fazer. O arquivo esta atualizado.");
                 return false;
             }
-            
+
             SSLContextBuilder builder = buildSSLContext();
 
             SSLConnectionSocketFactory sslsf = new SSLConnectionSocketFactory(builder.build());
@@ -84,14 +84,14 @@ public abstract class DownloadResultadosService {
 
         } finally {
             try {
-                if (response != null){
-                    response.close();    
+                if (response != null) {
+                    response.close();
                 }
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
-        
+
         return true;
     }
 
@@ -122,7 +122,7 @@ public abstract class DownloadResultadosService {
         this.serviceConfig = serviceConfig;
     }
 
-    private boolean isArquivoAtualizado(File f){
+    private boolean isArquivoAtualizado(File f) {
         System.out.println(new Date(f.lastModified()));
         return false;
     }

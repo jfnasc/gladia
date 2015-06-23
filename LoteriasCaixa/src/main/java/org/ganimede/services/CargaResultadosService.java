@@ -1,6 +1,5 @@
 package org.ganimede.services;
 
-import java.text.SimpleDateFormat;
 import java.util.Collection;
 import java.util.List;
 

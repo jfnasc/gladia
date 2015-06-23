@@ -37,9 +37,10 @@ public class CargaResultadosDuplaSenaImpl extends CargaResultadosService {
             while ((line = reader.readLine()) != null) {
                 Concurso concurso = carregarDadosConcurso(line);
                 if (ultimoConcursoGravado == null || (concurso.getNuConcurso() > ultimoConcursoGravado.getNuConcurso())) {
-                    //if (concurso.getNuConcurso() == 921 || concurso.getNuConcurso() == 341) {
-                        concursos.add(concurso);
-                    //}
+                    // if (concurso.getNuConcurso() == 921 ||
+                    // concurso.getNuConcurso() == 341) {
+                    concursos.add(concurso);
+                    // }
                 }
             }
 

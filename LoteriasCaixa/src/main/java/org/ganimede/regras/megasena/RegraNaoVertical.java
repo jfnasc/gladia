@@ -31,9 +31,9 @@ public class RegraNaoVertical extends RegraBase implements Regra {
         List<Integer[]> toRemoveList = new ArrayList<Integer[]>();
 
         for (Integer[] aposta : apostas) {
-            
+
             int count = 0;
-            
+
             for (Integer dezena : aposta) {
                 for (int i = 1; i < 6; i++) {
                     if (Arrays.asList(aposta).contains(dezena + (10 * i))) {
@@ -41,8 +41,8 @@ public class RegraNaoVertical extends RegraBase implements Regra {
                     }
                 }
             }
-            
-            if (count > 0){
+
+            if (count > 0) {
                 toRemoveList.add(aposta);
             }
         }

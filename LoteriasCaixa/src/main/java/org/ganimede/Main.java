@@ -13,29 +13,23 @@ public class Main {
 
     public static void main(String[] args) {
 
-        // ((DownloadResultadosService)
-        // context.getBean("downloadResultadosQuina")).processarResultados();
-        // ((DownloadResultadosService)
-        // context.getBean("downloadResultadosMegaSena")).processarResultados();
-        // ((DownloadResultadosService)
-        // context.getBean("downloadResultadosDuplaSena")).processarResultados();
+        ((DownloadResultadosService) context.getBean("downloadResultadosQuina")).processarResultados();
+        ((CargaResultadosService) context.getBean("cargaResultadosQuina")).carregar();
+
+        ((DownloadResultadosService) context.getBean("downloadResultadosMegaSena")).processarResultados();
+        ((CargaResultadosService) context.getBean("cargaResultadosMegaSena")).carregar();
+
+        ((DownloadResultadosService) context.getBean("downloadResultadosDuplaSena")).processarResultados();
+        ((CargaResultadosService) context.getBean("cargaResultadosDuplaSena")).carregar();
+
         ((DownloadResultadosService) context.getBean("downloadResultadosLotoFacil")).processarResultados();
         ((CargaResultadosService) context.getBean("cargaResultadosLotoFacil")).carregar();
 
-        // CargaResultadosService cms = new CargaResultadosMegaSenaImpl();
-        // cms.carregar();
-        //
-        // CargaResultadosService cqu = new CargaResultadosQuinaImpl();
-        // cqu.carregar();
-        //
-        // CargaResultadosService cds = new CargaResultadosDuplaSenaImpl();
-        // cds.carregar();
-        //
         AtrasosDAO dao = new AtrasosDAOImpl();
-        // dao.registrarAtrasos(TiposConcurso.DUPLA_SENA.sigla, 1, 60);
-        // dao.registrarAtrasos(TiposConcurso.DUPLA_SENA.sigla, 2, 60);
-        // dao.registrarAtrasos(TiposConcurso.MEGA_SENA.sigla, 1, 60);
-        // dao.registrarAtrasos(TiposConcurso.QUINA.sigla, 1, 80);
+        dao.registrarAtrasos(TiposConcurso.DUPLA_SENA, 1);
+        dao.registrarAtrasos(TiposConcurso.DUPLA_SENA, 2);
+        dao.registrarAtrasos(TiposConcurso.MEGA_SENA, 1);
+        dao.registrarAtrasos(TiposConcurso.QUINA, 1);
         dao.registrarAtrasos(TiposConcurso.LOTO_FACIL, 1);
     }
 }

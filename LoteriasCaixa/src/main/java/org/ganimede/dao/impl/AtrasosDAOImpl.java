@@ -243,12 +243,12 @@ public class AtrasosDAOImpl extends BaseDAO implements AtrasosDAO {
                 zerarAtrasoDezenasSorteadas(conn, atraso);
 
                 atualizarStatus(conn, atraso);
-                
+
                 System.out.println(atraso);
             }
 
             conn.commit();
-            
+
         } catch (Exception e) {
             try {
                 conn.rollback();

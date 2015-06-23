@@ -1,4 +1,5 @@
 package org.ganimede;
+
 import java.math.BigDecimal;
 
 public class CombinacoesMegaSena extends BaseCombinacoes {
@@ -33,11 +34,6 @@ public class CombinacoesMegaSena extends BaseCombinacoes {
         }
 
         throw new RuntimeException("Não suportado!");
-    }
-
-    @Override
-    Integer[] simularResultado() {
-        return Combinacoes.simularResultado(6, 60);
     }
 
     @Override
