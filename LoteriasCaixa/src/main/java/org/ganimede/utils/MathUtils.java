@@ -26,11 +26,11 @@ public class MathUtils {
         return result;
     }
 
-    public static long csimples(long n, long p) {
-        BigDecimal p1 = fatorial(n);
-        BigDecimal p2 = fatorial(p);
+    public static long csimples(long m, long n) {
+        BigDecimal p1 = fatorial(m);
+        BigDecimal p2 = fatorial(n);
 
-        if (n == 0 || p == 0) {
+        if (m == 0 || n == 0) {
             return 1L;
         }
 
@@ -38,7 +38,7 @@ public class MathUtils {
             return 1L;
         }
 
-        BigDecimal p3 = fatorial(n - p);
+        BigDecimal p3 = fatorial(m - n);
 
         return p1.divide(p2.multiply(p3), RoundingMode.HALF_UP).longValue();
     }
@@ -153,6 +153,9 @@ public class MathUtils {
      */
     public static void main(String[] args) {
 
+        System.out.println(calcularChances(80, 10, 5, 3));
+        System.out.println(calcularChances(80, 15, 5, 3));
+
         // System.out.println("'" + format(5, 10) + "'");
 
         // System.out.println("--");
@@ -197,60 +200,44 @@ public class MathUtils {
 
         // System.out.println(MathUtils.csimples(15, 8));
 
-//        int i, j = 0;
-//
-//        for (i = 0; i < 5; i++) {
-//            for (j = i + 1; j < 5; j++) {
-//                System.out.println(String.format("%s\t%s", i, j));
-//            }
-//        }
-//
-//        System.out.println("-------------------------");
-//
-//        i = 0;
-//        j = 0;
-//        int k = 0;
-//
-//        for (i = 0; i < 5; i++) {
-//            for (j = i + 1; j < 5; j++) {
-//                for (k = j + 1; k < 5; k++) {
-//                    System.out.println(String.format("%s\t%s\t%s", i, j, k));
-//                }
-//            }
-//        }
-//
-//        System.out.println("-------------------------");
-//
-//        i = 0;
-//        j = 0;
-//        k = 0;
-//        int l = 0;
-//
-//        for (i = 0; i < 5; i++) {
-//            for (j = i + 1; j < 5; j++) {
-//                for (k = j + 1; k < 5; k++) {
-//                    for (l = k + 1; l < 5; l++) {
-//                        System.out.println(String.format("%s\t%s\t%s\t%s", i, j, k, l));
-//                    }
-//                }
-//            }
-//        }
-        
-        long m = 5;
-        long n = 2;
-        long t = csimples(m, n);
-        
-        System.out.println(t);
-        
-        List<Integer[]> combinacoes = new ArrayList<>();
-        for (int i = 0; i < t; i++) {
-            combinacoes.add(new Integer[]{0,0});
-        }
-        
-        for (Integer[] integers : combinacoes) {
-            System.out.println(Arrays.toString(integers));
-        }
-        
+        // int i, j = 0;
+        //
+        // for (i = 0; i < 5; i++) {
+        // for (j = i + 1; j < 5; j++) {
+        // System.out.println(String.format("%s\t%s", i, j));
+        // }
+        // }
+        //
+        // System.out.println("-------------------------");
+        //
+        // i = 0;
+        // j = 0;
+        // int k = 0;
+        //
+        // for (i = 0; i < 5; i++) {
+        // for (j = i + 1; j < 5; j++) {
+        // for (k = j + 1; k < 5; k++) {
+        // System.out.println(String.format("%s\t%s\t%s", i, j, k));
+        // }
+        // }
+        // }
+        //
+        // System.out.println("-------------------------");
+        //
+        // i = 0;
+        // j = 0;
+        // k = 0;
+        // int l = 0;
+        //
+        // for (i = 0; i < 5; i++) {
+        // for (j = i + 1; j < 5; j++) {
+        // for (k = j + 1; k < 5; k++) {
+        // for (l = k + 1; l < 5; l++) {
+        // System.out.println(String.format("%s\t%s\t%s\t%s", i, j, k, l));
+        // }
+        // }
+        // }
+        // }
     }
 
     public static String format(long p, int size) {

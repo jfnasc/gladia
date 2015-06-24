@@ -6,9 +6,9 @@ import java.util.List;
 
 public class Combinations {
     public static void main(String[] args) {
-        Integer[] base = new Integer[10];
-        for (int i = 0; i < 10; i++) {
-            base[i] = i + 10;
+        Integer[] base = new Integer[5];
+        for (int i = 0; i < 5; i++) {
+            base[i] = i;
         }
         List<Integer[]> b = Combinations.calc(base, 3);
         for (Integer[] integers : b) {

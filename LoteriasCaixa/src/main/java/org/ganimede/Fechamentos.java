@@ -11,15 +11,12 @@ import org.ganimede.utils.StringUtils;
 public class Fechamentos {
 
     public static void main(String[] args) {
-        int n = 10;
+        int n = 15;
 
         Integer[] base = new Integer[n];
         for (int i = 0; i < n; i++) {
             base[i] = i + 1;
         }
-
-        //
-        // calcular(base, 6, 5);
 
         List<Integer[]> p = calcular(base, 3, 5);
         for (Integer[] d : p) {
@@ -36,17 +33,11 @@ public class Fechamentos {
 
         List<Integer[]> apostas = new ArrayList<>();
 
-        List<Integer[]> combinacoesBase = new ArrayList<>();
-        List<Integer[]> combinacoesComplementares = new ArrayList<>();
-
-        calcularCombinacoes(combinacoesBase, base, nuDezenasVariaveis);
-
+        List<Integer[]> combinacoesBase = calcularCombinacoes(base, nuDezenasVariaveis);
         for (Integer[] combinacao : combinacoesBase) {
-            calcularCombinacoes(combinacoesComplementares, remover(base, combinacao), nuPrognosticos
+            List<Integer[]> combinacoesComplementares = calcularCombinacoes(remover(base, combinacao), nuPrognosticos
                     - nuDezenasVariaveis);
-        }
 
-        for (Integer[] combinacao : combinacoesBase) {
             // alguma já atende a essa combinacao ?
             if (!existeCombinacao(apostas, combinacao)) {
                 for (Integer[] complementar : combinacoesComplementares) {
@@ -59,18 +50,55 @@ public class Fechamentos {
             }
         }
 
-        for (Integer[] aposta : apostas) {
-            Arrays.sort(aposta);
-        }
+        validar(apostas);
+        
+        validarFechamentos(combinacoesBase, apostas);
 
-        System.out.println(String.format("Combinacoes base: %s | Combinacoes compl: %s | Nro.  apostas: %s",
-                combinacoesBase.size(), combinacoesComplementares.size(), apostas.size()));
+        System.out.println(String.format("Combinacoes base: %s | Nro.  apostas: %s", combinacoesBase.size(),
+                apostas.size()));
 
         return apostas;
     }
 
-    public static void calcularCombinacoes(List<Integer[]> combinacoes, Integer[] base, int nuDezenasFixas) {
+    public static void validar(List<Integer[]> apostas) {
+        for (Integer[] aposta : apostas) {
+            Arrays.sort(aposta);
+            for (Integer dezena : aposta) {
+                if (contar(aposta, dezena) > 1) {
+                    throw new RuntimeException("Nao pode haver numeros repetidos na aposta!");
+                }
+            }
+        }
+    }
+
+    public static void validarFechamentos(List<Integer[]> combinacoesBase, List<Integer[]> apostas) {
+        for (Integer[] base : combinacoesBase) {
+            boolean contem = false;
+            for (Integer[] aposta : apostas) {
+                if (estaContido(aposta, base)){
+                    contem = true;
+                }
+            }
+            if (!contem){
+                throw new RuntimeException(String.format("A base [%s] nao esta contemplada!", Arrays.toString(base)));
+            }
+        }
+    }
+    
+    public static int contar(Integer[] aposta, Integer dezena) {
+        int result = 0;
+        for (Integer a : aposta) {
+            if (a == dezena) {
+                result++;
+            }
+        }
+        return result;
+    }
+
+    public static List<Integer[]> calcularCombinacoes(Integer[] base, int nuDezenasFixas) {
+        List<Integer[]> combinacoes = new ArrayList<>();
         combinacoes.addAll(Combinations.calc(base, nuDezenasFixas));
+        return combinacoes;
     }
 
     public static Integer[] remover(Integer[] base, Integer[] lista) {
@@ -96,11 +124,8 @@ public class Fechamentos {
     }
 
     public static boolean estaContido(Integer[] base, Integer[] combinacao) {
-        List<Integer> tmp = new ArrayList<>();
-        tmp.addAll(Arrays.asList(base));
-
         for (Integer dezena : combinacao) {
-            if (!tmp.contains(dezena)) {
+            if (!Arrays.asList(base).contains(dezena)) {
                 return false;
             }
         }
