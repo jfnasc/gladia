@@ -15,16 +15,20 @@ import org.ganimede.utils.DatabaseUtils;
 public class ResultadoDAOImpl extends BaseDAO implements ResultadoDAO {
 
     @Override
-    public int concursosEmAtraso(String tpConcurso, int nuSorteio, int nuDezena) {
+    public int qtAtrasoDezena(String tpConcurso, int nuSorteio, int nuDezena) {
         int result = 0;
 
         StringBuilder sb = new StringBuilder();
 
-        sb.append("select qt_atraso ");
-        sb.append("  from tb_atrasos ");
-        sb.append(" where tp_concurso = ? ");
-        sb.append("   and nu_sorteio = ? ");
-        sb.append("   and nu_dezena = ?; ");
+        sb.append("select qt_atraso "); 
+        sb.append("  from tb_atrasos "); 
+        sb.append(" where nu_concurso = ( "); 
+        sb.append("     select max(nu_concurso) "); 
+        sb.append("       from tb_atrasos "); 
+        sb.append("      where tp_concurso = ? "); 
+        sb.append("        and nu_sorteio  = ? "); 
+        sb.append("       ) "); 
+        sb.append("   and nu_dezena = ? ");
 
         Connection conn = null;
         PreparedStatement pstmt = null;
@@ -38,7 +42,7 @@ public class ResultadoDAOImpl extends BaseDAO implements ResultadoDAO {
 
             pstmt.setString(1, tpConcurso);
             pstmt.setInt(2, nuSorteio);
-            pstmt.setInt(5, nuDezena);
+            pstmt.setInt(3, nuDezena);
 
             rs = pstmt.executeQuery();
 

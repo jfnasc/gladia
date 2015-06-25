@@ -68,21 +68,20 @@ public class GerarCombinacoesMS extends GerarCombinacoesBase {
 
     @Override
     int qtDezenas() {
-        return 60;
+        return TiposConcurso.MEGA_SENA.nuDezenas;
     }
 
     @Override
     List<Regra> regras() {
         List<Regra> regras = new ArrayList<Regra>();
 
-        regras.add(new org.ganimede.regras.megasena.RegraNaoSequencial());
-        regras.add(new org.ganimede.regras.megasena.RegraSorteiosAnteriores());
-        regras.add(new org.ganimede.regras.megasena.RegraParesImpares());
-        regras.add(new org.ganimede.regras.megasena.RegraNaoVertical());
-        regras.add(new org.ganimede.regras.megasena.RegraAtraso(8));
-        regras.add(new org.ganimede.regras.megasena.RegraDezenasFrequentes(10));
+        regras.add(new org.ganimede.regras.impl.RegraNaoSequencial());
+        regras.add(new org.ganimede.regras.impl.RegraSorteiosAnteriores(TiposConcurso.MEGA_SENA));
+        regras.add(new org.ganimede.regras.impl.RegraParesImpares());
+        regras.add(new org.ganimede.regras.impl.RegraNaoVertical(TiposConcurso.MEGA_SENA));
+        regras.add(new org.ganimede.regras.impl.RegraAtraso(TiposConcurso.MEGA_SENA, 8));
+        regras.add(new org.ganimede.regras.impl.RegraDezenasFrequentes(TiposConcurso.MEGA_SENA, 10));
         regras.add(new org.ganimede.regras.impl.RegraDezenasAnteriores(TiposConcurso.MEGA_SENA.sigla, 2));
-        regras.add(new org.ganimede.regras.megasena.RegraDistribuicao());
 
         return regras;
     }

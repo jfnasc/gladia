@@ -15,15 +15,15 @@ import org.ganimede.regras.Regra;
 public class GerarCombinacoesQuina extends GerarCombinacoesBase {
     @Override
     int qtDezenas() {
-        return 80;
+        return TiposConcurso.QUINA.nuDezenas;
     }
 
     @Override
     List<Regra> regras() {
         List<Regra> regras = new ArrayList<Regra>();
 
-        regras.add(new org.ganimede.regras.megasena.RegraNaoSequencial());
-        regras.add(new org.ganimede.regras.megasena.RegraParesImpares());
+        regras.add(new org.ganimede.regras.impl.RegraNaoSequencial());
+        regras.add(new org.ganimede.regras.impl.RegraParesImpares());
         regras.add(new org.ganimede.regras.impl.RegraDezenasAnteriores(TiposConcurso.QUINA.sigla, 3));
 
         return regras;

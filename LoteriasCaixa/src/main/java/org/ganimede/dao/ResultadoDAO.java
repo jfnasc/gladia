@@ -6,7 +6,7 @@ import org.ganimede.Sorteio;
 
 public interface ResultadoDAO {
 
-    int concursosEmAtraso(String tpConcurso, int nuSorteio, int nuDezena);
+    int qtAtrasoDezena(String tpConcurso, int nuSorteio, int nuDezena);
 
     boolean existeSorteioIgual(String tpConcurso, String hash);
 

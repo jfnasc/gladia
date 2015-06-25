@@ -5,4 +5,4 @@
  * @author josen
  *
  */
-package org.ganimede.regras.megasena;
+package org.ganimede.regras.impl;

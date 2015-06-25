@@ -10,6 +10,8 @@ import java.util.List;
 public interface Regra {
 
     /**
+     * Aplica a regra especificada para o conjunto de regras informado. As
+     * apostas que não atendem a regra serão descartadas.
      * 
      * @param apostas
      */
