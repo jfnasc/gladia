@@ -16,14 +16,18 @@ import org.ganimede.regras.RegraBase;
  */
 public class RegraNaoSequencial extends RegraBase implements Regra {
 
+    private static final int QT_MAXIMA = 1;
+
     @Override
     public boolean validar(Integer[] aposta) {
+        int count = 0;
+
         for (Integer dezena : aposta) {
             if (Arrays.asList(aposta).contains(dezena + 1)) {
-                return false;
+                count++;
             }
         }
-        return true;
+        return count <= QT_MAXIMA;
     }
 
     public static void main(String[] args) {

@@ -20,7 +20,7 @@ public class CargaResultadosQuinaImpl extends CargaResultadosService {
 
     @Override
     public void carregar() {
-        Concurso ultimoConcursoGravado = getConcursoDAO().recuperarUltimoConcurso(TiposConcurso.QUINA.sigla);
+        Concurso ultimoConcursoGravado = getConcursoDAO().recuperarUltimoConcurso(TiposConcurso.QUINA);
 
         String filepath = "/projetos/github/gladia/LoteriasCaixa/arquivos/resultados_quina.csv";
         BufferedReader reader = null;

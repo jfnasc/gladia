@@ -25,7 +25,7 @@ public class GerarCombinacoesMS extends GerarCombinacoesBase {
             StringUtils.print(aposta);
         }
 
-        Concurso ultimoConcurso = getConcursoDAO().recuperarUltimoConcurso(TiposConcurso.MEGA_SENA.sigla);
+        Concurso ultimoConcurso = getConcursoDAO().recuperarUltimoConcurso(TiposConcurso.MEGA_SENA);
 
         System.out.println("------------------------------------------------");
         System.out.println("Ultimas sorteadas");
@@ -79,9 +79,9 @@ public class GerarCombinacoesMS extends GerarCombinacoesBase {
         regras.add(new org.ganimede.regras.impl.RegraSorteiosAnteriores(TiposConcurso.MEGA_SENA));
         regras.add(new org.ganimede.regras.impl.RegraParesImpares());
         regras.add(new org.ganimede.regras.impl.RegraNaoVertical(TiposConcurso.MEGA_SENA));
-        regras.add(new org.ganimede.regras.impl.RegraAtraso(TiposConcurso.MEGA_SENA, 8));
-        regras.add(new org.ganimede.regras.impl.RegraDezenasFrequentes(TiposConcurso.MEGA_SENA, 10));
-        regras.add(new org.ganimede.regras.impl.RegraDezenasAnteriores(TiposConcurso.MEGA_SENA.sigla, 2));
+//        regras.add(new org.ganimede.regras.impl.RegraAtraso(TiposConcurso.MEGA_SENA, 8));
+//        regras.add(new org.ganimede.regras.impl.RegraDezenasFrequentes(TiposConcurso.MEGA_SENA, 10));
+//        regras.add(new org.ganimede.regras.impl.RegraDezenasAnteriores(TiposConcurso.MEGA_SENA, 2));
 
         return regras;
     }

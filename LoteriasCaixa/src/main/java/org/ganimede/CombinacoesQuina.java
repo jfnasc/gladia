@@ -6,7 +6,8 @@ public class CombinacoesQuina extends BaseCombinacoes {
 
     public static void main(String[] args) {
         BaseCombinacoes p = new CombinacoesQuina();
-        p.gerarProvaHTML(10, 5, 3);
+        //p.gerarProvaHTML(10, 5, 3);
+        p.gerarProvaHTML(17, 5);
         // p.gerarProva(10, 5, 3);
     }
 

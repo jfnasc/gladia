@@ -22,14 +22,14 @@ public class AnaliseParesImparesDAOImpl extends BaseDAO implements AnaliseDAO {
 
     @Override
     public void executar(TiposConcurso tpConcurso, int nuSorteio) {
-        Concurso ultimoConcurso = getConcursoDAO().recuperarUltimoConcurso(tpConcurso.sigla);
+        Concurso ultimoConcurso = getConcursoDAO().recuperarUltimoConcurso(tpConcurso);
 
         Map<String, Integer> totalizador = new HashMap<>();
         int count = 0;
 
         for (int i = 1; i <= ultimoConcurso.getNuConcurso(); i++) {
 
-            Concurso concurso = getConcursoDAO().recuperarConcurso(i, tpConcurso.sigla, 1);
+            Concurso concurso = getConcursoDAO().recuperarConcurso(i, tpConcurso);
 
             for (Sorteio sorteio : concurso.getSorteios()) {
                 int countPares = 0;

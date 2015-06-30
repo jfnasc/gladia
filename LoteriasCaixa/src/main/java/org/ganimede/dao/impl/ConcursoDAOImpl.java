@@ -13,6 +13,7 @@ import java.util.List;
 
 import org.ganimede.Concurso;
 import org.ganimede.Sorteio;
+import org.ganimede.TiposConcurso;
 import org.ganimede.dao.BaseDAO;
 import org.ganimede.dao.ConcursoDAO;
 import org.ganimede.utils.DatabaseUtils;
@@ -121,7 +122,7 @@ public class ConcursoDAOImpl extends BaseDAO implements ConcursoDAO {
     }
 
     @Override
-    public Concurso recuperarConcurso(int nuConcurso, String tpConcurso, int numeroSorteio) {
+    public Concurso recuperarConcurso(int nuConcurso, TiposConcurso tpConcurso) {
         Concurso result = null;
 
         Connection conn = null;
@@ -136,7 +137,7 @@ public class ConcursoDAOImpl extends BaseDAO implements ConcursoDAO {
                     + "where nu_concurso =? and tp_concurso = ?");
 
             pstmt.setInt(1, nuConcurso);
-            pstmt.setString(2, tpConcurso);
+            pstmt.setString(2, tpConcurso.sigla);
 
             rs = pstmt.executeQuery();
 
@@ -160,7 +161,7 @@ public class ConcursoDAOImpl extends BaseDAO implements ConcursoDAO {
     }
 
     @Override
-    public Concurso recuperarUltimoConcurso(String tpConcurso) {
+    public Concurso recuperarUltimoConcurso(TiposConcurso tpConcurso) {
         Concurso result = null;
 
         Connection conn = null;
@@ -179,7 +180,7 @@ public class ConcursoDAOImpl extends BaseDAO implements ConcursoDAO {
 
             pstmt = conn.prepareStatement(sql.toString());
 
-            pstmt.setString(1, tpConcurso);
+            pstmt.setString(1, tpConcurso.sigla);
 
             rs = pstmt.executeQuery();
 
@@ -190,7 +191,10 @@ public class ConcursoDAOImpl extends BaseDAO implements ConcursoDAO {
                 result.setTpConcurso(rs.getString("tp_concurso"));
                 result.setDtConcurso(sdf.parse(rs.getString("dt_concurso")));
 
-                recuperarSorteios(result, 1);
+                for (int i = 1; i <= tpConcurso.qtSorteios; i++) {
+                    recuperarSorteios(result, i);
+                }
+
             }
         } catch (Exception e) {
             e.printStackTrace();

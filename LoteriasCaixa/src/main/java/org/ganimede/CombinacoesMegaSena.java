@@ -5,7 +5,8 @@ import java.math.BigDecimal;
 public class CombinacoesMegaSena extends BaseCombinacoes {
     public static void main(String[] args) {
         BaseCombinacoes p = new CombinacoesMegaSena();
-        p.gerarProvaHTML(10, 6, 4);
+        p.gerarProvaHTML(15, 6);
+        //p.gerarProvaHTML(30, 8);
     }
 
     @Override

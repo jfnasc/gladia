@@ -35,17 +35,38 @@ public class RegraFaixasDistribuicao extends RegraBase implements Regra {
 
     @Override
     public boolean validar(Integer[] dezenas) {
-        // inicio = n + 1;
-        // fim = (n + 1) * nuDezenas / nufaixas;
-        // contar
-        return false;
+
+        int tamanho = this.tpConcurso.nuDezenas / this.nuFaixas.length;
+
+        for (int i = 0; i < this.nuFaixas.length; i++) {
+            int inicio = (i * tamanho) + 1;
+            int fim = (i + 1) * tamanho;
+
+            boolean existe = false;
+
+            for (Integer dezena : dezenas) {
+                if (dezena >= inicio && dezena <= fim) {
+                    existe = true;
+                    break;
+                }
+            }
+
+            if (!existe) {
+                return false;
+            }
+        }
+
+        return true;
     }
 
     public static void main(String[] args) {
         Regra regra = new RegraFaixasDistribuicao(TiposConcurso.QUINA, new int[] { 1, 1, 1, 1 });
 
         List<Integer[]> p = new ArrayList<>();
-        p.add(new Integer[] { 7, 19, 30, 35, 42, 47 });
+
+        p.add(new Integer[] { 1, 2, 3, 4, 5 });
+        p.add(new Integer[] { 7, 19, 30, 35, 60 });
+        p.add(new Integer[] { 1, 21, 41, 61, 71 });
 
         regra.aplicar(p);
     }

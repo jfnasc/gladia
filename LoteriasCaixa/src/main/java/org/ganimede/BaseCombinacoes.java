@@ -14,24 +14,28 @@ import org.ganimede.utils.StringUtils;
 public abstract class BaseCombinacoes {
 
     private NumberFormat nf = new DecimalFormat("###,##0.00");
-    private int nuPrognosticos;
-    private int numeroDezenasFixas;
-    private int tamanhoBase;
+
     private Integer[] base;
 
     public Integer[] simularResultado() {
         return Fechamentos.simularResultado(maiorFaixaPremiavel(), numeroDezenas());
     }
-    
+
     public List<Integer[]> gerar(int tamanhoBase, int nuPrognosticos, int numeroDezenasFixas) {
-        this.tamanhoBase = tamanhoBase;
-        this.nuPrognosticos = nuPrognosticos;
-        this.numeroDezenasFixas = numeroDezenasFixas;
+//        List<Integer[]> bases = gerarCombinacoes().prognosticos(1, tamanhoBase);
+//        this.base = bases.get(0);
+        
+        int n = tamanhoBase;
+        this.base = new Integer[n];
+        for (int i = 0; i < n; i++) {
+            base[i] = i + 1;
+        }   
+        
+        return Fechamentos.calcular(this.base, numeroDezenasFixas, nuPrognosticos);
+    }
 
-        List<Integer[]> bases = gerarCombinacoes().prognosticos(1, this.tamanhoBase);
-        this.base = bases.get(0);
-
-        return Fechamentos.calcular(this.base, this.numeroDezenasFixas, this.nuPrognosticos);
+    public List<Integer[]> gerar(int nuApostas, int nuPrognosticos) {
+        return gerarCombinacoes().prognosticos(nuApostas, nuPrognosticos);
     }
 
     abstract GerarCombinacoesBase gerarCombinacoes();
@@ -55,26 +59,36 @@ public abstract class BaseCombinacoes {
         return BigDecimal.valueOf(apostas.size()).multiply(valorAposta(apostas.get(0).length));
     }
 
-    public void gerarProvaHTML(int tamanhoBase, int numeroPrognosticos, int numeroDezenasFixas) {
+    public void gerarProvaHTML(int tamanhoBase, int nuPrognosticos) {
+        List<Integer[]> apostas = gerar(tamanhoBase, nuPrognosticos);
+        gerarHtml(apostas, tamanhoBase, 0, nuPrognosticos);
+    }
 
-        List<Integer[]> apostas = gerar(tamanhoBase, numeroPrognosticos, numeroDezenasFixas);
+    public void gerarProvaHTML(int tamanhoBase, int nuPrognosticos, int numeroDezenasFixas) {
+        List<Integer[]> apostas = gerar(tamanhoBase, nuPrognosticos, numeroDezenasFixas);
+        gerarHtml(apostas, tamanhoBase, numeroDezenasFixas, nuPrognosticos);
+    }
 
+    private void gerarHtml(List<Integer[]> apostas, int tamanhoBase, int numeroDezenasFixas, int nuPrognosticos) {
         StringBuilder html = abrirHtml();
 
-        Arrays.sort(base);
-
-        html.append("<tr><td colspan=2> " + StringUtils.print(base) + "</td></tr>");
-        html.append("<tr><td colspan=2> " + base.length + "</td></tr>");
-        html.append("<tr><td colspan=2> 1:"
-                + MathUtils.calcularChances(numeroDezenas(), maiorFaixaPremiavel(), tamanhoBase, numeroDezenasFixas)
-                + "</td></tr>");
+        if (this.base != null) {
+            Arrays.sort(this.base);
+            html.append("<tr><td colspan=2> " + StringUtils.print(base) + "</td></tr>");
+            html.append("<tr><td colspan=2> " + base.length + "</td></tr>");
+            html.append("<tr><td colspan=2> 1:"
+                    + MathUtils
+                            .calcularChances(numeroDezenas(), maiorFaixaPremiavel(), tamanhoBase, numeroDezenasFixas)
+                    + "</td></tr>");
+        }
 
         html.append("<tr><td colspan=2><textarea rows=\"10\">");
         for (Integer[] aposta : apostas) {
+            Arrays.sort(aposta);
             html.append(StringUtils.print(aposta) + "\n");
         }
         html.append("</textarea></td></tr>");
-        html.append("<tr><td>Qtd. Prognosticos:</td><td style=\"width: 50px; text-align: right\">" + numeroPrognosticos
+        html.append("<tr><td>Qtd. Prognosticos:</td><td style=\"width: 50px; text-align: right\">" + nuPrognosticos
                 + "</td></tr>");
         html.append("<tr><td>Qtd. Jogos: </td><td style=\"width: 50px; text-align: right\">" + apostas.size()
                 + "</td></tr>");
@@ -84,9 +98,7 @@ public abstract class BaseCombinacoes {
                 + nf.format(calcularValor(apostas)) + "</td></tr>");
         html.append("</table>");
         html.append("<br/>");
-        html.append("<table width=\"40%\">");
-
-        int nuPrognosticos = apostas.get(0).length;
+        html.append("<table cellpadding=0 cellspacing=0 width=\"40%\">");
 
         int tentativas = 0;
         while (tentativas < 100) {
@@ -94,7 +106,7 @@ public abstract class BaseCombinacoes {
             Integer[] resultado = Fechamentos.simularResultado(maiorFaixaPremiavel(), numeroDezenas());
             Arrays.sort(resultado);
 
-            if (Fechamentos.conferir(resultado, base) >= 0) {
+            if (base == null || Fechamentos.conferir(resultado, base) >= 0) {
 
                 html.append("<tr><td colspan=" + (nuPrognosticos + 2) + " style=\"background-color: #f5f5f5\"> "
                         + StringUtils.print(resultado) + "</td></tr>");
@@ -110,11 +122,9 @@ public abstract class BaseCombinacoes {
                     }
                 }
 
-                html.append(String
-                        .format("<tr><td colspan="
-                                + (nuPrognosticos - 1)
-                                + " width=\"50\"></td><td colspan=2 width=\"30\">Premio: R$ </td><td align=\"right\" width=\"20\">%s</td></tr>",
-                                nf.format(premio)));
+                html.append(String.format("<tr><td colspan=" + (nuPrognosticos - 1)
+                        + " width=\"%s\"></td><td colspan=2 width=\"%s\">Premio: R$ </td>"
+                        + "<td align=\"right\" width=\"%s\">%s</td></tr>", "50%", "30%", "20%", nf.format(premio)));
 
                 tentativas++;
 
@@ -163,8 +173,6 @@ public abstract class BaseCombinacoes {
         html.append(" ");
         html.append("table td { ");
         html.append("    background-color: #fff; ");
-        html.append("    border: 1px solid silver; ");
-        html.append("    width: 50px; ");
         html.append("} ");
         html.append("</style> ");
         html.append("</head> ");

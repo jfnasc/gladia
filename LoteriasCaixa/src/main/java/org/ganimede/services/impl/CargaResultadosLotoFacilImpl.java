@@ -20,7 +20,7 @@ public class CargaResultadosLotoFacilImpl extends CargaResultadosService {
 
     @Override
     public void carregar() {
-        Concurso ultimoConcursoGravado = getConcursoDAO().recuperarUltimoConcurso(TiposConcurso.LOTO_FACIL.sigla);
+        Concurso ultimoConcursoGravado = getConcursoDAO().recuperarUltimoConcurso(TiposConcurso.LOTO_FACIL);
 
         String filepath = getServiceConfig().getPath() + File.separator + "resultados_loto_facil.csv";
         BufferedReader reader = null;

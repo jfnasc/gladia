@@ -20,7 +20,7 @@ public class CargaResultadosDuplaSenaImpl extends CargaResultadosService {
 
     @Override
     public void carregar() {
-        Concurso ultimoConcursoGravado = getConcursoDAO().recuperarUltimoConcurso(TiposConcurso.DUPLA_SENA.sigla);
+        Concurso ultimoConcursoGravado = getConcursoDAO().recuperarUltimoConcurso(TiposConcurso.DUPLA_SENA);
 
         String filepath = "/projetos/github/gladia/LoteriasCaixa/arquivos/resultados_dupla_sena.csv";
         BufferedReader reader = null;

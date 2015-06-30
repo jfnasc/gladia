@@ -90,6 +90,15 @@ public class Sorteio implements Serializable {
     }
 
     /**
+     * @return the dezenas
+     */
+    public Integer[] getDezenasAsArray() {
+        Integer[] result = new Integer[dezenas.size()];
+        dezenas.toArray(result);
+        return result;
+    }
+
+    /**
      * @param dezenas
      *            the dezenas to set
      */

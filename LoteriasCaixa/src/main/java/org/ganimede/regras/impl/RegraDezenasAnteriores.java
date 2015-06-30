@@ -14,12 +14,12 @@ public class RegraDezenasAnteriores extends RegraBase implements Regra {
 
     private List<Integer> dezenasAIgnorar = new ArrayList<>();
 
-    public RegraDezenasAnteriores(String tpConcurso, int qtConcursos) {
+    public RegraDezenasAnteriores(TiposConcurso tpConcurso, int qtConcursos) {
         Concurso ultimoConcurso = getConcursoDAO().recuperarUltimoConcurso(tpConcurso);
 
         for (int i = ultimoConcurso.getNuConcurso(); i > ultimoConcurso.getNuConcurso() - qtConcursos; i--) {
             getLogger().debug(String.format("%s Concurso [%s]", tpConcurso, i));
-            Concurso concurso = getConcursoDAO().recuperarConcurso(i, tpConcurso, 1);
+            Concurso concurso = getConcursoDAO().recuperarConcurso(i, tpConcurso);
             for (Sorteio sorteio : concurso.getSorteios()) {
                 Collections.sort(sorteio.getDezenas());
                 dezenasAIgnorar.addAll(sorteio.getDezenas());
@@ -43,7 +43,7 @@ public class RegraDezenasAnteriores extends RegraBase implements Regra {
     }
 
     public static void main(String[] args) {
-        RegraDezenasAnteriores regra = new RegraDezenasAnteriores(TiposConcurso.QUINA.sigla, 3);
+        RegraDezenasAnteriores regra = new RegraDezenasAnteriores(TiposConcurso.QUINA, 3);
 
         List<Integer[]> p = new ArrayList<>();
         p.add(new Integer[] { 7, 19, 30, 35, 42, 47 });

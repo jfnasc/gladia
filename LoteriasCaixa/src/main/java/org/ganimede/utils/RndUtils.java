@@ -46,16 +46,15 @@ public class RndUtils {
         return result;
     }
 
-    public static Integer[] nextInts(int n, int m) {
-        Integer[] result = new Integer[m];
-        for (int i = 0; i < m; i++) {
+    public static Integer[] nextInts(int maiorDezena, int qtDezenas) {
+        Integer[] result = new Integer[qtDezenas];
+        for (int i = 0; i < qtDezenas; i++) {
             while (result[i] == null) {
-                int p = nextInt(n);
+                int p = nextInt(maiorDezena);
                 if (!Arrays.asList(result).contains(p)) {
                     result[i] = p;
                 }
             }
-
         }
         return result;
     }

@@ -72,7 +72,7 @@ public class AtrasosDAOImpl extends BaseDAO implements AtrasosDAO {
 
     public void registrarAtrasos(TiposConcurso tpConcurso, int numeroSorteio) {
 
-        Concurso ultimoConcursoRegistrado = getConcursoDAO().recuperarUltimoConcurso(tpConcurso.sigla);
+        Concurso ultimoConcursoRegistrado = getConcursoDAO().recuperarUltimoConcurso(tpConcurso);
         Concurso ultimoAtrasoRegistrado = recuperarUltimoConcurso(tpConcurso.sigla, numeroSorteio);
 
         int inicioSerie = 1;

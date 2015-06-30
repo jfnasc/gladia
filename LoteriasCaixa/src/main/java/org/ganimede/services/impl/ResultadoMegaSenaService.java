@@ -69,7 +69,7 @@ public class ResultadoMegaSenaService extends BaseService implements ResultadoSe
 
         Concurso ultimoConcurso = buscarUltimoConcurso();
 
-        Concurso ultimoConcursoSalvo = getConcursoDAO().recuperarUltimoConcurso(TiposConcurso.MEGA_SENA.sigla);
+        Concurso ultimoConcursoSalvo = getConcursoDAO().recuperarUltimoConcurso(TiposConcurso.MEGA_SENA);
         if (ultimoConcursoSalvo == null) {
             ultimoConcursoSalvo = new Concurso();
             ultimoConcursoSalvo.setTpConcurso(TiposConcurso.MEGA_SENA.sigla);

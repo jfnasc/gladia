@@ -37,7 +37,7 @@ public class RegraNaoVertical extends RegraBase implements Regra {
             }
         }
 
-        return count == 0;
+        return count >= 1;
     }
 
     public static void main(String[] args) {

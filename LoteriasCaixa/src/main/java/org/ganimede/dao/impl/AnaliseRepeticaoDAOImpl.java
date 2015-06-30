@@ -29,8 +29,8 @@ public class AnaliseRepeticaoDAOImpl extends BaseDAO implements AnaliseDAO {
 
     @Override
     public void executar(TiposConcurso tpConcurso, int nuSorteio) {
-        Concurso ultimoConcurso = getConcursoDAO().recuperarUltimoConcurso(tpConcurso.sigla);
-        int ultimoConcursoRegistrado = recuperarUltimoConcursoRegistrado(tpConcurso.sigla, nuSorteio);
+        Concurso ultimoConcurso = getConcursoDAO().recuperarUltimoConcurso(tpConcurso);
+        int ultimoConcursoRegistrado = recuperarUltimoConcursoRegistrado(tpConcurso, nuSorteio);
 
         int count = 0;
         List<Integer> p = new ArrayList<>();
@@ -54,7 +54,7 @@ public class AnaliseRepeticaoDAOImpl extends BaseDAO implements AnaliseDAO {
         }
     }
 
-    private int recuperarUltimoConcursoRegistrado(String tpConcurso, int nuSorteio) {
+    private int recuperarUltimoConcursoRegistrado(TiposConcurso tpConcurso, int nuSorteio) {
         int result = 0;
 
         StringBuilder sb = new StringBuilder();
@@ -73,7 +73,7 @@ public class AnaliseRepeticaoDAOImpl extends BaseDAO implements AnaliseDAO {
 
             pstmt = conn.prepareStatement(sb.toString());
             pstmt.setInt(1, nuSorteio);
-            pstmt.setString(2, tpConcurso);
+            pstmt.setString(2, tpConcurso.sigla);
 
             rs = pstmt.executeQuery();
 

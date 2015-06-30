@@ -21,13 +21,13 @@ public class AnaliseComposicaoDAOImpl extends BaseDAO implements AnaliseDAO {
     @Override
     public void executar(TiposConcurso tpConcurso, int nuSorteio) {
 
-        Concurso ultimoConcurso = getConcursoDAO().recuperarUltimoConcurso(tpConcurso.sigla);
+        Concurso ultimoConcurso = getConcursoDAO().recuperarUltimoConcurso(tpConcurso);
 
         float count = 0;
         float nuDezenas = 0;
         for (int i = 1; i < ultimoConcurso.getNuConcurso(); i++) {
-            Sorteio s1 = getConcursoDAO().recuperarConcurso(i, tpConcurso.sigla, 1).getSorteios().get(0);
-            Sorteio s2 = getConcursoDAO().recuperarConcurso(i + 1, tpConcurso.sigla, 1).getSorteios().get(0);
+            Sorteio s1 = getConcursoDAO().recuperarConcurso(i, tpConcurso).getSorteios().get(0);
+            Sorteio s2 = getConcursoDAO().recuperarConcurso(i + 1, tpConcurso).getSorteios().get(0);
             nuDezenas += (contar(s1.getDezenas(), s2.getDezenas()));
             count++;
         }

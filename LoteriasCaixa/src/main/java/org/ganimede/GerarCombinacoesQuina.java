@@ -22,9 +22,11 @@ public class GerarCombinacoesQuina extends GerarCombinacoesBase {
     List<Regra> regras() {
         List<Regra> regras = new ArrayList<Regra>();
 
+        regras.add(new org.ganimede.regras.impl.RegraFaixasDistribuicao(TiposConcurso.QUINA, 
+                new int[] { 1, 1, 1, 1, 1}));
         regras.add(new org.ganimede.regras.impl.RegraNaoSequencial());
         regras.add(new org.ganimede.regras.impl.RegraParesImpares());
-        regras.add(new org.ganimede.regras.impl.RegraDezenasAnteriores(TiposConcurso.QUINA.sigla, 3));
+        regras.add(new org.ganimede.regras.impl.RegraDezenasAnteriores(TiposConcurso.QUINA, 3));
 
         return regras;
     }

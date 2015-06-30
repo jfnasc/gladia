@@ -1,15 +1,16 @@
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collection;
-import java.util.Iterator;
 import java.util.List;
 
 import org.ganimede.utils.MathUtils;
 
-public class TestComb<E> implements Collection<E>{
+public class TestComb {
     public static void main(String[] args) {
-        comb(3, 2);
-        comb(5, 2);
+        List<Integer[]> p = comb(15, 9);
+        for (Integer[] i : p) {
+            System.out.println(Arrays.toString(i));
+        }
+        //comb(5, 2);
     }
 
     public static List<Integer[]> comb(int m, int n) {
@@ -36,7 +37,7 @@ public class TestComb<E> implements Collection<E>{
         System.out.println(count);
         System.out.println(MathUtils.csimples(m, n) == count);
 
-        return null;
+        return result;
     }
 
     private static void move(int index, Integer[] a) {
@@ -55,83 +56,5 @@ public class TestComb<E> implements Collection<E>{
             }
         }
         return -1;
-    }
-
-    @Override
-    public int size() {
-        // TODO Auto-generated method stub
-        return 0;
-    }
-
-    @Override
-    public boolean isEmpty() {
-        // TODO Auto-generated method stub
-        return false;
-    }
-
-    @Override
-    public boolean contains(Object o) {
-        // TODO Auto-generated method stub
-        return false;
-    }
-
-    @Override
-    public Iterator<E> iterator() {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    @Override
-    public Object[] toArray() {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    @Override
-    public <T> T[] toArray(T[] a) {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    @Override
-    public boolean add(E e) {
-        // TODO Auto-generated method stub
-        return false;
-    }
-
-    @Override
-    public boolean remove(Object o) {
-        // TODO Auto-generated method stub
-        return false;
-    }
-
-    @Override
-    public boolean containsAll(Collection<?> c) {
-        // TODO Auto-generated method stub
-        return false;
-    }
-
-    @Override
-    public boolean addAll(Collection<? extends E> c) {
-        // TODO Auto-generated method stub
-        return false;
-    }
-
-    @Override
-    public boolean removeAll(Collection<?> c) {
-        // TODO Auto-generated method stub
-        return false;
-    }
-
-    @Override
-    public boolean retainAll(Collection<?> c) {
-        // TODO Auto-generated method stub
-        return false;
-    }
-
-    @Override
-    public void clear() {
-        // TODO Auto-generated method stub
-        
     }
 }
