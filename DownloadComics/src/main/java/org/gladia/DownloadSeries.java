@@ -35,13 +35,20 @@ public class DownloadSeries {
 
 		for (int j = 0; j <= qtCapitulos; j++) {
 
-			for (int i = 0; i < qtEdicoes; i++) {
-				boolean t1 = DownloadSeries.downloadFile(Config.getString("url.home"), targetDir, obterNomeEdicao(j),
+			boolean t1 = false;
+			boolean t2 = false;
+
+			for (int i = 1; i <= qtEdicoes; i++) {
+				t1 = DownloadSeries.downloadFile(Config.getString("url.home"), targetDir, obterNomeEdicao(j),
 				        obterNomeArquivo(i, false));
 
 				if (!t1) {
-					DownloadSeries.downloadFile(Config.getString("url.home"), targetDir, obterNomeEdicao(j),
+					t2 = DownloadSeries.downloadFile(Config.getString("url.home"), targetDir, obterNomeEdicao(j),
 					        obterNomeArquivo(i, true));
+				}
+
+				if (!t1 && !t2) {
+					break;
 				}
 			}
 
