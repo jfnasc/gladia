@@ -1,12 +1,13 @@
 package org.gladia;
 
+
 public class Utils {
-	public static final String extrairNomeArquivo(String url) {
+	public static final String extrairUltimaParte(String url, String separador) {
 		if (isEmpty(url)) {
 			return null;
 		}
 
-		return url.substring(url.lastIndexOf("/") + 1, url.length());
+		return url.substring(url.lastIndexOf(separador) + 1, url.length());
 	}
 
 	public static final String completarNumeracao(int numero, int qtDigitos) {

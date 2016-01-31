@@ -25,7 +25,9 @@ public class GerenciadorDownloads {
 				capitulo.setHomeDir(homeDir);
 				for (String url : capitulo.getUrlPaginas()) {
 					System.out.println(url);
-					downloadFile(url, capitulo.getHomeDir());
+					if (!downloadFile(url, capitulo.getHomeDir())){
+						break;
+					}
 				}
 			}
 		} catch (IOException e) {
@@ -37,8 +39,8 @@ public class GerenciadorDownloads {
 
 		System.out.println(url);
 		System.out.println(dir);
-		System.out.println(Utils.extrairNomeArquivo(url));
-		String filePath = dir + "/" + Utils.extrairNomeArquivo(url);
+		System.out.println(Utils.extrairUltimaParte(url, "/"));
+		String filePath = dir + "/" + Utils.extrairUltimaParte(url, "/");
 		System.out.println(filePath);
 
 		(new File(dir)).mkdirs();
