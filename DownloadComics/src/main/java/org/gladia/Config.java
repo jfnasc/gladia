@@ -9,12 +9,31 @@ public class Config {
 		rb = ResourceBundle.getBundle("config");
 	}
 
+	/**
+	 * 
+	 * @param key
+	 * @return
+	 */
 	public static final String getString(String key) {
 		try {
-	        return rb.getString(key);
-        } catch (Exception e) {
-	        e.printStackTrace();
-        }
+			return rb.getString(key);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	/**
+	 * 
+	 * @param key
+	 * @return
+	 */
+	public static final Integer getInteger(String key) {
+		try {
+			return Integer.valueOf(rb.getString(key));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		return null;
 	}
 

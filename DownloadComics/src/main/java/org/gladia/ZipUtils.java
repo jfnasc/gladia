@@ -16,6 +16,10 @@ public class ZipUtils {
 		ZipUtils.zip("edicao0002", Config.getString("target.dir"), Config.getString("target.dir"));
 	}
 
+	public static void zip(String edicao, String dir) throws IOException {
+		zip(edicao, dir, dir);
+	}
+
 	public static void zip(String edicao, String dir, String target) throws IOException {
 		File directoryToZip = new File(dir + File.separator + edicao);
 

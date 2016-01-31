@@ -24,32 +24,41 @@ public class DownloadSeries {
 
 	public static void main(String... args) throws IOException {
 
-		for (int j = 24; j < 1000; j++) {
-		//for (int j = 21; j < 22; j++) {
+		int qtCapitulos = Config.getInteger("capitulo.qtCapitulos");
+		int qtEdicoes = Config.getInteger("capitulo.qtEdicoes");
 
-			for (int i = 1; i < 30; i++) {
-				boolean t1 = DownloadSeries.downloadFile(Config.getString("url.home"), obterNomeEdicao(j),
+		String targetDir = String.format("%s%s%s", Config.getString("target.dir"), File.separator,
+		        Config.getString("serie.nome"));
+		if (!(new File(targetDir)).exists()) {
+			(new File(targetDir)).mkdirs();
+		}
+
+		for (int j = 0; j <= qtCapitulos; j++) {
+
+			for (int i = 0; i < qtEdicoes; i++) {
+				boolean t1 = DownloadSeries.downloadFile(Config.getString("url.home"), targetDir, obterNomeEdicao(j),
 				        obterNomeArquivo(i, false));
 
 				if (!t1) {
-					DownloadSeries.downloadFile(Config.getString("url.home"), obterNomeEdicao(j),
+					DownloadSeries.downloadFile(Config.getString("url.home"), targetDir, obterNomeEdicao(j),
 					        obterNomeArquivo(i, true));
 				}
 			}
 
-			ZipUtils.zip(obterNomeEdicao(j), Config.getString("target.dir"), Config.getString("target.dir"));
+			ZipUtils.zip(obterNomeEdicao(j), targetDir);
 		}
 
 	}
 
-	public static boolean downloadFile(String urlHome, String edicao, String filename) throws IOException {
+	public static boolean downloadFile(String urlHome, String targetDir, String edicao, String filename)
+	        throws IOException {
 		String url = String.format("%s/%s/%s", urlHome, edicao, filename);
 		System.out.println(url);
 
-		String dir = String.format("%s/%s", Config.getString("target.dir"), edicao);
+		String dir = String.format("%s/%s", targetDir, edicao);
 		(new File(dir)).mkdirs();
 
-		String filePath = String.format("%s/%s/%s", Config.getString("target.dir"), edicao, filename);
+		String filePath = String.format("%s/%s/%s", targetDir, edicao, filename);
 		System.out.println(filePath);
 
 		if ((new File(filePath)).exists()) {
@@ -95,27 +104,42 @@ public class DownloadSeries {
 		return true;
 	}
 
-	private static String obterNomeEdicao(int i) {
-		if (i < 10) {
-			return "edicao000" + i;
-		} else if (i < 100) {
-			return "edicao00" + i;
-		} else if (i < 1000) {
-			return "edicao0" + i;
+	private static String obterNomeEdicao(int nuEdicao) {
+
+		String edicaoPrefixo = Config.getString("edicao.prefixo");
+		Integer edicaoQtDigitos = Config.getInteger("edicao.qtDigitos");
+		String result = String.valueOf(nuEdicao);
+
+		while (result.length() < edicaoQtDigitos) {
+			result = "0" + result;
 		}
 
-		return "edicao" + i;
+		if (Utils.isEmpty(edicaoPrefixo)) {
+			return String.format("%s", result);
+		}
+
+		return String.format("%s%s", edicaoPrefixo, result);
+
 	}
 
-	private static String obterNomeArquivo(int i, boolean upper) {
-		String suffix = ".jpg";
+	private static String obterNomeArquivo(int nuArquivo, boolean upperCase) {
 
-		if (i < 10) {
-			return "www.thewalkingdead-online.com-00" + i + (upper ? suffix.toUpperCase() : suffix);
-		} else if (i < 100) {
-			return "www.thewalkingdead-online.com-0" + i + (upper ? suffix.toUpperCase() : suffix);
+		String arquivoPrefixo = Config.getString("arquivo.prefixo");
+		String arquivoSufixo = Config.getString("arquivo.sufixo");
+		Integer arquivoQtDigitos = Config.getInteger("arquivo.qtDigitos");
+
+		String result = String.valueOf(nuArquivo);
+
+		while (result.length() < arquivoQtDigitos) {
+			result = "0" + result;
 		}
 
-		return "www.thewalkingdead-online.com-" + i + (upper ? suffix.toUpperCase() : suffix);
+		if (Utils.isEmpty(arquivoPrefixo)) {
+			return String.format("%s%s", result, (upperCase ? arquivoSufixo.toUpperCase() : arquivoSufixo));
+		}
+
+		return String.format("%s%s%s", arquivoPrefixo, result,
+		        (upperCase ? arquivoSufixo.toUpperCase() : arquivoSufixo));
+
 	}
 }
