@@ -33,7 +33,7 @@ public class DownloadSeries {
 			(new File(targetDir)).mkdirs();
 		}
 
-		for (int j = 0; j <= qtCapitulos; j++) {
+		for (int j = 1; j <= qtCapitulos; j++) {
 
 			boolean t1 = false;
 			boolean t2 = false;
