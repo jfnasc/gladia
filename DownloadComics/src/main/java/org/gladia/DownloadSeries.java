@@ -15,6 +15,7 @@ import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
+import org.gladia.utils.PDFUtils;
 
 /**
  * @author Administrador
@@ -27,23 +28,23 @@ public class DownloadSeries {
         int qtCapitulos = Config.getInteger("capitulo.qtCapitulos");
         int qtEdicoes = Config.getInteger("capitulo.qtEdicoes");
 
-        String targetDir = String.format("%s%s%s", Config.getString("target.dir"), File.separator,
-                Config.getString("serie.nome"));
-        if (!(new File(targetDir)).exists()) {
-            (new File(targetDir)).mkdirs();
+        String tmpDir = parseTmpDir();
+
+        if (!(new File(tmpDir)).exists()) {
+            (new File(tmpDir)).mkdirs();
         }
 
-        for (int j = 1; j <= qtCapitulos; j++) {
+        for (int j = 0; j <= qtCapitulos; j++) {
 
             boolean t1 = false;
             boolean t2 = false;
 
             for (int i = 1; i <= qtEdicoes; i++) {
-                t1 = DownloadSeries.downloadFile(Config.getString("url.home"), targetDir, obterNomeEdicao(j),
+                t1 = DownloadSeries.downloadFile(Config.getString("url.home"), tmpDir, obterNomeCapitulo(j),
                         obterNomeArquivo(i, false));
 
                 if (!t1) {
-                    t2 = DownloadSeries.downloadFile(Config.getString("url.home"), targetDir, obterNomeEdicao(j),
+                    t2 = DownloadSeries.downloadFile(Config.getString("url.home"), tmpDir, obterNomeCapitulo(j),
                             obterNomeArquivo(i, true));
                 }
 
@@ -52,9 +53,29 @@ public class DownloadSeries {
                 }
             }
 
-            ZipUtils.zip(Config.getString("serie.nome"), obterNomeEdicao(j), targetDir);
+            ZipUtils.zip(parseFilename(Config.getString("target.dir"), j, "cbz"), tmpDir + File.separator
+                    + obterNomeCapitulo(j));
+            PDFUtils.convertJpegToPdf(parseFilename(Config.getString("target.dir"), j, "pdf"), tmpDir + File.separator
+                    + obterNomeCapitulo(j));
         }
 
+    }
+
+    private static String parseTmpDir() {
+        return String.format("%s%s%s%s%s", Config.getString("tmp.dir"), File.separator, Config.getString("perso.nome"),
+                File.separator, Config.getString("serie.nome"));
+    }
+
+    private static String parseFilename(String targetDir, int numeroCapitulo, String filetype) {
+        StringBuilder sb = new StringBuilder();
+
+        sb.append(targetDir + File.separator);
+        sb.append(Config.getString("perso.nome") + File.separator);
+        sb.append(Config.getString("serie.nome") + File.separator);
+        sb.append(filetype + File.separator);
+        sb.append(Config.getString("serie.nome") + " - " + obterNumeroCapitulo(numeroCapitulo) + "." + filetype);
+
+        return sb.toString();
     }
 
     public static boolean downloadFile(String urlHome, String targetDir, String edicao, String filename)
@@ -111,15 +132,10 @@ public class DownloadSeries {
         return true;
     }
 
-    private static String obterNomeEdicao(int nuEdicao) {
+    private static String obterNomeCapitulo(int nuCapitulo) {
 
         String edicaoPrefixo = Config.getString("edicao.prefixo");
-        Integer edicaoQtDigitos = Config.getInteger("edicao.qtDigitos");
-        String result = String.valueOf(nuEdicao);
-
-        while (result.length() < edicaoQtDigitos) {
-            result = "0" + result;
-        }
+        String result = obterNumeroCapitulo(nuCapitulo);
 
         if (Utils.isEmpty(edicaoPrefixo)) {
             return String.format("%s", result);
@@ -129,17 +145,24 @@ public class DownloadSeries {
 
     }
 
+    private static String obterNumeroCapitulo(int nuCapitulo) {
+
+        Integer edicaoQtDigitos = Config.getInteger("edicao.qtDigitos");
+        String result = String.valueOf(nuCapitulo);
+
+        while (result.length() < edicaoQtDigitos) {
+            result = "0" + result;
+        }
+
+        return result;
+
+    }
+
     private static String obterNomeArquivo(int nuArquivo, boolean upperCase) {
 
         String arquivoPrefixo = Config.getString("arquivo.prefixo");
         String arquivoSufixo = Config.getString("arquivo.sufixo");
-        Integer arquivoQtDigitos = Config.getInteger("arquivo.qtDigitos");
-
-        String result = String.valueOf(nuArquivo);
-
-        while (result.length() < arquivoQtDigitos) {
-            result = "0" + result;
-        }
+        String result = obterNumeroArquivo(nuArquivo);
 
         if (Utils.isEmpty(arquivoPrefixo)) {
             return String.format("%s%s", result, (upperCase ? arquivoSufixo.toUpperCase() : arquivoSufixo));
@@ -149,4 +172,18 @@ public class DownloadSeries {
                 (upperCase ? arquivoSufixo.toUpperCase() : arquivoSufixo));
 
     }
+
+    private static String obterNumeroArquivo(int nuArquivo) {
+        Integer arquivoQtDigitos = Config.getInteger("arquivo.qtDigitos");
+
+        String result = String.valueOf(nuArquivo);
+
+        while (result.length() < arquivoQtDigitos) {
+            result = "0" + result;
+        }
+
+        return result;
+
+    }
+
 }

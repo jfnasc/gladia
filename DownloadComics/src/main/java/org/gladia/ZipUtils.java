@@ -12,29 +12,27 @@ import java.util.zip.ZipOutputStream;
 
 public class ZipUtils {
 
-    public static void main(String[] args) throws IOException {
-        ZipUtils.zip("", "edicao0002", Config.getString("target.dir"), Config.getString("target.dir"));
-    }
+    public static void zip(String filename, String dir) throws IOException {
 
-    public static void zip(String nomeSerie, String edicao, String dir) throws IOException {
-        zip(nomeSerie, edicao, dir, dir);
-    }
+        if (dir == null) {
+            return;
+        }
 
-    public static void zip(String nomeSerie, String edicao, String dir, String target) throws IOException {
-        File directoryToZip = new File(dir + File.separator + edicao);
+        File fdir = new File(filename.substring(0, filename.lastIndexOf(File.separator))); 
+        if (!fdir.exists() && !fdir.mkdirs()) {
+            throw new RuntimeException("Nao foi possivel criar o diretorio!");
+        }
+
+        File directoryToZip = new File(dir);
 
         List<File> fileList = new ArrayList<File>();
-        System.out.println("---Getting references to all files in: " + directoryToZip.getCanonicalPath());
-
         getAllFiles(directoryToZip, fileList);
-        System.out.println("---Creating zip file");
-
-        writeZipFile(nomeSerie, target, directoryToZip, fileList);
-        System.out.println("---Done");
+        writeZipFile(filename, directoryToZip, fileList);
     }
 
     public static void getAllFiles(File dir, List<File> fileList) {
         try {
+            System.out.println("--- Getting references to all files in: " + dir.getCanonicalPath());
             File[] files = dir.listFiles();
             for (File file : files) {
                 fileList.add(file);
@@ -42,7 +40,7 @@ public class ZipUtils {
                     System.out.println("directory:" + file.getCanonicalPath());
                     getAllFiles(file, fileList);
                 } else {
-                    System.out.println("     file:" + file.getCanonicalPath());
+                    System.out.println("file:" + file.getCanonicalPath());
                 }
             }
         } catch (IOException e) {
@@ -50,11 +48,11 @@ public class ZipUtils {
         }
     }
 
-    public static void writeZipFile(String nomeSerie, String targetDir, File directoryToZip, List<File> fileList) {
+    public static void writeZipFile(String filename, File directoryToZip, List<File> fileList) {
 
         try {
-            String filename = targetDir + File.separator + nomeSerie + "-" + directoryToZip.getName() + ".cbz";
-            System.out.println(filename);
+            System.out.println("Generating file. Initializing..." + filename);
+            System.out.println("Generating file. " + filename);
             FileOutputStream fos = new FileOutputStream(filename);
             ZipOutputStream zos = new ZipOutputStream(fos);
 
@@ -66,6 +64,7 @@ public class ZipUtils {
 
             zos.close();
             fos.close();
+            System.out.println("Generating file. Done!");
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
