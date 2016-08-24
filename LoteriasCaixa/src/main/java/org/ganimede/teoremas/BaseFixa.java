@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.ganimede.GerarCombinacoesBase;
-import org.ganimede.GerarCombinacoesMS;
+import org.ganimede.GerarCombinacoesMegaSena;
 
 public class BaseFixa {
     public static void main(String[] args) {
@@ -14,7 +14,7 @@ public class BaseFixa {
         // escolha o numero de combinacoes
         int quantidade = 10;
 
-        GerarCombinacoesBase g = new GerarCombinacoesMS();
+        GerarCombinacoesBase g = new GerarCombinacoesMegaSena();
         List<Integer[]> a = g.prognosticos(quantidade, 3);
         for (Integer[] complemento : a) {
             System.out.println(Arrays.toString(base) + Arrays.toString(complemento));

@@ -68,6 +68,6 @@ public class CombinacoesMegaSena extends BaseCombinacoes {
 
     @Override
     GerarCombinacoesBase gerarCombinacoes() {
-        return new GerarCombinacoesMS();
+        return new GerarCombinacoesMegaSena();
     }
 }

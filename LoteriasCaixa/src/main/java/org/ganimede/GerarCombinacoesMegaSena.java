@@ -8,9 +8,9 @@ import java.util.List;
 import org.ganimede.regras.Regra;
 import org.ganimede.utils.StringUtils;
 
-public class GerarCombinacoesMS extends GerarCombinacoesBase {
+public class GerarCombinacoesMegaSena extends GerarCombinacoesBase {
 
-    private static GerarCombinacoesBase gb = new GerarCombinacoesMS();
+    private static GerarCombinacoesBase gb = new GerarCombinacoesMegaSena();
 
     /**
      * 
@@ -42,30 +42,6 @@ public class GerarCombinacoesMS extends GerarCombinacoesBase {
         List<Integer> atrasos = getResultadoDAO().buscarDezenasEmAtraso(TiposConcurso.MEGA_SENA.sigla, 1, 8);
         Collections.sort(atrasos);
         System.out.println(atrasos);
-    }
-
-    public static void main2(String[] args) {
-        List<List<Integer>> apostas = new ArrayList<List<Integer>>();
-
-        List<Integer[]> prognosticos = gb.prognosticos(1, 10);
-
-        for (Integer[] p : prognosticos) {
-            System.out.println("-- BASE");
-            StringUtils.print(p);
-            System.out.println("--------------------");
-
-            for (int i = 0; i < p.length / 5; i++) {
-                fechamento(apostas, p, i * 5, 5);
-            }
-
-            for (List<Integer> aposta : apostas) {
-                Collections.sort(aposta);
-                System.out.println(aposta);
-            }
-            System.out.println("--------------------");
-            System.out.println("Nro. apostas: " + apostas.size());
-            System.out.println("Vl.  apostas: " + Float.valueOf(apostas.size()) * 3.50);
-        }
     }
 
     @Override

@@ -20,7 +20,7 @@ public class GerarCombinacoesLotoFacil extends GerarCombinacoesBase {
     private static GerarCombinacoesBase gb = new GerarCombinacoesLotoFacil();
     
     public static void main(String[] args) {
-        List<Integer[]> prognosticos = gb.prognosticos(10, TiposConcurso.LOTO_FACIL.maiorFaixaPremiavel);
+        List<Integer[]> prognosticos = gb.prognosticos(5, TiposConcurso.LOTO_FACIL.maiorFaixaPremiavel);
 
         System.out.println("--------------------------");
         System.out.println("Boa Sorte!");
@@ -45,13 +45,11 @@ public class GerarCombinacoesLotoFacil extends GerarCombinacoesBase {
         List<Integer> atrasos = getResultadoDAO().buscarDezenasEmAtraso(TiposConcurso.LOTO_FACIL.sigla, 1, 2);
         Collections.sort(atrasos);
         System.out.println(atrasos);
-        
-        
     }
     
     @Override
     int qtDezenas() {
-        return 25;
+        return TiposConcurso.LOTO_FACIL.nuDezenas;
     }
 
     @Override
