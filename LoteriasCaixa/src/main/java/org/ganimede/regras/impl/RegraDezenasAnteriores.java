@@ -60,13 +60,4 @@ public class RegraDezenasAnteriores extends RegraBase implements Regra {
         return true;
     }
 
-    public static void main(String[] args) {
-        RegraDezenasAnteriores regra = new RegraDezenasAnteriores(TiposConcurso.QUINA, 3);
-
-        List<Integer[]> p = new ArrayList<>();
-        p.add(new Integer[] { 7, 19, 30, 35, 42, 47 });
-
-        regra.aplicar(p);
-    }
-
 }

@@ -175,12 +175,15 @@ public class ConcursoDAOImpl extends BaseDAO implements ConcursoDAO {
             StringBuilder sql = new StringBuilder();
             sql.append(" select nu_concurso, tp_concurso, dt_concurso");
             sql.append("   from loterias.tb_concursos ");
-            sql.append("  where nu_concurso = (");
-            sql.append("      select max(nu_concurso) from loterias.tb_concursos where tp_concurso = ?)");
+            sql.append("  where tp_concurso = ?");
+            sql.append("    and nu_concurso = ( select max(nu_concurso) ");
+            sql.append("                          from loterias.tb_concursos ");
+            sql.append("                         where tp_concurso = ?)");
 
             pstmt = conn.prepareStatement(sql.toString());
 
             pstmt.setString(1, tpConcurso.sigla);
+            pstmt.setString(2, tpConcurso.sigla);
 
             rs = pstmt.executeQuery();
 

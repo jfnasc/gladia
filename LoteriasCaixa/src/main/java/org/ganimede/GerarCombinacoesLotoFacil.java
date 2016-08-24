@@ -5,6 +5,7 @@ package org.ganimede;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import org.ganimede.regras.Regra;
@@ -29,6 +30,23 @@ public class GerarCombinacoesLotoFacil extends GerarCombinacoesBase {
             StringUtils.print(aposta);
         }
 
+        Concurso ultimoConcurso = getConcursoDAO().recuperarUltimoConcurso(TiposConcurso.LOTO_FACIL);
+
+        System.out.println("------------------------------------------------");
+        System.out.println("Ultimas sorteadas");
+        System.out.println("------------------------------------------------");
+        for (Sorteio sorteio : ultimoConcurso.getSorteios()) {
+            System.out.println(sorteio.getDezenas());
+        }
+
+        System.out.println("------------------------------------------------");
+        System.out.println("Atrasos");
+        System.out.println("------------------------------------------------");
+        List<Integer> atrasos = getResultadoDAO().buscarDezenasEmAtraso(TiposConcurso.LOTO_FACIL.sigla, 1, 2);
+        Collections.sort(atrasos);
+        System.out.println(atrasos);
+        
+        
     }
     
     @Override

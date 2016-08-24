@@ -114,8 +114,10 @@ public class ResultadoDAOImpl extends BaseDAO implements ResultadoDAO {
         sb.append("  from loterias.tb_atrasos ");
         sb.append(" where nu_sorteio = ? ");
         sb.append("   and tp_concurso = ? ");
-        sb.append("   and nu_concurso = (select max(nu_concurso) from loterias.tb_concursos where tp_concurso = ?) ");
-        sb.append("   and qt_atraso > ? ");
+        sb.append("   and nu_concurso = ( select max(nu_concurso) ");
+        sb.append("                         from loterias.tb_concursos ");
+        sb.append("                        where tp_concurso = ? ) ");
+        sb.append("   and qt_atraso >= ? ");
 
         Connection conn = null;
         PreparedStatement pstmt = null;

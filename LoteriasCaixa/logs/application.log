@@ -1,24 +1,24 @@
-2016/08/24 10:57:30 DEBUG RegraNaoSequencial 0.0
-2016/08/24 10:57:31 DEBUG RegraSorteiosAnteriores 0.0
-2016/08/24 10:57:31 DEBUG RegraParesImpares 33.333336
-2016/08/24 10:57:31 DEBUG RegraNaoVertical 0.0
-2016/08/24 10:57:31 DEBUG RegraNaoSequencial 0.0
-2016/08/24 10:57:31 DEBUG RegraSorteiosAnteriores 0.0
-2016/08/24 10:57:31 DEBUG RegraParesImpares 60.000004
-2016/08/24 10:57:31 DEBUG RegraNaoVertical 0.0
-2016/08/24 10:57:31 DEBUG RegraNaoSequencial 20.0
-2016/08/24 10:57:31 DEBUG RegraSorteiosAnteriores 0.0
-2016/08/24 10:57:31 DEBUG RegraParesImpares 50.0
-2016/08/24 10:57:31 DEBUG RegraNaoVertical 0.0
-2016/08/24 10:57:31 DEBUG RegraNaoSequencial 0.0
-2016/08/24 10:57:31 DEBUG RegraSorteiosAnteriores 0.0
-2016/08/24 10:57:31 DEBUG RegraParesImpares 60.000004
-2016/08/24 10:57:31 DEBUG RegraNaoVertical 0.0
-2016/08/24 10:57:31 DEBUG RegraNaoSequencial 0.0
-2016/08/24 10:57:31 DEBUG RegraSorteiosAnteriores 0.0
-2016/08/24 10:57:31 DEBUG RegraParesImpares 40.0
-2016/08/24 10:57:31 DEBUG RegraNaoVertical 33.333336
-2016/08/24 10:57:31 DEBUG RegraNaoSequencial 20.0
-2016/08/24 10:57:31 DEBUG RegraSorteiosAnteriores 0.0
-2016/08/24 10:57:31 DEBUG RegraParesImpares 25.0
-2016/08/24 10:57:31 DEBUG RegraNaoVertical 0.0
+2016/08/24 11:08:14 DEBUG RegraDezenasAnteriores LOTO_FACIL Concurso [1404]
+2016/08/24 11:08:14 DEBUG RegraDezenasAnteriores Dezenas sorteadas nos 1 ultimos concursos: [[1, 2, 3, 4, 8, 10, 11, 13, 15, 16, 18, 19, 21, 22, 25]]
+2016/08/24 11:08:15 DEBUG RegraDezenasAnteriores LOTO_FACIL Concurso [1404]
+2016/08/24 11:08:15 DEBUG RegraDezenasAnteriores Dezenas sorteadas nos 1 ultimos concursos: [[1, 2, 3, 4, 8, 10, 11, 13, 15, 16, 18, 19, 21, 22, 25]]
+2016/08/24 11:08:15 DEBUG RegraParesImpares 60.000004
+2016/08/24 11:08:15 DEBUG RegraDezenasAnteriores 50.0
+2016/08/24 11:08:15 DEBUG RegraDezenasAnteriores LOTO_FACIL Concurso [1404]
+2016/08/24 11:08:15 DEBUG RegraDezenasAnteriores Dezenas sorteadas nos 1 ultimos concursos: [[1, 2, 3, 4, 8, 10, 11, 13, 15, 16, 18, 19, 21, 22, 25]]
+2016/08/24 11:08:15 DEBUG RegraDezenasAnteriores LOTO_FACIL Concurso [1404]
+2016/08/24 11:08:15 DEBUG RegraDezenasAnteriores Dezenas sorteadas nos 1 ultimos concursos: [[1, 2, 3, 4, 8, 10, 11, 13, 15, 16, 18, 19, 21, 22, 25]]
+2016/08/24 11:08:15 DEBUG RegraParesImpares 33.333336
+2016/08/24 11:08:15 DEBUG RegraDezenasAnteriores 25.0
+2016/08/24 11:08:15 DEBUG RegraDezenasAnteriores LOTO_FACIL Concurso [1404]
+2016/08/24 11:08:15 DEBUG RegraDezenasAnteriores Dezenas sorteadas nos 1 ultimos concursos: [[1, 2, 3, 4, 8, 10, 11, 13, 15, 16, 18, 19, 21, 22, 25]]
+2016/08/24 11:08:15 DEBUG RegraDezenasAnteriores LOTO_FACIL Concurso [1404]
+2016/08/24 11:08:15 DEBUG RegraDezenasAnteriores Dezenas sorteadas nos 1 ultimos concursos: [[1, 2, 3, 4, 8, 10, 11, 13, 15, 16, 18, 19, 21, 22, 25]]
+2016/08/24 11:08:15 DEBUG RegraParesImpares 37.5
+2016/08/24 11:08:15 DEBUG RegraDezenasAnteriores 20.0
+2016/08/24 11:08:15 DEBUG RegraDezenasAnteriores LOTO_FACIL Concurso [1404]
+2016/08/24 11:08:15 DEBUG RegraDezenasAnteriores Dezenas sorteadas nos 1 ultimos concursos: [[1, 2, 3, 4, 8, 10, 11, 13, 15, 16, 18, 19, 21, 22, 25]]
+2016/08/24 11:08:15 DEBUG RegraDezenasAnteriores LOTO_FACIL Concurso [1404]
+2016/08/24 11:08:15 DEBUG RegraDezenasAnteriores Dezenas sorteadas nos 1 ultimos concursos: [[1, 2, 3, 4, 8, 10, 11, 13, 15, 16, 18, 19, 21, 22, 25]]
+2016/08/24 11:08:15 DEBUG RegraParesImpares 22.222223
+2016/08/24 11:08:15 DEBUG RegraDezenasAnteriores 28.57143
