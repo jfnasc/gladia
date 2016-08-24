@@ -8,13 +8,13 @@ import java.util.regex.Pattern;
 
 public class StringUtils {
 
-    public static String print(List<Integer> dezenas) {
-        Integer[] result = new Integer[dezenas.size()];
-        dezenas.toArray(result);
-        return print(result);
+    public static void print(List<Integer[]> p) {
+        for (Integer[] a : p) {
+            print(a);
+        }
     }
 
-    public static String print(Integer[] arg0) {
+    public static void print(Integer[] arg0) {
         String s = "";
         for (int i = 0; i < arg0.length; i++) {
             if (arg0[i] < 10) {
@@ -24,7 +24,7 @@ public class StringUtils {
             }
 
         }
-        return s.substring(2);
+        System.out.println(s.substring(2));
     }
 
     public static Integer[] splitAsIntArray(String arg0) {

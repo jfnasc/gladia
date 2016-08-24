@@ -12,9 +12,18 @@ import org.ganimede.regras.RegraBase;
 
 public class RegraDezenasAnteriores extends RegraBase implements Regra {
 
+    private int maxDezenas = 0;
+
     private List<Integer> dezenasAIgnorar = new ArrayList<>();
 
     public RegraDezenasAnteriores(TiposConcurso tpConcurso, int qtConcursos) {
+        this(tpConcurso, qtConcursos, 0);
+    }
+
+    public RegraDezenasAnteriores(TiposConcurso tpConcurso, int qtConcursos, int maxDezenas) {
+
+        this.maxDezenas = maxDezenas;
+
         Concurso ultimoConcurso = getConcursoDAO().recuperarUltimoConcurso(tpConcurso);
 
         for (int i = ultimoConcurso.getNuConcurso(); i > ultimoConcurso.getNuConcurso() - qtConcursos; i--) {
@@ -28,17 +37,26 @@ public class RegraDezenasAnteriores extends RegraBase implements Regra {
 
         Collections.sort(dezenasAIgnorar);
         getLogger().debug(
-                        String.format("Dezenas sorteadas nos %s ultimos concursos: [%s]", qtConcursos, dezenasAIgnorar));
+                String.format("Dezenas sorteadas nos %s ultimos" + " concursos: [%s]", qtConcursos, dezenasAIgnorar));
     }
 
     @Override
     public boolean validar(Integer[] aposta) {
-        for (Integer dezena : aposta) {
-            if (dezenasAIgnorar.contains(dezena)) {
-                return false;
-            }
-        }
 
+        int contador = 0;
+
+        for (Integer dezena : aposta) {
+
+            if (dezenasAIgnorar.contains(dezena)) {
+
+                contador++;
+
+                if (this.maxDezenas == 0 || contador >= maxDezenas) {
+                    return false;
+                }
+            }
+
+        }
         return true;
     }
 

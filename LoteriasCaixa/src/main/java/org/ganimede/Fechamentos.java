@@ -22,9 +22,7 @@ public class Fechamentos {
         // 37, 41, 43, 45, 52, 54};
 
         List<Integer[]> p = calcular(base, 3, 5);
-        for (Integer[] d : p) {
-            System.out.println(StringUtils.print(d));
-        }
+        StringUtils.print(p);
     }
 
     public static List<Integer[]> calcular(Integer[] base, int nuDezenasVariaveis, int nuPrognosticos) {
@@ -48,7 +46,7 @@ public class Fechamentos {
             // alguma já atende a essa combinacao ?
             for (Integer[] complementar : combinacoesComplementares) {
                 Integer[] aposta = combinar(combinacao, complementar);
-                if (!existeCombinacao(apostas, combinacao) && !existeCombinacao(apostas, aposta)){
+                if (!existeCombinacao(apostas, combinacao) && !existeCombinacao(apostas, aposta)) {
                     apostas.add(aposta);
                     break;
                 }

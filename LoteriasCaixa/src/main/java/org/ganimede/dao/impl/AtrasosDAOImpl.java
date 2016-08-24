@@ -34,9 +34,9 @@ public class AtrasosDAOImpl extends BaseDAO implements AtrasosDAO {
             StringBuilder sb = new StringBuilder();
 
             sb.append("select tb1.nu_concurso, tb1.tp_concurso, tb1.dt_concurso ");
-            sb.append("  from tb_concursos tb1 ");
+            sb.append("  from loterias.tb_concursos tb1 ");
             sb.append(" where tb1.nu_concurso = ( select max(nu_concurso) ");
-            sb.append("                             from tb_atrasos ");
+            sb.append("                             from loterias.tb_atrasos ");
             sb.append("                            where tp_concurso = ? ");
             sb.append("                              and nu_sorteio  = ?) ");
             sb.append("   and tb1.tp_concurso = ? ");
@@ -99,7 +99,7 @@ public class AtrasosDAOImpl extends BaseDAO implements AtrasosDAO {
 
             StringBuilder sb = new StringBuilder();
 
-            sb.append("insert into tb_atrasos (nu_sorteio,nu_concurso,tp_concurso,nu_dezena,qt_atraso) ");
+            sb.append("insert into loterias.tb_atrasos (nu_sorteio,nu_concurso,tp_concurso,nu_dezena,qt_atraso) ");
             sb.append("values (?,?,?,?,?)");
 
             pstmt = conn.prepareStatement(sb.toString());
@@ -152,7 +152,7 @@ public class AtrasosDAOImpl extends BaseDAO implements AtrasosDAO {
             StringBuilder sb = new StringBuilder();
 
             sb.append("select nu_sorteio, nu_concurso, tp_concurso, nu_dezena, qt_atraso, ic_calculado");
-            sb.append("  from tb_atrasos  ");
+            sb.append("  from loterias.tb_atrasos  ");
             sb.append(" where nu_sorteio = ? ");
             sb.append("   and tp_concurso = ? ");
             sb.append("   and ic_calculado = ?");
@@ -209,10 +209,10 @@ public class AtrasosDAOImpl extends BaseDAO implements AtrasosDAO {
 
             StringBuilder sb = new StringBuilder();
 
-            sb.append("update tb_atrasos");
+            sb.append("update loterias.tb_atrasos");
             sb.append("   set qt_atraso = (");
             sb.append("           select qt_atraso + 1");
-            sb.append("             from tb_atrasos");
+            sb.append("             from loterias.tb_atrasos");
             sb.append("            where nu_sorteio = ?");
             sb.append("              and nu_concurso = ?");
             sb.append("              and tp_concurso = ?");
@@ -267,14 +267,14 @@ public class AtrasosDAOImpl extends BaseDAO implements AtrasosDAO {
         try {
             StringBuilder sb = new StringBuilder();
 
-            sb.append("update tb_atrasos ");
+            sb.append("update loterias.tb_atrasos ");
             sb.append("   set qt_atraso = 0 ");
             sb.append(" where nu_sorteio = ? ");
             sb.append("   and nu_concurso = ? ");
             sb.append("   and tp_concurso = ? ");
             sb.append("   and nu_dezena in ( ");
             sb.append("          select nu_dezena ");
-            sb.append("            from tb_dezenas ");
+            sb.append("            from loterias.tb_dezenas ");
             sb.append("           where nu_sorteio = ? ");
             sb.append("             and nu_concurso = ? ");
             sb.append("             and tp_concurso = ? ");
@@ -304,7 +304,7 @@ public class AtrasosDAOImpl extends BaseDAO implements AtrasosDAO {
         try {
             StringBuilder sb = new StringBuilder();
 
-            sb.append("update tb_atrasos ");
+            sb.append("update loterias.tb_atrasos ");
             sb.append("   set ic_calculado = ? ");
             sb.append(" where nu_sorteio = ? ");
             sb.append("   and nu_concurso = ? ");

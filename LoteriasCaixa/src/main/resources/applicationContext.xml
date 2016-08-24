@@ -27,7 +27,7 @@
 
 	<bean id="serviceConfig" class="org.ganimede.services.ServiceConfig">
 		<property name="path" value="/projetos/github/gladia/LoteriasCaixa/arquivos/" />
-		<property name="proxyEnabled" value="true" />
+		<property name="proxyEnabled" value="false" />
 	</bean>
 
 	<bean id="downloadResultadosQuina" class="org.ganimede.services.impl.DownloadResultadosQuina">

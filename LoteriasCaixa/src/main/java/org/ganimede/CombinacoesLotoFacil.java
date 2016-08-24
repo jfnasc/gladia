@@ -1,13 +1,26 @@
 package org.ganimede;
 
 import java.math.BigDecimal;
+import java.util.Arrays;
+import java.util.List;
+
+import org.ganimede.utils.StringUtils;
 
 public class CombinacoesLotoFacil extends BaseCombinacoes {
 
+    private static GerarCombinacoesBase gb = new GerarCombinacoesLotoFacil();
+
     public static void main(String[] args) {
-        BaseCombinacoes p = new CombinacoesLotoFacil();
-        p.gerarProvaHTML(10, 5, 3);
-        // p.gerarProva(10, 5, 3);
+        List<Integer[]> prognosticos = gb.prognosticos(3, TiposConcurso.LOTO_FACIL.maiorFaixaPremiavel);
+
+        System.out.println("--------------------------");
+        System.out.println("Boa Sorte!");
+        System.out.println("--------------------------");
+        for (Integer[] aposta : prognosticos) {
+            Arrays.sort(aposta);
+            StringUtils.print(aposta);
+        }
+
     }
 
     @Override

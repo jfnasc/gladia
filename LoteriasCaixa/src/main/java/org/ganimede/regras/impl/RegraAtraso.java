@@ -19,21 +19,23 @@ import org.ganimede.utils.StringUtils;
 public class RegraAtraso extends RegraBase implements Regra {
 
     private static final int QT_MINIMA_DEZENAS = 2;
-    private int qtConcursos;
+    private int qtAtrasoMinimo;
     private TiposConcurso tpConcurso;
 
-    public RegraAtraso(TiposConcurso tpConcurso, int qtConcursos) {
+    public RegraAtraso(TiposConcurso tpConcurso, int qtAtrasoMinimo) {
         this.tpConcurso = tpConcurso;
-        this.qtConcursos = qtConcursos;
+        this.qtAtrasoMinimo = qtAtrasoMinimo;
     }
 
     public static void main(String[] args) {
+        
         List<Integer[]> p = new ArrayList<>();
+        
         p.add(new Integer[] { 1, 2, 3, 4, 5, 6 });
         p.add(new Integer[] { 8, 9, 1, 2, 3, 4 });
         p.add(new Integer[] { 7, 19, 30, 35, 42, 47 });
 
-        Regra regra = new RegraAtraso(TiposConcurso.QUINA, 8);
+        Regra regra = new RegraAtraso(TiposConcurso.MEGA_SENA, 8);
         regra.aplicar(p);
 
         for (Integer[] p1 : p) {
@@ -48,7 +50,7 @@ public class RegraAtraso extends RegraBase implements Regra {
 
         for (Integer dezena : aposta) {
             int qtConcursosAtraso = getResultadoDAO().qtAtrasoDezena(this.tpConcurso.sigla, 1, dezena);
-            if (qtConcursosAtraso >= this.qtConcursos) {
+            if (qtConcursosAtraso >= this.qtAtrasoMinimo) {
                 count++;
             }
         }

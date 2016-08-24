@@ -141,7 +141,7 @@ public class AnaliseRepeticaoDAOImpl extends BaseDAO implements AnaliseDAO {
 
         sb.append("select count(1) from (");
         sb.append("  select nu_dezena, count(nu_dezena) ");
-        sb.append("    from tb_atrasos ");
+        sb.append("    from loterias.tb_atrasos ");
         sb.append("   where tp_concurso = ? ");
         sb.append("     and qt_atraso = 0 ");
         sb.append("     and nu_concurso between ? and ? ");

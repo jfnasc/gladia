@@ -114,7 +114,7 @@ public class Sorteio implements Serializable {
     @Override
     public String toString() {
         return "Sorteio [nuSorteio=" + nuSorteio + ", nuConcurso=" + nuConcurso + ", tpConcurso=" + tpConcurso
-                + ", hash=" + hash + ", dezenas=" + StringUtils.print(dezenas) + "]";
+                + ", hash=" + hash + ", dezenas=" + dezenas + "]";
     }
 
 }

@@ -24,5 +24,6 @@ public enum TiposConcurso {
         this.nome = nome;
         this.nuDezenas = nuDezenas;
         this.maiorFaixaPremiavel = maiorFaixaPremiavel;
+        this.qtSorteios = qtSorteios;
     }
 }

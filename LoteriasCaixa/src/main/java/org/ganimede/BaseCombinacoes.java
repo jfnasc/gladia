@@ -74,7 +74,7 @@ public abstract class BaseCombinacoes {
 
         if (this.base != null) {
             Arrays.sort(this.base);
-            html.append("<tr><td colspan=2> " + StringUtils.print(base) + "</td></tr>");
+            html.append("<tr><td colspan=2> " + Arrays.toString(base) + "</td></tr>");
             html.append("<tr><td colspan=2> " + base.length + "</td></tr>");
             html.append("<tr><td colspan=2> 1:"
                     + MathUtils
@@ -85,7 +85,7 @@ public abstract class BaseCombinacoes {
         html.append("<tr><td colspan=2><textarea rows=\"10\">");
         for (Integer[] aposta : apostas) {
             Arrays.sort(aposta);
-            html.append(StringUtils.print(aposta) + "\n");
+            html.append(Arrays.toString(aposta) + "\n");
         }
         html.append("</textarea></td></tr>");
         html.append("<tr><td>Qtd. Prognosticos:</td><td style=\"width: 50px; text-align: right\">" + nuPrognosticos
@@ -109,7 +109,7 @@ public abstract class BaseCombinacoes {
             if (base == null || Fechamentos.conferir(resultado, base) >= 0) {
 
                 html.append("<tr><td colspan=" + (nuPrognosticos + 2) + " style=\"background-color: #f5f5f5\"> "
-                        + StringUtils.print(resultado) + "</td></tr>");
+                        + Arrays.toString(resultado) + "</td></tr>");
 
                 BigDecimal premio = BigDecimal.ZERO;
                 for (Integer[] aposta : apostas) {

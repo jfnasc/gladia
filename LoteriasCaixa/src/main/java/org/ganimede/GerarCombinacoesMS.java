@@ -1,6 +1,7 @@
 package org.ganimede;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -15,13 +16,14 @@ public class GerarCombinacoesMS extends GerarCombinacoesBase {
      * 
      * @param args
      */
-    public static void main2(String[] args) {
+    public static void main(String[] args) {
         List<Integer[]> prognosticos = gb.prognosticos(3, 6);
 
         System.out.println("--------------------------");
         System.out.println("Boa Sorte!");
         System.out.println("--------------------------");
         for (Integer[] aposta : prognosticos) {
+            Arrays.sort(aposta);
             StringUtils.print(aposta);
         }
 
@@ -42,7 +44,7 @@ public class GerarCombinacoesMS extends GerarCombinacoesBase {
         System.out.println(atrasos);
     }
 
-    public static void main(String[] args) {
+    public static void main2(String[] args) {
         List<List<Integer>> apostas = new ArrayList<List<Integer>>();
 
         List<Integer[]> prognosticos = gb.prognosticos(1, 10);

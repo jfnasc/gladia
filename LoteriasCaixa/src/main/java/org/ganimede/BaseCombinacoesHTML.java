@@ -53,11 +53,11 @@ public abstract class BaseCombinacoesHTML {
 
         StringBuilder html = abrirHtml();
 
-        html.append("<tr><td colspan=2> " + StringUtils.print(base) + "</td></tr>");
+        html.append("<tr><td colspan=2> " + Arrays.toString(base) + "</td></tr>");
 
         html.append("<tr><td colspan=2><textarea rows=\"10\">");
         for (Integer[] aposta : apostas) {
-            html.append(StringUtils.print(aposta) + "\n");
+            html.append(Arrays.toString(aposta) + "\n");
         }
         html.append("</textarea></td></tr>");
         html.append("<tr><td>Qtd. Prognosticos:</td><td style=\"width: 50px; text-align: right\">"
@@ -84,7 +84,7 @@ public abstract class BaseCombinacoesHTML {
 
                 html.append("<tr><td colspan=" + (nuPrognosticos + 2) + ">&nbsp;</td></tr>");
                 html.append("<tr><td colspan=" + (nuPrognosticos + 2) + " style=\"background-color: #f5f5f5\"> "
-                        + StringUtils.print(resultado) + "</td></tr>");
+                        + Arrays.toString(resultado) + "</td></tr>");
 
                 BigDecimal premio = BigDecimal.ZERO;
                 for (Integer[] aposta : apostas) {

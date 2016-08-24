@@ -7,12 +7,92 @@ import java.util.List;
 public class Combinations {
 
     public static void main(String[] args) {
-        Integer[] base = new Integer[] { 6, 7, 8, 9, 10 };
 
-        List<Integer[]> a = Combinations.comb(base, 3);
-        for (Integer[] i : a) {
+        // quantos numeros vou escolher?
+        int limit = 8;
+
+        List<Integer> b = new ArrayList<Integer>();
+        for (int i = 1; i < (limit + 1); i++) {
+            b.add(i);
+        }
+
+        // combinacoes com quantas dezenas? no minimo 6
+        int nuCombinacoes = 6;
+
+        List<Integer[]> combinacoes = Combinations.comb(b, (nuCombinacoes >= 6 ? nuCombinacoes : 6));
+        for (Integer[] i : combinacoes) {
             System.out.println(Arrays.toString(i));
         }
+        System.out.println(combinacoes.size());
+
+        // quantas dezenas quero garantir acertar?
+        // quantos prognosticos para garantir que acertando, por exemplo, 3
+        // numeros
+        // daqueles que escolhi inicialmente, ao menos um terno está garantido
+        // no minimo 1
+        int garantia = 2;
+
+        List<Integer[]> resultado = new ArrayList<Integer[]>();
+
+        List<Integer[]> provas = Combinations.comb(b, garantia >= 1 ? garantia : 1);
+        for (Integer[] prova : provas) {
+
+            System.out.println(Arrays.toString(prova));
+
+            for (Integer[] combinacao : combinacoes) {
+
+                // se alguma combinacao no resultado final
+                // ja contempla a prova, sai
+                if (contains(resultado, prova)) {
+                    break;
+                }
+
+                if (contains(combinacao, prova)) {
+                    if (!resultado.contains(combinacao)) {
+                        resultado.add(combinacao);
+                        break;
+                    }
+                }
+            }
+        }
+
+        System.out.println("------------------------------------------");
+        for (Integer[] i : resultado) {
+            System.out.println(Arrays.toString(i));
+        }
+        System.out.println(resultado.size());
+    }
+
+    public static boolean contains(Integer[] combinacao, Integer[] dezenas) {
+
+        for (Integer dezena : dezenas) {
+            if (!Arrays.asList(combinacao).contains(dezena)) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    public static boolean contains(List<Integer[]> combinacoes, Integer[] dezenas) {
+
+        if (combinacoes == null || combinacoes.isEmpty() || dezenas == null) {
+            return false;
+        }
+
+        for (Integer[] combinacao : combinacoes) {
+            if (!contains(combinacao, dezenas)){
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    public static List<Integer[]> comb(List<Integer> l, Integer n) {
+        Integer[] base = new Integer[] {};
+        base = l.toArray(base);
+        return comb(base, n);
     }
 
     public static List<Integer[]> comb(Integer[] m, Integer n) {

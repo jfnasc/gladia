@@ -21,10 +21,13 @@ import org.apache.http.conn.ssl.SSLContextBuilder;
 import org.apache.http.conn.ssl.TrustStrategy;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
+import org.apache.log4j.Logger;
 import org.ganimede.utils.ZipUtils;
 
 public abstract class DownloadResultadosService {
 
+    private static Logger LOGGER = Logger.getLogger(DownloadResultadosService.class);
+    
     private ServiceConfig serviceConfig;
 
     public abstract void processarResultados();
@@ -34,6 +37,7 @@ public abstract class DownloadResultadosService {
 
         try {
             fw = new FileWriter(getServiceConfig().getPath() + File.separator + filename);
+            LOGGER.info("Gravando o arquivo : " + getServiceConfig().getPath() + File.separator + filename);
             fw.write(buffer.toString());
             fw.flush();
         } catch (Exception e) {
@@ -44,11 +48,14 @@ public abstract class DownloadResultadosService {
     protected boolean baixarArquivos(String url, String filepath) {
         CloseableHttpResponse response = null;
 
+        LOGGER.info("Baixando o arquivo : " + url);
+        
         try {
             File f = new File(filepath + File.separator + url.substring(url.lastIndexOf("/") + 1));
+            
             if (isArquivoAtualizado(f)) {
-                System.out.println(f.getAbsolutePath());
-                System.out.println("Nada a fazer. O arquivo esta atualizado.");
+                LOGGER.info(f.getAbsolutePath());
+                LOGGER.info("Nada a fazer. O arquivo esta atualizado.");
                 return false;
             }
 
@@ -67,7 +74,7 @@ public abstract class DownloadResultadosService {
 
             response = httpclient.execute(request);
 
-            System.out.println(response.getStatusLine());
+            LOGGER.info(response.getStatusLine());
 
             BufferedInputStream bis = new BufferedInputStream(response.getEntity().getContent());
             BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(f));
@@ -81,7 +88,8 @@ public abstract class DownloadResultadosService {
             ZipUtils.unzip(f.getAbsolutePath(), filepath);
 
         } catch (Exception e) {
-
+            LOGGER.error(e);
+            throw new RuntimeException(e);
         } finally {
             try {
                 if (response != null) {

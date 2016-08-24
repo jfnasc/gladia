@@ -42,6 +42,7 @@ public abstract class GerarCombinacoesBase {
      * @return
      */
     public List<Integer[]> prognosticos(Integer quantidade, Integer nuPrognosticos) {
+        
         List<Integer[]> result = new ArrayList<Integer[]>();
 
         while (result.size() < quantidade) {
@@ -65,6 +66,7 @@ public abstract class GerarCombinacoesBase {
      * @return
      */
     public Integer[] gerarAposta(int qtDezenas) {
+        
         List<Integer> tmp = new ArrayList<Integer>();
 
         while (tmp.size() < qtDezenas) {

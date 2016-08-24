@@ -21,10 +21,10 @@ public class ResultadoDAOImpl extends BaseDAO implements ResultadoDAO {
         StringBuilder sb = new StringBuilder();
 
         sb.append("select qt_atraso "); 
-        sb.append("  from tb_atrasos "); 
+        sb.append("  from loterias.tb_atrasos "); 
         sb.append(" where nu_concurso = ( "); 
         sb.append("     select max(nu_concurso) "); 
-        sb.append("       from tb_atrasos "); 
+        sb.append("       from loterias.tb_atrasos "); 
         sb.append("      where tp_concurso = ? "); 
         sb.append("        and nu_sorteio  = ? "); 
         sb.append("       ) "); 
@@ -70,7 +70,7 @@ public class ResultadoDAOImpl extends BaseDAO implements ResultadoDAO {
 
         StringBuilder sb = new StringBuilder();
         sb.append("select hash ");
-        sb.append("  from tb_sorteios ");
+        sb.append("  from loterias.tb_sorteios ");
         sb.append(" where hash = ? ");
         sb.append("   and tp_concurso = ? ");
 
@@ -111,10 +111,10 @@ public class ResultadoDAOImpl extends BaseDAO implements ResultadoDAO {
 
         StringBuilder sb = new StringBuilder();
         sb.append("select nu_dezena ");
-        sb.append("  from tb_atrasos ");
+        sb.append("  from loterias.tb_atrasos ");
         sb.append(" where nu_sorteio = ? ");
         sb.append("   and tp_concurso = ? ");
-        sb.append("   and nu_concurso = (select max(nu_concurso) from tb_concursos where tp_concurso = ?) ");
+        sb.append("   and nu_concurso = (select max(nu_concurso) from loterias.tb_concursos where tp_concurso = ?) ");
         sb.append("   and qt_atraso > ? ");
 
         Connection conn = null;
@@ -162,7 +162,7 @@ public class ResultadoDAOImpl extends BaseDAO implements ResultadoDAO {
         sb.append("  from ( ");
         sb.append("         select nu_dezena, ");
         sb.append("                count(nu_concurso) ");
-        sb.append("           from tb_dezenas ");
+        sb.append("           from loterias.tb_dezenas ");
         sb.append("          where tp_concurso = ? ");
         sb.append("          group by nu_dezena ");
         sb.append("          order by count(nu_concurso) desc ");

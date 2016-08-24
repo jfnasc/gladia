@@ -22,7 +22,7 @@ public class CargaResultadosMegaSenaImpl extends CargaResultadosService {
     public void carregar() {
         Concurso ultimoConcursoGravado = getConcursoDAO().recuperarUltimoConcurso(TiposConcurso.MEGA_SENA);
 
-        String filepath = "/projetos/github/gladia/LoteriasCaixa/arquivos/resultados_mega_sena.csv";
+        String filepath = getServiceConfig().getPath() + File.separator + "resultados_mega_sena.csv";
         BufferedReader reader = null;
         InputStreamReader in = null;
 

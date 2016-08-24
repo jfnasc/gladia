@@ -36,7 +36,7 @@ public class ConcursoDAOImpl extends BaseDAO implements ConcursoDAO {
             conn.setAutoCommit(false);
 
             pstmt = conn
-                    .prepareStatement("INSERT INTO tb_concursos(nu_concurso, tp_concurso, dt_concurso) VALUES(?, ?, ?)");
+                    .prepareStatement("INSERT INTO loterias.tb_concursos(nu_concurso, tp_concurso, dt_concurso) VALUES(?, ?, ?)");
 
             for (Concurso concurso : concursos) {
                 System.out.println(concurso);
@@ -72,7 +72,7 @@ public class ConcursoDAOImpl extends BaseDAO implements ConcursoDAO {
         PreparedStatement pstmt = null;
 
         try {
-            pstmt = conn.prepareStatement("INSERT INTO tb_sorteios(nu_sorteio, nu_concurso, tp_concurso, hash)"
+            pstmt = conn.prepareStatement("INSERT INTO loterias.tb_sorteios(nu_sorteio, nu_concurso, tp_concurso, hash)"
                     + " VALUES(?, ?, ?, ?)");
 
             for (Sorteio sorteio : concurso.getSorteios()) {
@@ -98,7 +98,7 @@ public class ConcursoDAOImpl extends BaseDAO implements ConcursoDAO {
 
         try {
             pstmt = conn
-                    .prepareStatement("INSERT INTO tb_dezenas(nu_sorteio, nu_concurso, tp_concurso, nu_dezena, nu_posicao)"
+                    .prepareStatement("INSERT INTO loterias.tb_dezenas(nu_sorteio, nu_concurso, tp_concurso, nu_dezena, nu_posicao)"
                             + " VALUES(?, ?, ?, ?, ?)");
 
             int pos = 1;
@@ -133,7 +133,7 @@ public class ConcursoDAOImpl extends BaseDAO implements ConcursoDAO {
 
             conn = getDataSource().getConnection();
 
-            pstmt = conn.prepareStatement("select nu_concurso, tp_concurso, dt_concurso from tb_concursos "
+            pstmt = conn.prepareStatement("select nu_concurso, tp_concurso, dt_concurso from loterias.tb_concursos "
                     + "where nu_concurso =? and tp_concurso = ?");
 
             pstmt.setInt(1, nuConcurso);
@@ -174,9 +174,9 @@ public class ConcursoDAOImpl extends BaseDAO implements ConcursoDAO {
 
             StringBuilder sql = new StringBuilder();
             sql.append(" select nu_concurso, tp_concurso, dt_concurso");
-            sql.append("   from tb_concursos ");
+            sql.append("   from loterias.tb_concursos ");
             sql.append("  where nu_concurso = (");
-            sql.append("      select max(nu_concurso) from tb_concursos where tp_concurso = ?)");
+            sql.append("      select max(nu_concurso) from loterias.tb_concursos where tp_concurso = ?)");
 
             pstmt = conn.prepareStatement(sql.toString());
 
@@ -210,7 +210,7 @@ public class ConcursoDAOImpl extends BaseDAO implements ConcursoDAO {
 
         StringBuilder sb = new StringBuilder();
         sb.append("select nu_dezena, nu_posicao ");
-        sb.append("  from tb_dezenas ");
+        sb.append("  from loterias.tb_dezenas ");
         sb.append(" where nu_concurso = ? ");
         sb.append("   and tp_concurso = ? ");
         sb.append("   and nu_sorteio = ? ");
