@@ -20,7 +20,7 @@ public class GerarCombinacoesLotoFacil extends GerarCombinacoesBase {
     private static GerarCombinacoesBase gb = new GerarCombinacoesLotoFacil();
     
     public static void main(String[] args) {
-        List<Integer[]> prognosticos = gb.prognosticos(5, TiposConcurso.LOTO_FACIL.maiorFaixaPremiavel);
+        List<Integer[]> prognosticos = gb.prognosticos(10, TiposConcurso.LOTO_FACIL.maiorFaixaPremiavel);
 
         System.out.println("--------------------------");
         System.out.println("Boa Sorte!");
