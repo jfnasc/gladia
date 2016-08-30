@@ -14,12 +14,12 @@ import org.ganimede.regras.Regra;
  */
 public class GerarCombinacoesQuina extends GerarCombinacoesBase {
     @Override
-    int qtDezenas() {
+    public int qtDezenas() {
         return TiposConcurso.QUINA.nuDezenas;
     }
 
     @Override
-    List<Regra> regras() {
+    public List<Regra> regras() {
         List<Regra> regras = new ArrayList<Regra>();
 
         regras.add(new org.ganimede.regras.impl.RegraFaixasDistribuicao(TiposConcurso.QUINA, 

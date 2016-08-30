@@ -20,7 +20,7 @@ public class GerarCombinacoesLotoFacil extends GerarCombinacoesBase {
     private static GerarCombinacoesBase gb = new GerarCombinacoesLotoFacil();
     
     public static void main(String[] args) {
-        List<Integer[]> prognosticos = gb.prognosticos(5, TiposConcurso.LOTO_FACIL.maiorFaixaPremiavel);
+        List<Integer[]> prognosticos = gb.prognosticos(1, 18);
 
         System.out.println("--------------------------");
         System.out.println("Boa Sorte!");
@@ -48,16 +48,16 @@ public class GerarCombinacoesLotoFacil extends GerarCombinacoesBase {
     }
     
     @Override
-    int qtDezenas() {
+    public int qtDezenas() {
         return TiposConcurso.LOTO_FACIL.nuDezenas;
     }
 
     @Override
-    List<Regra> regras() {
+    public List<Regra> regras() {
         List<Regra> regras = new ArrayList<Regra>();
 
         regras.add(new org.ganimede.regras.impl.RegraParesImpares());
-        regras.add(new org.ganimede.regras.impl.RegraDezenasAnteriores(TiposConcurso.LOTO_FACIL, 1, 9));
+        //regras.add(new org.ganimede.regras.impl.RegraDezenasAnteriores(TiposConcurso.LOTO_FACIL, 1, 9));
 
         return regras;
     }

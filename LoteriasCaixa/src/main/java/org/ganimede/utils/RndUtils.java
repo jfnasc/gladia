@@ -51,7 +51,7 @@ public class RndUtils {
         for (int i = 0; i < qtDezenas; i++) {
             while (result[i] == null) {
                 int p = nextInt(maiorDezena);
-                if (!Arrays.asList(result).contains(p)) {
+                if (p != 0 && !Arrays.asList(result).contains(p)) {
                     result[i] = p;
                 }
             }

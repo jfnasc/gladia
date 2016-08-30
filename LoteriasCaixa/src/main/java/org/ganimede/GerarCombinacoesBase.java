@@ -17,9 +17,9 @@ public abstract class GerarCombinacoesBase {
 
     static ResultadoDAO resultadoDAO = null;
 
-    abstract int qtDezenas();
+    public abstract int qtDezenas();
 
-    abstract List<Regra> regras();
+    public abstract List<Regra> regras();
 
     public static void fechamento(List<List<Integer>> apostas, Integer[] p, int pos, int size) {
         List<Integer> base = Arrays.asList(p).subList(pos, pos + size);

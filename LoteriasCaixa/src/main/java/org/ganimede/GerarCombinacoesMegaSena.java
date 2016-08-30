@@ -45,12 +45,12 @@ public class GerarCombinacoesMegaSena extends GerarCombinacoesBase {
     }
 
     @Override
-    int qtDezenas() {
+    public int qtDezenas() {
         return TiposConcurso.MEGA_SENA.nuDezenas;
     }
 
     @Override
-    List<Regra> regras() {
+    public List<Regra> regras() {
         List<Regra> regras = new ArrayList<Regra>();
 
         regras.add(new org.ganimede.regras.impl.RegraNaoSequencial());
