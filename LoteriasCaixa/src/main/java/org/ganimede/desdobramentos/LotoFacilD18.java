@@ -2,7 +2,6 @@ package org.ganimede.desdobramentos;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -15,62 +14,66 @@ import org.ganimede.utils.Combinations;
 
 public class LotoFacilD18 extends GerarCombinacoesLotoFacil {
 
-    private static GerarCombinacoesBase gb = new LotoFacilD18();
+    public LotoFacilD18(Integer qtDezenasSorteioAnterior, Integer qtDezenasBase) {
+        super(qtDezenasSorteioAnterior, qtDezenasBase);
+        // TODO Auto-generated constructor stub
+    }
+
+    private static GerarCombinacoesBase gb = new LotoFacilD18(9, 18);
 
     public static void main(String[] args) {
-        List<List<Integer>> prognosticos = gerarPrognosticos(7);
 
-        for (int i = 1; i <= getConcursoDAO().recuperarUltimoConcurso(TiposConcurso.LOTO_FACIL).getNuConcurso(); i++) {
-            List<Integer> resultado = getConcursoDAO().recuperarConcurso(1, TiposConcurso.LOTO_FACIL).getSorteios()
-                    .get(0).getDezenas();
-
-            System.out.println("Concurso: " + i);
-            System.out
-                    .println("===============================================================================================");
-            verificar(prognosticos, resultado);
-            System.out
-                    .println("===============================================================================================");
+        List<Integer[]> p = Combinations.comb(6, 5);
+        for (Integer[] n : p) {
+            System.out.println(Arrays.toString(n));
         }
+        System.out.println(p.size());
+        System.out.println("R$ " + (p.size() * 2));
+
+        // List<Integer[]> prognosticos = gerarPrognosticos(21);
+        // for (Integer[] p : prognosticos) {
+        // System.out.println(Arrays.toString(p));
+        // }
+        //
+        // System.out.println(prognosticos.size());
+        // System.out.println("R$ " + (prognosticos.size() * 2));
+        //
+        // verificarAcertos(TiposConcurso.LOTO_FACIL, prognosticos, 13);
     }
 
-    public static void verificar(List<List<Integer>> prognosticos, List<Integer> resultado) {
-        for (List<Integer> p : prognosticos) {
-            int count = 0;
-            for (Integer dezena : resultado) {
-                if (p.contains(dezena)) {
-                    count++;
-                }
-            }
-            System.out.println(p + "\t\t acertos:" + count);
-            if (count >= 13) {
-                System.out.println("Ganhador!!!");
-                System.exit(0);
-            }
-        }
-    }
+    public static List<Integer[]> gerarPrognosticos(int factor) {
+        List<Integer[]> prognosticos = new ArrayList<Integer[]>();
 
-    public static List<List<Integer>> gerarPrognosticos(int factor) {
-        List<List<Integer>> prognosticos = new ArrayList<List<Integer>>();
-        List<Integer[]> base = gb.prognosticos(1, factor * 3);
+        List<Integer[]> base = gb.gerarPrognosticos(1, factor);
+        // List<Integer[]> base = new ArrayList<Integer[]>();
+        // Integer[] tmp = new Integer[factor];
+        // for (int i = 1; i <= (factor); i++) {
+        // tmp[i - 1] = i;
+        // }
+        // base.add(tmp);
 
         Map<Integer, List<Integer>> grupos = new HashMap<Integer, List<Integer>>();
-        for (int i = 0; i < factor; i++) {
+        for (int i = 0; i < factor / 3; i++) {
             grupos.put(i, Arrays.asList(base.get(0)).subList(i * 3, (i + 1) * 3));
         }
 
-        List<Integer[]> combinacoes = Combinations.comb(factor, 5);
+        List<Integer[]> combinacoes = Combinations.comb(factor / 3, 5);
+
         for (Integer[] combinacao : combinacoes) {
-            System.out.println(Arrays.toString(combinacao));
-            List<Integer> p = new ArrayList<Integer>();
-            for (Integer i : combinacao) {
-                p.addAll(grupos.get(i));
+
+            List<Integer> tmp = new ArrayList<Integer>();
+
+            for (Integer key : combinacao) {
+                tmp.addAll(grupos.get(key));
             }
-            Collections.sort(p);
+
+            Integer[] p = new Integer[15];
+            tmp.toArray(p);
+
+            Arrays.sort(p);
+
             prognosticos.add(p);
         }
-        System.out.println(combinacoes.size() * 2);
-
-        System.out.println(prognosticos);
 
         return prognosticos;
     }
@@ -79,9 +82,11 @@ public class LotoFacilD18 extends GerarCombinacoesLotoFacil {
     public List<Regra> regras() {
         List<Regra> regras = new ArrayList<Regra>();
         regras.add(new org.ganimede.regras.impl.RegraParesImpares());
-//        regras.add(new org.ganimede.regras.impl.RegraQuantidadeDezenas(new Integer[] { 1, 2, 3, 5, 8, 13, 21 }, 4, 5));
-//        regras.add(new org.ganimede.regras.impl.RegraQuantidadeDezenas(
-//                new Integer[] { 2, 3, 5, 7, 11, 13, 17, 19, 23 }, 5, 6));
+        regras.add(new org.ganimede.regras.impl.RegraDezenasAnteriores(TiposConcurso.LOTO_FACIL, 1, 9));
+        // regras.add(new org.ganimede.regras.impl.RegraQuantidadeDezenas(new
+        // Integer[] { 1, 2, 3, 5, 8, 13, 21 }, 4, 5));
+        // regras.add(new org.ganimede.regras.impl.RegraQuantidadeDezenas(
+        // new Integer[] { 2, 3, 5, 7, 11, 13, 17, 19, 23 }, 5, 6));
         return regras;
     }
 }

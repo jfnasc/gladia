@@ -1,0 +1,10 @@
+
+
+
+
+1. Obter o último resultado da lotofácil;
+2. Entre as dezenas sorteadas escolher aleatoriamente 9 e completar com 9, 12 ou 15 
+que não foram sorteadas (as mais atrasadas, por exemplo), totalizando 18, 21 ou 24 dezenas (base);
+3. Dividir as dezenas base em grupos de 3;
+4. Montar todas as combinacoes possíves com esses grupos;
+5. Para base 18, serão gerados 6 cartões, para base 21, serão 21 cartões e para base 24, 56

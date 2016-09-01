@@ -10,6 +10,8 @@ public interface ResultadoDAO {
 
     boolean existeSorteioIgual(String tpConcurso, String hash);
 
+    List<Integer> buscarDezenasEmAtraso(String tpConcurso, int qtConcursos);
+    
     List<Integer> buscarDezenasEmAtraso(String tpConcurso, int nuSorteio, int qtConcursos);
 
     boolean isDezenaFrequente(String tpConcurso, int nuDezena, int limite);

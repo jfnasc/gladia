@@ -8,10 +8,10 @@ import org.ganimede.utils.StringUtils;
 
 public class CombinacoesLotoFacil extends BaseCombinacoes {
 
-    private static GerarCombinacoesBase gb = new GerarCombinacoesLotoFacil();
+    private static GerarCombinacoesBase gb = new GerarCombinacoesLotoFacil(9,18);
 
     public static void main(String[] args) {
-        List<Integer[]> prognosticos = gb.prognosticos(3, TiposConcurso.LOTO_FACIL.maiorFaixaPremiavel);
+        List<Integer[]> prognosticos = gb.gerarPrognosticos(3, TiposConcurso.LOTO_FACIL.maiorFaixaPremiavel);
 
         System.out.println("--------------------------");
         System.out.println("Boa Sorte!");
@@ -80,6 +80,6 @@ public class CombinacoesLotoFacil extends BaseCombinacoes {
 
     @Override
     GerarCombinacoesBase gerarCombinacoes() {
-        return new GerarCombinacoesLotoFacil();
+        return new GerarCombinacoesLotoFacil(0,0);
     }
 }

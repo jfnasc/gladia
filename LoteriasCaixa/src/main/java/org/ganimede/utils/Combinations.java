@@ -105,17 +105,17 @@ public class Combinations {
         return result;
     }
 
-    public static List<Integer[]> comb(Integer m, Integer n) {
+    public static List<Integer[]> comb(Integer qtDezenas, Integer qtTamanho) {
         List<Integer[]> result = new ArrayList<>();
 
-        Integer[] a = new Integer[n];
-        for (int i = 0; i < n; i++) {
+        Integer[] a = new Integer[qtTamanho];
+        for (int i = 0; i < qtTamanho; i++) {
             a[i] = i;
         }
 
         int index = -1;
 
-        while ((index = nextIndex(m, n, a)) != -1) {
+        while ((index = nextIndex(qtDezenas, qtTamanho, a)) != -1) {
             result.add(Arrays.copyOf(a, a.length));
             move(index, a);
         }

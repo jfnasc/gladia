@@ -17,9 +17,11 @@ public abstract class GerarCombinacoesBase {
 
     static ResultadoDAO resultadoDAO = null;
 
-    public abstract int qtDezenas();
+    public abstract int qtDezenasConcurso();
 
     public abstract List<Regra> regras();
+
+    public abstract void gerar();
 
     public static void fechamento(List<List<Integer>> apostas, Integer[] p, int pos, int size) {
         List<Integer> base = Arrays.asList(p).subList(pos, pos + size);
@@ -41,14 +43,14 @@ public abstract class GerarCombinacoesBase {
      * @param quantidade
      * @return
      */
-    public List<Integer[]> prognosticos(Integer quantidade, Integer nuPrognosticos) {
-        
+    public List<Integer[]> gerarPrognosticos(Integer qtPrognosticos, Integer nuDezenas) {
+
         List<Integer[]> result = new ArrayList<Integer[]>();
 
-        while (result.size() < quantidade) {
+        while (result.size() < qtPrognosticos) {
 
-            for (int i = 0; i < quantidade; i++) {
-                result.add(gerarAposta(nuPrognosticos));
+            for (int i = 0; i < qtPrognosticos; i++) {
+                result.add(gerarAposta(nuDezenas));
             }
 
             if (regras() != null) {
@@ -56,9 +58,31 @@ public abstract class GerarCombinacoesBase {
                     regra.aplicar(result);
                 }
             }
+
         }
 
-        return result.subList(0, quantidade);
+        return result.subList(0, qtPrognosticos);
+    }
+
+    public List<Integer[]> gerarPrognosticos(Integer qtPrognosticos, Integer qtDezenas, Integer[] base) {
+
+        List<Integer[]> result = new ArrayList<Integer[]>();
+
+        while (result.size() < qtPrognosticos) {
+
+            for (int i = 0; i < qtPrognosticos; i++) {
+                result.add(gerarAposta(qtDezenas, base));
+            }
+
+            if (regras() != null) {
+                for (Regra regra : regras()) {
+                    regra.aplicar(result);
+                }
+            }
+
+        }
+
+        return result.subList(0, qtPrognosticos);
     }
 
     /**
@@ -66,11 +90,11 @@ public abstract class GerarCombinacoesBase {
      * @return
      */
     public Integer[] gerarAposta(int qtDezenas) {
-        
+
         List<Integer> tmp = new ArrayList<Integer>();
 
         while (tmp.size() < qtDezenas) {
-            Integer p1 = RndUtils.nextInt(1, qtDezenas());
+            Integer p1 = RndUtils.nextInt(1, qtDezenasConcurso());
             if (!tmp.contains(p1)) {
                 tmp.add(p1);
             }
@@ -80,6 +104,53 @@ public abstract class GerarCombinacoesBase {
         tmp.subList(0, qtDezenas).toArray(result);
 
         return result;
+    }
+
+    public Integer[] gerarAposta(int qtDezenas, Integer[] base) {
+        List<Integer> tmp = new ArrayList<Integer>();
+
+        while (tmp.size() < qtDezenas) {
+            Integer p1 = base[RndUtils.nextInt(1, base.length)];
+            if (p1 != null && !tmp.contains(p1)) {
+                tmp.add(p1);
+            }
+        }
+
+        Integer[] result = new Integer[qtDezenas];
+        tmp.subList(0, qtDezenas).toArray(result);
+        Arrays.sort(result);
+
+        return result;
+    }
+
+    public static void verificarAcertos(List<Integer[]> prognosticos, List<Integer> resultado, Integer qtDezenasPremio) {
+
+        for (Integer[] p : prognosticos) {
+            int count = 0;
+            for (Integer dezena : resultado) {
+                if (Arrays.asList(p).contains(dezena)) {
+                    count++;
+                }
+            }
+
+            System.out.println(Arrays.toString(p) + "\t\t acertos:" + count);
+
+            if (count >= qtDezenasPremio) {
+                System.out.println("Ganhador!!!");
+            }
+        }
+    }
+
+    public static void verificarAcertos(TiposConcurso tipoConcurso, List<Integer[]> prognosticos,
+            Integer qtDezenasPremio) {
+        for (int i = 1; i <= getConcursoDAO().recuperarUltimoConcurso(tipoConcurso).getNuConcurso(); i++) {
+            List<Integer> resultado = getConcursoDAO().recuperarConcurso(1, tipoConcurso).getSorteios().get(0)
+                    .getDezenas();
+
+            System.out.println("\nConcurso: " + i);
+            verificarAcertos(prognosticos, resultado, qtDezenasPremio);
+        }
+
     }
 
     protected static ConcursoDAO getConcursoDAO() {

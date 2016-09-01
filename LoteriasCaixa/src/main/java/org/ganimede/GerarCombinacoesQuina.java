@@ -13,8 +13,22 @@ import org.ganimede.regras.Regra;
  * 
  */
 public class GerarCombinacoesQuina extends GerarCombinacoesBase {
+    
+    public static void main(String[] args) {
+
+        GerarCombinacoesBase gb = new GerarCombinacoesQuina();
+        gb.gerar();
+
+    }
+
     @Override
-    public int qtDezenas() {
+    public void gerar() {
+        
+        
+    }
+    
+    @Override
+    public int qtDezenasConcurso() {
         return TiposConcurso.QUINA.nuDezenas;
     }
 

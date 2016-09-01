@@ -106,6 +106,11 @@ public class ResultadoDAOImpl extends BaseDAO implements ResultadoDAO {
     }
 
     @Override
+    public List<Integer> buscarDezenasEmAtraso(String tpConcurso, int qtConcursos) {
+        return buscarDezenasEmAtraso(tpConcurso, 1, qtConcursos);
+    }
+
+    @Override
     public List<Integer> buscarDezenasEmAtraso(String tpConcurso, int nuSorteio, int qtConcursos) {
         List<Integer> result = new ArrayList<>();
 
@@ -118,6 +123,7 @@ public class ResultadoDAOImpl extends BaseDAO implements ResultadoDAO {
         sb.append("                         from loterias.tb_concursos ");
         sb.append("                        where tp_concurso = ? ) ");
         sb.append("   and qt_atraso >= ? ");
+        sb.append(" order by qt_atraso desc ");
 
         Connection conn = null;
         PreparedStatement pstmt = null;

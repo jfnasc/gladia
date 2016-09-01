@@ -15,7 +15,7 @@ public class BaseFixa {
         int quantidade = 10;
 
         GerarCombinacoesBase g = new GerarCombinacoesMegaSena();
-        List<Integer[]> a = g.prognosticos(quantidade, 3);
+        List<Integer[]> a = g.gerarPrognosticos(quantidade, 3);
         for (Integer[] complemento : a) {
             System.out.println(Arrays.toString(base) + Arrays.toString(complemento));
         }

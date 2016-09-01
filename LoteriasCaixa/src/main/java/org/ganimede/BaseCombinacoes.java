@@ -35,7 +35,7 @@ public abstract class BaseCombinacoes {
     }
 
     public List<Integer[]> gerar(int nuApostas, int nuPrognosticos) {
-        return gerarCombinacoes().prognosticos(nuApostas, nuPrognosticos);
+        return gerarCombinacoes().gerarPrognosticos(nuApostas, nuPrognosticos);
     }
 
     abstract GerarCombinacoesBase gerarCombinacoes();
