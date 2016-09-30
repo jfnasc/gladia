@@ -32,7 +32,6 @@ public abstract class GerarCombinacoesBase {
 
             if (!base.contains(dezena)) {
                 aposta.add(dezena);
-                // Collections.sort(aposta);
                 apostas.add(aposta);
             }
         }
@@ -123,34 +122,34 @@ public abstract class GerarCombinacoesBase {
         return result;
     }
 
-    public static void verificarAcertos(List<Integer[]> prognosticos, List<Integer> resultado, Integer qtDezenasPremio) {
+    public static float contarAcertos(List<Integer[]> prognosticos, List<Integer> resultado, Integer qtDezenasPremio) {
+        int count = 0;
 
         for (Integer[] p : prognosticos) {
-            int count = 0;
+
             for (Integer dezena : resultado) {
                 if (Arrays.asList(p).contains(dezena)) {
                     count++;
                 }
             }
-
-            System.out.println(Arrays.toString(p) + "\t\t acertos:" + count);
-
-            if (count >= qtDezenasPremio) {
-                System.out.println("Ganhador!!!");
-            }
         }
+
+        return Float.valueOf(count) / Float.valueOf(prognosticos.size());
     }
 
     public static void verificarAcertos(TiposConcurso tipoConcurso, List<Integer[]> prognosticos,
             Integer qtDezenasPremio) {
+
         for (int i = 1; i <= getConcursoDAO().recuperarUltimoConcurso(tipoConcurso).getNuConcurso(); i++) {
             List<Integer> resultado = getConcursoDAO().recuperarConcurso(1, tipoConcurso).getSorteios().get(0)
                     .getDezenas();
 
-            System.out.println("\nConcurso: " + i);
-            verificarAcertos(prognosticos, resultado, qtDezenasPremio);
+            System.out.println(i + " " + contarAcertos(prognosticos, resultado, qtDezenasPremio));
         }
 
+        for (Integer[] p : prognosticos) {
+            System.out.println(Arrays.toString(p));
+        }
     }
 
     protected static ConcursoDAO getConcursoDAO() {

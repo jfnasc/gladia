@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+   <modelVersion>4.0.0</modelVersion>
+
+   <parent>
+      <artifactId>sisfashion</artifactId>
+      <groupId>br.com.sisfashion</groupId>
+      <version>1.0</version>
+   </parent>
+
+   <artifactId>sisfashion-ear</artifactId>
+   <packaging>ear</packaging>
+
+   <name>Sisfashion - Módulo EAR</name>
+
+   <dependencies>
+      <dependency>
+         <groupId>br.com.sisfashion</groupId>
+         <artifactId>sisfashion-web</artifactId>
+         <type>war</type>
+      </dependency>
+      <dependency>
+         <groupId>br.com.sisfashion</groupId>
+         <artifactId>sisfashion-ejb</artifactId>
+         <type>ejb</type>
+      </dependency>
+   </dependencies>
+
+   <build>
+      <finalName>sisfashion</finalName>
+      <plugins>
+         <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-ear-plugin</artifactId>
+            <version>2.6</version>
+            <configuration>
+               <version>6</version>
+               <defaultLibBundleDir>lib</defaultLibBundleDir>
+               <modules>
+                  <webModule>
+                     <groupId>br.com.sisfashion</groupId>
+                     <artifactId>sisfashion-web</artifactId>
+                     <contextRoot>/sisfashion</contextRoot>
+                  </webModule>
+               </modules>
+            </configuration>
+         </plugin>
+      </plugins>
+   </build>
+</project>

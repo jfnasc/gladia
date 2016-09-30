@@ -12,7 +12,6 @@ import java.util.Map;
 import org.ganimede.regras.Regra;
 import org.ganimede.utils.CollectionUtils;
 import org.ganimede.utils.Combinations;
-import org.ganimede.utils.RndUtils;
 
 /**
  * @author Jose Flavio <jfnasc@outlook.com>
