@@ -1,31 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-   <modelVersion>4.0.0</modelVersion>
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
 
-   <parent>
-      <artifactId>sisfashion</artifactId>
-      <groupId>br.com.sisfashion</groupId>
-      <version>1.0</version>
-   </parent>
+    <parent>
+        <artifactId>sisfashion</artifactId>
+        <groupId>br.com.sisfashion</groupId>
+        <version>1.0</version>
+    </parent>
 
-   <artifactId>sisfashion-ejb</artifactId>
-   <packaging>ejb</packaging>
+    <artifactId>sisfashion-ejb</artifactId>
+    <packaging>ejb</packaging>
 
-   <name>Sisfashion - Módulo EJB</name>
+    <name>Sisfashion - Módulo EJB</name>
 
-   <dependencies>
-   </dependencies>
+    <dependencies>
+        <dependency>
+            <groupId>javax.ejb</groupId>
+            <artifactId>ejb-api</artifactId>
+            <version>3.0</version>
+            <scope>provided</scope>
+        </dependency>
+    </dependencies>
 
-   <build>
-      <plugins>
-         <plugin>
-            <artifactId>maven-ejb-plugin</artifactId>
-            <version>2.3</version>
-            <configuration>
-               <ejbVersion>3.1</ejbVersion>
-            </configuration>
-         </plugin>
-      </plugins>
-   </build>
+    <build>
+        <plugins>
+            <plugin>
+                <artifactId>maven-ejb-plugin</artifactId>
+                <version>2.3</version>
+                <configuration>
+                    <ejbVersion>3.1</ejbVersion>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 </project>

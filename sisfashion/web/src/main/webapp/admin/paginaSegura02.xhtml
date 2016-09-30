@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ui:composition xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-	xmlns:f="http://xmlns.jcp.org/jsf/core"
-	xmlns:h="http://xmlns.jcp.org/jsf/html"
-	xmlns:p="http://primefaces.org/ui">
-	
-	<div class="center">
-		Conteudo Seguro! Acesso Administrador
-	</div>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui" xmlns:b="http://bootsfaces.net/ui">
+
+    <div class="center">
+        <h:form>
+            <b:commandButton value="Logout" ajax="true" onclick="${usuarioBean.logout()}" />
+        Conteudo Seguro! Acesso Administrador
+        </h:form>
+    </div>
 </ui:composition>
