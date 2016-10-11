@@ -13,7 +13,7 @@ import javax.faces.context.FacesContext;
  */
 @ManagedBean
 @SessionScoped
-public class UsuarioBean {
+public class LoginBean {
 
     /**
      * Realiza o logout do usuario invalidando sua sessão.

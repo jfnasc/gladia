@@ -4,6 +4,32 @@
     xmlns:p="http://primefaces.org/ui" xmlns:b="http://bootsfaces.net/ui" template="/pages/templates/principal.xhtml">
 
     <ui:define name="corpoPagina">
-        Bemvindo ao Sistem Sisfashion. Usuarios.
+        <b:panel title="Pesquisar Usuários" collapsible="false">
+            <b:row>
+                <b:column style="width:30%">
+                    <h:outputText value="Nome:" />
+                </b:column>
+                <b:column>
+                    <b:inputText id="txtNome" fieldId="txtNome" name="txtNome" style="width:50%" />
+                </b:column>
+            </b:row>
+            <b:row>
+                <b:column style="width:30%">
+                    <h:outputText value="E-mail:" />
+                </b:column>
+                <b:column>
+                    <b:inputText id="txtEmail" fieldId="txtEmail" name="txtEmail" style="width:50%" />
+                </b:column>
+            </b:row>
+            <b:row>
+                <b:column colspan="2">
+                    <b:commandButton value="Pesquisar" type="submit" action="#{loginBean.recuperarSenha}"
+                        update="@form" look="primary" />
+                    <p:spacer width="10" height="10" />
+                    <b:commandButton value="Cadastrar Novo Usuário" type="submit" action="#{loginBean.recuperarSenha}"
+                        update="@form" look="primary" />
+                </b:column>
+            </b:row>
+        </b:panel>
     </ui:define>
 </ui:composition>
