@@ -1,0 +1,39 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:b="http://bootsfaces.net/ui"
+    xmlns:f="http://java.sun.com/jsf/core">
+<h:head>
+    <script type="text/javascript">
+        function sair(){
+            var cmdSair = document.getElementById("formPrincipal:btnSair");
+            cmdSair.click();            
+        }
+    </script>
+</h:head>
+<h:body>
+    <b:navBar brand="Sisfashion" brandHref="/index.jsf" inverse="true" fixed="true">
+        <b:navbarLinks>
+            <b:navLink value="Home" outcome="/pages/home.jsf?faces-redirect=true"></b:navLink>
+            <b:navLink value="Usuários" outcome="/pages/usuarios/usuarios.jsf?faces-redirect=true" rendered="#{request.isUserInRole('administradores')}"></b:navLink>
+            <b:navLink value="Agenda" outcome="/pages/agenda/agenda.jsf?faces-redirect=true"></b:navLink>
+            <b:navLink value="Clientes" outcome="/pages/clientes/clientes.jsf?faces-redirect=true"></b:navLink>
+            <b:navLink value="Sair" href="javascript:sair();"></b:navLink>
+        </b:navbarLinks>
+    </b:navBar>
+
+    <h:form id="formPrincipal">
+        <h:commandButton id="btnSair" action="#{usuarioBean.logout()}" value="Sair" style="display: none" />
+
+        <div id="corpoPagina" class="corpoPagina">
+            <b:panel collapsible="false">
+                <b:row>
+                    <b:column style="width: 40px" />
+                    <b:column>
+                        <ui:insert name="corpoPagina" />
+                    </b:column>
+                </b:row>
+            </b:panel>
+        </div>
+    </h:form>
+</h:body>
+</html>

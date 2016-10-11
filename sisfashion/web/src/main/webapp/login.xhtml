@@ -6,6 +6,11 @@
 </h:head>
 
 <script type="text/javascript">
+
+    $(document).ready(function(){ 
+        $('#j_username').focus();
+    });
+
     function login(){
         $("#formLogin").attr("action", "j_security_check");
         $("#formLogin").submit();
@@ -17,7 +22,7 @@
         <div style="position:relative; height: 100px; width:50%; margin:0 auto; padding: 10% 0;">
             <b:panel title="Login" collapsible="false">
                 <b:row>
-                    <b:column colspan="2">
+                    <b:column colspan="2" style="height: 40px">
                         <h:outputText value="É necessário informar os dados abaixo para acessar o Sistema" />
                     </b:column>
                 </b:row>
@@ -26,7 +31,7 @@
                         <h:outputText value="E-mail:" />
                     </b:column>
                     <b:column>
-                        <b:inputText id="j_username" fieldId="j_username" name="j_username" style="width:250px">
+                        <b:inputText id="j_username" fieldId="j_username" name="j_username" placeholder="Digite o email" style="width:250px">
                             <f:facet name="prepend">
                                 <b:icon name="user" />
                             </f:facet>
@@ -39,7 +44,7 @@
                         <h:outputText value="Senha:" />
                     </b:column>
                     <b:column>
-                        <b:inputText type="password" id="j_password" name="j_password" style="width:250px">
+                        <b:inputText type="password" id="j_password" name="j_password" placeholder="Digite a senha" style="width:250px">
                             <f:facet name="prepend">
                                 <b:iconAwesome name="key" />
                             </f:facet>
@@ -48,7 +53,7 @@
                 </b:row>
 
                 <b:row>
-                    <b:column colspan="2">
+                    <b:column colspan="2" style="height: 40px">
                         <h:link value="Recuperar Senha" outcome="recuperarSenha.jsf" />
                     </b:column>
                 </b:row>
