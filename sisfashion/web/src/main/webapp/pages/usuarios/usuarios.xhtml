@@ -4,6 +4,21 @@
     xmlns:p="http://primefaces.org/ui" xmlns:b="http://bootsfaces.net/ui" template="/pages/templates/principal.xhtml">
 
     <ui:define name="corpoPagina">
+
+        <script type="text/javascript">
+            $(document).ready(function() {
+            
+$('#listaUsuarios').dataTable( {
+  "language": {
+    "paginate": {
+      "first": "First page"
+    }
+  }
+} );
+                 
+            });
+        </script>
+
         <b:panel title="Pesquisar Usuários" collapsible="false">
             <b:row>
                 <b:column style="width:30%">
@@ -23,13 +38,24 @@
             </b:row>
             <b:row>
                 <b:column colspan="2">
-                    <b:commandButton value="Pesquisar" type="submit" action="#{loginBean.recuperarSenha}"
-                        update="@form" look="primary" />
+                    <b:commandButton value="Pesquisar" type="submit" action="#{loginBean.recuperarSenha}" update="@form"
+                        look="primary" />
                     <p:spacer width="10" height="10" />
                     <b:commandButton value="Cadastrar Novo Usuário" type="submit" action="#{loginBean.recuperarSenha}"
                         update="@form" look="primary" />
                 </b:column>
             </b:row>
         </b:panel>
+
+        <b:dataTable value="#{usuarioBean.listarUsuarios()}" var="usuario" id="listaUsuarios" custom-lang-url="/sisfashion/json/dataTable-ptBr.json">
+            <h:column value="#{usuario.nuUsuario}" label="Cód." />
+            <h:column value="#{usuario.noUsuario}" label="Nome" />
+            <h:column value="#{usuario.deEmail}" label="E-mail" />
+            <h:column value="#{usuario.deTelefone}" label="Telefone/Celular" />
+            <h:column value="#{usuario.deFuncao}" label="Função" />
+            <h:column label="Ações">
+                
+            </h:column>
+        </b:dataTable>
     </ui:define>
 </ui:composition>
