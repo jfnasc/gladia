@@ -1,11 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ui:composition xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-	xmlns:f="http://xmlns.jcp.org/jsf/core"
-	xmlns:h="http://xmlns.jcp.org/jsf/html"
-	xmlns:p="http://primefaces.org/ui">
-	
-	<div class="center">
-		Você não tem permissão para acessar esse recurso!
-	</div>
-</ui:composition>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui" xmlns:b="http://bootsfaces.net/ui">
+<h:head>
+    <title>Sisfashion</title>
+</h:head>
+<h:body>
+    <h:form method="post" action="" id="formLogin">
+        <div style="position:relative; height: 100px; width:50%; margin:0 auto; padding: 10% 0;">
+            <b:panel title="Recuperar Senha" collapsible="false">
+                <b:row style="height: 40px">
+                    <b:column colspan="2">
+                        <h:outputText value="Informe o e-mail cadastrado no sistema para recuperação da senha." />
+                    </b:column>
+                </b:row>
+                <b:row>
+                    <b:column>
+                        <h:outputText value="E-mail:" />
+                    </b:column>
+                    <b:column>
+                        <b:inputText id="j_username" fieldId="j_username" name="j_username" style="width:250px">
+                            <f:facet name="prepend">
+                                <b:icon name="user" />
+                            </f:facet>
+                        </b:inputText>
+                    </b:column>
+                </b:row>
+
+                <b:row>
+                    <b:column colspan="2">
+                        <b:commandButton value="Enviar Senha" type="submit" action="#{usuarioBean.recuperarSenha}" update="@form" look="primary" />
+                    </b:column>
+                </b:row>
+            </b:panel>
+        </div>
+    </h:form>
+
+</h:body>
+</html>

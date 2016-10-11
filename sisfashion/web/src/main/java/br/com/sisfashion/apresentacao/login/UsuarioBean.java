@@ -24,4 +24,13 @@ public class UsuarioBean {
         FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
         return "/index.jsf?faces-redirect=true";
     }
+
+    /**
+     * Recupera a senha do usuario a partir do email informado
+     * 
+     * @return
+     */
+    public String recuperarSenha() {
+        return "/recuperarSenha.jsf";
+    }
 }
