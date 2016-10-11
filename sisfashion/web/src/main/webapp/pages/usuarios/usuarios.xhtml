@@ -4,58 +4,77 @@
     xmlns:p="http://primefaces.org/ui" xmlns:b="http://bootsfaces.net/ui" template="/pages/templates/principal.xhtml">
 
     <ui:define name="corpoPagina">
-
-        <script type="text/javascript">
-            $(document).ready(function() {
-            
-$('#listaUsuarios').dataTable( {
-  "language": {
-    "paginate": {
-      "first": "First page"
-    }
-  }
-} );
-                 
-            });
-        </script>
-
         <b:panel title="Pesquisar Usuários" collapsible="false">
             <b:row>
-                <b:column style="width:30%">
+                <b:column col-md="1">
                     <h:outputText value="Nome:" />
                 </b:column>
-                <b:column>
+                <b:column col-md="7">
                     <b:inputText id="txtNome" fieldId="txtNome" name="txtNome" style="width:50%" />
                 </b:column>
             </b:row>
             <b:row>
-                <b:column style="width:30%">
+                <b:column col-md="1">
                     <h:outputText value="E-mail:" />
                 </b:column>
-                <b:column>
+                <b:column col-md="7">
                     <b:inputText id="txtEmail" fieldId="txtEmail" name="txtEmail" style="width:50%" />
                 </b:column>
             </b:row>
             <b:row>
                 <b:column colspan="2">
                     <b:commandButton value="Pesquisar" type="submit" action="#{loginBean.recuperarSenha}" update="@form"
-                        look="primary" />
+                        look="primary" size="small" />
                     <p:spacer width="10" height="10" />
-                    <b:commandButton value="Cadastrar Novo Usuário" type="submit" action="#{loginBean.recuperarSenha}"
-                        update="@form" look="primary" />
+                    <b:commandButton value="Cadastrar novo usuário" look="primary" size="small"
+                        onclick="$('.modalPseudoClass').modal();return false;" />
                 </b:column>
             </b:row>
         </b:panel>
 
-        <b:dataTable value="#{usuarioBean.listarUsuarios()}" var="usuario" id="listaUsuarios" custom-lang-url="/sisfashion/json/dataTable-ptBr.json">
+        <b:dataTable value="#{usuarioBean.listarUsuarios()}" var="usuario" id="listaUsuarios"
+            custom-lang-url="/sisfashion/json/dataTable-ptBr.json">
             <h:column value="#{usuario.nuUsuario}" label="Cód." />
             <h:column value="#{usuario.noUsuario}" label="Nome" />
             <h:column value="#{usuario.deEmail}" label="E-mail" />
             <h:column value="#{usuario.deTelefone}" label="Telefone/Celular" />
             <h:column value="#{usuario.deFuncao}" label="Função" />
             <h:column label="Ações">
-                
+
             </h:column>
         </b:dataTable>
+
+        <b:modal id="amodal" title="Cadastrar Usuário" styleClass="modalPseudoClass" closable="false"
+            close-on-escape="false" backdrop="false">
+
+            <b:panelGrid columns="2" size="xs" columnClasses="col-lg-4, col-lg-7">
+                <h:outputLabel value="Nome: *" />
+                <b:inputText />
+                <h:outputLabel value="E-mail: *" />
+                <b:inputText />
+                <h:outputLabel value="Telefone/Celular: *" />
+                <b:inputText />
+                <h:outputLabel value="E-mail: *" />
+                <b:inputText />
+                <h:outputLabel value="Função: *" />
+                <b:inputText />
+                <h:outputLabel value="Perfil: *" />
+                <b:inputText />
+            </b:panelGrid>
+
+            <hr />
+
+            <b:panelGrid columns="2" size="xs" columnClasses="col-lg-4, col-lg-7">
+                <h:outputLabel value="Senha: *" />
+                <b:inputText />
+                <h:outputLabel value="Confirmar Senha: *" />
+                <b:inputText />
+            </b:panelGrid>
+
+            <f:facet name="footer">
+                <b:button value="Voltar" dismiss="modal" onclick="return false;" />
+                <b:button value="Cadastrar" look="primary" dismiss="modal" onclick="return false;" />
+            </f:facet>
+        </b:modal>
     </ui:define>
 </ui:composition>
