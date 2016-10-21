@@ -7,6 +7,9 @@
 <h:body>
     <h:form method="post" action="" id="formLogin">
         <div style="position:relative; height: 100px; width:50%; margin:0 auto; padding: 10% 0;">
+        
+        	<b:messages id="msgs" showDetail="true" showSummary="false"/>
+        
             <b:panel title="Recuperar Senha" collapsible="false">
                 <b:row style="height: 40px">
                     <b:column colspan="2">
@@ -18,7 +21,8 @@
                         <h:outputText value="E-mail:" />
                     </b:column>
                     <b:column>
-                        <b:inputText id="j_username" fieldId="j_username" name="j_username" style="width:250px">
+                        <b:inputText id="deEmail" fieldId="deEmail" name="deEmail" 
+                        	style="width:250px" required="true" requiredMessage="O E-mail é obrigatório.">
                             <f:facet name="prepend">
                                 <b:icon name="user" />
                             </f:facet>
@@ -28,7 +32,8 @@
 
                 <b:row>
                     <b:column colspan="2">
-                        <b:commandButton value="Enviar Senha" type="submit" action="#{loginBean.recuperarSenha}" update="@form" look="primary" />
+                        <b:commandButton value="Enviar Senha" action="#{loginBean.recuperarSenha}" 
+                        	update="@form" look="primary" size="xs"/>
                     </b:column>
                 </b:row>
             </b:panel>

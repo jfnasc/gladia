@@ -12,26 +12,35 @@
     });
 
     function login(){
-        $("#formLogin").attr("action", "j_security_check");
-        $("#formLogin").submit();
+    	if ($('#j_username').val() != ''){
+	        $("#formLogin").attr("action", "j_security_check");
+	        $("#formLogin").submit();
+    	}
     }
 </script>
 
 <h:body>
+
     <h:form method="post" action="" id="formLogin">
+
         <div style="position:relative; height: 100px; width:50%; margin:0 auto; padding: 10% 0;">
+
+			<b:label text="Usuário ou senha inválidos, tente novamente!" severity="danger" 
+   				rendered="#{requestScope['javax.servlet.forward.servlet_path'] == '/pages/j_security_check'}"/>
+
+			<b:messages id="msgs" showDetail="true" showSummary="false"/>
+
             <b:panel title="Login" collapsible="false">
                 <b:row>
                     <b:column colspan="2" style="height: 40px">
-                        <h:outputText value="É necessário informar os dados abaixo para acessar o Sistema" />
+                        <h:outputText value="É necessário informar os dados abaixo para acessar o Sistema"/>
                     </b:column>
                 </b:row>
                 <b:row>
                     <b:column>
-                        <h:outputText value="E-mail:" />
-                    </b:column>
-                    <b:column>
-                        <b:inputText id="j_username" fieldId="j_username" name="j_username" placeholder="Digite o email" style="width:250px">
+                        <b:inputText id="j_username" fieldId="j_username" name="j_username" 
+                        	label="E-mail:" placeholder="Digite o email" style="width:250px" 
+                        	required="true" requiredMessage="O E-mail é obrigatório." autocomplete="false">
                             <f:facet name="prepend">
                                 <b:icon name="user" />
                             </f:facet>
@@ -41,10 +50,12 @@
 
                 <b:row>
                     <b:column>
-                        <h:outputText value="Senha:" />
+                        <h:outputText  />
                     </b:column>
                     <b:column>
-                        <b:inputText type="password" id="j_password" name="j_password" placeholder="Digite a senha" style="width:250px">
+                        <b:inputText type="password" id="j_password" name="j_password" 
+                        	label="Senha:" placeholder="Digite a senha" style="width:250px"
+                        	required="true" requiredMessage="A Senha é obrigatória." autocomplete="false">
                             <f:facet name="prepend">
                                 <b:iconAwesome name="key" />
                             </f:facet>
@@ -60,7 +71,7 @@
 
                 <b:row>
                     <b:column colspan="2">
-                        <b:commandButton value="Entrar" onclick="login();" update="@form" look="primary" />
+                        <b:commandButton value="Entrar" onclick="login();" update="@form" look="primary" size="xs"/>
                     </b:column>
                 </b:row>
 
