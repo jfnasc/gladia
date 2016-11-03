@@ -12,6 +12,10 @@ import java.io.IOException;
  */
 public class Main {
     public static void main(String[] args) {
+        
+    }
+    
+    public static void main2(String[] args) {
         EZTParser p = new EZTParser();
 
         StringBuilder sb = new StringBuilder();
