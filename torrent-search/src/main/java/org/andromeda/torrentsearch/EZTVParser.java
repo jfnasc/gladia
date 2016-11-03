@@ -21,13 +21,13 @@ import org.apache.http.impl.client.HttpClients;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-public class EZTParser implements Parser {
+public class EZTVParser implements Parser {
 
-    private static Logger LOGGER = LogManager.getLogger(EZTParser.class);
+    private static Logger LOGGER = LogManager.getLogger(EZTVParser.class);
 
     private int limit = 100;
 
-    public EZTParser() {
+    public EZTVParser() {
 
     }
 

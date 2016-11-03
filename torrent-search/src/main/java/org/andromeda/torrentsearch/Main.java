@@ -35,7 +35,7 @@ public class Main {
         context.put("allSeriesInfo", series);
 
         //
-        EZTParser p = new EZTParser();
+        EZTVParser p = new EZTVParser();
 
         for (SerieInfoDTO serieInfoDTO : series) {
             serieInfoDTO.getListTorrents().addAll(p.listar(serieInfoDTO.getSearchCode()));
