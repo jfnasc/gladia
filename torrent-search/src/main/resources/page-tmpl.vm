@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>$title</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+    <!-- Menu Navbar -->
+    <nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+        <div class="collapse navbar-collapse" id="myNavbar">
+        <ul class="nav navbar-nav">
+            <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#">Selecione a serie...<span class="caret"></span></a>
+                <ul class="dropdown-menu">
+#foreach( $serieInfo in $allSeriesInfo )
+                    <li><a href="javascript:void(0)" onclick="openCity('$serieInfo.name')">$serieInfo.name</a></li>
+#end
+                </ul>
+            </li>
+        </ul>
+        </div>
+    </div>
+    </nav>
+    
+    <!-- Resultados -->
+#foreach( $serieInfo in $allSeriesInfo )
+    <div id="$serieInfo.name" class="w3-container serie">
+    <h2>$serieInfo.name</h2>
+    $serieInfo.html
+    </div>
+
+#end
+
+    <script>
+        openCity("$firstSerieName");
+
+        function openCity(serieName) {
+            var i;
+            var x = document.getElementsByClassName("serie");
+            for (i = 0; i < x.length; i++) {
+                x[i].style.display = "none";
+            }
+            document.getElementById(serieName).style.display = "block";
+        }
+    </script>
+</body>
+</html>

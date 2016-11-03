@@ -3,73 +3,87 @@
  */
 package org.andromeda.torrentsearch;
 
+import java.io.BufferedReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.StringWriter;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
+import org.apache.velocity.Template;
+import org.apache.velocity.VelocityContext;
 
 /**
  * @author josen
  * 
  */
 public class Main {
+
     public static void main(String[] args) {
-        
-    }
-    
-    public static void main2(String[] args) {
+        Template template = VelocityUtils.getTemplate("page-tmpl");
+
+        VelocityContext context = new VelocityContext();
+
+        // titulo
+        context.put("title", new String("Torrents::Search Results"));
+
+        //
+        List<SerieInfoDTO> series = getSeriesInfo();
+        context.put("firstSerieName", series.get(0).getName());
+        context.put("allSeriesInfo", series);
+
+        //
         EZTParser p = new EZTParser();
 
-        StringBuilder sb = new StringBuilder();
-        sb.append("<html>                                            \n");
-        sb.append("<head>                                            \n");
-        sb.append("  <title>TORRENT Search Results</title>           \n");
-        sb.append("  <style type=\"text/css\">                       \n");
-        sb.append("    table {                                       \n");
-        sb.append("        border-collapse: collapse;                \n");
-        sb.append("        width: 80%;                               \n");
-        sb.append("    }                                             \n");
-        sb.append("                                                  \n");
-        sb.append("    th, td {                                      \n");
-        sb.append("        font-family: arial;                       \n");
-        sb.append("        font-size: 12px;                          \n");
-        sb.append("        text-align: left;                         \n");
-        sb.append("        padding: 8px;                             \n");
-        sb.append("        height: 15px;                             \n");
-        sb.append("    }                                             \n");
-        sb.append("                                                  \n");
-        sb.append("    tr:nth-child(even){background-color: #f2f2f2} \n");
-        sb.append("                                                  \n");
-        sb.append("    th {                                          \n");
-        sb.append("        background-color: #4CAF50;                \n");
-        sb.append("        color: white;                             \n");
-        sb.append("        height: 20px;                             \n");
-        sb.append("    }                                             \n");
-        sb.append("  </style>                                        \n");
-        sb.append("</head>                                           \n");
-        sb.append("<body>\n");
+        for (SerieInfoDTO serieInfoDTO : series) {
+            serieInfoDTO.getListTorrents().addAll(p.listar(serieInfoDTO.getSearchCode()));
+        }
 
-        sb.append(HtmlUtils.toHtml(p.listar("empire-2015")));
-        sb.append(HtmlUtils.toHtml(p.listar("the-walking-dead")));
-        sb.append(HtmlUtils.toHtml(p.listar("van-helsing")));
-        sb.append(HtmlUtils.toHtml(p.listar("westworld")));
-        sb.append(HtmlUtils.toHtml(p.listar("chicago-pd")));
-        sb.append(HtmlUtils.toHtml(p.listar("chicago-fire")));
-        sb.append(HtmlUtils.toHtml(p.listar("impastor")));
-        sb.append(HtmlUtils.toHtml(p.listar("the-exorcist")));
-        sb.append(HtmlUtils.toHtml(p.listar("the-fall")));
-        sb.append(HtmlUtils.toHtml(p.listar("the-flash-2014")));
-        sb.append(HtmlUtils.toHtml(p.listar("blacklist")));
-        sb.append(HtmlUtils.toHtml(p.listar("lucifer")));
-
-        sb.append("</body>\n");
-        sb.append("</html>\n");
+        StringWriter sw = new StringWriter();
+        template.merge(context, sw);
 
         try {
             FileWriter bw = new FileWriter("/home/josen/result.html");
-            bw.write(sb.toString());
+            bw.write(sw.toString());
             bw.close();
         } catch (IOException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
     }
+
+    private static List<SerieInfoDTO> getSeriesInfo() {
+
+        List<SerieInfoDTO> result = new ArrayList<>();
+
+        BufferedReader reader = null;
+
+        try {
+            reader = new BufferedReader(new InputStreamReader(Main.class.getResourceAsStream("/series.lst")));
+
+            String line = null;
+            while ((line = reader.readLine()) != null) {
+                SerieInfoDTO dto = new SerieInfoDTO();
+
+                dto.setName(line.split(";")[0].trim());
+                dto.setSearchCode(line.split(";")[1].trim());
+
+                result.add(dto);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+
+            try {
+                reader.close();
+            } catch (IOException e1) {
+                e1.printStackTrace();
+            }
+        }
+
+        Collections.sort(result);
+
+        return result;
+    }
+
 }

@@ -21,7 +21,7 @@ import org.apache.http.impl.client.HttpClients;
 
 public class EZTParser implements Parser {
 
-    private int limit = 10;
+    private int limit = 25;
 
     public EZTParser() {
 
@@ -100,7 +100,7 @@ public class EZTParser implements Parser {
             StringBuilder sb = new StringBuilder();
 
             while ((line = br.readLine()) != null) {
-                sb.append(line);
+                sb.append(line + "\n");
             }
 
             result = sb.toString();
@@ -131,8 +131,6 @@ public class EZTParser implements Parser {
     }
 
     private String replaceAll(String arg0, String regex, String arg1) {
-        System.out.println(arg0);
-        System.out.println(regex);
         return arg0.replaceAll(regex, arg1);
     }
 
@@ -142,7 +140,7 @@ public class EZTParser implements Parser {
         try {
 
             fw = new FileWriter(getFileNameCache(nomeSerie));
-            fw.write(line);
+            fw.write(line + "\n");
             fw.flush();
 
         } catch (IOException e) {
@@ -168,6 +166,7 @@ public class EZTParser implements Parser {
      * 
      */
     private Long getTimestamp() {
+
         Calendar cal = Calendar.getInstance();
 
         cal.set(Calendar.HOUR, 00);
@@ -176,6 +175,7 @@ public class EZTParser implements Parser {
         cal.set(Calendar.MILLISECOND, 00);
 
         return cal.getTimeInMillis();
+
     }
 
     /*
