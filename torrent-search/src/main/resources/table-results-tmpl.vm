@@ -1,19 +1,17 @@
-<div class="container">
-  <table class="table table-hover table-condensed table-bordered table-striped">
+<div class="container-fluid">
+  <table class="table table-condensed table-hover">
     <tr>
       <th>Title</th>
       <th>Size</th>
       <th>Released</th>
       <th>Seeds</th>
-      <th>Magnet</th>
     </tr>
 #foreach( $torrentInfo in $allTorrentsInfo )    
     <tr>
-      <td style="width: 60%;">$torrentInfo.title</td>
-      <td style="width: 10%; text-align:right;">$torrentInfo.size</td>
-      <td style="width: 10%; text-align:right;">$torrentInfo.released</td>
-      <td style="width: 10%; text-align:right;">$torrentInfo.seeds</td>
-      <td style="width: 10%; text-align:center;"><a href="$torrentInfo.magnetLink">baixar</a></td>
+      <td><a href="$torrentInfo.magnetLink">$torrentInfo.title</a></td>
+      <td>$torrentInfo.size</td>
+      <td>$torrentInfo.released</td>
+      <td>$torrentInfo.seeds</td>
     </tr>
 #end
   </table>

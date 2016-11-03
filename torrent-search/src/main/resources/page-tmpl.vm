@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <title>$title</title>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body>
 
@@ -21,7 +21,7 @@
 	        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Selecione...<span class="caret"></span></a>
 	        <ul class="dropdown-menu">
 #foreach( $serieInfo in $allSeriesInfo )
-                <li><a href="javascript:void(0)" onclick="openCity('$serieInfo.name')">$serieInfo.name</a></li>
+                <li><a href="javascript:void(0)" onclick="showTorrentsList('$serieInfo.name')">$serieInfo.name</a></li>
 #end
 	        </ul>
 	      </li>
@@ -38,9 +38,9 @@
 #end
 
     <script>
-        openCity("$firstSerieName");
+        showTorrentsList("$firstSerieName");
 
-        function openCity(serieName) {
+        function showTorrentsList(serieName) {
             var i;
             var x = document.getElementsByClassName("serie");
             for (i = 0; i < x.length; i++) {

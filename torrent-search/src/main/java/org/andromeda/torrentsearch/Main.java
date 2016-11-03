@@ -22,7 +22,7 @@ import org.apache.velocity.VelocityContext;
 public class Main {
 
     public static void main(String[] args) {
-        Template template = VelocityUtils.getTemplate("page-tmpl");
+        Template template = VelocityUtils.getTemplate("page2-tmpl");
 
         VelocityContext context = new VelocityContext();
 
@@ -35,7 +35,7 @@ public class Main {
         context.put("allSeriesInfo", series);
 
         //
-        EZTParser p = new EZTParser();
+        EZTVParser p = new EZTVParser();
 
         for (SerieInfoDTO serieInfoDTO : series) {
             serieInfoDTO.getListTorrents().addAll(p.listar(serieInfoDTO.getSearchCode()));
