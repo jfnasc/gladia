@@ -11,30 +11,30 @@
 <body>
 
     <!-- Menu Navbar -->
-    <nav class="navbar navbar-inverse">
-    <div class="container-fluid">
-        <div class="collapse navbar-collapse" id="myNavbar">
-        <ul class="nav navbar-nav">
-            <li class="dropdown">
-                <a class="dropdown-toggle" data-toggle="dropdown" href="#">Selecione a serie...<span class="caret"></span></a>
-                <ul class="dropdown-menu">
+	<nav class="navbar navbar-inverse">
+	  <div class="container-fluid">
+	    <div class="navbar-header">
+	      <a class="navbar-brand" href="#">Torrents :: Search Results</a>
+	    </div>
+	    <ul class="nav navbar-nav">
+	      <li class="dropdown">
+	        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Selecione...<span class="caret"></span></a>
+	        <ul class="dropdown-menu">
 #foreach( $serieInfo in $allSeriesInfo )
-                    <li><a href="javascript:void(0)" onclick="openCity('$serieInfo.name')">$serieInfo.name</a></li>
+                <li><a href="javascript:void(0)" onclick="openCity('$serieInfo.name')">$serieInfo.name</a></li>
 #end
-                </ul>
-            </li>
-        </ul>
-        </div>
-    </div>
-    </nav>
+	        </ul>
+	      </li>
+	    </ul>
+	  </div>
+	</nav>
     
     <!-- Resultados -->
 #foreach( $serieInfo in $allSeriesInfo )
-    <div id="$serieInfo.name" class="w3-container serie">
-    <h2>$serieInfo.name</h2>
+    <div id="$serieInfo.name" class="container serie">
+    <h3>$serieInfo.name</h3>
     $serieInfo.html
     </div>
-
 #end
 
     <script>

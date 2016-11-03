@@ -18,10 +18,14 @@ import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class EZTParser implements Parser {
 
-    private int limit = 25;
+    private static Logger LOGGER = LogManager.getLogger(EZTParser.class);
+
+    private int limit = 100;
 
     public EZTParser() {
 
@@ -64,9 +68,12 @@ public class EZTParser implements Parser {
             dto.setReleased(replaceAll(parts[4], "<[\\w\\s\\W]+>", ""));
             dto.setSeeds(replaceAll(parts[5].replaceAll("</font>", ""), "<[\\w\\s\\W]+>", ""));
 
-            result.add(dto);
+            LOGGER.info(dto.getTitle());
 
-            count++;
+            if (dto.getTitle().indexOf("720p") != -1) {
+                result.add(dto);
+                count++;
+            }
 
             if (count == limit) {
                 break;
@@ -82,8 +89,9 @@ public class EZTParser implements Parser {
 
         String result = null;
 
+        String url = "https://eztv.ag/search/" + nomeSerie;
         CloseableHttpClient httpclient = HttpClients.createDefault();
-        HttpGet httpGet = new HttpGet("https://eztv.ag/search/" + nomeSerie);
+        HttpGet httpGet = new HttpGet(url);
         CloseableHttpResponse response1 = null;
 
         String line = null;
@@ -91,7 +99,8 @@ public class EZTParser implements Parser {
         try {
             response1 = httpclient.execute(httpGet);
 
-            System.out.println(response1.getStatusLine());
+            LOGGER.info(url);
+            LOGGER.info(response1.getStatusLine());
 
             HttpEntity entity = response1.getEntity();
             InputStreamReader isr = new InputStreamReader(entity.getContent());
