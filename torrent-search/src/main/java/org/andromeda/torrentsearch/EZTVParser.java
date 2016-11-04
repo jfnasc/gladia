@@ -23,203 +23,212 @@ import org.apache.logging.log4j.Logger;
 
 public class EZTVParser implements Parser {
 
-    private static Logger LOGGER = LogManager.getLogger(EZTVParser.class);
+	private static Logger LOGGER = LogManager.getLogger(EZTVParser.class);
 
-    private int limit = 100;
+	private int limit = -1;
+	private boolean isHighResolution = false;
 
-    public EZTVParser() {
+	public EZTVParser() {
 
-    }
+	}
 
-    @Override
-    public List<TorrentDTO> listar(String nomeSerie) {
+	public EZTVParser(final int limit, final boolean isHighResolution) {
+		this.limit = limit;
+		this.isHighResolution = isHighResolution;
+	}
 
-        if (!isResultInCache(nomeSerie)) {
-            writeCache(nomeSerie, pesquisar(nomeSerie));
-        }
+	@Override
+	public List<TorrentDTO> listar(String nomeSerie) {
 
-        String line = restoreFromCache(nomeSerie);
+		String line = null;
 
-        List<TorrentDTO> result = new ArrayList<>();
+		if (!isResultInCache(nomeSerie)) {
+			line = pesquisar(nomeSerie);
+			writeCache(nomeSerie, line);
+		} else {
+			line = restoreFromCache(nomeSerie);
+		}
 
-        String prefixo = "<tr name=\"hover\" class=\"forum_header_border\">";
-        String sufixo = "</tr>";
+		List<TorrentDTO> result = new ArrayList<>();
 
-        Pattern p = Pattern.compile(prefixo + "[\\W\\w\\d\\s]+" + sufixo);
-        Matcher m = p.matcher(line);
+		String prefixo = "<tr name=\"hover\" class=\"forum_header_border\">";
+		String sufixo = "</tr>";
 
-        String base = null;
-        if (m.find()) {
-            base = line.substring(m.start(), m.end());
-        }
+		Pattern p = Pattern.compile(prefixo + "[\\W\\w\\d\\s]+" + sufixo);
+		Matcher m = p.matcher(line);
 
-        String[] episodes = base.split("</tr>");
+		String base = null;
+		if (m.find()) {
+			base = line.substring(m.start(), m.end());
+		}
 
-        int count = 0;
-        for (String episode : episodes) {
+		String[] episodes = base.split("</tr>");
 
-            String[] parts = episode.split("</td>");
+		int count = 0;
+		for (String episode : episodes) {
 
-            TorrentDTO dto = new TorrentDTO();
+			String[] parts = episode.split("</td>");
 
-            dto.setTitle(replaceAll(parts[1], "[\\w\\s\\W]+class=\"epinfo\">|</a>", ""));
-            dto.setMagnetLink(extract(parts[2], "magnet:[\\w\\d\\?=:&\\.\\%\\-]*"));
-            dto.setSize(replaceAll(parts[3], "<[\\w\\s\\W]+>", ""));
-            dto.setReleased(replaceAll(parts[4], "<[\\w\\s\\W]+>", ""));
-            dto.setSeeds(replaceAll(parts[5].replaceAll("</font>", ""), "<[\\w\\s\\W]+>", ""));
+			TorrentDTO dto = new TorrentDTO();
 
-            LOGGER.info(dto.getTitle());
+			dto.setTitle(replaceAll(parts[1], "[\\w\\s\\W]+class=\"epinfo\">|</a>", ""));
+			dto.setMagnetLink(extract(parts[2], "magnet:[\\w\\d\\?=:&\\.\\%\\-]*"));
+			dto.setSize(replaceAll(parts[3], "<[\\w\\s\\W]+>", ""));
+			dto.setReleased(replaceAll(parts[4], "<[\\w\\s\\W]+>", ""));
+			dto.setSeeds(replaceAll(parts[5].replaceAll("</font>", ""), "<[\\w\\s\\W]+>", ""));
 
-            if (dto.getTitle().indexOf("720p") != -1) {
-                result.add(dto);
-                count++;
-            }
+			if (!isHighResolution || (isHighResolution && dto.getTitle().indexOf("720p") != -1)) {
+				result.add(dto);
+				count++;
+			}
 
-            if (count == limit) {
-                break;
-            }
-        }
+			if (limit != -1 && count == limit) {
+				break;
+			}
+		}
 
-        Collections.sort(result);
+		Collections.sort(result);
 
-        return result;
-    }
+		return result;
+	}
 
-    private String pesquisar(String nomeSerie) {
+	private String pesquisar(String nomeSerie) {
 
-        String result = null;
+		String result = null;
 
-        String url = "https://eztv.ag/search/" + nomeSerie;
-        CloseableHttpClient httpclient = HttpClients.createDefault();
-        HttpGet httpGet = new HttpGet(url);
-        CloseableHttpResponse response1 = null;
+		String url = "https://eztv.ag/search/" + nomeSerie;
+		CloseableHttpClient httpclient = HttpClients.createDefault();
+		HttpGet httpGet = new HttpGet(url);
+		CloseableHttpResponse response1 = null;
 
-        String line = null;
+		String line = null;
 
-        try {
-            response1 = httpclient.execute(httpGet);
+		try {
+			response1 = httpclient.execute(httpGet);
 
-            LOGGER.info(url);
-            LOGGER.info(response1.getStatusLine());
+			LOGGER.info(url);
+			LOGGER.info(response1.getStatusLine());
 
-            HttpEntity entity = response1.getEntity();
-            InputStreamReader isr = new InputStreamReader(entity.getContent());
-            BufferedReader br = new BufferedReader(isr);
+			HttpEntity entity = response1.getEntity();
+			InputStreamReader isr = new InputStreamReader(entity.getContent());
+			BufferedReader br = new BufferedReader(isr);
 
-            StringBuilder sb = new StringBuilder();
+			StringBuilder sb = new StringBuilder();
 
-            while ((line = br.readLine()) != null) {
-                sb.append(line + "\n");
-            }
+			while ((line = br.readLine()) != null) {
+				sb.append(line + "\n");
+			}
 
-            result = sb.toString();
+			result = sb.toString();
 
-        } catch (Exception e) {
-            System.out.println(line);
-            e.printStackTrace();
-        } finally {
-            try {
-                response1.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
+		} catch (Exception e) {
+			System.out.println(line);
+			e.printStackTrace();
+		} finally {
+			try {
+				response1.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
 
-        return result;
-    }
+		return result;
+	}
 
-    private String extract(String arg0, String regex) {
-        Pattern p = Pattern.compile(regex);
-        Matcher m = p.matcher(arg0);
+	private String extract(String arg0, String regex) {
+		Pattern p = Pattern.compile(regex);
+		Matcher m = p.matcher(arg0);
 
-        if (m.find()) {
-            return (arg0.substring(m.start(), m.end()));
-        }
+		if (m.find()) {
+			return (arg0.substring(m.start(), m.end()));
+		}
 
-        return null;
-    }
+		return null;
+	}
 
-    private String replaceAll(String arg0, String regex, String arg1) {
-        return arg0.replaceAll(regex, arg1);
-    }
+	private String replaceAll(String arg0, String regex, String arg1) {
+		return arg0.replaceAll(regex, arg1);
+	}
 
-    private void writeCache(String nomeSerie, String line) {
-        FileWriter fw = null;
+	private void writeCache(String nomeSerie, String line) {
+		FileWriter fw = null;
 
-        try {
+		try {
 
-            fw = new FileWriter(getFileNameCache(nomeSerie));
-            fw.write(line + "\n");
-            fw.flush();
+			fw = new FileWriter(getFileNameCache(nomeSerie));
+			fw.write(line + "\n");
+			fw.flush();
 
-        } catch (IOException e) {
+		} catch (IOException e) {
 
-            e.printStackTrace();
+			e.printStackTrace();
 
-            try {
-                fw.close();
-            } catch (IOException e1) {
-                e1.printStackTrace();
-            }
-        }
-    }
+			try {
+				fw.close();
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
+		}
+	}
 
-    /*
-     * 
-     */
-    private boolean isResultInCache(String nomeSerie) {
-        return (new File(getFileNameCache(nomeSerie))).exists();
-    }
+	/*
+	 * 
+	 */
+	private boolean isResultInCache(String nomeSerie) {
+		return (new File(getFileNameCache(nomeSerie))).exists();
+	}
 
-    /*
-     * 
-     */
-    private Long getTimestamp() {
+	/*
+	 * 
+	 */
+	private Long getTimestamp() {
 
-        Calendar cal = Calendar.getInstance();
+		Calendar cal = Calendar.getInstance();
 
-        cal.set(Calendar.HOUR, 00);
-        cal.set(Calendar.MINUTE, 00);
-        cal.set(Calendar.SECOND, 00);
-        cal.set(Calendar.MILLISECOND, 00);
+		cal.set(Calendar.HOUR, 00);
+		cal.set(Calendar.MINUTE, 00);
+		cal.set(Calendar.SECOND, 00);
+		cal.set(Calendar.MILLISECOND, 00);
 
-        return cal.getTimeInMillis();
+		return cal.getTimeInMillis();
 
-    }
+	}
 
-    /*
-     * 
-     */
-    private String getFileNameCache(String nomeSerie) {
+	/*
+	 * 
+	 */
+	private String getFileNameCache(String nomeSerie) {
 
-        return String.format("./cache/%s-%s.cache", nomeSerie, getTimestamp());
+		return String.format("./cache/%s-%s.cache", nomeSerie, getTimestamp());
 
-    }
+	}
 
-    private String restoreFromCache(String nomeSerie) {
+	private String restoreFromCache(String nomeSerie) {
 
-        StringBuilder sb = new StringBuilder();
+		StringBuilder sb = new StringBuilder();
 
-        BufferedReader reader = null;
+		BufferedReader reader = null;
 
-        try {
-            reader = new BufferedReader(new FileReader(new File(getFileNameCache(nomeSerie))));
+		try {
+			reader = new BufferedReader(new FileReader(new File(getFileNameCache(nomeSerie))));
 
-            String line = null;
-            while ((line = reader.readLine()) != null) {
-                sb.append(line);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
+			LOGGER.info("Loading file: " + getFileNameCache(nomeSerie));
 
-            try {
-                reader.close();
-            } catch (IOException e1) {
-                e1.printStackTrace();
-            }
-        }
+			String line = null;
+			while ((line = reader.readLine()) != null) {
+				sb.append(line);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
 
-        return sb.toString();
-    }
+			try {
+				reader.close();
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
+		}
+
+		return sb.toString();
+	}
 
 }

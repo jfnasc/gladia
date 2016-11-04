@@ -22,7 +22,7 @@ import org.apache.velocity.VelocityContext;
 public class Main {
 
     public static void main(String[] args) {
-        Template template = VelocityUtils.getTemplate("page2-tmpl");
+        Template template = VelocityUtils.getTemplate("sidenav-tmpl");
 
         VelocityContext context = new VelocityContext();
 
