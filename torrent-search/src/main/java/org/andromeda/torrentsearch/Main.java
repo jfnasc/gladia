@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import org.andromeda.torrentsearch.parsers.PirateBayParser;
 import org.apache.velocity.Template;
 import org.apache.velocity.VelocityContext;
 
@@ -21,69 +22,71 @@ import org.apache.velocity.VelocityContext;
  */
 public class Main {
 
-    public static void main(String[] args) {
-        Template template = VelocityUtils.getTemplate("sidenav-tmpl");
+	public static void main(String[] args) {
+		Template template = VelocityUtils.getTemplate("sidenav-tmpl");
 
-        VelocityContext context = new VelocityContext();
+		VelocityContext context = new VelocityContext();
 
-        // titulo
-        context.put("title", new String("Torrents::Search Results"));
+		// titulo
+		context.put("title", new String("Torrents::Search Results"));
 
-        //
-        List<SerieInfoDTO> series = getSeriesInfo();
-        context.put("firstSerieName", series.get(0).getName());
-        context.put("allSeriesInfo", series);
+		//
+		List<SerieInfoDTO> series = getSeriesInfo();
+		context.put("firstSerieName", series.get(0).getName());
+		context.put("allSeriesInfo", series);
 
-        //
-        EZTVParser p = new EZTVParser();
+		// Parser p = new org.andromeda.torrentsearch.parsers.PirateBayParser();
+		Parser p = new org.andromeda.torrentsearch.parsers.EZTVParser();
 
-        for (SerieInfoDTO serieInfoDTO : series) {
-            serieInfoDTO.getListTorrents().addAll(p.listar(serieInfoDTO.getSearchCode()));
-        }
+		for (SerieInfoDTO serieInfoDTO : series) {
+			serieInfoDTO.getListTorrents().addAll(p.listar(serieInfoDTO.getSearchCode()));
+		}
 
-        StringWriter sw = new StringWriter();
-        template.merge(context, sw);
+		StringWriter sw = new StringWriter();
+		template.merge(context, sw);
 
-        try {
-            FileWriter bw = new FileWriter("/home/josen/result.html");
-            bw.write(sw.toString());
-            bw.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
+		try {
+			FileWriter bw = new FileWriter("/home/josen/result.html");
+			bw.write(sw.toString());
+			bw.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 
-    private static List<SerieInfoDTO> getSeriesInfo() {
+	private static List<SerieInfoDTO> getSeriesInfo() {
 
-        List<SerieInfoDTO> result = new ArrayList<>();
+		List<SerieInfoDTO> result = new ArrayList<>();
 
-        BufferedReader reader = null;
+		BufferedReader reader = null;
 
-        try {
-            reader = new BufferedReader(new InputStreamReader(Main.class.getResourceAsStream("/series.lst")));
+		try {
+			reader = new BufferedReader(new InputStreamReader(Main.class.getResourceAsStream("/series.lst")));
 
-            String line = null;
-            while ((line = reader.readLine()) != null) {
-                SerieInfoDTO dto = new SerieInfoDTO();
+			String line = null;
+			while ((line = reader.readLine()) != null) {
+				if (!line.trim().startsWith("#")) {
+					SerieInfoDTO dto = new SerieInfoDTO();
 
-                dto.setName(line.split(";")[0].trim());
-                dto.setSearchCode(line.split(";")[1].trim());
+					dto.setName(line.split(";")[0].trim());
+					dto.setSearchCode(line.split(";")[1].trim());
 
-                result.add(dto);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
+					result.add(dto);
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
 
-            try {
-                reader.close();
-            } catch (IOException e1) {
-                e1.printStackTrace();
-            }
-        }
+			try {
+				reader.close();
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
+		}
 
-        Collections.sort(result);
+		Collections.sort(result);
 
-        return result;
-    }
+		return result;
+	}
 
 }

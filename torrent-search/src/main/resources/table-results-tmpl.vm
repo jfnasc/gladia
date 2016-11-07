@@ -5,6 +5,7 @@
       <th>Size</th>
       <th>Released</th>
       <th>Seeds</th>
+      <th>Leechers</th>
     </tr>
 #foreach( $torrentInfo in $allTorrentsInfo )    
     <tr>
@@ -12,6 +13,7 @@
       <td>$torrentInfo.size</td>
       <td>$torrentInfo.released</td>
       <td>$torrentInfo.seeds</td>
+      <td>$torrentInfo.leechers</td>
     </tr>
 #end
   </table>

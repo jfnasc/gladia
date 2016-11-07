@@ -4,100 +4,118 @@ import java.io.Serializable;
 
 public class TorrentDTO implements Serializable, Comparable<TorrentDTO> {
 
-    /**
+	/**
 	 * 
 	 */
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private String title;
+	private String title = "";
 
-    private String magnetLink;
+	private String magnetLink = "";
 
-    private String size;
+	private String size = "0";
 
-    private String released;
+	private String released = "";
 
-    private String seeds;
+	private String seeds = "0";
 
-    /**
-     * @return the title
-     */
-    public String getTitle() {
-        return title;
-    }
+	private String leechers = "0";
 
-    /**
-     * @param title
-     *            the title to set
-     */
-    public void setTitle(String title) {
-        this.title = title;
-    }
+	/**
+	 * @return the title
+	 */
+	public String getTitle() {
+		return title;
+	}
 
-    /**
-     * @return the magnetLink
-     */
-    public String getMagnetLink() {
-        return magnetLink;
-    }
+	/**
+	 * @param title
+	 *            the title to set
+	 */
+	public void setTitle(String title) {
+		this.title = title;
+	}
 
-    /**
-     * @param magnetLink
-     *            the magnetLink to set
-     */
-    public void setMagnetLink(String magnetLink) {
-        this.magnetLink = magnetLink;
-    }
+	/**
+	 * @return the magnetLink
+	 */
+	public String getMagnetLink() {
+		return magnetLink;
+	}
 
-    /**
-     * @return the size
-     */
-    public String getSize() {
-        return size;
-    }
+	/**
+	 * @param magnetLink
+	 *            the magnetLink to set
+	 */
+	public void setMagnetLink(String magnetLink) {
+		this.magnetLink = magnetLink;
+	}
 
-    /**
-     * @param size
-     *            the size to set
-     */
-    public void setSize(String size) {
-        this.size = size;
-    }
+	/**
+	 * @return the size
+	 */
+	public String getSize() {
+		return size;
+	}
 
-    /**
-     * @return the released
-     */
-    public String getReleased() {
-        return released;
-    }
+	/**
+	 * @param size
+	 *            the size to set
+	 */
+	public void setSize(String size) {
+		this.size = size;
+	}
 
-    /**
-     * @param released
-     *            the released to set
-     */
-    public void setReleased(String released) {
-        this.released = released;
-    }
+	/**
+	 * @return the released
+	 */
+	public String getReleased() {
+		return released;
+	}
 
-    /**
-     * @return the seeds
-     */
-    public String getSeeds() {
-        return seeds;
-    }
+	/**
+	 * @param released
+	 *            the released to set
+	 */
+	public void setReleased(String released) {
+		this.released = released;
+	}
 
-    /**
-     * @param seeds
-     *            the seeds to set
-     */
-    public void setSeeds(String seeds) {
-        this.seeds = seeds;
-    }
+	/**
+	 * @return the seeds
+	 */
+	public String getSeeds() {
+		return seeds;
+	}
 
-    @Override
-    public int compareTo(TorrentDTO o) {
-        // inverse
-        return o.getTitle().compareTo(getTitle());
-    }
+	/**
+	 * @param seeds
+	 *            the seeds to set
+	 */
+	public void setSeeds(String seeds) {
+		this.seeds = seeds;
+	}
+
+	/**
+	 * 
+	 * @return
+	 */
+	public String getLeechers() {
+		return leechers;
+	}
+
+	/**
+	 * 
+	 * @param leechers
+	 */
+	public void setLeechers(String leechers) {
+		this.leechers = leechers;
+	}
+
+	@Override
+	public int compareTo(TorrentDTO o) {
+		// inverse
+		return o.getTitle().compareTo(getTitle());
+	}
 
 }
