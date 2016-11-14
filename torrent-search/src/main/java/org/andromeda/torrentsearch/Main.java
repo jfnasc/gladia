@@ -46,7 +46,7 @@ public class Main {
 		template.merge(context, sw);
 
 		try {
-			FileWriter bw = new FileWriter("/home/josen/result.html");
+			FileWriter bw = new FileWriter("/var/www/html/result.html");
 			bw.write(sw.toString());
 			bw.close();
 		} catch (IOException e) {
