@@ -10,7 +10,8 @@
                     <h:outputText value="Nome:" />
                 </b:column>
                 <b:column col-md="7">
-                    <b:inputText id="txtNome" fieldId="txtNome" name="txtNome" style="width:50%" />
+                    <b:inputText value="#{usuarioBean.usuarioPesquisa.noUsuario}" id="txtNome" fieldId="txtNome"
+                        name="txtNome" style="width:50%" />
                 </b:column>
             </b:row>
             <b:row>
@@ -18,16 +19,17 @@
                     <h:outputText value="E-mail:" />
                 </b:column>
                 <b:column col-md="7">
-                    <b:inputText id="txtEmail" fieldId="txtEmail" name="txtEmail" style="width:50%" />
+                    <b:inputText value="#{usuarioBean.usuarioPesquisa.deEmail}" id="txtEmail" fieldId="txtEmail"
+                        name="txtEmail" style="width:50%" />
                 </b:column>
             </b:row>
             <b:row>
                 <b:column colspan="2">
-                    <b:commandButton value="Pesquisar" type="submit" action="#{loginBean.recuperarSenha}" update="@form"
-                        look="primary" size="small" />
+                    <b:commandButton value="Pesquisar" type="submit" action="#{usuarioBean.pesquisarUsuarios()}"
+                        update="@form" look="primary" size="small" />
                     <p:spacer width="10" height="10" />
                     <b:commandButton value="Cadastrar novo usuário" look="primary" size="small"
-                        onclick="$('.modalPseudoClass').modal();return false;" />
+                        onclick="$('.modalCadastrarUsuario').modal();return false;" />
                 </b:column>
             </b:row>
         </b:panel>
@@ -40,41 +42,94 @@
             <h:column value="#{usuario.deTelefone}" label="Telefone/Celular" />
             <h:column value="#{usuario.deFuncao}" label="Função" />
             <h:column label="Ações">
-
+                <b:commandButton actionListener="#{usuarioBean.pesquisarUsuario()}"
+                    onclick="$('.modalAlterarUsuario').modal();return false;" look="primary" update="@form">
+                    <f:attribute name="usuario" value="usuario" />
+                    <span class="glyphicon glyphicon-pencil" size="xs"></span>
+                </b:commandButton>
+                <p:spacer width="5" height="5" />
+                <b:commandButton look="primary">
+                    <span class="glyphicon glyphicon-search" size="xs"></span>
+                </b:commandButton>
+                <p:spacer width="5" height="5" />
+                <b:commandButton look="primary">
+                    <span class="glyphicon glyphicon-trash" size="xs"></span>
+                </b:commandButton>
             </h:column>
         </b:dataTable>
 
-        <b:modal id="amodal" title="Cadastrar Usuário" styleClass="modalPseudoClass" closable="false"
-            close-on-escape="false" backdrop="false">
+        <!-- Modal Cadastro de Usuário -->
+        <b:modal id="modalCadastrarUsuario" title="Cadastrar Usuário" styleClass="modalCadastrarUsuario"
+            closable="false" close-on-escape="false" backdrop="false">
 
             <b:panelGrid columns="2" size="xs" columnClasses="col-lg-4, col-lg-7">
                 <h:outputLabel value="Nome: *" />
-                <b:inputText />
-                <h:outputLabel value="E-mail: *" />
-                <b:inputText />
+                <b:inputText value="#{usuarioBean.usuario.noUsuario}" />
                 <h:outputLabel value="Telefone/Celular: *" />
-                <b:inputText />
+                <b:inputText value="#{usuarioBean.usuario.deTelefone}" />
                 <h:outputLabel value="E-mail: *" />
-                <b:inputText />
+                <b:inputText value="#{usuarioBean.usuario.deEmail}" />
                 <h:outputLabel value="Função: *" />
-                <b:inputText />
+                <b:inputText value="#{usuarioBean.usuario.deFuncao}" />
                 <h:outputLabel value="Perfil: *" />
-                <b:inputText />
+                <b:selectOneMenu value="#{usuarioBean.usuario.coPerfil}">
+                    <f:selectItem itemValue="1" itemLabel="Administradores" />
+                    <f:selectItem itemValue="2" itemLabel="Usuários" />
+                </b:selectOneMenu>
             </b:panelGrid>
 
             <hr />
 
             <b:panelGrid columns="2" size="xs" columnClasses="col-lg-4, col-lg-7">
                 <h:outputLabel value="Senha: *" />
-                <b:inputText />
+                <b:inputText value="#{usuarioBean.usuario.deSenha}" />
                 <h:outputLabel value="Confirmar Senha: *" />
-                <b:inputText />
+                <b:inputText name="txtConfirmarSenha" />
             </b:panelGrid>
 
             <f:facet name="footer">
                 <b:button value="Voltar" dismiss="modal" onclick="return false;" />
-                <b:button value="Cadastrar" look="primary" dismiss="modal" onclick="return false;" />
+                <b:commandButton value="Cadastrar" type="submit" action="#{usuarioBean.cadastrarUsuario()}"
+                    update="@form" look="primary" size="small" data-dismiss="modal"
+                    onclick="javascript:window.location.reload()" />
             </f:facet>
         </b:modal>
+
+        <!-- Modal Alteração de Usuário -->
+        <b:modal id="modalAlterarUsuario" title="Alterar Usuário" styleClass="modalAlterarUsuario" closable="false"
+            close-on-escape="false" backdrop="false">
+
+            <b:panelGrid columns="2" size="xs" columnClasses="col-lg-4, col-lg-7">
+                <h:outputLabel value="Nome: *" />
+                <b:inputText value="#{usuarioBean.usuario.noUsuario}" />
+                <h:outputLabel value="Telefone/Celular: *" />
+                <b:inputText value="#{usuarioBean.usuario.deTelefone}" />
+                <h:outputLabel value="E-mail: *" />
+                <b:inputText value="#{usuarioBean.usuario.deEmail}" />
+                <h:outputLabel value="Função: *" />
+                <b:inputText value="#{usuarioBean.usuario.deFuncao}" />
+                <h:outputLabel value="Perfil: *" />
+                <b:selectOneMenu value="#{usuarioBean.usuario.coPerfil}">
+                    <f:selectItem itemValue="1" itemLabel="Administradores" />
+                    <f:selectItem itemValue="2" itemLabel="Usuários" />
+                </b:selectOneMenu>
+            </b:panelGrid>
+
+            <hr />
+
+            <b:panelGrid columns="2" size="xs" columnClasses="col-lg-4, col-lg-7">
+                <h:outputLabel value="Senha: *" />
+                <b:inputText value="#{usuarioBean.usuario.deSenha}" />
+                <h:outputLabel value="Confirmar Senha: *" />
+                <b:inputText name="txtConfirmarSenha" />
+            </b:panelGrid>
+
+            <f:facet name="footer">
+                <b:button value="Voltar" dismiss="modal" onclick="return false;" />
+                <b:commandButton value="Salvar" type="submit" action="#{usuarioBean.cadastrarUsuario()}" update="@form"
+                    look="primary" size="small" data-dismiss="modal" onclick="javascript:window.location.reload()" />
+            </f:facet>
+        </b:modal>
+
     </ui:define>
 </ui:composition>

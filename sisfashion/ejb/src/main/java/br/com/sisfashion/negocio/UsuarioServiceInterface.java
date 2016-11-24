@@ -16,6 +16,10 @@ import br.com.sisfashion.modelo.dto.UsuarioDTO;
 @Local
 public interface UsuarioServiceInterface {
 
-    public Collection<UsuarioDTO> listarUsuarios() throws Exception;
+	public void salvarUsuario(UsuarioDTO usuarioDTO) throws Exception;
+
+	public Collection<UsuarioDTO> pesquisarUsuarios(UsuarioDTO usuarioDTO) throws Exception;
+	
+	public Collection<UsuarioDTO> pesquisarUsuarios() throws Exception;
 
 }

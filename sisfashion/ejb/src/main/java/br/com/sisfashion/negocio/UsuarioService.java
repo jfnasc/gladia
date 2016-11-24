@@ -3,12 +3,12 @@
  */
 package br.com.sisfashion.negocio;
 
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
 
+import javax.ejb.EJB;
 import javax.ejb.Stateless;
 
+import br.com.sisfashion.modelo.dao.UsuarioDAO;
 import br.com.sisfashion.modelo.dto.UsuarioDTO;
 
 /**
@@ -18,23 +18,22 @@ import br.com.sisfashion.modelo.dto.UsuarioDTO;
 @Stateless
 public class UsuarioService implements UsuarioServiceInterface {
 
-    @Override
-    public Collection<UsuarioDTO> listarUsuarios() throws Exception {
-        List<UsuarioDTO> result = new ArrayList<>();
+	@EJB
+	UsuarioDAO usuarioDAO;
 
-        for (int i = 0; i < 20; i++) {
-            UsuarioDTO usuario = new UsuarioDTO();
+	@Override
+	public void salvarUsuario(UsuarioDTO usuarioDTO) throws Exception {
+		usuarioDAO.salvarUsuario(usuarioDTO);
+	}
 
-            usuario.setNuUsuario(i);
-            usuario.setNoUsuario("Usuario Cod. " + i);
-            usuario.setDeFuncao("Funcao Usuario Cod. " + i);
-            usuario.setDeTelefone("Telefone Usuario Cod. " + i);
-            usuario.setDeEmail("E-mail Usuario Cod. " + i);
+	@Override
+	public Collection<UsuarioDTO> pesquisarUsuarios(UsuarioDTO usuarioDTO) throws Exception {
+		return usuarioDAO.pesquisarUsuarios(usuarioDTO);
+	}
 
-            result.add(usuario);
-        }
-
-        return result;
-    }
+	@Override
+	public Collection<UsuarioDTO> pesquisarUsuarios() throws Exception {
+		return usuarioDAO.pesquisarUsuarios();
+	}
 
 }

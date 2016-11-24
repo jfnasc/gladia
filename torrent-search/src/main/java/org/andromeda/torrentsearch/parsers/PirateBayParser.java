@@ -73,6 +73,10 @@ public class PirateBayParser extends Parser {
 			}
 		}
 
+		if (base == null){
+			return result;
+		}
+		
 		String[] episodes = base.split("</tr>");
 
 		int count = 0;

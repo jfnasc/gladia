@@ -4,109 +4,135 @@ import java.io.Serializable;
 
 public class UsuarioDTO implements Serializable {
 
-    /**
-     * 
-     */
-    private static final long serialVersionUID = 1L;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
-    /**
-     * 
-     */
-    private Integer nuUsuario;
+	/**
+	 * 
+	 */
+	private Integer nuUsuario;
 
-    /**
-     * 
-     */
-    private String noUsuario;
+	/**
+	 * 
+	 */
+	private String noUsuario;
 
-    /**
-     * 
-     */
-    private String deEmail;
+	/**
+	 * 
+	 */
+	private String deEmail;
 
-    /**
-     * 
-     */
-    private String deTelefone;
+	/**
+	 * 
+	 */
+	private String deTelefone;
 
-    /**
-     * 
-     */
-    private String deFuncao;
+	/**
+	 * 
+	 */
+	private String deFuncao;
 
-    /**
-     * @return the nuUsuario
-     */
-    public Integer getNuUsuario() {
-        return nuUsuario;
-    }
+	/**
+	 * 
+	 */
+	private String deSenha;
 
-    /**
-     * @param nuUsuario
-     *            the nuUsuario to set
-     */
-    public void setNuUsuario(Integer nuUsuario) {
-        this.nuUsuario = nuUsuario;
-    }
+	/**
+	 * 
+	 */
+	private Integer coPerfil;
 
-    /**
-     * @return the noUsuario
-     */
-    public String getNoUsuario() {
-        return noUsuario;
-    }
+	/**
+	 * @return the nuUsuario
+	 */
+	public Integer getNuUsuario() {
+		return nuUsuario;
+	}
 
-    /**
-     * @param noUsuario
-     *            the noUsuario to set
-     */
-    public void setNoUsuario(String noUsuario) {
-        this.noUsuario = noUsuario;
-    }
+	/**
+	 * @param nuUsuario
+	 *            the nuUsuario to set
+	 */
+	public void setNuUsuario(Integer nuUsuario) {
+		this.nuUsuario = nuUsuario;
+	}
 
-    /**
-     * @return the deEmail
-     */
-    public String getDeEmail() {
-        return deEmail;
-    }
+	/**
+	 * @return the noUsuario
+	 */
+	public String getNoUsuario() {
+		return noUsuario;
+	}
 
-    /**
-     * @param deEmail
-     *            the deEmail to set
-     */
-    public void setDeEmail(String deEmail) {
-        this.deEmail = deEmail;
-    }
+	/**
+	 * @param noUsuario
+	 *            the noUsuario to set
+	 */
+	public void setNoUsuario(String noUsuario) {
+		this.noUsuario = noUsuario;
+	}
 
-    /**
-     * @return the deTelefone
-     */
-    public String getDeTelefone() {
-        return deTelefone;
-    }
+	/**
+	 * @return the deEmail
+	 */
+	public String getDeEmail() {
+		return deEmail;
+	}
 
-    /**
-     * @param deTelefone
-     *            the deTelefone to set
-     */
-    public void setDeTelefone(String deTelefone) {
-        this.deTelefone = deTelefone;
-    }
+	/**
+	 * @param deEmail
+	 *            the deEmail to set
+	 */
+	public void setDeEmail(String deEmail) {
+		this.deEmail = deEmail;
+	}
 
-    /**
-     * @return the deFuncao
-     */
-    public String getDeFuncao() {
-        return deFuncao;
-    }
+	/**
+	 * @return the deTelefone
+	 */
+	public String getDeTelefone() {
+		return deTelefone;
+	}
 
-    /**
-     * @param deFuncao
-     *            the deFuncao to set
-     */
-    public void setDeFuncao(String deFuncao) {
-        this.deFuncao = deFuncao;
-    }
+	/**
+	 * @param deTelefone
+	 *            the deTelefone to set
+	 */
+	public void setDeTelefone(String deTelefone) {
+		this.deTelefone = deTelefone;
+	}
+
+	/**
+	 * @return the deFuncao
+	 */
+	public String getDeFuncao() {
+		return deFuncao;
+	}
+
+	/**
+	 * @param deFuncao
+	 *            the deFuncao to set
+	 */
+	public void setDeFuncao(String deFuncao) {
+		this.deFuncao = deFuncao;
+	}
+
+	public String getDeSenha() {
+		return deSenha;
+	}
+
+	public void setDeSenha(String deSenha) {
+		this.deSenha = deSenha;
+	}
+
+	public Integer getCoPerfil() {
+		return coPerfil;
+	}
+
+	public void setCoPerfil(Integer coPerfil) {
+		this.coPerfil = coPerfil;
+	}
 
 }

@@ -15,7 +15,7 @@
     <b:navBar brand="Sisfashion" brandHref="/sisfashion/index.jsf" inverse="true" fixed="true">
         <b:navbarLinks>
             <b:navLink value="Home" outcome="/pages/home.jsf?faces-redirect=true"></b:navLink>
-            <b:navLink value="Usuários" outcome="/pages/usuarios/usuarios.jsf?faces-redirect=true" rendered="#{request.isUserInRole('administradores')}"></b:navLink>
+            <b:navLink value="Usuários" outcome="#{usuarioBean.carregarPagina()}" rendered="#{request.isUserInRole('administradores')}"></b:navLink>
             <b:navLink value="Agenda" outcome="/pages/agenda/agenda.jsf?faces-redirect=true"></b:navLink>
             <b:navLink value="Clientes" outcome="/pages/clientes/clientes.jsf?faces-redirect=true"></b:navLink>
             <b:navLink value="Sair" href="javascript:sair();"></b:navLink>
