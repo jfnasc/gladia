@@ -35,8 +35,8 @@ public class Main {
 		context.put("firstSerieName", series.get(0).getName());
 		context.put("allSeriesInfo", series);
 
-		Parser p = new org.andromeda.torrentsearch.parsers.PirateBayParser();
-		// Parser p = new org.andromeda.torrentsearch.parsers.EZTVParser();
+		//Parser p = new org.andromeda.torrentsearch.parsers.PirateBayParser();
+		Parser p = new org.andromeda.torrentsearch.parsers.EZTVParser();
 
 		for (SerieInfoDTO serieInfoDTO : series) {
 			serieInfoDTO.getListTorrents().addAll(p.listar(serieInfoDTO.getSearchCode()));
