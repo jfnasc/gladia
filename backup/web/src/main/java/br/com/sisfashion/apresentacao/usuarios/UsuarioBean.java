@@ -51,7 +51,7 @@ public class UsuarioBean {
 	 * @throws Exception
 	 */
 	public void pesquisarUsuario(ActionEvent evt) throws Exception {
-		System.out.println();
+		System.out.println("dsadasdasdasdasdasd");
 	}
 
 	/**
@@ -60,7 +60,6 @@ public class UsuarioBean {
 	 */
 	public void cadastrarUsuario() throws Exception {
 		usuarioService.salvarUsuario(this.usuarioDTO);
-		this.usuarioDTO = null;
 	}
 
 	public UsuarioDTO getUsuario() {
