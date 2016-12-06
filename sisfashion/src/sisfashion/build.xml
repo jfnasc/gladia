@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<project name="SISFASHION" default="deploy" basedir=".">
+
+	<property file="build.properties" />
+
+	<target name="clean">
+
+		<delete dir="${deploy.dir}/sisfashion.war" />
+
+	</target>
+
+	<target name="deploy">
+		<mkdir dir="${deploy.dir}/sisfashion.war" />
+
+		<copy todir="${deploy.dir}/sisfashion.war" verbose="true">
+			<fileset dir="target/Sisfashion" />
+		</copy>
+
+		<copy todir="${deploy.dir}/sisfashion.war/WEB-INF/classes" verbose="true">
+			<fileset dir="target/classes" />
+		</copy>
+
+		<copy todir="${deploy.dir}/sisfashion.war" verbose="true">
+			<fileset dir="src/main/webapp" />
+		</copy>
+	</target>
+</project>

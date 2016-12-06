@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts-config PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 1.3//EN" "http://jakarta.apache.org/struts/dtds/struts-config_1_3.dtd">
+<struts-config>
+
+	<form-beans>
+		<form-bean name="helloWorldForm" type="br.com.sisfashion.form.HelloWorldForm" />
+		<form-bean name="loginForm" type="br.com.sisfashion.form.LoginForm" />
+		<form-bean name="agendaForm" type="br.com.sisfashion.form.AgendaForm" />
+		<form-bean name="usuariosForm" type="br.com.sisfashion.form.UsuariosForm" />
+		<form-bean name="clientesForm" type="br.com.sisfashion.form.ClientesForm" />
+	</form-beans>
+
+	<action-mappings>
+		<action path="/helloWorld" type="br.com.sisfashion.action.HelloWorldAction"
+			name="helloWorldForm">
+			<forward name="success" path="/helloWorld.jsp" />
+		</action>
+
+		<action path="/login" type="br.com.sisfashion.action.LoginAction"
+			name="loginForm" scope="request" parameter="method">
+			<forward name="login" path="/login.jsp" />
+			<forward name="recuperarSenha" path="/recuperarSenha.jsp" />
+		</action>
+
+		<action path="/agenda" type="br.com.sisfashion.action.AgendaAction"
+			name="agendaForm" scope="request" parameter="method">
+			<forward name="iniciar" path="/paginas/agenda/agenda.jsp" />
+			<forward name="cadastrar" path="/paginas/agenda/cadastrarAtendimento.jsp" />
+			<forward name="salvar" path="/paginas/agenda/agenda.jsp" />
+			<forward name="alterar" path="/paginas/agenda/alterarAtendimento.jsp" />
+			<forward name="visualizar" path="/paginas/agenda/visualizarAtendimento.jsp" />
+		</action>
+
+		<action path="/usuarios" type="br.com.sisfashion.action.UsuariosAction"
+			name="usuariosForm" scope="request" parameter="method">
+			<forward name="iniciar" path="/paginas/usuarios/usuarios.jsp" />
+			<forward name="cadastrar" path="/paginas/usuarios/cadastrarUsuario.jsp" />
+			<forward name="salvar" path="/paginas/usuarios/usuarios.jsp" />
+			<forward name="alterar" path="/paginas/usuarios/alterarUsuario.jsp" />
+			<forward name="visualizar" path="/paginas/usuarios/visualizarUsuario.jsp" />
+		</action>
+
+		<action path="/clientes" type="br.com.sisfashion.action.ClientesAction"
+			name="clientesForm" scope="request" parameter="method">
+			<forward name="iniciar" path="/paginas/clientes/clientes.jsp" />
+			<forward name="cadastrar" path="/paginas/clientes/cadastrarCliente.jsp" />
+			<forward name="salvar" path="/paginas/clientes/clientes.jsp" />
+			<forward name="alterar" path="/paginas/clientes/alterarCliente.jsp" />
+			<forward name="visualizar" path="/paginas/clientes/visualizarCliente.jsp" />
+		</action>
+	</action-mappings>
+</struts-config>
