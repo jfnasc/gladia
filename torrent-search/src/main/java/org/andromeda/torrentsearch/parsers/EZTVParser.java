@@ -3,10 +3,9 @@ package org.andromeda.torrentsearch.parsers;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import org.andromeda.torrentsearch.Parser;
+import org.andromeda.torrentsearch.RegexUtils;
 import org.andromeda.torrentsearch.TorrentDTO;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -36,51 +35,41 @@ public class EZTVParser extends Parser {
 	@Override
 	public List<TorrentDTO> listar(String nomeSerie) {
 
-		String line = null;
-
-		if (!isResultInCache(nomeSerie)) {
-			line = pesquisar(URL_BASE + "/" + nomeSerie);
-			writeCache(nomeSerie, line);
-		} else {
-			line = restoreFromCache(nomeSerie);
-		}
-
 		List<TorrentDTO> result = new ArrayList<>();
 
-		String prefixo = "<tr name=\"hover\" class=\"forum_header_border\">";
-		String sufixo = "</tr>";
+		String contents = getContents(URL_BASE, nomeSerie);
 
-		Pattern p = Pattern.compile(prefixo + "[\\W\\w\\d\\s]+" + sufixo);
-		Matcher m = p.matcher(line);
+		List<String> bases = RegexUtils.extract(contents, "<tr name=\"hover\" class=\"forum_header_border\">", "</tr>");
 
-		String base = null;
-		if (m.find()) {
-			base = line.substring(m.start(), m.end());
-		}
+		for (String base : bases) {
 
-		String[] episodes = base.split("</tr>");
+			List<String> linhas = RegexUtils.extract(base, "<tr>|<tr[\\w\\d\\s=\"]+>", "</tr>");
 
-		int count = 0;
-		for (String episode : episodes) {
+			int count = 0;
 
-			String[] parts = episode.split("</td>");
+			for (String linha : linhas) {
 
-			TorrentDTO dto = new TorrentDTO();
+				List<String> colunas = RegexUtils.extract(linha, "<td>|<td[\\w\\d\\s=\"]+>", "</td>");
 
-			dto.setTitle(replaceAll(parts[1], "[\\w\\s\\W]+class=\"epinfo\">|</a>", ""));
-			dto.setMagnetLink(extract(parts[2], "magnet:[\\w\\d\\?=:&\\.\\%\\-]*"));
-			dto.setSize(replaceAll(parts[3], "<[\\w\\s\\W]+>", ""));
-			dto.setReleased(replaceAll(parts[4], "<[\\w\\s\\W]+>", ""));
-			dto.setSeeds(replaceAll(parts[5].replaceAll("</font>", ""), "<[\\w\\s\\W]+>", ""));
+				TorrentDTO dto = new TorrentDTO();
 
-			if (!isHighResolution || (isHighResolution && dto.getTitle().indexOf("720p") != -1)) {
-				result.add(dto);
-				count++;
+				dto.setTitle(replaceAll(colunas.get(1), "[\\w\\s\\W]+class=\"epinfo\">|</a>|</td>", ""));
+				dto.setMagnetLink(extract(colunas.get(2), "magnet:[\\w\\d\\?=:&\\.\\%\\-]*"));
+				dto.setSize(replaceAll(colunas.get(3), "<td[\\w\\s\"_=]+>|</td>", ""));
+				dto.setReleased(replaceAll(colunas.get(4), "<td[\\w\\s\"_=]+>|</td>", ""));
+				dto.setSeeds(replaceAll(colunas.get(5), "<td[\\w\\s\"_=]+><font[\\w\\s\"_=]+>|</font></td>", ""));
+
+				if (!isHighResolution || (isHighResolution && dto.getTitle().indexOf("720p") != -1)) {
+					result.add(dto);
+					count++;
+				}
+
+				if (limit != -1 && count == limit) {
+					break;
+				}
+
 			}
 
-			if (limit != -1 && count == limit) {
-				break;
-			}
 		}
 
 		Collections.sort(result);

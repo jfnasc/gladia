@@ -12,7 +12,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import org.andromeda.torrentsearch.parsers.PirateBayParser;
 import org.apache.velocity.Template;
 import org.apache.velocity.VelocityContext;
 

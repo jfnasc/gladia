@@ -94,6 +94,24 @@ public abstract class Parser {
 
 	}
 
+	protected String getContents(String url, String nomeSerie){
+
+		String line = null;
+
+		if (!isResultInCache(nomeSerie)) {
+			line = pesquisar(url + "/" + nomeSerie);
+			writeCache(nomeSerie, line);
+		} else {
+			line = restoreFromCache(nomeSerie);
+		}
+		
+		if (line != null){
+			line = (line.replaceAll(">[\\s]*<", "><")).trim();
+		}
+		
+		return line;
+	}
+	
 	/*
 	 * 
 	 */

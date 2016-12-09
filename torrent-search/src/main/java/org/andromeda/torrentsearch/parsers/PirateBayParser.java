@@ -62,20 +62,36 @@ public class PirateBayParser extends Parser {
 
 		String base = null;
 		if (m.find()) {
+			
 			base = line.substring(m.start(), m.end());
-
+			System.out.println(base.trim());
+			
 			// segunda fase
-			p = Pattern.compile("<tr>[\\W\\w\\d\\s]+</tr>");
+			p = Pattern.compile("[<tr>]*");
 			m = p.matcher(line);
 
-			if (m.find()) {
-				base = line.substring(m.start(), m.end());
+			while (m.find()) {
+				int beginIndex = m.start();
+				int endIndex = beginIndex + base.substring(m.end()).indexOf("</tr>");
+				System.out.println(base.substring(beginIndex, endIndex));
 			}
 		}
 
 		if (base == null){
 			return result;
 		}
+
+		System.exit(0);
+		
+		// segunda fase
+		p = Pattern.compile("<td>[\\W\\w\\d\\s]+</td>");
+		m = p.matcher(line);
+
+		while (m.find()) {
+			base = line.substring(m.start(), m.end());
+			System.out.println(base.trim());
+		}
+		
 		
 		String[] episodes = base.split("</tr>");
 
@@ -88,13 +104,13 @@ public class PirateBayParser extends Parser {
 			TorrentDTO dto = new TorrentDTO();
 
 			System.out.println("1 " + parts[1]);
-			System.out.println("2 " + parts[2]);
-			System.out.println("3 " + parts[3]);
+//			System.out.println("2 " + parts[2]);
+//			System.out.println("3 " + parts[3]);
 			
 			// title="Details for Blade Runner (1982) [The FInal Cut] 720p BrRip
 			// - 700MB - YIFY">
 
-			dto.setTitle(extract(parts[1], "title=\"Details for [\\w\\d\\s\\~\\{\\}\\|\\/\\\\\'\\&\\;\\-\\:\\*\\+\\,\\.\\_\\-(\\)\\[\\]#]+\"").replaceAll("title=\"Details for |\"", ""));
+			dto.setTitle(extract(parts[1], "title=\"Details for [\\w\\d\\s\\~\\{\\}\\|\\/\\\\\'\\$\\&\\;\\-\\:\\*\\+\\,\\.\\_\\-(\\)\\[\\]#]+\"").replaceAll("title=\"Details for |\"", ""));
 			dto.setMagnetLink(extract(parts[1], "magnet:[\\w\\d\\?=:&\\_\\,\\.\\%\\-]*"));
 
 			// dto.setSize(replaceAll(parts[3], "<[\\w\\s\\W]+>", ""));
