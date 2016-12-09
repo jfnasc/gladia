@@ -31,11 +31,17 @@ public class Main {
 
 		//
 		List<SerieInfoDTO> series = getSeriesInfo();
+		if (series.isEmpty()) {
+			System.out.println("Nada a fazer! :(");
+			System.exit(0);
+		}
 		context.put("firstSerieName", series.get(0).getName());
 		context.put("allSeriesInfo", series);
 
-		//Parser p = new org.andromeda.torrentsearch.parsers.PirateBayParser();
+		// Parser p = new org.andromeda.torrentsearch.parsers.PirateBayParser();
 		Parser p = new org.andromeda.torrentsearch.parsers.EZTVParser();
+		// Parser p = new
+		// org.andromeda.torrentsearch.parsers.LimeTorrentsParser();
 
 		for (SerieInfoDTO serieInfoDTO : series) {
 			serieInfoDTO.getListTorrents().addAll(p.listar(serieInfoDTO.getSearchCode()));

@@ -10,31 +10,22 @@ import org.andromeda.torrentsearch.TorrentDTO;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-public class PirateBayParser extends Parser {
+public class LimeTorrentsParser extends Parser {
 
-	private static String SEARCH_ENGINE = "PirateBay";
+	private static String SEARCH_ENGINE = "LimeTorrents";
 
-	private static String URL_BASE = "https://thepiratebay.org/search";
+	private static String URL_BASE = "https://www.limetorrents.cc/search/all/";
 
-	protected static Logger LOGGER = LogManager.getLogger(PirateBayParser.class);
+	protected static Logger LOGGER = LogManager.getLogger(LimeTorrentsParser.class);
 
 	private int limit = -1;
-
 	private boolean isHighResolution = false;
 
-	/**
-	 * 
-	 */
-	public PirateBayParser() {
+	public LimeTorrentsParser() {
 		super(SEARCH_ENGINE);
 	}
 
-	/**
-	 * 
-	 * @param limit
-	 * @param isHighResolution
-	 */
-	public PirateBayParser(final int limit, final boolean isHighResolution) {
+	public LimeTorrentsParser(final int limit, final boolean isHighResolution) {
 		super(SEARCH_ENGINE);
 
 		this.limit = limit;
@@ -48,11 +39,11 @@ public class PirateBayParser extends Parser {
 
 		String contents = getContents(URL_BASE, nomeSerie);
 
-		List<String> bases = RegexUtils.extract(contents, "<table id=\"searchResult\">", "</table>");
+		List<String> bases = RegexUtils.extract(contents, "<table class=\"table2\" cellpadding=\"6\" cellspacing=\"0\">", "<\\table>");
 
 		for (String base : bases) {
 
-			List<String> linhas = RegexUtils.extract(base, "<tr>", "</tr>");
+			List<String> linhas = RegexUtils.extract(base, "<tr>|<tr[\\w\\d\\s=\"]+>", "</tr>");
 
 			int count = 0;
 
@@ -62,11 +53,12 @@ public class PirateBayParser extends Parser {
 
 				TorrentDTO dto = new TorrentDTO();
 
-				dto.setTitle(RegexUtils.extract(colunas.get(1), "title=\"Details for ", "\">", true));
-				dto.setMagnetLink(RegexUtils.extract(colunas.get(1), "magnet:[\\w\\d\\?=:&\\.\\%\\-]*"));
-				dto.setSize(RegexUtils.extract(colunas.get(1), "Size ", ",", true));
-				dto.setReleased(RegexUtils.extract(colunas.get(1), "Uploaded ", ",", true));
-				dto.setSeeds(RegexUtils.replaceAll(colunas.get(2), "<td[\\w\\s\"_=]+>|</td>", ""));
+				dto.setTitle(RegexUtils.replaceAll(colunas.get(1), "[\\w\\s\\W]+class=\"epinfo\">|</a>|</td>", ""));
+				dto.setMagnetLink(RegexUtils.extract(colunas.get(2), "magnet:[\\w\\d\\?=:&\\.\\%\\-]*"));
+				dto.setSize(RegexUtils.replaceAll(colunas.get(3), "<td[\\w\\s\"_=]+>|</td>", ""));
+				dto.setReleased(RegexUtils.replaceAll(colunas.get(4), "<td[\\w\\s\"_=]+>|</td>", ""));
+				dto.setSeeds(
+						RegexUtils.replaceAll(colunas.get(5), "<td[\\w\\s\"_=]+><font[\\w\\s\"_=]+>|</font></td>", ""));
 
 				if (!isHighResolution || (isHighResolution && dto.getTitle().indexOf("720p") != -1)) {
 					result.add(dto);

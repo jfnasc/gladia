@@ -53,11 +53,11 @@ public class EZTVParser extends Parser {
 
 				TorrentDTO dto = new TorrentDTO();
 
-				dto.setTitle(replaceAll(colunas.get(1), "[\\w\\s\\W]+class=\"epinfo\">|</a>|</td>", ""));
-				dto.setMagnetLink(extract(colunas.get(2), "magnet:[\\w\\d\\?=:&\\.\\%\\-]*"));
-				dto.setSize(replaceAll(colunas.get(3), "<td[\\w\\s\"_=]+>|</td>", ""));
-				dto.setReleased(replaceAll(colunas.get(4), "<td[\\w\\s\"_=]+>|</td>", ""));
-				dto.setSeeds(replaceAll(colunas.get(5), "<td[\\w\\s\"_=]+><font[\\w\\s\"_=]+>|</font></td>", ""));
+				dto.setTitle(RegexUtils.replaceAll(colunas.get(1), "[\\w\\s\\W]+class=\"epinfo\">|</a>|</td>", ""));
+				dto.setMagnetLink(RegexUtils.extract(colunas.get(2), "magnet:[\\w\\d\\?=:&\\.\\%\\-]*"));
+				dto.setSize(RegexUtils.replaceAll(colunas.get(3), "<td[\\w\\s\"_=]+>|</td>", ""));
+				dto.setReleased(RegexUtils.replaceAll(colunas.get(4), "<td[\\w\\s\"_=]+>|</td>", ""));
+				dto.setSeeds(RegexUtils.replaceAll(colunas.get(5), "<td[\\w\\s\"_=]+><font[\\w\\s\"_=]+>|</font></td>", ""));
 
 				if (!isHighResolution || (isHighResolution && dto.getTitle().indexOf("720p") != -1)) {
 					result.add(dto);

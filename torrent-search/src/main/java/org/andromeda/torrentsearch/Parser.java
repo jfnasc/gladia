@@ -8,8 +8,6 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Calendar;
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
@@ -24,31 +22,16 @@ public abstract class Parser {
 	private static Logger LOGGER = LogManager.getLogger(Parser.class);
 
 	private String searchEngine;
-	
+
 	/**
 	 * 
 	 * @param searchEngine
 	 */
-	public Parser(String searchEngine){
+	public Parser(String searchEngine) {
 		this.searchEngine = searchEngine;
 	}
-	
+
 	public abstract List<TorrentDTO> listar(String nomeSerie);
-
-	protected String extract(String arg0, String regex) {
-		Pattern p = Pattern.compile(regex);
-		Matcher m = p.matcher(arg0);
-
-		if (m.find()) {
-			return (arg0.substring(m.start(), m.end()));
-		}
-
-		return null;
-	}
-
-	protected String replaceAll(String arg0, String regex, String arg1) {
-		return arg0.replaceAll(regex, arg1);
-	}
 
 	protected void writeCache(String nomeSerie, String line) {
 		FileWriter fw = null;
@@ -94,7 +77,7 @@ public abstract class Parser {
 
 	}
 
-	protected String getContents(String url, String nomeSerie){
+	protected String getContents(String url, String nomeSerie) {
 
 		String line = null;
 
@@ -104,19 +87,19 @@ public abstract class Parser {
 		} else {
 			line = restoreFromCache(nomeSerie);
 		}
-		
-		if (line != null){
+
+		if (line != null) {
 			line = (line.replaceAll(">[\\s]*<", "><")).trim();
 		}
-		
+
 		return line;
 	}
-	
+
 	/*
 	 * 
 	 */
 	protected String getFileNameCache(String nomeSerie) {
-
+		
 		return String.format("./cache/%s-%s-%s.cache", searchEngine, nomeSerie, getTimestamp());
 
 	}
