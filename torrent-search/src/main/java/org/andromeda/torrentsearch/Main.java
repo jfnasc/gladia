@@ -12,6 +12,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import org.andromeda.torrentsearch.parsers.EZTVParser;
+import org.andromeda.torrentsearch.parsers.ExtraTorrentParser;
+import org.andromeda.torrentsearch.parsers.PirateBayParser;
 import org.apache.velocity.Template;
 import org.apache.velocity.VelocityContext;
 
@@ -21,27 +24,36 @@ import org.apache.velocity.VelocityContext;
  */
 public class Main {
 
-	// private static Parser p = new
-	// org.andromeda.torrentsearch.parsers.PirateBayParser();
-	private static Parser p = new org.andromeda.torrentsearch.parsers.EZTVParser();
-	// private static Parser p = new
-	// org.andromeda.torrentsearch.parsers.LimeTorrentsParser();
+	static List<Parser> parsers = null;
 
-	public static void main(String[] args) {
-		listarMaisRecentes();
-		listar();
+	static {
+		parsers = new ArrayList<>();
+		parsers.add(new ExtraTorrentParser());
+		parsers.add(new EZTVParser());
+		parsers.add(new PirateBayParser());
 	}
 
-	public static void listarMaisRecentes() {
+	public static void main(String[] args) {
+		for (Parser p : parsers) {
+			listarMaisRecentes(parsers);
+			listar(p);
+		}
+	}
+
+	public static void listarMaisRecentes(List<Parser> parsers) {
 		Template template = VelocityUtils.getTemplate("sidenav-resumo-tmpl");
 
 		VelocityContext context = new VelocityContext();
 
-		List<SerieInfoDTO> series = listarEpisodiosMaisRecentes();
-
 		List<TorrentDTO> torrents = new ArrayList<>();
-		for (SerieInfoDTO serie : series) {
-			torrents.addAll(serie.getListTorrents());
+
+		for (Parser p : parsers) {
+
+			List<SerieInfoDTO> series = listarEpisodiosMaisRecentes(p);
+
+			for (SerieInfoDTO serie : series) {
+				torrents.addAll(serie.getListTorrents());
+			}
 		}
 
 		Collections.sort(torrents);
@@ -55,7 +67,7 @@ public class Main {
 		template.merge(context, sw);
 
 		try {
-			FileWriter bw = new FileWriter("/var/www/html/torrents/resumo.html");
+			FileWriter bw = new FileWriter("pages/resumo.html");
 			bw.write(sw.toString());
 			bw.close();
 		} catch (IOException e) {
@@ -63,12 +75,12 @@ public class Main {
 		}
 	}
 
-	public static void listar() {
+	public static void listar(Parser p) {
 		Template template = VelocityUtils.getTemplate("sidenav-tmpl");
 
 		VelocityContext context = new VelocityContext();
 
-		List<SerieInfoDTO> series = listarEpisodios();
+		List<SerieInfoDTO> series = listarEpisodios(p);
 
 		// titulo
 		context.put("title", new String("Torrents::Search Results"));
@@ -79,7 +91,7 @@ public class Main {
 		template.merge(context, sw);
 
 		try {
-			FileWriter bw = new FileWriter("/var/www/html/torrents/results.html");
+			FileWriter bw = new FileWriter("pages/" + p.getClass().getSimpleName() + ".html");
 			bw.write(sw.toString());
 			bw.close();
 		} catch (IOException e) {
@@ -87,24 +99,24 @@ public class Main {
 		}
 	}
 
-	private static List<SerieInfoDTO> listarEpisodios() {
+	private static List<SerieInfoDTO> listarEpisodios(Parser p) {
 
 		List<SerieInfoDTO> series = getSeriesInfo();
 
 		for (SerieInfoDTO serieInfoDTO : series) {
-			List<TorrentDTO> episodes = p.listar(serieInfoDTO);
+			List<TorrentDTO> episodes = (p).listar(serieInfoDTO);
 			serieInfoDTO.getListTorrents().addAll(episodes);
 		}
 
 		return series;
 	}
 
-	private static List<SerieInfoDTO> listarEpisodiosMaisRecentes() {
+	private static List<SerieInfoDTO> listarEpisodiosMaisRecentes(Parser p) {
 
 		List<SerieInfoDTO> series = getSeriesInfo();
 
 		for (SerieInfoDTO serieInfoDTO : series) {
-			List<TorrentDTO> episodes = p.listar(serieInfoDTO);
+			List<TorrentDTO> episodes = (p).listar(serieInfoDTO);
 			if (!episodes.isEmpty()) {
 				serieInfoDTO.getListTorrents().add(episodes.get(0));
 			}

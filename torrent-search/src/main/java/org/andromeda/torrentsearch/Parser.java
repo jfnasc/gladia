@@ -6,7 +6,8 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.Calendar;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import org.apache.http.HttpEntity;
@@ -61,28 +62,12 @@ public abstract class Parser {
 		return (new File(getFileNameCache(nomeSerie))).exists();
 	}
 
-	/*
-	 * 
-	 */
-	protected Long getTimestamp() {
-
-		Calendar cal = Calendar.getInstance();
-
-		cal.set(Calendar.HOUR, 00);
-		cal.set(Calendar.MINUTE, 00);
-		cal.set(Calendar.SECOND, 00);
-		cal.set(Calendar.MILLISECOND, 00);
-
-		return cal.getTimeInMillis();
-
-	}
-
 	protected String getContents(String url, String nomeSerie) {
 
 		String line = null;
 
 		if (!isResultInCache(nomeSerie)) {
-			line = pesquisar(url + "/" + nomeSerie);
+			line = pesquisar(url + nomeSerie);
 			writeCache(nomeSerie, line);
 		} else {
 			line = restoreFromCache(nomeSerie);
@@ -99,8 +84,8 @@ public abstract class Parser {
 	 * 
 	 */
 	protected String getFileNameCache(String nomeSerie) {
-		
-		return String.format("./cache/%s-%s-%s.cache", searchEngine, nomeSerie, getTimestamp());
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		return String.format("./cache/%s-%s-%s.cache", searchEngine, nomeSerie, sdf.format(new Date()));
 
 	}
 

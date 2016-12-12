@@ -15,7 +15,7 @@ public class PirateBayParser extends Parser {
 
 	private static String SEARCH_ENGINE = "PirateBay";
 
-	private static String URL_BASE = "https://thepiratebay.org/search";
+	private static String URL_BASE = "https://thepiratebay.org/search/";
 
 	protected static Logger LOGGER = LogManager.getLogger(PirateBayParser.class);
 
@@ -47,7 +47,7 @@ public class PirateBayParser extends Parser {
 
 		List<TorrentDTO> result = new ArrayList<>();
 
-		String contents = getContents(URL_BASE, serieInfo.getName());
+		String contents = getContents(URL_BASE, serieInfo.getSearchCode());
 
 		List<String> bases = RegexUtils.extract(contents, "<table id=\"searchResult\">", "</table>");
 
@@ -64,6 +64,7 @@ public class PirateBayParser extends Parser {
 				TorrentDTO dto = new TorrentDTO();
 
 				dto.setTitle(RegexUtils.extract(colunas.get(1), "title=\"Details for ", "\">", true));
+
 				dto.setMagnetLink(RegexUtils.extract(colunas.get(1), "magnet:[\\w\\d\\?=:&\\.\\%\\-]*"));
 				dto.setSize(RegexUtils.extract(colunas.get(1), "Size ", ",", true));
 				dto.setReleased(RegexUtils.extract(colunas.get(1), "Uploaded ", ",", true));
