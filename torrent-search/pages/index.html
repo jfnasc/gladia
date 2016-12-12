@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Frames Test</title>
+<style>
+#menu {
+	position: fixed;
+	left: 0;
+	width: 100%;
+	top: 0px;
+	height: 65px;
+}
+
+#menu iframe {
+	width: 100%;
+	height: 100%;
+	border: none;
+	overflow: hidden;
+}
+
+#conteudo {
+	position: fixed;
+	left: 0;
+	width: 100%;
+	top: 65px;
+	height: 100%;
+}
+
+#conteudo iframe {
+	width: 100%;
+	height: 100%;
+	border: none;
+}
+</style>
+</head>
+<body>
+    <div id="menu">
+        <iframe src="menu.html" name="menu" scrolling="no"></iframe>
+    </div>
+
+    <div id="conteudo">
+        <iframe src="resumo.html" name="principal"></iframe>
+    </div>
+</body>
+</html>

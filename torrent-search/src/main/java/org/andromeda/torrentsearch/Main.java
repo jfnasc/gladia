@@ -21,42 +21,96 @@ import org.apache.velocity.VelocityContext;
  */
 public class Main {
 
+	// private static Parser p = new
+	// org.andromeda.torrentsearch.parsers.PirateBayParser();
+	private static Parser p = new org.andromeda.torrentsearch.parsers.EZTVParser();
+	// private static Parser p = new
+	// org.andromeda.torrentsearch.parsers.LimeTorrentsParser();
+
 	public static void main(String[] args) {
-		Template template = VelocityUtils.getTemplate("sidenav-tmpl");
+		listarMaisRecentes();
+		listar();
+	}
+
+	public static void listarMaisRecentes() {
+		Template template = VelocityUtils.getTemplate("sidenav-resumo-tmpl");
 
 		VelocityContext context = new VelocityContext();
 
+		List<SerieInfoDTO> series = listarEpisodiosMaisRecentes();
+
+		List<TorrentDTO> torrents = new ArrayList<>();
+		for (SerieInfoDTO serie : series) {
+			torrents.addAll(serie.getListTorrents());
+		}
+
+		Collections.sort(torrents);
+		Collections.reverse(torrents);
+
 		// titulo
 		context.put("title", new String("Torrents::Search Results"));
-
-		//
-		List<SerieInfoDTO> series = getSeriesInfo();
-		if (series.isEmpty()) {
-			System.out.println("Nada a fazer! :(");
-			System.exit(0);
-		}
-		context.put("firstSerieName", series.get(0).getName());
-		context.put("allSeriesInfo", series);
-
-		// Parser p = new org.andromeda.torrentsearch.parsers.PirateBayParser();
-		Parser p = new org.andromeda.torrentsearch.parsers.EZTVParser();
-		// Parser p = new
-		// org.andromeda.torrentsearch.parsers.LimeTorrentsParser();
-
-		for (SerieInfoDTO serieInfoDTO : series) {
-			serieInfoDTO.getListTorrents().addAll(p.listar(serieInfoDTO.getSearchCode()));
-		}
+		context.put("allTorrentsInfo", torrents);
 
 		StringWriter sw = new StringWriter();
 		template.merge(context, sw);
 
 		try {
-			FileWriter bw = new FileWriter("/var/www/html/result.html");
+			FileWriter bw = new FileWriter("/var/www/html/torrents/resumo.html");
 			bw.write(sw.toString());
 			bw.close();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+
+	public static void listar() {
+		Template template = VelocityUtils.getTemplate("sidenav-tmpl");
+
+		VelocityContext context = new VelocityContext();
+
+		List<SerieInfoDTO> series = listarEpisodios();
+
+		// titulo
+		context.put("title", new String("Torrents::Search Results"));
+		context.put("firstSerieName", series.get(0).getName());
+		context.put("allSeriesInfo", series);
+
+		StringWriter sw = new StringWriter();
+		template.merge(context, sw);
+
+		try {
+			FileWriter bw = new FileWriter("/var/www/html/torrents/results.html");
+			bw.write(sw.toString());
+			bw.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	private static List<SerieInfoDTO> listarEpisodios() {
+
+		List<SerieInfoDTO> series = getSeriesInfo();
+
+		for (SerieInfoDTO serieInfoDTO : series) {
+			List<TorrentDTO> episodes = p.listar(serieInfoDTO);
+			serieInfoDTO.getListTorrents().addAll(episodes);
+		}
+
+		return series;
+	}
+
+	private static List<SerieInfoDTO> listarEpisodiosMaisRecentes() {
+
+		List<SerieInfoDTO> series = getSeriesInfo();
+
+		for (SerieInfoDTO serieInfoDTO : series) {
+			List<TorrentDTO> episodes = p.listar(serieInfoDTO);
+			if (!episodes.isEmpty()) {
+				serieInfoDTO.getListTorrents().add(episodes.get(0));
+			}
+		}
+
+		return series;
 	}
 
 	private static List<SerieInfoDTO> getSeriesInfo() {
@@ -79,6 +133,12 @@ public class Main {
 					result.add(dto);
 				}
 			}
+
+			if (result.isEmpty()) {
+				System.out.println("Nada a fazer! :(");
+				System.exit(0);
+			}
+
 		} catch (Exception e) {
 			e.printStackTrace();
 

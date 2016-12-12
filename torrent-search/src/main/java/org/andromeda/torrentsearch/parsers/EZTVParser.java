@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.andromeda.torrentsearch.Parser;
 import org.andromeda.torrentsearch.RegexUtils;
+import org.andromeda.torrentsearch.SerieInfoDTO;
 import org.andromeda.torrentsearch.TorrentDTO;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -33,11 +34,13 @@ public class EZTVParser extends Parser {
 	}
 
 	@Override
-	public List<TorrentDTO> listar(String nomeSerie) {
+	public List<TorrentDTO> listar(SerieInfoDTO serieInfo) {
 
+		System.out.println(serieInfo.getName());
+		
 		List<TorrentDTO> result = new ArrayList<>();
 
-		String contents = getContents(URL_BASE, nomeSerie);
+		String contents = getContents(URL_BASE, serieInfo.getSearchCode());
 
 		List<String> bases = RegexUtils.extract(contents, "<tr name=\"hover\" class=\"forum_header_border\">", "</tr>");
 
@@ -54,14 +57,19 @@ public class EZTVParser extends Parser {
 				TorrentDTO dto = new TorrentDTO();
 
 				dto.setTitle(RegexUtils.replaceAll(colunas.get(1), "[\\w\\s\\W]+class=\"epinfo\">|</a>|</td>", ""));
-				dto.setMagnetLink(RegexUtils.extract(colunas.get(2), "magnet:[\\w\\d\\?=:&\\.\\%\\-]*"));
-				dto.setSize(RegexUtils.replaceAll(colunas.get(3), "<td[\\w\\s\"_=]+>|</td>", ""));
-				dto.setReleased(RegexUtils.replaceAll(colunas.get(4), "<td[\\w\\s\"_=]+>|</td>", ""));
-				dto.setSeeds(RegexUtils.replaceAll(colunas.get(5), "<td[\\w\\s\"_=]+><font[\\w\\s\"_=]+>|</font></td>", ""));
 
-				if (!isHighResolution || (isHighResolution && dto.getTitle().indexOf("720p") != -1)) {
-					result.add(dto);
-					count++;
+				if (dto.getTitle().startsWith(serieInfo.getName())) {
+
+					dto.setMagnetLink(RegexUtils.extract(colunas.get(2), "magnet:[\\w\\d\\?=:&\\.\\%\\-]*"));
+					dto.setSize(RegexUtils.replaceAll(colunas.get(3), "<td[\\w\\s\"_=]+>|</td>", ""));
+					dto.setReleased(RegexUtils.replaceAll(colunas.get(4), "<td[\\w\\s\"_=]+>|</td>", ""));
+					dto.setSeeds(RegexUtils.replaceAll(colunas.get(5),
+							"<td[\\w\\s\"_=]+><font[\\w\\s\"_=]+>|</font></td>", ""));
+
+					if (!isHighResolution || (isHighResolution && dto.getTitle().indexOf("720p") != -1)) {
+						result.add(dto);
+						count++;
+					}
 				}
 
 				if (limit != -1 && count == limit) {

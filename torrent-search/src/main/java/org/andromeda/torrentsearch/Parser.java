@@ -31,7 +31,7 @@ public abstract class Parser {
 		this.searchEngine = searchEngine;
 	}
 
-	public abstract List<TorrentDTO> listar(String nomeSerie);
+	public abstract List<TorrentDTO> listar(SerieInfoDTO serieInfo);
 
 	protected void writeCache(String nomeSerie, String line) {
 		FileWriter fw = null;

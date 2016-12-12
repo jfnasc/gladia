@@ -76,7 +76,7 @@ public class RegexUtils {
 
 	}
 
-	public static List<String> extract(String base, String start, String end) {
+	public static List<String> extractTeste(String base, String start, String end) {
 
 		List<String> result = new ArrayList<>();
 
@@ -90,6 +90,26 @@ public class RegexUtils {
 
 		return result;
 	}
+	
+	public static List<String> extract(String base, String start, String end) {
+		
+		List<String> result = new ArrayList<>();
+		
+		Pattern p = Pattern.compile(start);
+		Matcher m = p.matcher(base);
+
+		while (m.find()) {
+			
+			int beginIndex = m.start();
+			int endIndex = beginIndex + base.substring(beginIndex).indexOf(end) + end.length();
+			
+			result.add(base.substring(beginIndex, endIndex));
+		}
+
+		return result;
+	}
+
+	
 
 	public static String extract(String base, String start, String end, boolean removeTags) {
 

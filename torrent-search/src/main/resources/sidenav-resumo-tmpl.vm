@@ -12,34 +12,28 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body>
+
+<!-- Resultados -->
 <div class="container-fluid">
-    <div class="col-sm-2 sidenav">
-      <ul class="nav nav-pills nav-stacked">
-#foreach( $serieInfo in $allSeriesInfo )
-         <li><a href="#" onclick="showTorrentsList('$serieInfo.name')">$serieInfo.name</a></li>
+  <table class="table table-condensed table-hover">
+    <tr>
+      <th>Title</th>
+      <th>Size</th>
+      <th>Released</th>
+      <th>Seeds</th>
+      <th>Leechers</th>
+    </tr>
+#foreach( $torrentInfo in $allTorrentsInfo )    
+    <tr>
+      <td><a href="$torrentInfo.magnetLink">$torrentInfo.title</a></td>
+      <td>$torrentInfo.size</td>
+      <td>$torrentInfo.released</td>
+      <td>$torrentInfo.seeds</td>
+      <td>$torrentInfo.leechers</td>
+    </tr>
 #end
-      </ul>
-    </div>
-
-    <div class="col-sm-6">
-
-    <!-- Resultados -->
-	#foreach( $serieInfo in $allSeriesInfo )
-
-	    <div id="$serieInfo.name" class="container serie">
-	    <h3>$serieInfo.name</h3>
-
-	   	$serieInfo.html
-
-	   	#if ( $serieInfo.listTorrents.empty )
-	    	<h4>Nenhum resultado encontrado :(</h4>
-	    #end
-
-	    </div>
-	#end
-    </div>
+  </table>
 </div>
-
 <script>
     showTorrentsList("$firstSerieName");
 

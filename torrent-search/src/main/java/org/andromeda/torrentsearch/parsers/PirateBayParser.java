@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.andromeda.torrentsearch.Parser;
 import org.andromeda.torrentsearch.RegexUtils;
+import org.andromeda.torrentsearch.SerieInfoDTO;
 import org.andromeda.torrentsearch.TorrentDTO;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -42,11 +43,11 @@ public class PirateBayParser extends Parser {
 	}
 
 	@Override
-	public List<TorrentDTO> listar(String nomeSerie) {
+	public List<TorrentDTO> listar(SerieInfoDTO serieInfo) {
 
 		List<TorrentDTO> result = new ArrayList<>();
 
-		String contents = getContents(URL_BASE, nomeSerie);
+		String contents = getContents(URL_BASE, serieInfo.getName());
 
 		List<String> bases = RegexUtils.extract(contents, "<table id=\"searchResult\">", "</table>");
 
