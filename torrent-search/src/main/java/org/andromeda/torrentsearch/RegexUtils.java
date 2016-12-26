@@ -90,46 +90,41 @@ public class RegexUtils {
 
 		return result;
 	}
-	
+
 	public static List<String> extract(String base, String start, String end) {
-		
+
 		List<String> result = new ArrayList<>();
-		
+
 		Pattern p = Pattern.compile(start);
 		Matcher m = p.matcher(base);
 
 		while (m.find()) {
-			
+
 			int beginIndex = m.start();
 			int endIndex = beginIndex + base.substring(beginIndex).indexOf(end) + end.length();
-			
+
 			result.add(base.substring(beginIndex, endIndex));
 		}
 
 		return result;
 	}
 
-	
-
 	public static String extract(String base, String start, String end, boolean removeTags) {
 
 		String result = null;
 
-		Pattern p = Pattern.compile(start);
-		Matcher m = p.matcher(base);
-
-		if (m.find()) {
-
-			int beginIndex = m.start();
-			int endIndex = beginIndex + base.substring(beginIndex).indexOf(end) + end.length();
-
-			result = base.substring(beginIndex, endIndex);
-
-			if (removeTags) {
-				result = result.replaceAll("^" + start, "");
-				result = result.replaceAll(end + "$", "");
-			}
+		int beginIndex = base.indexOf(start);
+		if (beginIndex == -1) {
+			return null;
 		}
+
+		int endIndex = beginIndex + base.substring(beginIndex).indexOf(end);
+	
+		if (beginIndex == -1 || endIndex == -1) {
+			return null;
+		}
+		
+		result = base.substring(beginIndex + start.length(), endIndex);
 
 		return result;
 	}

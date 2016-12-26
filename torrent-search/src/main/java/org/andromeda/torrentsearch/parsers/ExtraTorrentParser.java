@@ -15,7 +15,7 @@ public class ExtraTorrentParser extends Parser {
 
 	private static String SEARCH_ENGINE = "ExtraTorrent";
 
-	private static String URL_BASE = "http://extratorrent.cc/search/?search=";
+	private static String URL_BASE = "http://extratorrent.cc/search/?&new=1&x=0&y=0&search=";
 
 	protected static Logger LOGGER = LogManager.getLogger(ExtraTorrentParser.class);
 
@@ -40,7 +40,7 @@ public class ExtraTorrentParser extends Parser {
 
 		List<TorrentDTO> result = new ArrayList<>();
 
-		String contents = getContents(URL_BASE, serieInfo.getName().replaceAll(" ", "%20"));
+		String contents = getContents(URL_BASE, serieInfo.getName().replaceAll(" ", "+").toLowerCase());
 
 		List<String> bases = RegexUtils.extract(contents, "<table class=\"tl\">", "</table><br />");
 

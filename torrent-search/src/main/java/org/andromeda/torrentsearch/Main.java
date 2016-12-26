@@ -13,7 +13,7 @@ import java.util.Collections;
 import java.util.List;
 
 import org.andromeda.torrentsearch.parsers.EZTVParser;
-import org.andromeda.torrentsearch.parsers.ExtraTorrentParser;
+import org.andromeda.torrentsearch.parsers.KickAssParser;
 import org.andromeda.torrentsearch.parsers.PirateBayParser;
 import org.apache.velocity.Template;
 import org.apache.velocity.VelocityContext;
@@ -28,9 +28,11 @@ public class Main {
 
 	static {
 		parsers = new ArrayList<>();
-		parsers.add(new ExtraTorrentParser());
+
+		// parsers.add(new ExtraTorrentParser());
 		parsers.add(new EZTVParser());
 		parsers.add(new PirateBayParser());
+		parsers.add(new KickAssParser());
 	}
 
 	public static void main(String[] args) {
