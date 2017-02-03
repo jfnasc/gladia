@@ -11,8 +11,11 @@
         <property name="password" value="avalon" />
     </bean>
 
-    <!-- Definition for studentJDBCTemplate bean -->
     <bean id="SeriesDAO" class="org.avalon.hunterz.dao.jdbc.SeriesDAOImpl">
+        <property name="dataSource" ref="dataSource" />
+    </bean>
+
+    <bean id="TorrentsDAO" class="org.avalon.hunterz.dao.jdbc.TorrentsDAOImpl">
         <property name="dataSource" ref="dataSource" />
     </bean>
 

@@ -12,6 +12,7 @@ import java.util.List;
 
 import org.avalon.hunterz.dao.SeriesDAO;
 import org.avalon.hunterz.model.Serie;
+import org.avalon.hunterz.utils.DbUtils;
 
 /**
  * @author josen
@@ -52,6 +53,8 @@ public class SeriesDAOImpl extends BaseDAO implements SeriesDAO {
 
         } catch (Exception e) {
             e.printStackTrace();
+        } finally {
+            DbUtils.close(null, null, conn);
         }
 
         return result;
@@ -63,7 +66,7 @@ public class SeriesDAOImpl extends BaseDAO implements SeriesDAO {
         serie.setCodigo(rs.getInt("id_serie"));
         serie.setNome(rs.getString("no_serie"));
         serie.setCodigoBusca(rs.getString("co_serie"));
-        
+
         return serie;
     }
 }

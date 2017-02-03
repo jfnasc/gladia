@@ -9,7 +9,7 @@ import org.apache.logging.log4j.Logger;
 import org.avalon.hunterz.Parser;
 import org.avalon.hunterz.RegexUtils;
 import org.avalon.hunterz.SeriesDTO;
-import org.avalon.hunterz.TorrentDTO;
+import org.avalon.hunterz.model.TorrentInfo;
 
 public class LimeTorrentsParser extends Parser {
 
@@ -34,9 +34,9 @@ public class LimeTorrentsParser extends Parser {
 	}
 
 	@Override
-	public List<TorrentDTO> listar(SeriesDTO serieDTO) {
+	public List<TorrentInfo> listar(SeriesDTO serieDTO) {
 
-		List<TorrentDTO> result = new ArrayList<>();
+		List<TorrentInfo> result = new ArrayList<>();
 
 		String contents = getContents(URL_BASE, serieDTO.getSerie().getNome());
 
@@ -52,7 +52,7 @@ public class LimeTorrentsParser extends Parser {
 
 				List<String> colunas = RegexUtils.extract(linha, "<td>|<td[\\w\\d\\s=\"]+>", "</td>");
 
-				TorrentDTO dto = new TorrentDTO();
+				TorrentInfo dto = new TorrentInfo();
 
 				dto.setTitle(RegexUtils.replaceAll(colunas.get(1), "[\\w\\s\\W]+class=\"epinfo\">|</a>|</td>", ""));
 				dto.setMagnetLink(RegexUtils.extract(colunas.get(2), "magnet:[\\w\\d\\?=:&\\.\\%\\-]*"));

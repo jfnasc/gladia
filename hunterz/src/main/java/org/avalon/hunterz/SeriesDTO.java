@@ -8,6 +8,7 @@ import java.util.List;
 import org.apache.velocity.Template;
 import org.apache.velocity.VelocityContext;
 import org.avalon.hunterz.model.Serie;
+import org.avalon.hunterz.model.TorrentInfo;
 
 public class SeriesDTO implements Serializable, Comparable<SeriesDTO> {
 
@@ -18,7 +19,7 @@ public class SeriesDTO implements Serializable, Comparable<SeriesDTO> {
 
     private Serie serie;
 
-    private List<TorrentDTO> listTorrents;
+    private List<TorrentInfo> listTorrents;
 
     /**
      * @return the serie
@@ -59,7 +60,7 @@ public class SeriesDTO implements Serializable, Comparable<SeriesDTO> {
 
         VelocityContext context = new VelocityContext();
 
-        context.put("allTorrentsInfo", getListTorrents());
+        context.put("allTorrentsInfo", listarTorrents());
 
         StringWriter sw = new StringWriter();
         template.merge(context, sw);
@@ -70,9 +71,9 @@ public class SeriesDTO implements Serializable, Comparable<SeriesDTO> {
     /**
      * @return the listTorrents
      */
-    public List<TorrentDTO> getListTorrents() {
+    public List<TorrentInfo> listarTorrents() {
         if (listTorrents == null) {
-            listTorrents = new ArrayList<TorrentDTO>();
+            listTorrents = new ArrayList<TorrentInfo>();
         }
         return listTorrents;
     }
@@ -81,7 +82,7 @@ public class SeriesDTO implements Serializable, Comparable<SeriesDTO> {
      * @param listTorrents
      *            the listTorrents to set
      */
-    public void setListTorrents(List<TorrentDTO> listTorrents) {
+    public void setListTorrents(List<TorrentInfo> listTorrents) {
         this.listTorrents = listTorrents;
     }
 
