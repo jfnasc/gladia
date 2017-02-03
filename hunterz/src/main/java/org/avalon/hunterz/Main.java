@@ -1,7 +1,7 @@
 /**
  * 
  */
-package org.andromeda.torrentsearch;
+package org.avalon.hunterz;
 
 import java.io.BufferedReader;
 import java.io.FileWriter;
@@ -12,11 +12,11 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import org.andromeda.torrentsearch.parsers.EZTVParser;
-import org.andromeda.torrentsearch.parsers.KickAssParser;
-import org.andromeda.torrentsearch.parsers.PirateBayParser;
 import org.apache.velocity.Template;
 import org.apache.velocity.VelocityContext;
+import org.avalon.hunterz.parsers.EZTVParser;
+import org.avalon.hunterz.parsers.KickAssParser;
+import org.avalon.hunterz.parsers.PirateBayParser;
 
 /**
  * @author josen

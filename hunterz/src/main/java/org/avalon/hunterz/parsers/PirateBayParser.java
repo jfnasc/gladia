@@ -1,15 +1,15 @@
-package org.andromeda.torrentsearch.parsers;
+package org.avalon.hunterz.parsers;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import org.andromeda.torrentsearch.Parser;
-import org.andromeda.torrentsearch.RegexUtils;
-import org.andromeda.torrentsearch.SerieInfoDTO;
-import org.andromeda.torrentsearch.TorrentDTO;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.avalon.hunterz.Parser;
+import org.avalon.hunterz.RegexUtils;
+import org.avalon.hunterz.SerieInfoDTO;
+import org.avalon.hunterz.TorrentDTO;
 
 public class PirateBayParser extends Parser {
 

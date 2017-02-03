@@ -1,4 +1,4 @@
-package org.andromeda.torrentsearch;
+package org.avalon.hunterz;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

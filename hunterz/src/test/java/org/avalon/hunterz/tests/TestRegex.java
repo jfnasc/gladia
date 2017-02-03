@@ -1,4 +1,4 @@
-package org.andromeda.torrentsearch.tests;
+package org.avalon.hunterz.tests;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;

@@ -1,4 +1,4 @@
-package org.andromeda.torrentsearch;
+package org.avalon.hunterz;
 
 import java.io.Serializable;
 import java.io.StringWriter;
