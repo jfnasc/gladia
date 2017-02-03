@@ -4,6 +4,7 @@
 package org.avalon.app;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -97,6 +98,9 @@ public class Main {
 		template.merge(context, sw);
 
 		try {
+			
+			(new File("./pages")).mkdirs();
+			
 			FileWriter bw = new FileWriter("pages/" + p.getClass().getSimpleName() + ".html");
 			bw.write(sw.toString());
 			bw.close();
