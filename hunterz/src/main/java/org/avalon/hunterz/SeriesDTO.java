@@ -7,53 +7,47 @@ import java.util.List;
 
 import org.apache.velocity.Template;
 import org.apache.velocity.VelocityContext;
+import org.avalon.hunterz.model.Serie;
 
-public class SerieInfoDTO implements Serializable, Comparable<SerieInfoDTO> {
+public class SeriesDTO implements Serializable, Comparable<SeriesDTO> {
 
     /**
      * 
      */
     private static final long serialVersionUID = 1L;
 
-    private String name;
-
-    private String searchCode;
+    private Serie serie;
 
     private List<TorrentDTO> listTorrents;
 
     /**
-     * @return the name
+     * @return the serie
      */
-    public String getName() {
-        return name;
+    public Serie getSerie() {
+        return serie;
     }
 
     /**
-     * @param name
-     *            the name to set
+     * @param serie
+     *            the serie to set
      */
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    /**
-     * @return the searchCode
-     */
-    public String getSearchCode() {
-        return searchCode;
-    }
-
-    /**
-     * @param searchCode
-     *            the searchCode to set
-     */
-    public void setSearchCode(String searchCode) {
-        this.searchCode = searchCode;
+    public void setSerie(Serie serie) {
+        this.serie = serie;
     }
 
     @Override
-    public int compareTo(SerieInfoDTO o) {
-        return getName().compareTo(o.getName());
+    public int compareTo(SeriesDTO o) {
+        return serie.getNome().compareTo(serie.getNome());
+    }
+
+    /*
+     * (non-Javadoc)
+     * 
+     * @see java.lang.Object#toString()
+     */
+    @Override
+    public String toString() {
+        return "SeriesDTO [serie=" + serie + ", listTorrents=" + listTorrents + "]";
     }
 
     /**

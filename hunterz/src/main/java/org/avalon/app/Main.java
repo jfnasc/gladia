@@ -3,11 +3,9 @@
  */
 package org.avalon.app;
 
-import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -16,12 +14,15 @@ import java.util.List;
 import org.apache.velocity.Template;
 import org.apache.velocity.VelocityContext;
 import org.avalon.hunterz.Parser;
-import org.avalon.hunterz.SerieInfoDTO;
+import org.avalon.hunterz.SeriesDTO;
 import org.avalon.hunterz.TorrentDTO;
 import org.avalon.hunterz.VelocityUtils;
+import org.avalon.hunterz.dao.SeriesDAO;
+import org.avalon.hunterz.model.Serie;
 import org.avalon.hunterz.parsers.EZTVParser;
-import org.avalon.hunterz.parsers.KickAssParser;
-import org.avalon.hunterz.parsers.PirateBayParser;
+import org.springframework.beans.BeansException;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 /**
  * @author josen
@@ -29,151 +30,150 @@ import org.avalon.hunterz.parsers.PirateBayParser;
  */
 public class Main {
 
-	static List<Parser> parsers = null;
+    static ApplicationContext context;
 
-	static {
-		parsers = new ArrayList<>();
+    static List<Parser> parsers = null;
 
-		// parsers.add(new ExtraTorrentParser());
-		parsers.add(new EZTVParser());
-		parsers.add(new PirateBayParser());
-		parsers.add(new KickAssParser());
-	}
+    static {
+        context = new ClassPathXmlApplicationContext("appConfig.xml");
 
-	public static void main(String[] args) {
-		for (Parser p : parsers) {
-			listarMaisRecentes(parsers);
-			listar(p);
-		}
-	}
+        parsers = new ArrayList<>();
 
-	public static void listarMaisRecentes(List<Parser> parsers) {
-		Template template = VelocityUtils.getTemplate("sidenav-resumo-tmpl");
+        // parsers.add(new ExtraTorrentParser());
+        parsers.add(new EZTVParser());
+        // parsers.add(new PirateBayParser());
+        // parsers.add(new KickAssParser());
+    }
 
-		VelocityContext context = new VelocityContext();
+    public static void main(String[] args) {
 
-		List<TorrentDTO> torrents = new ArrayList<>();
+        try {
+            SeriesDAO seriesDAO = (SeriesDAO) context.getBean("SeriesDAO");
 
-		for (Parser p : parsers) {
+            System.out.println(seriesDAO.listar());
+        } catch (BeansException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
-			List<SerieInfoDTO> series = listarEpisodiosMaisRecentes(p);
+        for (Parser p : parsers) {
+            listarMaisRecentes(parsers);
+            listar(p);
+        }
+    }
 
-			for (SerieInfoDTO serie : series) {
-				torrents.addAll(serie.getListTorrents());
-			}
-		}
+    public static void listarMaisRecentes(List<Parser> parsers) {
+        Template template = VelocityUtils.getTemplate("sidenav-resumo-tmpl");
 
-		Collections.sort(torrents);
-		Collections.reverse(torrents);
+        VelocityContext context = new VelocityContext();
 
-		// titulo
-		context.put("title", new String("Torrents::Search Results"));
-		context.put("allTorrentsInfo", torrents);
+        List<TorrentDTO> torrents = new ArrayList<>();
 
-		StringWriter sw = new StringWriter();
-		template.merge(context, sw);
+        for (Parser p : parsers) {
 
-		try {
-			FileWriter bw = new FileWriter("pages/resumo.html");
-			bw.write(sw.toString());
-			bw.close();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
+            List<SeriesDTO> series = listarEpisodiosMaisRecentes(p);
 
-	public static void listar(Parser p) {
-		Template template = VelocityUtils.getTemplate("sidenav-tmpl");
+            for (SeriesDTO serie : series) {
+                torrents.addAll(serie.getListTorrents());
+            }
+        }
 
-		VelocityContext context = new VelocityContext();
+        Collections.sort(torrents);
+        Collections.reverse(torrents);
 
-		List<SerieInfoDTO> series = listarEpisodios(p);
+        // titulo
+        context.put("title", new String("Torrents::Search Results"));
+        context.put("allTorrentsInfo", torrents);
 
-		// titulo
-		context.put("title", new String("Torrents::Search Results"));
-		context.put("firstSerieName", series.get(0).getName());
-		context.put("allSeriesInfo", series);
+        StringWriter sw = new StringWriter();
+        template.merge(context, sw);
 
-		StringWriter sw = new StringWriter();
-		template.merge(context, sw);
+        try {
+            FileWriter bw = new FileWriter("pages/resumo.html");
+            bw.write(sw.toString());
+            bw.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
-		try {
-			
-			(new File("./pages")).mkdirs();
-			
-			FileWriter bw = new FileWriter("pages/" + p.getClass().getSimpleName() + ".html");
-			bw.write(sw.toString());
-			bw.close();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
+    public static void listar(Parser p) {
+        Template template = VelocityUtils.getTemplate("sidenav-tmpl");
 
-	private static List<SerieInfoDTO> listarEpisodios(Parser p) {
+        VelocityContext context = new VelocityContext();
 
-		List<SerieInfoDTO> series = getSeriesInfo();
+        List<SeriesDTO> series = listarEpisodios(p);
 
-		for (SerieInfoDTO serieInfoDTO : series) {
-			List<TorrentDTO> episodes = (p).listar(serieInfoDTO);
-			serieInfoDTO.getListTorrents().addAll(episodes);
-		}
+        // titulo
+        context.put("title", new String("Torrents::Search Results"));
+        context.put("firstSerieName", series.get(0).getSerie().getNome());
+        context.put("allSeriesInfo", series);
 
-		return series;
-	}
+        StringWriter sw = new StringWriter();
+        template.merge(context, sw);
 
-	private static List<SerieInfoDTO> listarEpisodiosMaisRecentes(Parser p) {
+        try {
 
-		List<SerieInfoDTO> series = getSeriesInfo();
+            (new File("./pages")).mkdirs();
 
-		for (SerieInfoDTO serieInfoDTO : series) {
-			List<TorrentDTO> episodes = (p).listar(serieInfoDTO);
-			if (!episodes.isEmpty()) {
-				serieInfoDTO.getListTorrents().add(episodes.get(0));
-			}
-		}
+            FileWriter bw = new FileWriter("pages/" + p.getClass().getSimpleName() + ".html");
+            bw.write(sw.toString());
+            bw.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
-		return series;
-	}
+    private static List<SeriesDTO> listarEpisodios(Parser p) {
 
-	private static List<SerieInfoDTO> getSeriesInfo() {
+        List<SeriesDTO> series = listarSeries();
 
-		List<SerieInfoDTO> result = new ArrayList<>();
+        for (SeriesDTO serieInfoDTO : series) {
+            List<TorrentDTO> episodios = (p).listar(serieInfoDTO);
+            serieInfoDTO.getListTorrents().addAll(episodios);
+        }
 
-		BufferedReader reader = null;
+        return series;
+    }
 
-		try {
-			reader = new BufferedReader(new InputStreamReader(Main.class.getResourceAsStream("/series.lst")));
+    private static List<SeriesDTO> listarEpisodiosMaisRecentes(Parser p) {
 
-			String line = null;
-			while ((line = reader.readLine()) != null) {
-				if (!line.trim().startsWith("#")) {
-					SerieInfoDTO dto = new SerieInfoDTO();
+        List<SeriesDTO> series = listarSeries();
 
-					dto.setName(line.split(";")[0].trim());
-					dto.setSearchCode(line.split(";")[1].trim());
+        for (SeriesDTO serieInfoDTO : series) {
+            List<TorrentDTO> episodes = (p).listar(serieInfoDTO);
+            if (!episodes.isEmpty()) {
+                serieInfoDTO.getListTorrents().add(episodes.get(0));
+            }
+        }
 
-					result.add(dto);
-				}
-			}
+        return series;
+    }
 
-			if (result.isEmpty()) {
-				System.out.println("Nada a fazer! :(");
-				System.exit(0);
-			}
+    private static List<SeriesDTO> listarSeries() {
 
-		} catch (Exception e) {
-			e.printStackTrace();
+        List<SeriesDTO> result = new ArrayList<>();
 
-			try {
-				reader.close();
-			} catch (IOException e1) {
-				e1.printStackTrace();
-			}
-		}
+        try {
 
-		Collections.sort(result);
+            SeriesDAO seriesDAO = (SeriesDAO) context.getBean("SeriesDAO");
 
-		return result;
-	}
+            for (Serie serie : seriesDAO.listar()) {
+                
+                SeriesDTO seriesDTO = new SeriesDTO();
+                seriesDTO.setSerie(serie);
+                
+                result.add(seriesDTO);
+            }
+
+        } catch (BeansException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return result;
+    }
 
 }

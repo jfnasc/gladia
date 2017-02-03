@@ -8,7 +8,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.avalon.hunterz.Parser;
 import org.avalon.hunterz.RegexUtils;
-import org.avalon.hunterz.SerieInfoDTO;
+import org.avalon.hunterz.SeriesDTO;
 import org.avalon.hunterz.TorrentDTO;
 
 public class PirateBayParser extends Parser {
@@ -43,11 +43,11 @@ public class PirateBayParser extends Parser {
 	}
 
 	@Override
-	public List<TorrentDTO> listar(SerieInfoDTO serieInfo) {
+	public List<TorrentDTO> listar(SeriesDTO serieDTO) {
 
 		List<TorrentDTO> result = new ArrayList<>();
 
-		String contents = getContents(URL_BASE, serieInfo.getSearchCode());
+		String contents = getContents(URL_BASE, serieDTO.getSerie().getNome());
 
 		List<String> bases = RegexUtils.extract(contents, "<table id=\"searchResult\">", "</table>");
 

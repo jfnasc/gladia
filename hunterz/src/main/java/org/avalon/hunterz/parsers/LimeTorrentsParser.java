@@ -8,7 +8,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.avalon.hunterz.Parser;
 import org.avalon.hunterz.RegexUtils;
-import org.avalon.hunterz.SerieInfoDTO;
+import org.avalon.hunterz.SeriesDTO;
 import org.avalon.hunterz.TorrentDTO;
 
 public class LimeTorrentsParser extends Parser {
@@ -34,11 +34,11 @@ public class LimeTorrentsParser extends Parser {
 	}
 
 	@Override
-	public List<TorrentDTO> listar(SerieInfoDTO serieInfo) {
+	public List<TorrentDTO> listar(SeriesDTO serieDTO) {
 
 		List<TorrentDTO> result = new ArrayList<>();
 
-		String contents = getContents(URL_BASE, serieInfo.getName());
+		String contents = getContents(URL_BASE, serieDTO.getSerie().getNome());
 
 		List<String> bases = RegexUtils.extract(contents, "<table class=\"table2\" cellpadding=\"6\" cellspacing=\"0\">", "<\\table>");
 

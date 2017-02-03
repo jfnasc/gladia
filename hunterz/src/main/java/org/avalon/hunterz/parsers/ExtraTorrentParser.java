@@ -8,7 +8,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.avalon.hunterz.Parser;
 import org.avalon.hunterz.RegexUtils;
-import org.avalon.hunterz.SerieInfoDTO;
+import org.avalon.hunterz.SeriesDTO;
 import org.avalon.hunterz.TorrentDTO;
 
 public class ExtraTorrentParser extends Parser {
@@ -34,13 +34,13 @@ public class ExtraTorrentParser extends Parser {
 	}
 
 	@Override
-	public List<TorrentDTO> listar(SerieInfoDTO serieInfo) {
+	public List<TorrentDTO> listar(SeriesDTO serieDTO) {
 
-		System.out.println(serieInfo.getName());
+		System.out.println(serieDTO.getSerie().getNome());
 
 		List<TorrentDTO> result = new ArrayList<>();
 
-		String contents = getContents(URL_BASE, serieInfo.getName().replaceAll(" ", "+").toLowerCase());
+		String contents = getContents(URL_BASE, serieDTO.getSerie().getNome().replaceAll(" ", "+").toLowerCase());
 
 		List<String> bases = RegexUtils.extract(contents, "<table class=\"tl\">", "</table><br />");
 
@@ -58,7 +58,7 @@ public class ExtraTorrentParser extends Parser {
 
 				dto.setTitle(RegexUtils.extract(colunas.get(0), "title=\"Download ", " torrent", true));
 
-				if (dto.getTitle().startsWith(serieInfo.getName())) {
+				if (dto.getTitle().startsWith(serieDTO.getSerie().getNome())) {
 
 					dto.setMagnetLink("magnet:" + RegexUtils.extract(colunas.get(0), "magnet:", "\"", true));
 					dto.setSize(RegexUtils.replaceAll(colunas.get(4), "<td>|</td>", ""));

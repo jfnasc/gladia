@@ -8,7 +8,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.avalon.hunterz.Parser;
 import org.avalon.hunterz.RegexUtils;
-import org.avalon.hunterz.SerieInfoDTO;
+import org.avalon.hunterz.SeriesDTO;
 import org.avalon.hunterz.TorrentDTO;
 
 public class EZTVParser extends Parser {
@@ -34,13 +34,13 @@ public class EZTVParser extends Parser {
 	}
 
 	@Override
-	public List<TorrentDTO> listar(SerieInfoDTO serieInfo) {
+	public List<TorrentDTO> listar(SeriesDTO serieDTO) {
 
-		System.out.println(serieInfo.getName());
+		System.out.println(serieDTO.getSerie().getNome());
 		
 		List<TorrentDTO> result = new ArrayList<>();
 
-		String contents = getContents(URL_BASE, serieInfo.getSearchCode());
+		String contents = getContents(URL_BASE, serieDTO.getSerie().getCodigoBusca());
 
 		List<String> bases = RegexUtils.extract(contents, "<tr name=\"hover\" class=\"forum_header_border\">", "</tr>");
 
@@ -58,7 +58,7 @@ public class EZTVParser extends Parser {
 
 				dto.setTitle(RegexUtils.replaceAll(colunas.get(1), "[\\w\\s\\W]+class=\"epinfo\">|</a>|</td>", ""));
 
-				if (dto.getTitle().startsWith(serieInfo.getName())) {
+				if (dto.getTitle().startsWith(serieDTO.getSerie().getNome())) {
 
 					dto.setMagnetLink(RegexUtils.extract(colunas.get(2), "magnet:[\\w\\d\\?=:&\\.\\%\\-]*"));
 					dto.setSize(RegexUtils.replaceAll(colunas.get(3), "<td[\\w\\s\"_=]+>|</td>", ""));

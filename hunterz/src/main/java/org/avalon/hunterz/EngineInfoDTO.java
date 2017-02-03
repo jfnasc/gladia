@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class EngineInfoDTO implements Serializable, Comparable<SerieInfoDTO> {
+public class EngineInfoDTO implements Serializable, Comparable<EngineInfoDTO> {
 
 	/**
 	 * 
@@ -13,7 +13,7 @@ public class EngineInfoDTO implements Serializable, Comparable<SerieInfoDTO> {
 
 	private String name;
 
-	private List<SerieInfoDTO> listaSeries;
+	private List<SeriesDTO> listaSeries;
 
 	/**
 	 * @return the name
@@ -25,7 +25,7 @@ public class EngineInfoDTO implements Serializable, Comparable<SerieInfoDTO> {
 	/**
 	 * @return the listaSeries
 	 */
-	public List<SerieInfoDTO> getListaSeries() {
+	public List<SeriesDTO> getListaSeries() {
 		if (listaSeries == null) {
 			listaSeries = new ArrayList<>();
 		}
@@ -36,7 +36,7 @@ public class EngineInfoDTO implements Serializable, Comparable<SerieInfoDTO> {
 	 * @param listaSeries
 	 *            the listaSeries to set
 	 */
-	public void setListaSeries(List<SerieInfoDTO> listaSeries) {
+	public void setListaSeries(List<SeriesDTO> listaSeries) {
 		this.listaSeries = listaSeries;
 	}
 
@@ -49,7 +49,7 @@ public class EngineInfoDTO implements Serializable, Comparable<SerieInfoDTO> {
 	}
 
 	@Override
-	public int compareTo(SerieInfoDTO o) {
+	public int compareTo(EngineInfoDTO o) {
 		return getName().compareTo(o.getName());
 	}
 
