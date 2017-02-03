@@ -85,8 +85,9 @@ public abstract class Parser {
 	 */
 	protected String getFileNameCache(String nomeSerie) {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		// cria o diretorio
+		(new File("./cache")).mkdirs();
 		return String.format("./cache/%s-%s-%s.cache", searchEngine, nomeSerie, sdf.format(new Date()));
-
 	}
 
 	protected String restoreFromCache(String nomeSerie) {
