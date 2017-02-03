@@ -1,7 +1,7 @@
 /**
  * 
  */
-package org.avalon.hunterz;
+package org.avalon.app;
 
 import java.io.BufferedReader;
 import java.io.FileWriter;
@@ -14,6 +14,10 @@ import java.util.List;
 
 import org.apache.velocity.Template;
 import org.apache.velocity.VelocityContext;
+import org.avalon.hunterz.Parser;
+import org.avalon.hunterz.SerieInfoDTO;
+import org.avalon.hunterz.TorrentDTO;
+import org.avalon.hunterz.VelocityUtils;
 import org.avalon.hunterz.parsers.EZTVParser;
 import org.avalon.hunterz.parsers.KickAssParser;
 import org.avalon.hunterz.parsers.PirateBayParser;
