@@ -1,2 +1,4 @@
-/target
-/cache
+/target/
+/cache/
+/.settings/
+/cache/
