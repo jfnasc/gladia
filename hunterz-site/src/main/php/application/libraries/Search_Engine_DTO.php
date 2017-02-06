@@ -11,7 +11,7 @@ class Search_Engine_DTO
 
     private $de_url = null;
 
-    private $sg_ativa = null;
+    private $sg_ativo = null;
 
     public function get_co_search_engine ()
     {
@@ -43,14 +43,14 @@ class Search_Engine_DTO
         $this->de_url = $de_url;
     }
 
-    public function get_sg_ativa ()
+    public function get_sg_ativo ()
     {
-        return $this->sg_ativa;
+        return $this->sg_ativo;
     }
 
-    public function set_sg_ativa ($sg_ativa)
+    public function set_sg_ativo ($sg_ativo)
     {
-        $this->sg_ativa = $sg_ativa;
+        $this->sg_ativo = $sg_ativo;
     }
 }
 ?>

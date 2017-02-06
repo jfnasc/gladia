@@ -39,6 +39,8 @@ public class TorrentsDAOImpl extends BaseDAO implements TorrentsDAO {
 
             pstmt = conn.prepareStatement(sb.toString());
 
+            int count = 0;
+
             for (TorrentInfo torrent : dto.listarTorrents()) {
 
                 // se nao existe, inclui
@@ -55,7 +57,13 @@ public class TorrentsDAOImpl extends BaseDAO implements TorrentsDAO {
                     pstmt.setString(pos++, torrent.getSeeds());
                     pstmt.setString(pos++, torrent.getLeechers());
 
+                    count++;
+
                     pstmt.addBatch();
+                    
+                    if (count % 10 == 0){
+                        pstmt.executeBatch();
+                    }
                 }
 
             }

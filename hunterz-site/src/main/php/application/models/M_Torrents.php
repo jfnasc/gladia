@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class M_Series extends CI_Model
+class M_Torrents extends CI_Model
 {
 
     public function __construct ()
@@ -15,7 +15,7 @@ class M_Series extends CI_Model
         
         $sql = " select id_torrent, co_search_engine, de_title, de_magnet_link,";
         $sql .= "       nu_size, dt_released, qt_seeds, qt_leechers,";
-        $sql .= "       tb01.id_serie, tb01.no_serie, tb01.co_serie, tb01.sg_ativa";
+        $sql .= "       tb01.id_serie, tb01.no_serie, tb01.co_serie, tb01.sg_ativo";
         $sql .= "  from hunterz.tb02_torrents tb02,";
         $sql .= "       hunterz.tb01_series tb01";
         $sql .= " where tb02.id_serie = tb01.id_serie";

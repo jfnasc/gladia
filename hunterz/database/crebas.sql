@@ -12,7 +12,7 @@ create table hunterz.tb01_series (
   id_serie   int          not null,
   no_serie   varchar(100) not null,
   co_serie   varchar(100) not null,
-  sg_ativa   char(1)      not null default 'S',
+  sg_ativo   char(1)      not null default 'S',
   primary key(id_serie)
 );
 
@@ -37,12 +37,12 @@ create table hunterz.tb03_search_engines (
   co_search_engine  varchar(5)    not null,
   no_search_engine  varchar(100)  not null,
   de_url            varchar(1000) not null,
-  sg_ativa          char(1)       not null default 'S',
+  sg_ativo          char(1)       not null default 'S',
   primary key(co_search_engine)
 );
 
-insert into hunterz.tb03_search_engines values('PBY','The Pirate Bay', 'https://thepiratebay.org/search/dsadasd/0/99/0','S');
-insert into hunterz.tb03_search_engines values('EZTV','eztv.ag', 'https://eztv.ag/search/', 'S');
+insert into hunterz.tb03_search_engines values('PBY','The Pirate Bay', 'https://thepiratebay.org/search/%s/0/99/0','S');
+insert into hunterz.tb03_search_engines values('EZTV','eztv.ag', 'https://eztv.ag/search/%s', 'S');
 
 insert into hunterz.tb01_series values(nextval('hunterz.sq01_series'), 'Westworld', 'westworld', 'S');
 insert into hunterz.tb01_series values(nextval('hunterz.sq01_series'), 'The Night Of','the-night-of', 'S');
