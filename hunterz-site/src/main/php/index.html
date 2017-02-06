@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Pragma" content="no-cache" />
+<meta http-equiv="Expires" content="-1" />
+<meta http-equiv="CACHE-CONTROL" content="NO-CACHE" />
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Pragma" content="no-cache" />
+<meta http-equiv="Expires" content="-1" />
+<meta http-equiv="CACHE-CONTROL" content="NO-CACHE" />  
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<title>Torrents Search :: Series</title>
+<style>
+#menu {
+	position: fixed;
+	left: 0;
+	top: 0px;
+	width: 100%;
+	height: 65px;
+}
+
+#menu iframe {
+	width: 100%;
+	border: none;
+	overflow: hidden;
+}
+
+#conteudo {
+	position: fixed;
+	left: 0;
+	top: 65px;
+	width: 100%;
+	height: 100%;
+}
+
+#conteudo iframe {
+	width: 100%;
+	height: 80%;
+	border: none;
+	overflow: hidden;
+}
+</style>
+</head>
+<body>
+	<div id="menu">
+		<iframe src="pages/show_menu" name="menu"></iframe>
+	</div>
+	<div id="conteudo">
+		<iframe src="pages/list_new" name="principal"></iframe>
+		<iframe src="footer.php"></iframe>
+	</div>
+</body>
+</html>

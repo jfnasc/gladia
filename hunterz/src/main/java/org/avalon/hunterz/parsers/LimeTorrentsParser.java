@@ -13,7 +13,7 @@ import org.avalon.hunterz.model.TorrentInfo;
 
 public class LimeTorrentsParser extends Parser {
 
-	private static String SEARCH_ENGINE = "LimeTorrents";
+	private static String SEARCH_ENGINE = "LMT";
 
 	private static String URL_BASE = "https://www.limetorrents.cc/search/all/";
 
@@ -52,7 +52,7 @@ public class LimeTorrentsParser extends Parser {
 
 				List<String> colunas = RegexUtils.extract(linha, "<td>|<td[\\w\\d\\s=\"]+>", "</td>");
 
-				TorrentInfo dto = new TorrentInfo();
+				TorrentInfo dto = new TorrentInfo(SEARCH_ENGINE);
 
 				dto.setTitle(RegexUtils.replaceAll(colunas.get(1), "[\\w\\s\\W]+class=\"epinfo\">|</a>|</td>", ""));
 				dto.setMagnetLink(RegexUtils.extract(colunas.get(2), "magnet:[\\w\\d\\?=:&\\.\\%\\-]*"));

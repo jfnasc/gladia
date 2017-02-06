@@ -4,13 +4,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.List;
 
 import org.avalon.hunterz.SeriesDTO;
 import org.avalon.hunterz.dao.TorrentsDAO;
-import org.avalon.hunterz.model.Serie;
 import org.avalon.hunterz.model.TorrentInfo;
 import org.avalon.hunterz.utils.DbUtils;
 
@@ -23,15 +19,16 @@ public class TorrentsDAOImpl extends BaseDAO implements TorrentsDAO {
 
         sb.append("insert into hunterz.tb02_torrents( ");
         sb.append("    id_torrent, ");
+        sb.append("    co_search_engine, ");
         sb.append("    id_serie, ");
         sb.append("    de_title, ");
-        sb.append("    de_link, ");
+        sb.append("    de_magnet_link, ");
         sb.append("    nu_size, ");
         sb.append("    dt_released, ");
         sb.append("    qt_seeds, ");
         sb.append("    qt_leechers) ");
         sb.append("values ( ");
-        sb.append("    nextval('hunterz.sq02_torrents'),?,?,?,?,?,?,? ");
+        sb.append("    nextval('hunterz.sq02_torrents'),?,?,?,?,?,?,?,? ");
         sb.append("    ) ");
 
         Connection conn = null;
@@ -47,13 +44,16 @@ public class TorrentsDAOImpl extends BaseDAO implements TorrentsDAO {
                 // se nao existe, inclui
                 if (torrent.getMagnetLink() != null && findByUrl(torrent.getMagnetLink()) == null) {
 
-                    pstmt.setInt(1, dto.getSerie().getCodigo());
-                    pstmt.setString(2, torrent.getTitle());
-                    pstmt.setString(3, torrent.getMagnetLink());
-                    pstmt.setString(4, torrent.getSize());
-                    pstmt.setString(5, torrent.getReleased());
-                    pstmt.setString(6, torrent.getSeeds());
-                    pstmt.setString(7, torrent.getLeechers());
+                    int pos = 1;
+
+                    pstmt.setString(pos++, torrent.getSearchEngine());
+                    pstmt.setInt(pos++, dto.getSerie().getCodigo());
+                    pstmt.setString(pos++, torrent.getTitle());
+                    pstmt.setString(pos++, torrent.getMagnetLink());
+                    pstmt.setString(pos++, torrent.getSize());
+                    pstmt.setString(pos++, torrent.getReleased());
+                    pstmt.setString(pos++, torrent.getSeeds());
+                    pstmt.setString(pos++, torrent.getLeechers());
 
                     pstmt.addBatch();
                 }
@@ -81,10 +81,10 @@ public class TorrentsDAOImpl extends BaseDAO implements TorrentsDAO {
 
         StringBuilder sb = new StringBuilder();
 
-        sb.append("select id_torrent, id_serie, de_title, de_link, nu_size, ");
-        sb.append("       dt_released, qt_seeds, qt_leechers ");
+        sb.append("select id_torrent, id_serie, de_title, de_magnet_link, nu_size, ");
+        sb.append("       dt_released, qt_seeds, qt_leechers, co_search_engine ");
         sb.append("  from hunterz.tb02_torrents ");
-        sb.append(" where de_link = ? ");
+        sb.append(" where de_magnet_link = ? ");
 
         try {
             conn = getDataSource().getConnection();
@@ -110,12 +110,12 @@ public class TorrentsDAOImpl extends BaseDAO implements TorrentsDAO {
 
     private TorrentInfo map(ResultSet rs) throws SQLException {
 
-        TorrentInfo result = new TorrentInfo();
+        TorrentInfo result = new TorrentInfo(rs.getString("co_search_engine"));
 
         result.setCodigo(rs.getInt("id_torrent"));
         result.setCodigo(rs.getInt("id_serie"));
         result.setTitle(rs.getString("de_title"));
-        result.setMagnetLink(rs.getString("de_link"));
+        result.setMagnetLink(rs.getString("de_magnet_link"));
         result.setSize(rs.getString("nu_size"));
         result.setReleased(rs.getString("dt_released"));
         result.setSeeds(rs.getString("qt_seeds"));

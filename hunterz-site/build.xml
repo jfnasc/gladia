@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="hunterz-site" default="deploy" basedir=".">
+
+    <property file="build.properties" />
+
+    <target name="init" description="deploy">
+        <mkdir dir="${deploy.dir}/${project.name}" />
+    </target>
+
+    <target name="deploy" depends="init" description="deploy">
+        <copy todir="${deploy.dir}/${project.name}" verbose="true">
+            <fileset dir="${src.dir}" />
+        </copy>
+    </target>
+
+    <target name="clean" description="clean up">
+        <delete dir="${deploy.dir}/${project.name}" />
+    </target>
+</project>

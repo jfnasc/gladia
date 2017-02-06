@@ -13,7 +13,7 @@ import org.avalon.hunterz.model.TorrentInfo;
 
 public class ExtraTorrentParser extends Parser {
 
-	private static String SEARCH_ENGINE = "ExtraTorrent";
+	private static String SEARCH_ENGINE = "EXT";
 
 	private static String URL_BASE = "http://extratorrent.cc/search/?&new=1&x=0&y=0&search=";
 
@@ -54,7 +54,7 @@ public class ExtraTorrentParser extends Parser {
 
 				List<String> colunas = RegexUtils.extract(linha, "<td>|<td[\\w\\s\"_=]+>", "</td>");
 
-				TorrentInfo dto = new TorrentInfo();
+				TorrentInfo dto = new TorrentInfo(SEARCH_ENGINE);
 
 				dto.setTitle(RegexUtils.extract(colunas.get(0), "title=\"Download ", " torrent", true));
 

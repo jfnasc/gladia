@@ -54,17 +54,20 @@ public class EZTVParser extends Parser {
 
 				List<String> colunas = RegexUtils.extract(linha, "<td>|<td[\\w\\d\\s=\"]+>", "</td>");
 
-				TorrentInfo dto = new TorrentInfo();
+				TorrentInfo dto = new TorrentInfo(SEARCH_ENGINE);
 
 				dto.setTitle(RegexUtils.replaceAll(colunas.get(1), "[\\w\\s\\W]+class=\"epinfo\">|</a>|</td>", ""));
 
 				if (dto.getTitle().startsWith(serieDTO.getSerie().getNome())) {
 
 					dto.setMagnetLink(RegexUtils.extract(colunas.get(2), "magnet:[\\w\\d\\?=:&\\.\\%\\-]*"));
+					System.out.println(dto.getMagnetLink());
 					dto.setSize(RegexUtils.replaceAll(colunas.get(3), "<td[\\w\\s\"_=]+>|</td>", ""));
+					System.out.println(dto.getSize());
 					dto.setReleased(RegexUtils.replaceAll(colunas.get(4), "<td[\\w\\s\"_=]+>|</td>", ""));
-					dto.setSeeds(RegexUtils.replaceAll(colunas.get(5),
-							"<td[\\w\\s\"_=]+><font[\\w\\s\"_=]+>|</font></td>", ""));
+					System.out.println(dto.getReleased());
+					dto.setSeeds(RegexUtils.replaceAll(colunas.get(5),"<td[\\d\\w\\s\"_=]+>|<font[\\w\\s\"_=]+>|</font>|</td>", ""));
+					System.out.println(dto.getSeeds());
 
 					if (!isHighResolution || (isHighResolution && dto.getTitle().indexOf("720p") != -1)) {
 						result.add(dto);

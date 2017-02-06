@@ -3,24 +3,18 @@
  */
 package org.avalon.app;
 
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.StringWriter;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
-import org.apache.velocity.Template;
-import org.apache.velocity.VelocityContext;
 import org.avalon.hunterz.Parser;
 import org.avalon.hunterz.SeriesDTO;
-import org.avalon.hunterz.VelocityUtils;
 import org.avalon.hunterz.dao.SeriesDAO;
 import org.avalon.hunterz.dao.TorrentsDAO;
 import org.avalon.hunterz.model.Serie;
 import org.avalon.hunterz.model.TorrentInfo;
 import org.avalon.hunterz.parsers.EZTVParser;
+import org.avalon.hunterz.parsers.KickAssParser;
+import org.avalon.hunterz.parsers.PirateBayParser;
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -42,8 +36,8 @@ public class Main {
 
         // parsers.add(new ExtraTorrentParser());
         parsers.add(new EZTVParser());
-        // parsers.add(new PirateBayParser());
-        // parsers.add(new KickAssParser());
+        parsers.add(new PirateBayParser());
+        //parsers.add(new KickAssParser());
     }
 
     private static SeriesDAO seriesDAO;

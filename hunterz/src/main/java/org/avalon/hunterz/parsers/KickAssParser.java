@@ -54,7 +54,7 @@ public class KickAssParser extends Parser {
 
 				List<String> colunas = RegexUtils.extract(linha, "<td>|<td[\\w\\d\\s=\"]+>", "</td>");
 
-				TorrentInfo dto = new TorrentInfo();
+				TorrentInfo dto = new TorrentInfo(SEARCH_ENGINE);
 
 				String title = RegexUtils.extract(colunas.get(0), "https://kat.how/t0-", "-tt", true);
 				dto.setTitle(title);

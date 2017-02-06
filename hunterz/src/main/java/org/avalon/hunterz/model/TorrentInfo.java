@@ -11,6 +11,8 @@ public class TorrentInfo implements Serializable, Comparable<TorrentInfo> {
 
     private Integer codigo;
 
+    private String searchEngine;
+
     private String title = "";
 
     private String magnetLink = "";
@@ -22,6 +24,14 @@ public class TorrentInfo implements Serializable, Comparable<TorrentInfo> {
     private String seeds = "0";
 
     private String leechers = "0";
+
+    /**
+     * 
+     * @param codigoSite
+     */
+    public TorrentInfo(String searchEngine) {
+        this.searchEngine = searchEngine;
+    }
 
     /**
      * @return the title
@@ -127,6 +137,21 @@ public class TorrentInfo implements Serializable, Comparable<TorrentInfo> {
      */
     public void setCodigo(Integer codigo) {
         this.codigo = codigo;
+    }
+
+    /**
+     * @return the searchEngine
+     */
+    public String getSearchEngine() {
+        return searchEngine;
+    }
+
+    /**
+     * @param searchEngine
+     *            the searchEngine to set
+     */
+    public void setSearchEngine(String searchEngine) {
+        this.searchEngine = searchEngine;
     }
 
     @Override

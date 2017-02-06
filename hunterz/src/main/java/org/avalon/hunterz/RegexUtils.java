@@ -20,60 +20,9 @@ public class RegexUtils {
 
 		StringBuilder sb = new StringBuilder();
 
-		sb.append("<table class=\"table2\" cellpadding=\"6\" cellspacing=\"0\">");
-		sb.append("    <tr>");
-		sb.append(
-				"        <th class=\"thleft\"><span style=\"float:left\">Torrent Name</span><span style=\"float:right\"><img src=\"/static/images/comment16.png\" alt=\"Comments\" title=\"Comments\" /></a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;<img src=\"/static/images/vup16.png\" alt=\"Good\" title=\"Good\" /></a></span></th>");
-		sb.append("        <th class=\"thnormal\">Added</a></th>");
-		sb.append("        <th class=\"thnormal\">Size</a></th>");
-		sb.append("        <th class=\"thnormal\"><a href=\"/search/all/blacklist-s01/seeds/1/\">Seed</a></th>");
-		sb.append("        <th class=\"thnormal\">Leech</a></th>");
-		sb.append("        <th class=\"thright\">Health</th>");
-		sb.append("    </tr>");
-		sb.append("    <tr bgcolor=\"#F4F4F4\">");
-		sb.append("        <td class=\"tdleft\">");
-		sb.append(
-				"            <div class=\"tt-name\"><a href=\"http://itorrents.org/torrent/B6F20E2129B829AC16989AB80048E29B66EDF873.torrent?title=The-Blacklist-S01-03-Season-1-3-COMPLETE-720p-BluRay-x264-Pahe\" rel=\"nofollow\" class=\"csprite_dl14\"></a><a href=\"/The-Blacklist-S01-03-Season-1-3-COMPLETE-720p-BluRay-x264-Pahe-torrent-8180130.html\">The Blacklist S01-03 Season 1-3 COMPLETE 720p BluRay x264-Pahe</a></div>  ");
-		sb.append("            <div class=\"tt-options\"></div>");
-		sb.append("        </td>");
-		sb.append("        <td class=\"tdnormal\">4 months ago - in TV shows</a></td>");
-		sb.append("        <td class=\"tdnormal\">19.66 GB</td>");
-		sb.append("        <td class=\"tdseed\">0</td>");
-		sb.append("        <td class=\"tdleech\">0</td>");
-		sb.append("        <td class=\"tdright\">");
-		sb.append("            <div class=\"hb0\"></div>");
-		sb.append("        </td>");
-		sb.append("    </tr>");
-		sb.append("</table>    ");
-		sb.append("<table class=\"table2\" cellpadding=\"6\" cellspacing=\"0\">");
-		sb.append("    <tr>");
-		sb.append(
-				"        <th class=\"thleft\"><span style=\"float:left\">Torrent Name</span><span style=\"float:right\"><img src=\"/static/images/comment16.png\" alt=\"Comments\" title=\"Comments\" /></a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;<img src=\"/static/images/vup16.png\" alt=\"Good\" title=\"Good\" /></a></span></th>");
-		sb.append("        <th class=\"thnormal\">Added</a></th>");
-		sb.append("        <th class=\"thnormal\">Size</a></th>");
-		sb.append("        <th class=\"thnormal\"><a href=\"/search/all/blacklist-s01/seeds/1/\">Seed</a></th>");
-		sb.append("        <th class=\"thnormal\">Leech</a></th>");
-		sb.append("        <th class=\"thright\">Health</th>");
-		sb.append("    </tr>");
-		sb.append("    <tr bgcolor=\"#F4F4F4\">");
-		sb.append("        <td class=\"tdleft\">");
-		sb.append(
-				"            <div class=\"tt-name\"><a href=\"http://itorrents.org/torrent/B6F20E2129B829AC16989AB80048E29B66EDF873.torrent?title=The-Blacklist-S01-03-Season-1-3-COMPLETE-720p-BluRay-x264-Pahe\" rel=\"nofollow\" class=\"csprite_dl14\"></a><a href=\"/The-Blacklist-S01-03-Season-1-3-COMPLETE-720p-BluRay-x264-Pahe-torrent-8180130.html\">The Blacklist S01-03 Season 1-3 COMPLETE 720p BluRay x264-Pahe</a></div>  ");
-		sb.append("            <div class=\"tt-options\"></div>");
-		sb.append("        </td>");
-		sb.append("        <td class=\"tdnormal\">4 months ago - in TV shows</a></td>");
-		sb.append("        <td class=\"tdnormal\">19.66 GB</td>");
-		sb.append("        <td class=\"tdseed\">0</td>");
-		sb.append("        <td class=\"tdleech\">0</td>");
-		sb.append("        <td class=\"tdright\">");
-		sb.append("            <div class=\"hb0\"></div>");
-		sb.append("        </td>");
-		sb.append("    </tr>");
-		sb.append("</table>    ");
+		sb.append("<td align=\"center\" class=\"forum_thread_post\">-</td>");
 
-		System.out.println(
-				extract(sb.toString(), "<table class=\"table2\" cellpadding=\"6\" cellspacing=\"0\">", "</table>"));
-
+		System.out.println(RegexUtils.replaceAll(sb.toString(),"<td[\\d\\w\\s\"_=]+>|<font[\\w\\s\"_=]+>|</font>|</td>", ""));
 	}
 
 	public static List<String> extractTeste(String base, String start, String end) {

@@ -13,7 +13,7 @@ import org.avalon.hunterz.model.TorrentInfo;
 
 public class PirateBayParser extends Parser {
 
-	private static String SEARCH_ENGINE = "PirateBay";
+	private static String SEARCH_ENGINE = "PBY";
 
 	private static String URL_BASE = "https://thepiratebay.org/search/";
 
@@ -47,7 +47,7 @@ public class PirateBayParser extends Parser {
 
 		List<TorrentInfo> result = new ArrayList<>();
 
-		String contents = getContents(URL_BASE, serieDTO.getSerie().getNome());
+		String contents = getContents(URL_BASE, serieDTO.getSerie().getCodigoBusca());
 
 		List<String> bases = RegexUtils.extract(contents, "<table id=\"searchResult\">", "</table>");
 
@@ -61,7 +61,7 @@ public class PirateBayParser extends Parser {
 
 				List<String> colunas = RegexUtils.extract(linha, "<td>|<td[\\w\\d\\s=\"]+>", "</td>");
 
-				TorrentInfo dto = new TorrentInfo();
+				TorrentInfo dto = new TorrentInfo(SEARCH_ENGINE);
 
 				dto.setTitle(RegexUtils.extract(colunas.get(1), "title=\"Details for ", "\">", true));
 
