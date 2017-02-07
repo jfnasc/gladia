@@ -46,9 +46,10 @@ $(document).ready(function () {
 <body>
 	<div class="container">
 		<ul class="nav nav-tabs">
-			<li class="active"><a href="resumo" target="painel">Configuração Atual</a></li>
-			<li><a href="config_series" target="painel">Configuração de Series</a></li>
+			<li class="active"><a href="resumo" target="painel">Configuração
+					Atual</a></li>
 			<li><a href="config_engines" target="painel">Engines de Busca</a></li>
+			<li><a href="config_series" target="painel">Configuração de Series</a></li>
 		</ul>
 		<div id="painel">
 			<iframe src="/hunterz/pages/resumo" name="painel"></iframe>

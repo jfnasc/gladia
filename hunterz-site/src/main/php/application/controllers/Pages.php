@@ -40,7 +40,7 @@ class Pages extends CI_Controller
     
     public function config_series ()
     {
-        $data = [];
+        $data['lista_series_ativas'] = $this->M_Series->listar_series_ativas();
     
         $this->load->view('templates/header', $data);
         $this->load->view('configuracao/config_series', $data);
@@ -49,7 +49,7 @@ class Pages extends CI_Controller
     
     public function config_engines ()
     {
-        $data = [];
+        $data['lista_engines_ativos'] = $this->M_Search_Engine->listar_engines_ativos();
     
         $this->load->view('templates/header', $data);
         $this->load->view('configuracao/config_engines', $data);

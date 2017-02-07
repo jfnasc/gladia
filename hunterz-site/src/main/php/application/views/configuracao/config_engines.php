@@ -17,5 +17,35 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body>
+	<div class="container">
+<?php
+echo "<div class=\"panel panel-default\">";
+echo "	<div class=\"panel-heading\">Engines Ativos</div>";
+echo "	<div class=\"panel-body\">";
+echo "    <table class=\"table table-condensed table-hover\">";
+echo "      <tr>";
+echo "        <th>Código</th>";
+echo "        <th>Nome</th>";
+echo "        <th>Url de Busca</th>";
+echo "        <th>Ativo</th>";
+echo "      </tr>";
+
+if (isset($lista_engines_ativos) && count($lista_engines_ativos) > 0) {
+    
+    foreach ($lista_engines_ativos as $engine) {
+        echo "      <tr>";
+        echo "        <td>" . $engine->get_co_search_engine() . "</td>";
+        echo "        <td>" . $engine->get_no_search_engine() . "</td>";
+        echo "        <td>" . $engine->get_de_url() . "</td>";
+        echo "        <td>" . $engine->get_sg_ativo() . "</td>";
+        echo "      </tr>";
+    }
+}
+
+echo "	  </table>";
+echo "	</div>";
+echo "</div>";
+?>		
+	</div>
 </body>
 </html>
