@@ -13,7 +13,6 @@ import org.avalon.hunterz.dao.TorrentsDAO;
 import org.avalon.hunterz.model.Serie;
 import org.avalon.hunterz.model.TorrentInfo;
 import org.avalon.hunterz.parsers.EZTVParser;
-import org.avalon.hunterz.parsers.KickAssParser;
 import org.avalon.hunterz.parsers.PirateBayParser;
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
@@ -37,7 +36,7 @@ public class Main {
         // parsers.add(new ExtraTorrentParser());
         parsers.add(new EZTVParser());
         parsers.add(new PirateBayParser());
-        //parsers.add(new KickAssParser());
+        // parsers.add(new KickAssParser());
     }
 
     private static SeriesDAO seriesDAO;
