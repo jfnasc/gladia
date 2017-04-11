@@ -3,6 +3,8 @@ package translate;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -11,31 +13,52 @@ import java.util.List;
 
 public class Parser {
 
-	public static void main(String[] args) {
+	private TranslateText service;
 
-		String filename = "./subtitles/template.srt";
+	public void parse(String dir, String filename) {
 
-		List<String> srt = read(filename);
+		// diretorio destino
+		new File(dir + "/translated").mkdirs();
+
+		System.out.println(filename);
+
+		List<String> srt = read(dir, filename);
 
 		StringBuilder sb = new StringBuilder();
 
 		for (int i = 0; i < srt.size(); i++) {
-
 			if (isText(srt.get(i))) {
-				// String str = String.format("%s # %s\n", i, srt.get(i));
-				// sb.append(str);
-				// if (sb.length() > 1000){
-				// System.out.println(sb.toString());
-				// System.exit(0);
-				// }
-				System.out.println(md5sum(srt.get(i).trim()));
-			} else {
-				System.out.println(srt.get(i));
+				sb.append(i + "#" + srt.get(i) + "\n");
+				if (i == 10) {
+					System.out.println(getService().translate(sb.toString()));
+					System.exit(0);
+				}
 			}
+		}
+
+		writeFile(dir + "/translated", filename, sb);
+	}
+
+	public void writeFile(String dir, String filename, StringBuilder sb) {
+		System.out.println(dir);
+		System.out.println(filename);
+		FileWriter fw = null;
+
+		try {
+			fw = new FileWriter(new File(dir + File.separator + filename));
+			fw.write(sb.toString());
+			fw.flush();
+		} catch (IOException e) {
+			try {
+				fw.close();
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
+			e.printStackTrace();
 		}
 	}
 
-	private static String md5sum(String str) {
+	public String md5sum(String str) {
 		try {
 			byte[] digest = MessageDigest.getInstance("MD5").digest(str.getBytes());
 
@@ -48,10 +71,10 @@ public class Parser {
 		return null;
 	}
 
-	private static boolean isText(String line) {
+	public boolean isText(String line) {
 
 		//
-		if (line.trim().matches("[\\d]+")) {
+		if (line.matches("[\\S\\d]*")) {
 			return false;
 		}
 
@@ -68,14 +91,14 @@ public class Parser {
 		return true;
 	}
 
-	private static List<String> read(String filename) {
+	public List<String> read(String dir, String filename) {
 		BufferedReader buffer = null;
 
 		List<String> s = new ArrayList<String>();
 		String line = null;
 
 		try {
-			buffer = new BufferedReader(new FileReader(new File(filename)));
+			buffer = new BufferedReader(new FileReader(new File(dir + File.separator + filename)));
 
 			while ((line = buffer.readLine()) != null) {
 				s.add(String.format("%s", line));
@@ -89,4 +112,10 @@ public class Parser {
 
 	}
 
+	public TranslateText getService() {
+		if (this.service == null) {
+			this.service = new TranslateText();
+		}
+		return service;
+	}
 }

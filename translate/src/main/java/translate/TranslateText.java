@@ -14,6 +14,9 @@ import com.google.cloud.translate.Translation;
 import com.google.common.collect.ImmutableList;
 
 public class TranslateText {
+
+	private Translate translate;
+
 	/**
 	 * Detect the language of input text.
 	 *
@@ -22,8 +25,8 @@ public class TranslateText {
 	 * @param out
 	 *            print stream
 	 */
-	public static void detectLanguage(String sourceText, PrintStream out) {
-		Translate translate = createTranslateService();
+	public void detectLanguage(String sourceText, PrintStream out) {
+		Translate translate = getTranslateService();
 		java.util.List<Detection> detections = translate.detect(ImmutableList.of(sourceText));
 		System.out.println("Language(s) detected:");
 		for (Detection detection : detections) {
@@ -39,8 +42,8 @@ public class TranslateText {
 	 * @param out
 	 *            print stream
 	 */
-	public static void translateText(String sourceText, PrintStream out) {
-		Translate translate = createTranslateService();
+	public void translateText(String sourceText, PrintStream out) {
+		Translate translate = getTranslateService();
 		Translation translation = translate.translate(sourceText);
 		out.printf("Source Text:\n\t%s\n", sourceText);
 		out.printf("Translated Text:\n\t%s\n", translation.getTranslatedText());
@@ -59,10 +62,10 @@ public class TranslateText {
 	 * @param out
 	 *            print stream
 	 */
-	public static void translateTextWithOptionsAndModel(String sourceText, String sourceLang, String targetLang,
+	public void translateTextWithOptionsAndModel(String sourceText, String sourceLang, String targetLang,
 			PrintStream out) {
 
-		Translate translate = createTranslateService();
+		Translate translate = getTranslateService();
 		TranslateOption srcLang = TranslateOption.sourceLanguage(sourceLang);
 		TranslateOption tgtLang = TranslateOption.targetLanguage(targetLang);
 
@@ -86,14 +89,22 @@ public class TranslateText {
 	 * @param out
 	 *            print stream
 	 */
-	public static String translateTextWithOptions(String sourceText, String sourceLang, String targetLang) {
+	public String translateTextWithOptions(String sourceText, String sourceLang, String targetLang) {
 
-		Translate translate = createTranslateService();
+		Translate translate = getTranslateService();
+
 		TranslateOption srcLang = TranslateOption.sourceLanguage(sourceLang);
 		TranslateOption tgtLang = TranslateOption.targetLanguage(targetLang);
 
 		Translation translation = translate.translate(sourceText, srcLang, tgtLang);
 		return translation.getTranslatedText();
+	}
+
+	private Translate getTranslateService() {
+		if (translate == null) {
+			translate = createTranslateService();
+		}
+		return translate;
 	}
 
 	/**
@@ -104,8 +115,8 @@ public class TranslateText {
 	 * @param tgtLang
 	 *            optional target language
 	 */
-	public static void displaySupportedLanguages(PrintStream out, Optional<String> tgtLang) {
-		Translate translate = createTranslateService();
+	public void displaySupportedLanguages(PrintStream out, Optional<String> tgtLang) {
+		Translate translate = getTranslateService();
 		LanguageListOption target = LanguageListOption.targetLanguage(tgtLang.orElse("en"));
 		java.util.List<Language> languages = translate.listSupportedLanguages(target);
 
@@ -119,7 +130,7 @@ public class TranslateText {
 	 *
 	 * @return Google Translate Service
 	 */
-	public static Translate createTranslateService() {
+	public Translate createTranslateService() {
 		TranslateOptions translateOption = TranslateOptions.newBuilder()
 				.setApiKey("AIzaSyBEu0v0ZoGqTVJEL9Vy8oqgQpRlEB-03rc").setRetryParams(retryParams())
 				.setConnectTimeout(60000).setReadTimeout(60000).build();
@@ -129,21 +140,23 @@ public class TranslateText {
 	/**
 	 * Retry params for the Translate API.
 	 */
-	private static RetryParams retryParams() {
+	private RetryParams retryParams() {
 		return RetryParams.newBuilder().setRetryMaxAttempts(3).setMaxRetryDelayMillis(30000)
 				.setTotalRetryPeriodMillis(120000).setInitialRetryDelayMillis(250).build();
 	}
 
-	public static String translate(String text) {
+	public String translate(String text) {
 
 		String result = "";
 		final String sourceLang = "en";
 		final String targetLang = "pt";
 
 		try {
-			result = TranslateText.translateTextWithOptions(text, sourceLang, targetLang);
+			System.out.println(text);
+			result = translateTextWithOptions(text, sourceLang, targetLang);
+			System.out.println(result);
 		} catch (ArrayIndexOutOfBoundsException ex) {
-			TranslateText.translateText(text, System.out);
+			translateText(text, System.out);
 		}
 
 		return result;
