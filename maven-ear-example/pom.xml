@@ -96,4 +96,12 @@
       </pluginManagement>
    </build>
 
+    <repositories>
+        <repository>
+       <id>central</id>
+       <name>Repositorio Nexus SPREAD</name>
+       <url>http://integracaocontinua/nexus/content/groups/public</url>
+</repository>
+    </repositories>
+
 </project>
