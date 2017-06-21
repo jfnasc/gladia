@@ -1,27 +1,12 @@
 #!/bin/bash
 SERIE="$1"
 
-##
-# So Legendas
-##
-URL_ROOT="http://legendei.com"
-echo "procurando em $URL_ROOT"
+echo
+echo -----------------------------------------------------
+echo $SERIE
+echo -----------------------------------------------------
+echo
 
-url="$(wget -qO- "$URL_ROOT/$SERIE" | grep -io "?ofdl=[0-9]*" | uniq)"
-if [ -n "$url" ];then
-  echo "encontrado! :)"
-  echo "$url"
-  wget -O "$SERIE".rar "$URL_ROOT/$url"
-  exit
-fi
-
-url="$(wget -qO- "$URL_ROOT/$SERIE" | grep -io "$URL_ROOT/download/[0-9]*/" | uniq)"
-if [ -n "$url" ];then
-  echo "encontrado! :)"
-  echo "$url"
-  wget -O "$SERIE".rar "$url"
-  exit
-fi
 
 ##
 # So Legendas
@@ -34,6 +19,8 @@ if [ -n "$url" ];then
   echo "encontrado! :)"
   echo "$url"
   wget "$url"
+  echo -----------------------------------------------------
+  echo
   exit
 fi
 
@@ -42,8 +29,38 @@ if [ -n "$url" ];then
   echo "encontrado! :)"
   echo "$url"
   wget "$url" -O $SERIE.rar
+  echo -----------------------------------------------------
+  echo
   exit
 fi
+
+##
+# legendeu
+##
+URL_ROOT="http://legendei.com"
+echo "procurando em $URL_ROOT"
+
+url="$(wget -qO- "$URL_ROOT/$SERIE" | grep -io "?ofdl=[0-9]*" | uniq)"
+if [ -n "$url" ];then
+  echo "encontrado! :)"
+  echo "$url"
+  wget -O "$SERIE".rar "$URL_ROOT/$url"
+  echo -----------------------------------------------------
+  echo
+  exit
+fi
+
+url="$(wget -qO- "$URL_ROOT/$SERIE" | grep -io "$URL_ROOT/download/[0-9]*/" | uniq)"
+if [ -n "$url" ];then
+  echo "encontrado! :)"
+  echo "$url"
+  wget -O "$SERIE".rar "$url"
+  echo -----------------------------------------------------
+  echo
+  exit
+fi
+
+
 
 echo "Nao encontrei! :("
 
