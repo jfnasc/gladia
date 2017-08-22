@@ -8,7 +8,8 @@ import { MenuComponent } from './menu.component';
 import { WeatherComponent } from './weather.component';
 import { CurrencyComponent } from './currency.component';
 import { MovieComponent } from './movie.component';
-import { CONST_ROUTING } from './app.routing'; 
+import { CONST_ROUTING } from './app.routing';
+import { SharedService } from "./shared.service";
 
 @NgModule({
   declarations: [
@@ -24,7 +25,7 @@ import { CONST_ROUTING } from './app.routing';
     HttpModule,
     CONST_ROUTING
   ],
-  providers: [],
+  providers: [SharedService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
