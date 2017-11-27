@@ -26,7 +26,7 @@
 	</bean>
 
 	<bean id="serviceConfig" class="org.ganimede.services.ServiceConfig">
-		<property name="path" value="/projetos/github/gladia/LoteriasCaixa/arquivos/" />
+		<property name="path" value="/projetos/gladia/loterias/arquivos/" />
 		<property name="proxyEnabled" value="false" />
 	</bean>
 

@@ -21,7 +21,7 @@ public class GerarCombinacoesMegaSena extends GerarCombinacoesBase {
 
     @Override
     public void gerar() {
-        List<Integer[]> prognosticos = gb.gerarPrognosticos(3, 6);
+        List<Integer[]> prognosticos = gb.gerarPrognosticos(2, 7);
 
         System.out.println("--------------------------");
         System.out.println("Boa Sorte!");
@@ -61,14 +61,9 @@ public class GerarCombinacoesMegaSena extends GerarCombinacoesBase {
         regras.add(new org.ganimede.regras.impl.RegraSorteiosAnteriores(TiposConcurso.MEGA_SENA));
         regras.add(new org.ganimede.regras.impl.RegraParesImpares());
         regras.add(new org.ganimede.regras.impl.RegraNaoVertical(TiposConcurso.MEGA_SENA));
-        // regras.add(new
-        // org.ganimede.regras.impl.RegraAtraso(TiposConcurso.MEGA_SENA, 8));
-        // regras.add(new
-        // org.ganimede.regras.impl.RegraDezenasFrequentes(TiposConcurso.MEGA_SENA,
-        // 10));
-        // regras.add(new
-        // org.ganimede.regras.impl.RegraDezenasAnteriores(TiposConcurso.MEGA_SENA,
-        // 2));
+        regras.add(new org.ganimede.regras.impl.RegraAtraso(TiposConcurso.MEGA_SENA, 8));
+        regras.add(new org.ganimede.regras.impl.RegraDezenasFrequentes(TiposConcurso.MEGA_SENA, 10));
+        regras.add(new org.ganimede.regras.impl.RegraDezenasAnteriores(TiposConcurso.MEGA_SENA, 2));
 
         return regras;
     }

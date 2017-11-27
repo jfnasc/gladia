@@ -1,6 +1,26 @@
-2016/09/02 09:21:37 DEBUG RegraDezenasAnteriores LOTO_FACIL Concurso [1407]
-2016/09/02 09:21:37 DEBUG RegraDezenasAnteriores Dezenas sorteadas nos 1 ultimos concursos: [[1, 2, 4, 5, 6, 7, 10, 12, 13, 20, 21, 22, 23, 24, 25]]
-2016/09/02 09:21:37 DEBUG RegraDezenasAnteriores LOTO_FACIL Concurso [1407]
-2016/09/02 09:21:37 DEBUG RegraDezenasAnteriores Dezenas sorteadas nos 1 ultimos concursos: [[1, 2, 4, 5, 6, 7, 10, 12, 13, 20, 21, 22, 23, 24, 25]]
-2016/09/02 09:21:37 DEBUG RegraParesImpares 0.0
-2016/09/02 09:21:37 DEBUG RegraDezenasAnteriores 0.0
+2017/11/27 16:17:09 DEBUG RegraDezenasAnteriores MEGA_SENA Concurso [1991]
+2017/11/27 16:17:09 DEBUG RegraDezenasAnteriores MEGA_SENA Concurso [1990]
+2017/11/27 16:17:09 DEBUG RegraDezenasAnteriores Dezenas sorteadas nos 2 ultimos concursos: [[11, 19, 20, 24, 26, 28, 34, 34, 36, 37, 44, 59]]
+2017/11/27 16:17:09 DEBUG RegraDezenasAnteriores MEGA_SENA Concurso [1991]
+2017/11/27 16:17:09 DEBUG RegraDezenasAnteriores MEGA_SENA Concurso [1990]
+2017/11/27 16:17:09 DEBUG RegraDezenasAnteriores Dezenas sorteadas nos 2 ultimos concursos: [[11, 19, 20, 24, 26, 28, 34, 34, 36, 37, 44, 59]]
+2017/11/27 16:17:09 DEBUG RegraNaoSequencial 0.0
+2017/11/27 16:17:09 DEBUG RegraSorteiosAnteriores 0.0
+2017/11/27 16:17:09 DEBUG RegraParesImpares 50.0
+2017/11/27 16:17:09 DEBUG RegraNaoVertical 0.0
+2017/11/27 16:17:10 DEBUG RegraAtraso 0.0
+2017/11/27 16:17:10 DEBUG RegraDezenasFrequentes 0.0
+2017/11/27 16:17:10 DEBUG RegraDezenasAnteriores 0.0
+2017/11/27 16:17:10 DEBUG RegraDezenasAnteriores MEGA_SENA Concurso [1991]
+2017/11/27 16:17:10 DEBUG RegraDezenasAnteriores MEGA_SENA Concurso [1990]
+2017/11/27 16:17:10 DEBUG RegraDezenasAnteriores Dezenas sorteadas nos 2 ultimos concursos: [[11, 19, 20, 24, 26, 28, 34, 34, 36, 37, 44, 59]]
+2017/11/27 16:17:10 DEBUG RegraDezenasAnteriores MEGA_SENA Concurso [1991]
+2017/11/27 16:17:10 DEBUG RegraDezenasAnteriores MEGA_SENA Concurso [1990]
+2017/11/27 16:17:10 DEBUG RegraDezenasAnteriores Dezenas sorteadas nos 2 ultimos concursos: [[11, 19, 20, 24, 26, 28, 34, 34, 36, 37, 44, 59]]
+2017/11/27 16:17:10 DEBUG RegraNaoSequencial 0.0
+2017/11/27 16:17:10 DEBUG RegraSorteiosAnteriores 0.0
+2017/11/27 16:17:10 DEBUG RegraParesImpares 0.0
+2017/11/27 16:17:10 DEBUG RegraNaoVertical 0.0
+2017/11/27 16:17:13 DEBUG RegraAtraso 0.0
+2017/11/27 16:17:13 DEBUG RegraDezenasFrequentes 0.0
+2017/11/27 16:17:13 DEBUG RegraDezenasAnteriores 0.0
